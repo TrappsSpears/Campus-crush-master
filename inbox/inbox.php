@@ -1,17 +1,19 @@
 <?php 
 $page = 'inbox';
-include('../includes/headall.php'); ?>
+include('../includes/headall.php'); 
+
+?>
 
 <body>  
     <div class="main">
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
         <div class="nav">
-           <b>Messages And Replys</b>
+           <b>Messages</b>
         </div>
 <?php 
 
-    include('../includes/postBookmarks.php') ?>
+    include('../includes/postInbox.php') ?>
     </div>
 
 <?php include('../includes/leftbar.php') ;?>

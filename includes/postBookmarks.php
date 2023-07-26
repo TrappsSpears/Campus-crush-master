@@ -3,7 +3,8 @@
     <div class="post_head">
             <div class="select-post-type">
                 <p id="C_con">
-                  <span class="dot" id="CC_span"></span> 
+                  <span class="dot" id="CC_span"> </span> 
+                  Your saved Posts
                 </p>
             </div>    
         </div>

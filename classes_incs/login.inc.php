@@ -38,6 +38,8 @@
                     $_SESSION['username'] = $row['username'];                  
                     // Redirect to dashboard
                     header("Location: ../index/index.php?log_inSuccessful&$username");                   
+             }else{
+                echo 'pass did not verify';
              }
             }
         }

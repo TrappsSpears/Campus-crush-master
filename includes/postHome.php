@@ -130,20 +130,29 @@
             $result = $dbh->connect()->prepare($sql);
             if(!$result->execute(array($user_id,$post_id))){
                 $result = null;
-                header("location ../index/index.php?error=error");
-                exit();
             }else{
                 $results = $result->fetch(PDO::FETCH_ASSOC);
-                if($results == 0) { ?>
+                if(!$results['total'] == 0) { 
+                    $sql = "SELECT * FROM likes WHERE user_id = ? AND post_id = ?;";
+                    $result = $dbh->connect()->prepare($sql);
+                    if(!$result->execute(array($user_id,$post_id))){
+                        $result = null;
+                    }else{
+                        $resultsall = $result->fetch(PDO::FETCH_ASSOC);}
+                    ?>
 
                 <div class="react">
-                    <i class='fab fa-facebook'><?= $results['total'] ?></i>
+                <div class="react">
+                <img src="../images/<?php echo $resultsall['type'];?>.png" alt="<?= $resultsall['type'] ?>" class='icons'>
+                <small><?= $results['total']; ?></small>
+                </div>
                 </div>
             <?php }else{?>
                 <div class="react">
                 <img src="../images/happiness.png" alt="smiley" class='icons'>
+                <small><?= $results['total']; ?></small>
                 </div>
-                <?php }} ?>
+        <?php }} ?>
    
     <div class="react-emojis">
         <div>
@@ -230,6 +239,7 @@
                 <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
                 <input type="hidden" name='user_id' value='<?= $user_id ?>'>
                 <input type="hidden" name='page' value='<?= $page ?>'>
+                <input type="hidden" name='type' value='comment'>
                 <textarea name="comment" id="reply-textarea" placeholder="...whats your view"></textarea>
                </div>
                 <div>
@@ -242,13 +252,50 @@
        
     </div> 
 </div>
+<script>
+    //react
+    const react =document.querySelector('.react');
+  const react_emojis=document.querySelector('.react-emojis');
+  react.addEventListener('click', () => {
+    react_emojis.classList.toggle('react-emojis-active');
+  })
+</script>
 <?php } else {?>
     <div class="comment">
     <div>
-    <div class="react">
-                <img src="../images/happiness.png" alt="smiley" class='icons'>
+            <?php
+            $post_id = $post['post_id'];
+            $sql = "SELECT COUNT(*) as total FROM likes WHERE user_id = ? AND post_id = ?;";
+
+            $result = $dbh->connect()->prepare($sql);
+            if(!$result->execute(array($user_id,$post_id))){
+                $result = null;
+            }else{
+                $results = $result->fetch(PDO::FETCH_ASSOC);
+                if(!$results['total'] == 0) { 
+                    $sql = "SELECT * FROM likes WHERE user_id = ? AND post_id = ?;";
+                    $result = $dbh->connect()->prepare($sql);
+                    if(!$result->execute(array($user_id,$post_id))){
+                        $result = null;
+                    }else{
+                        $resultsall = $result->fetch(PDO::FETCH_ASSOC);}
+                    ?>
+
+                <div class="react">
+                <div class="react">
+                <img src="../images/<?php echo $resultsall['type'];?>.png" alt="<?= $resultsall['type'] ?>" class='icons'>
+                <small>
+                    <?php if($results>0){ ?>
+                    <?= $results['total']; ?> <?php } ?></small>
                 </div>
-    <div class="react-emojis">
+                </div>
+            <?php }else{?>
+                <div class="react" id='react'>
+                <img src="../images/happiness.png" alt="smiley" class='icons'>
+                <small><?= $results['total']; ?></small>
+                </div>
+            <?php }} ?>
+    <div class="react-emojis" id="reacts">
         <div>
             <form action="../classes_incs/liking.inc.php" method='post'>
             <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
@@ -263,7 +310,7 @@
             <input type="hidden" name="user_id" value='<?= $user_id ?>'>
             <input type="hidden" name="type" value='love'>
             <input type="hidden" name="page" value='home'>
-            <button name='submit_like'><img src="../images/heart.png" class='icons' alt="love"></button>
+            <button name='submit_like'><img src="../images/love.png" class='icons' alt="love"></button>
             </form>
         </div>
         <div>
@@ -272,7 +319,7 @@
             <input type="hidden" name="user_id" value='<?= $user_id ?>'>
             <input type="hidden" name="type" value='funny'>
             <input type="hidden" name="page" value='home'>
-            <button name='submit_like'><img src="../images/laughing.png" class='icons' alt="funny"></button>
+            <button name='submit_like'><img src="../images/funny.png" class='icons' alt="funny"></button>
             </form>
         </div>
         <div>
@@ -296,17 +343,41 @@
     </div>
     </div>
          <div class="comment_in">
-         <button class='btn_reply' id="commentBtn" style="color:aliceblue">Lets Deal</button>
+         <button class='btn_reply' id="connectBtn" style="color:aliceblue">Lets Deal</button>
         </div> 
     </div>
-    <div class="deal-input">
-        <form action="#">
-            <textarea type="text" name="deal" id="deal" placeholder='Are you/is this still available...'></textarea> 
-            
-            <button>Connect</button>
-            <button class='cancel'>Cancel</button>
+    <div class="deal-input" id='connect'>
+        <form action="../classes_incs/postcomments.php" method='post'>
+            <textarea type="text" name="comment" id="deal" placeholder='Are you/is this still available...'></textarea> 
+            <input type="hidden" name="type" value='reply'>
+            <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
+            <input type="hidden" name='user_id' value='<?= $user_id ?>'>
+            <input type="hidden" name='page' value='<?= $page ?>'>
+            <button name='submit_comment'> Connect</button>
+            <button class='cancel' id='cancelBtn'>Cancel</button>
         </form>
     </div>
+    <script>
+        //For the dealBtn
+    const connect = document.querySelector('#connectBtn');
+    const connect_div = document.querySelector('#connect');
+    const cancelBtn = document.querySelector('#cancelBtn');
+
+    connect.addEventListener("click", function() {
+        connect_div.classList.toggle('deal-input-active');
+        commentBtn.style.pointerEvents = 'none';
+    });
+    cancelBtn.addEventListener("click", function() {
+        connect_div.classList.remove('deal-input-active');
+    });
+
+    //react
+    const reacts =document.querySelector('#react');
+  const react_emojiss=document.querySelector('#reacts');
+  reacts.addEventListener('click', () => {
+    react_emojiss.classList.toggle('react-emojis-active');
+  })
+    </script>
 
     <?php } ?>
     </div>
@@ -383,11 +454,7 @@ textarea_Post.addEventListener('input', function() {
   });
   
 
-  const react =document.querySelector('.react');
-  const react_emojis=document.querySelector('.react-emojis');
-  react.addEventListener('click', () => {
-    react_emojis.classList.toggle('react-emojis-active');
-  })
+ 
 
   const head_dots =document.querySelector('.head-dots');
   const head_menu =document.querySelector('.head-menu');

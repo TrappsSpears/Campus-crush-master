@@ -34,10 +34,7 @@ a{
     color: white;
 
 }
-.sidebar-nav ul{
-    position: relative;
-    top: 80px;
-}
+
 .sidebar-nav ul div{
     display: flex;
 }
@@ -353,15 +350,21 @@ a{
 }
 .comment{
     display: grid;
-    padding: 12px;
-    grid-template-columns: 10% 90%;
+    padding: 8px 1px 12px 12px;
+    grid-template-columns: 13% 80%;
 }
 .deal-input{
     text-align: center;
     display: flex;
     justify-content:center;
     position: relative;
-    margin-top:-65px;
+    margin-top:-75px;
+    background-color: #201f1f;
+    padding:12px 5px 0px 0px;
+    display: none;
+}
+.deal-input-active{
+    display: block;
 }
 .deal-input textarea{
     border-radius: 32px ;
@@ -398,16 +401,29 @@ a{
 }
 .react{
 text-align: center;
-padding: 8px;
+padding: 5px 0px 0px 0px;
 cursor: pointer;
 }
-.react:hover{
+.react img:hover{
     transform:scale(1.2);
     transition:0.2s ease;
 }
+.react img{
+    position: relative;
+    margin-top: -6px;
+}
+.react small{
+    position: relative;
+    color:inherit;
+    
+    font-weight: 899;
+    border-radius: 43px;
+    padding: 5px 7px;
+
+}
 
 .icons {
-    width:25px
+    width:30px
 }
 .react-emojis{
     display: none;
@@ -813,9 +829,9 @@ cursor: pointer;
     position: relative;
     top: 100px;
 }
-.icons{
+.icons-men{
     position: relative;
-    top: 30%;
+    top: 5%;
     
 }
 .icons div{
@@ -828,7 +844,8 @@ cursor: pointer;
     border-radius: 43px;
     margin-right: 12px;
     font-weight: 600;
-    box-shadow: 2px 3px 3px 0px rgb(95, 44, 80)
+    box-shadow: 2px 3px 3px 0px rgb(95, 44, 80);
+    margin-bottom: 10px;
 }
 .settings{
     background-color: #0e0d0d;
@@ -902,7 +919,7 @@ cursor: pointer;
 
 .log-in-form {
     position: absolute;
-    top: -280px;
+    top: -220px;
     padding: 12px;
     left: 0;
     background-color: #1a1a1a;
@@ -961,10 +978,11 @@ cursor: pointer;
     cursor: pointer;
 }
 .profile-menue{
-    position: absolute;
-    top:-350px;
+    position: relative;
+    top:-260px;
     left:20px;
     padding: 12px;
+    width: 200px;
     background-color: #1a1a1a;
     border-radius: 6px;
     font-weight: 600;
@@ -1010,6 +1028,84 @@ cursor: pointer;
 }
 .locs p{
     margin-top: 5px;
+}
+.msg-box{
+    padding: 12px;
+    border-radius: 6px;
+    border: 2px solid grey;
+    width: 100%;
+    margin-bottom: 13px;
+}
+.msg_username{
+    color:#383838;
+}
+.msg-box small{
+    color:#0e0d0d;
+}
+.msg{
+    display: grid;
+    grid-template-columns: 10% 90%;
+}
+.user-p{
+    border-radius: 45px;
+    height: 20px;
+    padding: 8px;
+}
+.user-p .icons{
+
+    width: 20px;
+}
+.msg-body{
+    margin-left: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #252323;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.msg-body button{
+    border-radius: 6px;
+    padding: 8px;
+    background-color: inherit;
+    border: 2px solid #201f1f;
+    font-weight: 700;
+    cursor: pointer;
+    color: green ;
+    margin-right: 10px;
+}
+.msgBody_btn{
+    display: flex;
+}
+.msg-body p{
+    text-align: left;
+}
+.reply-box{
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 8px;
+    background-color: #383838;
+    text-align: center;
+    padding: 12px;
+}
+.reply-box div{
+    display: flex;
+    margin-bottom: 10px;
+}
+.reply-box input{
+    width: 80%;
+    padding: 4px;
+    border: none;
+    background-color:inherit;
+    border-bottom: 2px solid #292929;
+    outline: none;
+    font-weight: 700;
+    color:wheat;    
+}
+.reply-box button{
+    padding: 4px 8px;
+    background-color:#383838;
+    border: 2px solid #1a1a1a;
+    cursor: pointer;
 }
 /* Responcive Design*/
 

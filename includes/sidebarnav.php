@@ -34,8 +34,8 @@
                     <!-- When user is not signed in -->
                     <?php  
                 if(!isset($_SESSION['user_id'])){ ?>
-                    `<div class="icons"> 
-                        <div class="profile" id='loginBtn'>
+                    `<div class="icons-men"> 
+                        <div class="profile nav-a" id='loginBtn'>
                             Log in
                         </div>
                             
@@ -60,7 +60,7 @@
                         </div>
         
         
-                        <div class="settings" id='signupBtn'>
+                        <div class="settings nav-a" id='signupBtn'>
                             Sign Up
                         </div>
                         <div class="sign-up-form" id='sign_up'>
@@ -130,9 +130,9 @@
                        <?php } 
                        else{ ?>
                              <!-- when user is signed in -->
-                             <div class='icons'>
-                             <div class="settings" id="prof_menuBtn">
-                                 Profile
+                             <div class='icons-men' style="margin-top: 85px;">
+                             <div class="profile nav-a" id="prof_menuBtn">
+                                 Menu
                              </div>
                              <div class="profile-menue" id ='prof_menu'>
                                 
