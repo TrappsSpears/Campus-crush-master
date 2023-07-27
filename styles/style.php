@@ -1032,9 +1032,11 @@ cursor: pointer;
 .msg-box{
     padding: 12px;
     border-radius: 6px;
-    border: 2px solid grey;
+    box-shadow: 2px 6px 10px 0px 
+    rgb(29, 28, 28);
     width: 100%;
     margin-bottom: 13px;
+    background-color:#201f1f;
 }
 .msg_username{
     color:#383838;
@@ -1106,6 +1108,12 @@ cursor: pointer;
     background-color:#383838;
     border: 2px solid #1a1a1a;
     cursor: pointer;
+}
+.Responce{
+    border-top: 3px solid green;
+    border-right:  3px solid green;
+    border-bottom: 3px solid rgb(2, 70, 118);
+    border-left:  3px solid rgb(2, 70, 118);
 }
 /* Responcive Design*/
 

@@ -5,10 +5,26 @@
             include('phpfiles.msgs.php');
             ?> 
             <div class="msg-box">
-               <div class="msg-body">
-               <p><?= $msg['post']?></p> <p class='msg_username'>@Post</p>
+                <?php if($msg['poster_id'] == $user_id){ ?>
+            <div class="msg">   
+                    <div class="user-p">
+                <div class="icon">
+                    <img src="../images/user.png" alt="userProf" class='icons'>
+                   
+                </div>
+                </div>
+               <div class="msg-body" style="background-color: rgb(3, 81, 55);">
+               <p><?= $msg['post']?></p> <p class='msg_username'>You</p>
                </div>
-        <div class="msg">
+            </div>
+               <?php }else {?>
+                <div class="msg-body" style="background-color:rgb(2, 95, 95)">
+               <p><?= $msg['post']?></p> <p class='msg_username'>Post</p>
+               </div>
+               <?php } ?>
+
+               <?php if($msg['poster_id'] != $user_id){ ?>
+            <div class="msg" >
             
             <div class="user-p">
                 <div class="icon">
@@ -16,14 +32,21 @@
                    
                 </div>
             </div>
-            <div class="msg-body">
+            <div class="msg-body" style="background-color: rgb(3, 81, 55);">
                 <div>
-                    <p><?= $msg['comment']?></p> <p class='msg_username'>@<?= $msg['username']?></p>
+                    <p><?= $msg['comment']?></p> <p class='msg_username'><?= $msg['username']?></p>
                 </div>
                
             </div>
         </div>
-        <?php 
+        <?php }else {?>
+            <div class="msg-body" style="background-color:rgb(2, 95, 95)">
+                <div >
+                    <p><?= $msg['comment']?></p> <p class='msg_username'><?= $msg['username']?></p>
+                </div>
+               
+            </div>
+        <?php }
                 $selectRep = $dbh->connect()->prepare("SELECT post_id FROM reply where post_id = ? ");
                 if(!$selectRep->execute(array($post_id))){
                    echo 'Failed To Load Posts';
@@ -62,9 +85,9 @@
                 <?php } ?>
 
         <?php }else{ ?>
-        <div class="msg-body">
+        <div class="msg-body Responce">
             <?php foreach($post_reply as $reply){ ?>
-               <p> <?= $reply['reply']?></p><p class='msg_username'>Responce</p>
+               <p> <?= $reply['reply']?></p><p class='msg_username'>You can now Connect</p>
           <?php }?>
         </div>
        <?php } ?>
