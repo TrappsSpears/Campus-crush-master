@@ -1,5 +1,6 @@
 <style>
 *{
+    font-family: Arial, Helvetica, sans-serif;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -301,6 +302,14 @@ a{
 .heading-post{
     flex: 1;
 }
+.heading-post span{
+    position: relative;
+    top: -5px;
+    margin-left: 10px;
+}
+.heading-post img{
+    width: 20px;
+}
 .head-dots{
     display: block;
     cursor: pointer;
@@ -425,6 +434,7 @@ cursor: pointer;
 .icons {
     width:30px
 }
+
 .react-emojis{
     display: none;
     position: relative;
@@ -830,15 +840,28 @@ cursor: pointer;
     top: 100px;
 }
 .icons-men{
+   margin-top: 85px;
+   display: flex;
+}
+.icons-menn{
     position: relative;
-    top: 5%;
-    
+    top: 60%;
+}
+.icons-men div span{
+    background-color: black;
+    padding: 2px;
+    margin-right: 8px;
+    position: relative;
+    top: 32px;
+    border-radius: 30px;
+    height: 4px;
+    color: black;
 }
 .icons div{
     margin-bottom: 15px;
 }
 .profile, .settings{
-    padding: 20px;
+    padding: 10px;
     cursor: pointer;
     background: #000;
     border-radius: 43px;
@@ -846,6 +869,12 @@ cursor: pointer;
     font-weight: 600;
     box-shadow: 2px 3px 3px 0px rgb(95, 44, 80);
     margin-bottom: 10px;
+    width: fit-content;
+}
+.profile div span{
+    background-color: inherit ;
+    box-shadow: inherit;
+    padding: 6px;
 }
 .settings{
     background-color: #0e0d0d;
@@ -978,16 +1007,17 @@ cursor: pointer;
     cursor: pointer;
 }
 .profile-menue{
-    position: relative;
-    top:-260px;
-    left:20px;
+    position:fixed;
+    top:48%;
+    left:80px;
     padding: 12px;
-    width: 200px;
-    background-color: #1a1a1a;
+    
+    backdrop-filter: blur(2px);
     border-radius: 6px;
     font-weight: 600;
     display: none;
 }
+ 
 .profile-menue div{
     padding: 8px;
     cursor: pointer;

@@ -7,9 +7,10 @@
                        <span></span><span></span>  <li>   Home</li>
                     </a>
                 </div>
+                <?php if($userLogged){ ?>
                 <div <?php if ($page == 'linkups'){ echo 'class="active"';} ?>>
                     <a href="../linkups/linkups.php" class="nav-a"><?php if ($page == 'linkups'){ echo '<span></span>';} ?>
-                        <span></span><span></span><li>Link Ups</li>
+                        <span></span><span></span><li>linkUps</li>
                     </a>
                 </div>
                 <div <?php if ($page == 'hot'){ echo 'class="active"';} ?>>
@@ -28,13 +29,16 @@
                     </a>
                 </div>
                 
+               <?php }
+                ?>
+                
              
             </ul>
         </nav>
                     <!-- When user is not signed in -->
                     <?php  
                 if(!isset($_SESSION['user_id'])){ ?>
-                    `<div class="icons-men"> 
+                    `<div class="icons-menn"> 
                         <div class="profile nav-a" id='loginBtn'>
                             Log in
                         </div>
@@ -130,27 +134,30 @@
                        <?php } 
                        else{ ?>
                              <!-- when user is signed in -->
-                             <div class='icons-men' style="margin-top: 85px;">
-                             <div class="profile nav-a" id="prof_menuBtn">
-                                 Menu
+                             <div class='icons-men' >
+                             <div>
+                                    <span>.</span><span>.</span><span>.</span>
+                                </div>
+                             <div class="profile" id="prof_menuBtn">
+                                
+                                <div>
+                                 <img src="../images/menu-button-of-three-horizontal-lines.png" alt="Menu" class='icons'>   
+                                </div>
+                     
                              </div>
                              <div class="profile-menue" id ='prof_menu'>
                                 
-                             <?php if($userLogged){ ?>
-                <div <?php if ($page == 'profile'){ echo 'class="active"';} ?>>
-                    <a href="../userProfile/profileUserCurrent.php" class='nav-a'>
-                    <span></span><span></span><li>Profile</li> <?php if ($page == 'profile'){ echo '<span></span>';} ?><?php if ($page == 'profile'){ echo '<span></span>';} ?>
+                             
+                <div class=" profile">
+                    <a href="../userProfile/profileUserCurrent.php">
+                    <img src="../images/profile-user.png" alt="LogOut" class='icons'>
                     </a>
                  </div>
-                 <?php } ?>
-                                 <div class='div'>
-                                     Settings
+                                 <div class='profile'>
+                                 <img src="../images/gear.png" alt="Settings" class='icons'>
                                  </div>
-                                 <div class='div'>
-                                     Log in to another account
-                                 </div>
-                                 <div class='div' id='logoutBtn'>
-                                     Log out
+                                 <div class='profile' id='logoutBtn'>
+                                     <img src="../images/exit.png" alt="LogOut" class='icons'>
                                  </div>
                                  <div class="logout_confirm">
                                     <p>Confirm LogOut</p>

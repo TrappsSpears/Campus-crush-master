@@ -39,9 +39,9 @@
     
         <div class="post-container">
             <div class="post-head">
-                <div class="heading-post">
-                 <small>head</small>   
-                </div>
+            <div class="heading-post">
+            <img src="../images/incognito.png" alt="anonymouse" class="icons"> <span><?= $post['date_created'] ?></span>   
+            </div>
                 <div class="head-dots">
                     <div>
                       <small>.</small><small>.</small><small>.</small>   
@@ -67,34 +67,107 @@
     </div>
     <div class="comment">
     <div>
-        <div class="react">
-    <i class='fab fa-facebook'>R</i>
-    </div>
-    <div class="react-emojis">
-        <div>like</div><div>love</div><div>funny</div><div>sad</div><div>fire</div>
+            <?php
+            $post_id = $post['post_id'];
+            $sql = "SELECT COUNT(*) as total FROM likes WHERE user_id = ? AND post_id = ?;";
+
+            $result = $dbh->connect()->prepare($sql);
+            if(!$result->execute(array($user_id,$post_id))){
+                $result = null;
+            }else{
+                $results = $result->fetch(PDO::FETCH_ASSOC);
+                if(!$results['total'] == 0) { 
+                    $sql = "SELECT * FROM likes WHERE user_id = ? AND post_id = ?;";
+                    $result = $dbh->connect()->prepare($sql);
+                    if(!$result->execute(array($user_id,$post_id))){
+                        $result = null;
+                    }else{
+                        $resultsall = $result->fetch(PDO::FETCH_ASSOC);}
+                    ?>
+
+                <div class="react">
+                
+                <img src="../images/<?php echo $resultsall['type'];?>.png" alt="<?= $resultsall['type'] ?>" class='icons'>
+                <small>
+                    <?php if($results>0){ ?>
+                    <?= $results['total']; ?> <?php } ?></small>
+                </div>
+                
+            <?php }else{?>
+                <div class="react" id='react'>
+                <img src="../images/happiness.png" alt="smiley" class='icons'>
+                <small><?= $results['total']; ?></small>
+                </div>
+            <?php }} ?>
+    <div class="react-emojis" id="reacts">
+        <div>
+            <form action="../classes_incs/liking.inc.php" method='post'>
+            <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
+            <input type="hidden" name="user_id" value='<?= $user_id ?>'>
+            <input type="hidden" name="type" value='like'>
+            <button name='submit_like' ><img src="../images/like.png" class='icons' alt="like"> </button>
+            </form>
+        </div>
+        <div>
+        <form action="../classes_incs/liking.inc.php" method='post'>
+            <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
+            <input type="hidden" name="user_id" value='<?= $user_id ?>'>
+            <input type="hidden" name="type" value='love'>
+            <input type="hidden" name="page" value='home'>
+            <button name='submit_like'><img src="../images/love.png" class='icons' alt="love"></button>
+            </form>
+        </div>
+        <div>
+        <form action="../classes_incs/liking.inc.php" method='post'>
+            <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
+            <input type="hidden" name="user_id" value='<?= $user_id ?>'>
+            <input type="hidden" name="type" value='funny'>
+            <input type="hidden" name="page" value='home'>
+            <button name='submit_like'><img src="../images/funny.png" class='icons' alt="funny"></button>
+            </form>
+        </div>
+        <div>
+        <form action="../classes_incs/liking.inc.php" method='post'>
+            <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
+            <input type="hidden" name="user_id" value='<?= $user_id ?>'>
+            <input type="hidden" name="type" value='sad'>
+            <input type="hidden" name="page" value='home'>
+            <button name='submit_like'><img src="../images/sad.png" class='icons' alt="sad"></button>
+            </form>
+        </div>
+        <div>
+        <form action="../classes_incs/liking.inc.php" method='post'>
+            <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
+            <input type="hidden" name="user_id" value='<?= $user_id ?>'>
+            <input type="hidden" name="type" value='fire'>
+            <input type="hidden" name="page" value='home'>
+            <button name='submit_like'><img src="../images/fire.png" class='icons' alt="fire"></button>
+            </form>
+        </div>
     </div>
     </div>
          <div class="comment_in">
-         <button class='btn_reply' id="commentBtn" style="color:aliceblue">Lets Deal</button>
+         <button class='btn_reply' id="connectBtn" style="color:aliceblue">Lets Deal</button>
         </div> 
     </div>
-        <form action="../classes_incs/linkupReplys.inc.php" method="post">
-            <div class="deal-input">
-                <input type="hidden" name='post_id' value ='<?= $post['post_id'] ?>'>
-                <input type="hidden" name='user_id' value='<?= $user_id ?>'>
-                <input type="hidden" name='repliedId' value='<?= $post['user_id'] ?>'>
-                <input type="hidden" name='page' value='<?= $page ?>'>
-                <textarea type="text" name="reply" id="deal" placeholder='Are you/is this still available...'></textarea> <button name='submit_reply'>Send </button>
-                
-            </div>
+    <div class="deal-input" id='connect'>
+        <form action="../classes_incs/postcomments.php" method='post'>
+            <textarea type="text" name="comment" id="deal" placeholder='Are you/is this still available...'></textarea> 
+            <input type="hidden" name="type" value='reply'>
+            <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
+            <input type="hidden" name='user_id' value='<?= $user_id ?>'>
+            <input type="hidden" name='page' value='<?= $page ?>'>
+            <button type="submit" name='submit_comment'> Connect</button>
+            <button type="button" class='cancel' id='cancelBtn'>Cancel</button>
         </form>
+    </div>
         </div>
         <?php } ?> 
     
 </div>
 <script>
-    // when user wanna post somthing
-    const openPostBtn = document.querySelector('#C_con');
+      // when user wanna post somthing
+      const openPostBtn = document.querySelector('#C_con');
     const post_Box = document.querySelector('#post_linkups');
     const privacy_msg = document.querySelector('#privacy_msg');
     const CC_span = document.querySelector('#CC_span');
@@ -105,28 +178,24 @@
         CC_span.classList.toggle('dot-active');
     })
 
-    //For the comment Section
-const commentBtn = document.querySelector('#commentBtn');
-const commentDiv = document.querySelector('#commentDiv');
-const closebtn_Comment = document.querySelector("#close_comment");
-const textarea_comment = document.querySelector('#reply-textarea');
-const reply_form =document.querySelector(".reply-form");
+       
+        //For the dealBtn
+    const connect = document.querySelector('#connectBtn');
+    const connect_div = document.querySelector('#connect');
+    const cancelBtn = document.querySelector('#cancelBtn');
 
-commentBtn.addEventListener("click", function(){
-    commentDiv.classList.toggle('reply-form-active');
-    commentBtn.style.pointerEvents ='none';
-})
-closebtn_Comment.addEventListener('click', function(){
-    commentDiv.classList.remove('reply-form-active');
-    textarea_comment.value = '';
-    commentBtn.value = '';
-    textarea_comment.style.height = '40px';
-    commentBtn.style.pointerEvents ='all';
-})
-const react =document.querySelector('.react');
-  const react_emojis=document.querySelector('.react-emojis');
-  react.addEventListener('click', () => {
-    react_emojis.classList.toggle('react-emojis-active');
+    connect.addEventListener("click", function() {
+        connect_div.classList.toggle('deal-input-active');
+        commentBtn.style.pointerEvents = 'none';
+    });
+    cancelBtn.addEventListener("click", function() {
+        connect_div.classList.remove('deal-input-active');
+    });
+
+    //react
+    const reacts =document.querySelector('.react');
+  const react_emojiss=document.querySelector('#reacts');
+  reacts.addEventListener('click', () => {
+    react_emojiss.classList.toggle('react-emojis-active');
   })
-
 </script>

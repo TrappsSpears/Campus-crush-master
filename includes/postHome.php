@@ -68,7 +68,38 @@
             <small>Don Worry You got all the <a href="#" style="color:blueviolet"> privacy</a> YOU need...No one will ever know who post this</small>
         </div>
         </div>
-        
+        <script>
+            //post-choice for choosing type of post
+const hot_conDiv = document.querySelector('#hot_con'); //div for selecting hot_C
+const hotC_span = document.querySelector('#hotC_span');//hotC span
+const post_formHC = document.querySelector('#post_formHC');//HotC form
+const C_con= document.querySelector('#C_con')//div for selecting C_con
+const CC_span = document.querySelector('#CC_span');//hotC span
+const post_formCC = document.querySelector('#post_formCC');//HotC form
+const textarea_Post = document.querySelector("#textarea_Post");
+const post_btn = document.querySelector('#post_btn');
+
+hot_conDiv.addEventListener('click',function(){
+    post_formHC.classList.toggle('post_formHC-active');
+    post_formCC.classList.remove('post_formHC-active');
+    hotC_span.classList.toggle('dot-active');
+    CC_span.classList.remove('dot-active');
+})
+
+C_con.addEventListener('click',function(){
+    post_formCC.classList.toggle('post_formHC-active');
+    post_formHC.classList.remove('post_formHC-active');
+    CC_span.classList.toggle('dot-active');
+    hotC_span.classList.remove('dot-active');
+})
+
+textarea_Post.addEventListener('input', function() {
+    textarea_Post.style.height = 'auto';
+    textarea_Post.style.height = textarea_Post.scrollHeight + 'px';
+  
+  });
+  
+        </script>
         <?php } ?>
     </div>
 
@@ -81,7 +112,7 @@
     <div class="post-container">
         <div class="post-head">
             <div class="heading-post">
-             <small>Anonymous . <span><?= $post['date_created'] ?></span> </small>   
+            <img src="../images/incognito.png" alt="anonymouse" class="icons"> <span><?= $post['date_created'] ?></span>   
             </div>
             <div class="head-dots">
                 <div>
@@ -120,6 +151,7 @@
     ?>> <?= $post['post_body'] ?></p>
     </a>
 </div>
+<?php if($userLogged){ ?>
 <?php if($post['post_type'] =='thrill'){ ?> 
 <div class="comment">
     <div>
@@ -169,7 +201,7 @@
             <input type="hidden" name="user_id" value='<?= $user_id ?>'>
             <input type="hidden" name="type" value='love'>
             <input type="hidden" name="page" value='home'>
-            <button name='submit_like'><img src="../images/heart.png" class='icons' alt="love"></button>
+            <button name='submit_like'><img src="../images/love.png" class='icons' alt="love"></button>
             </form>
         </div>
         <div>
@@ -178,7 +210,7 @@
             <input type="hidden" name="user_id" value='<?= $user_id ?>'>
             <input type="hidden" name="type" value='funny'>
             <input type="hidden" name="page" value='home'>
-            <button name='submit_like'><img src="../images/laughing.png" class='icons' alt="funny"></button>
+            <button name='submit_like'><img src="../images/funny.png" class='icons' alt="funny"></button>
             </form>
         </div>
         <div>
@@ -236,14 +268,15 @@
                      <span>P</span>
                 </div>
                <div>
+               <input type="hidden" name="type" value='comm'>
                 <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
                 <input type="hidden" name='user_id' value='<?= $user_id ?>'>
                 <input type="hidden" name='page' value='<?= $page ?>'>
-                <input type="hidden" name='type' value='comment'>
+                <input type="hidden" name='type' value='comm'>
                 <textarea name="comment" id="reply-textarea" placeholder="...whats your view"></textarea>
                </div>
                 <div>
-                    <button name="submit_comment">Reply</button>
+                    <button name="submit_comment">Comment</button>
                 </div>            
             </div>
             </form>
@@ -353,8 +386,8 @@
             <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
             <input type="hidden" name='user_id' value='<?= $user_id ?>'>
             <input type="hidden" name='page' value='<?= $page ?>'>
-            <button name='submit_comment'> Connect</button>
-            <button class='cancel' id='cancelBtn'>Cancel</button>
+            <button type="submit" name='submit_comment'> Connect</button>
+            <button type="button" class='cancel' id='cancelBtn'>Cancel</button>
         </form>
     </div>
     <script>
@@ -372,13 +405,14 @@
     });
 
     //react
-    const reacts =document.querySelector('#react');
-  const react_emojiss=document.querySelector('#reacts');
+    const reacts =document.querySelector('.react');
+  const react_emojiss=document.querySelector('.reacts');
   reacts.addEventListener('click', () => {
     react_emojiss.classList.toggle('react-emojis-active');
   })
     </script>
 
+    <?php } ?>
     <?php } ?>
     </div>
 <script >
@@ -423,36 +457,7 @@ closebtn_Comment.addEventListener('click', function(){
 // });
 //comment Section Ends
 
-//post-choice for choosing type of post
-const hot_conDiv = document.querySelector('#hot_con'); //div for selecting hot_C
-const hotC_span = document.querySelector('#hotC_span');//hotC span
-const post_formHC = document.querySelector('#post_formHC');//HotC form
-const C_con= document.querySelector('#C_con')//div for selecting C_con
-const CC_span = document.querySelector('#CC_span');//hotC span
-const post_formCC = document.querySelector('#post_formCC');//HotC form
-const textarea_Post = document.querySelector("#textarea_Post");
-const post_btn = document.querySelector('#post_btn');
 
-hot_conDiv.addEventListener('click',function(){
-    post_formHC.classList.toggle('post_formHC-active');
-    post_formCC.classList.remove('post_formHC-active');
-    hotC_span.classList.toggle('dot-active');
-    CC_span.classList.remove('dot-active');
-})
-
-C_con.addEventListener('click',function(){
-    post_formCC.classList.toggle('post_formHC-active');
-    post_formHC.classList.remove('post_formHC-active');
-    CC_span.classList.toggle('dot-active');
-    hotC_span.classList.remove('dot-active');
-})
-
-textarea_Post.addEventListener('input', function() {
-    textarea_Post.style.height = 'auto';
-    textarea_Post.style.height = textarea_Post.scrollHeight + 'px';
-  
-  });
-  
 
  
 

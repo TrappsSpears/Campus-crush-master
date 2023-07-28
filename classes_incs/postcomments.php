@@ -11,9 +11,9 @@
         
         include_once('dbh.class.php');
         $dbh = New Dbh();
-        $sql = "INSERT INTO comments(post_id,comment,user_id,date_created) VALUES(?,?,?,?)";
+        $sql = "INSERT INTO comments(post_id,comment,user_id,date_created,type) VALUES(?,?,?,?,?)";
         $result = $dbh->connect()->prepare($sql);
-        if($result->execute(array($post_id,$comment,$user_id,$date))){
+        if($result->execute(array($post_id,$comment,$user_id,$date,$type))){
 
             if($page == 'home'){
                 header("Location: ../index/index.php?secceeded,Page=$page");

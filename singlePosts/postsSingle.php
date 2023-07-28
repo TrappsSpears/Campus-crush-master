@@ -9,9 +9,9 @@
     
         <div class="post-container-comment">
             <div class="post-head">
-                <div class="heading-post">
-                 <small>head</small>   
-                </div>
+            <div class="heading-post">
+             <small> <img src="../images/incognito.png" alt="anonymouse" class="icons">  <span><?= $post['date_created'] ?></span> </small>   
+            </div>
                 <div class="head-dots">
                     <div>
                       <small>.</small><small>.</small><small>.</small>   
@@ -20,7 +20,7 @@
                 </div>
             </div>
     <div class="post-box" style='height:auto'>
-        <a href="../singlePosts/singleposts.php">
+        <a href="#">
        
           
         <p <?php if(strlen($post['post_body']) < 60){echo "style='font-size:48px'";}
@@ -30,20 +30,88 @@
         </a>
     </div>
     
-    <?php if($user_id!= '') { ?>
+    <?php 
+    if($userLogged) { ?>
     <div class="comment">
     <div>
-        <div class="react">
-    <i class='fab fa-facebook'>R</i>
+            <?php
+            $post_id = $post['post_id'];
+            $sql = "SELECT COUNT(*) as total FROM likes WHERE user_id = ? AND post_id = ?;";
+
+            $result = $dbh->connect()->prepare($sql);
+            if(!$result->execute(array($user_id,$post_id))){
+                $result = null;
+            }else{
+                $results = $result->fetch(PDO::FETCH_ASSOC);
+                if(!$results['total'] == 0) { 
+                    $sql = "SELECT * FROM likes WHERE user_id = ? AND post_id = ?;";
+                    $result = $dbh->connect()->prepare($sql);
+                    if(!$result->execute(array($user_id,$post_id))){
+                        $result = null;
+                    }else{
+                        $resultsall = $result->fetch(PDO::FETCH_ASSOC);}
+                    ?>
+
+                <div class="react">
+                <div class="react">
+                <img src="../images/<?php echo $resultsall['type'];?>.png" alt="<?= $resultsall['type'] ?>" class='icons'>
+                <small>
+                    <?php if($results>0){ ?>
+                    <?= $results['total']; ?> <?php } ?></small>
+                </div>
+                </div>
+            <?php }else{?>
+                <div class="react" id='react'>
+                <img src="../images/happiness.png" alt="smiley" class='icons'>
+                <small><?= $results['total']; ?></small>
+                </div>
+            <?php }} ?>
+    <div class="react-emojis" id="reacts">
+        <div>
+            <form action="../classes_incs/liking.inc.php" method='post'>
+            <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
+            <input type="hidden" name="user_id" value='<?= $user_id ?>'>
+            <input type="hidden" name="type" value='like'>
+            <button name='submit_like' ><img src="../images/like.png" class='icons' alt="like"> </button>
+            </form>
+        </div>
+        <div>
+        <form action="../classes_incs/liking.inc.php" method='post'>
+            <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
+            <input type="hidden" name="user_id" value='<?= $user_id ?>'>
+            <input type="hidden" name="type" value='love'>
+            <input type="hidden" name="page" value='home'>
+            <button name='submit_like'><img src="../images/love.png" class='icons' alt="love"></button>
+            </form>
+        </div>
+        <div>
+        <form action="../classes_incs/liking.inc.php" method='post'>
+            <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
+            <input type="hidden" name="user_id" value='<?= $user_id ?>'>
+            <input type="hidden" name="type" value='funny'>
+            <input type="hidden" name="page" value='home'>
+            <button name='submit_like'><img src="../images/funny.png" class='icons' alt="funny"></button>
+            </form>
+        </div>
+        <div>
+        <form action="../classes_incs/liking.inc.php" method='post'>
+            <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
+            <input type="hidden" name="user_id" value='<?= $user_id ?>'>
+            <input type="hidden" name="type" value='sad'>
+            <input type="hidden" name="page" value='home'>
+            <button name='submit_like'><img src="../images/sad.png" class='icons' alt="sad"></button>
+            </form>
+        </div>
+        <div>
+        <form action="../classes_incs/liking.inc.php" method='post'>
+            <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
+            <input type="hidden" name="user_id" value='<?= $user_id ?>'>
+            <input type="hidden" name="type" value='fire'>
+            <input type="hidden" name="page" value='home'>
+            <button name='submit_like'><img src="../images/fire.png" class='icons' alt="fire"></button>
+            </form>
+        </div>
     </div>
-    <form action="#">
-        <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
-        <input type="hidden" name="user_id" value='<?= $user_id ?>'>
-       <div class="react-emojis">
-        <div>like</div><div>love</div><div>funny</div><div>sad</div><div>fire</div>
-    </div> 
-    </form>
-    
     </div>
         <form action="../classes_incs/postcomments.php" method="post" class='form-comment'>
          <div class="comment_in" >
@@ -51,13 +119,14 @@
                      <input type="hidden" name = 'post_id' value="<?= $post['post_id'] ?>">
                      <input type="hidden" name='user_id' value='<?= $user_id ?>'>
                      <input type="hidden" name='page' value='<?= $page ?>'>
+                     <input type="hidden" name="type" value='comm'>
         </div> 
         <button name='submit_comment'>Post</button>
         </form>
     </div>
     <?php }else{ ?>
             <div class="form-comment">
-                <h4 style='text-align:center'>Sign in to comment</h4>
+                <h4 style='text-align:center'>Sign in to comment and Like</h4>
             </div>
         <?php } ?>
         <div class="loc-trend-spost">
@@ -81,7 +150,8 @@
                         <small>@<?= $comment['username'] ?><span>like</span><span>reply</span> </small>
                     </div>
                     <div class='reply_comm'>
-                        <textarea name="reply-comment" placeholder='reply comment'></textarea> <button>post</button>
+                        <textarea name="reply-comment" placeholder='reply comment'></textarea> 
+                        <button>post</button>
                     </div>
                 </div>
                 <div class="comm_likNreply"> 

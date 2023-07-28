@@ -40,13 +40,22 @@
     
         <div class="post-container">
             <div class="post-head">
-                <div class="heading-post">
-                 <small>head</small>   
-                </div>
+            <div class="heading-post">
+            <img src="../images/incognito.png" alt="anonymouse" class="icons"> <span><?= $post['date_created'] ?></span>   
+            </div>
                 <div class="head-dots">
                     <div>
                       <small>.</small><small>.</small><small>.</small>   
                     </div>
+                    <div class="head-menu">
+               <form action="../classes_incs/bookmarks.inc.php" method='post'>
+                <input type="hidden" name="post_id" value="<?= $post['post_id'] ?>">
+                <input type="hidden" name='user_id' value='<?= $user_id ?>'>
+               <button name="bookmark"> Bookmark Post</button>
+               </form>
+                  
+                <p> Copy Link</p>
+               </div>
                    
                 </div>
             </div>
@@ -69,16 +78,100 @@
     </div>
     <div class="comment">
     <div>
-        <div class="react">
-    <i class='fab fa-facebook'>R</i>
-    </div>
+        <?php
+            $post_id = $post['post_id'];
+            $sql = "SELECT COUNT(*) as total FROM likes WHERE user_id = ? AND post_id = ?;";
+
+            $result = $dbh->connect()->prepare($sql);
+            if(!$result->execute(array($user_id,$post_id))){
+                $result = null;
+            }else{
+                $results = $result->fetch(PDO::FETCH_ASSOC);
+                if(!$results['total'] == 0) { 
+                    $sql = "SELECT * FROM likes WHERE user_id = ? AND post_id = ?;";
+                    $result = $dbh->connect()->prepare($sql);
+                    if(!$result->execute(array($user_id,$post_id))){
+                        $result = null;
+                    }else{
+                        $resultsall = $result->fetch(PDO::FETCH_ASSOC);}
+                    ?>
+
+                <div class="react">
+                <div class="react">
+                <img src="../images/<?php echo $resultsall['type'];?>.png" alt="<?= $resultsall['type'] ?>" class='icons'>
+                <small><?= $results['total']; ?></small>
+                </div>
+                </div>
+            <?php }else{?>
+                <div class="react">
+                <img src="../images/happiness.png" alt="smiley" class='icons'>
+                <small><?= $results['total']; ?></small>
+                </div>
+        <?php }} ?>
+   
     <div class="react-emojis">
-        <div>like</div><div>love</div><div>funny</div><div>sad</div><div>fire</div>
+        <div>
+            <form action="../classes_incs/liking.inc.php" method='post'>
+            <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
+            <input type="hidden" name="user_id" value='<?= $user_id ?>'>
+            <input type="hidden" name="type" value='like'>
+            <button name='submit_like' ><img src="../images/like.png" class='icons' alt="like"> </button>
+            </form>
+        </div>
+        <div>
+        <form action="../classes_incs/liking.inc.php" method='post'>
+            <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
+            <input type="hidden" name="user_id" value='<?= $user_id ?>'>
+            <input type="hidden" name="type" value='love'>
+            <input type="hidden" name="page" value='home'>
+            <button name='submit_like'><img src="../images/love.png" class='icons' alt="love"></button>
+            </form>
+        </div>
+        <div>
+        <form action="../classes_incs/liking.inc.php" method='post'>
+            <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
+            <input type="hidden" name="user_id" value='<?= $user_id ?>'>
+            <input type="hidden" name="type" value='funny'>
+            <input type="hidden" name="page" value='home'>
+            <button name='submit_like'><img src="../images/funny.png" class='icons' alt="funny"></button>
+            </form>
+        </div>
+        <div>
+        <form action="../classes_incs/liking.inc.php" method='post'>
+            <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
+            <input type="hidden" name="user_id" value='<?= $user_id ?>'>
+            <input type="hidden" name="type" value='sad'>
+            <input type="hidden" name="page" value='home'>
+            <button name='submit_like'><img src="../images/sad.png" class='icons' alt="sad"></button>
+            </form>
+        </div>
+        <div>
+        <form action="../classes_incs/liking.inc.php" method='post'>
+            <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
+            <input type="hidden" name="user_id" value='<?= $user_id ?>'>
+            <input type="hidden" name="type" value='fire'>
+            <input type="hidden" name="page" value='home'>
+            <button name='submit_like'><img src="../images/fire.png" class='icons' alt="fire"></button>
+            </form>
+        </div>
     </div>
     </div>
-         <div class="comment_in" >
-            <input type="text" placeholder="Reply" id="commentBtn">
-            <div class='reply-form-bg'id="commentDiv">
+     <div class="comment_in" >
+        <?php 
+        $post_id = $post['post_id'];
+             #counting comments
+    $countComments = $dbh->connect()->prepare("SELECT COUNT(*) as total from comments where post_id = ?");
+    if(!$countComments ->execute(array($post_id))){
+        echo 'Failed To Load Posts';
+    }else{
+         $result = $countComments->fetch(PDO::FETCH_ASSOC);
+        $total = $result['total']; 
+    
+    }
+
+        ?>
+        <input type="text" placeholder="Comment (<?= $total ?>)" id="commentBtn">
+       <div class='reply-form-bg'id="commentDiv">
        <div class="reply-form" >
             <span class="close-btn" id="close_comment">
                 X
@@ -98,9 +191,11 @@
                      <span>P</span>
                 </div>
                <div>
+               <input type="hidden" name="type" value='comm'>
                 <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
-                <input type="hidden" name='user_id' value='<?= $post['user_id'] ?>'>
+                <input type="hidden" name='user_id' value='<?= $user_id ?>'>
                 <input type="hidden" name='page' value='<?= $page ?>'>
+                <input type="hidden" name='type' value='comm'>
                 <textarea name="comment" id="reply-textarea" placeholder="...whats your view"></textarea>
                </div>
                 <div>
@@ -110,8 +205,10 @@
             </form>
         </div>
        </div>
-        </div> 
-    </div>
+       
+    </div> 
+</div>
+
         </div>
         <?php } ?> 
 
@@ -151,6 +248,12 @@ const react =document.querySelector('.react');
   const react_emojis=document.querySelector('.react-emojis');
   react.addEventListener('click', () => {
     react_emojis.classList.toggle('react-emojis-active');
+  })
+
+  const head_dots =document.querySelector('.head-dots');
+  const head_menu =document.querySelector('.head-menu');
+  head_dots.addEventListener('click',() =>{
+    head_menu.classList.toggle('head-menu-active');
   })
 
 </script>
