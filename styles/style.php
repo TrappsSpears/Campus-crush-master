@@ -15,7 +15,7 @@ body{
 .nav-a{
    
     display: flex;
-    min-width: 160px;
+    min-width: 10px;
 }
 a{
      color: inherit;
@@ -849,11 +849,13 @@ cursor: pointer;
 .emojis{
     position: relative;
     top: -40px;
+    left: 10%;
     border-radius: 32px;
-    width: 100%;
+    width: fit-content;
     background-color: #000;
     padding: 8px;
     display: flex;
+    text-align: center;
 }
 .emojis div{
     padding-right: 10px;
@@ -960,6 +962,7 @@ cursor: pointer;
     border-radius: 8px;
     font-size: 15px;
     margin-bottom: 20px;
+    padding-bottom: 12px;
 }
 .trends .trndItms{
     padding: 5px 20px;
@@ -1199,7 +1202,14 @@ cursor: pointer;
         display: none;
     }
     .sidebar-nav{
+        width: 20%;
+        background-color: #fff;
+    }
+    .sidebar-nav span {
         display: none;
+    }
+    .sidebar-nav .nav-a{
+        width: 5px;
     }
     
     .post-choice-active{

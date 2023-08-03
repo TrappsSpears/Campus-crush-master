@@ -1,11 +1,31 @@
 <div class="leftbar">
     <div class="leftbar-container">
         <div class="emojis">
-            <div><img src="../images/like.png" class='icons' alt="like"></div>
-            <div><img src="../images/love.png" class='icons' alt="love"></div>
-            <div><img src="../images/funny.png" class='icons' alt="funny"></div>
-            <div><img src="../images/sad.png" class='icons' alt="sad"></div>
-            <div><img src="../images/fire.png" class='icons' alt="fire"></div>
+            <div>
+            <a href="../Trends/trends.php?reaction=like">   
+            <img src="../images/like.png" class='icons' alt="like">
+            </a> 
+            </div>
+            <div>
+            <a href="../Trends/trends.php?reaction=love">
+            <img src="../images/love.png" class='icons' alt="love">
+            </a>    
+            </div>
+            <div>
+                <a href="../Trends/trends.php?reaction=funny">
+                <img src="../images/funny.png" class='icons' alt="funny">
+                </a>
+            </div>
+            <div>
+                <a href="../Trends/trends.php?reaction=sad" >
+                <img src="../images/sad.png" class='icons' alt="sad">
+                </a>            
+            </div>
+            <div>
+                <a href="../Trends/trends.php?reaction=fire">
+                <img src="../images/fire.png" class='icons' alt="fire">
+                </a>
+            </div>
         </div>
            
     <div class="trends">
@@ -34,9 +54,17 @@
   
     <h3 class='locs'>Top Places</h3>
     <?php foreach($location as $trend){ ?>
-        <a href="#"><div class='trndItms'>
-            <p>#<?= $trend['location'] ?></p>
-        </div></a>
+        <a href="#">
+            <div class='trndItms'>
+                <div>
+                    <small>Confessions.321K</small>
+                </div>
+                <div>
+                <p>#<?= $trend['location'] ?></p>
+                </div>
+            
+            </div>
+        </a>
  
     
    <?php } ?>

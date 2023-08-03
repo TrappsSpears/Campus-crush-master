@@ -34,13 +34,42 @@
    
 <!--...............------------------- Now Posting --------------------------------------------------------------->
 
-<?php foreach($posts_links as $post){ ?>
+<?php
+   function format_post_date($post_date) {
+    // Convert the input date to a timestamp
+    $timestamp = strtotime($post_date);
+    
+    // Get today's date at midnight
+    $today = strtotime('today midnight');
+    
+    // Get yesterday's date at midnight
+    $yesterday = strtotime('yesterday midnight');
+
+    // Check if the post date is today
+    if ($timestamp >= $today) {
+        return 'Today';
+    }
+    // Check if the post date is yesterday
+    elseif ($timestamp >= $yesterday) {
+        return 'Yesterday';
+    }
+    // For other days, format the date as "Thursday 23 May 2023" using the date() function
+    else {
+        return date('l j F Y', $timestamp);
+    }
+}
+ 
+foreach($posts_links as $post){ 
+ 
+    $post_date = $post['date_created'];
+    $formattedDate = format_post_date($post_date);
+    ?>
         
     
         <div class="post-container">
             <div class="post-head">
             <div class="heading-post">
-            <img src="../images/incognito.png" alt="anonymouse" class="icons"> <span><?= $post['date_created'] ?></span>   
+            <img src="../images/incognito.png" alt="anonymouse" class="icons"> <span><?= $formattedDate ?></span>   
             </div>
                 <div class="head-dots">
                     <div>
