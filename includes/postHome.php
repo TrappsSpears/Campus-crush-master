@@ -262,6 +262,7 @@ textarea_Post.addEventListener('input', function() {
         </div>
     </div>
     </div>
+    
      <div class="comment_in" >
         <?php 
         $post_id = $post['post_id'];
@@ -314,7 +315,46 @@ textarea_Post.addEventListener('input', function() {
        
     </div> 
 </div>
+<script src='http'></script>
 <script>
+    $(document).ready(function() {
+        // Attach a click event handler to the like buttons with class 'like-button'
+        $('.like-button').click(function() {
+            // Get the type of like (like, love, funny, sad, fire) from the data-type attribute
+            var type = $(this).data('type');
+
+            // Get the post_id and user_id from the hidden input fields
+            var post_id = <?= $post['post_id'] ?>;
+            var user_id = <?= $user_id ?>;
+
+            // Make the AJAX request to the server
+            $.ajax({
+                type: 'POST',
+                url: '../classes_incs/liking.inc.php',
+                data: {
+                    post_id: post_id,
+                    user_id: user_id,
+                    type: type,
+                },
+                dataType: 'json', // Expect JSON response from the server
+                success: function(response) {
+                    // This function is executed if the AJAX request is successful
+                    console.log('Like request successful!');
+                    console.log(response); // Log the response for debugging (if needed)
+
+                    // Update the like count or other UI elements based on the server's response
+                    // For example, you can update the like count using the newLikeCount value
+                    var likeCountElement = $('.react .react small');
+                    likeCountElement.text(response.newLikeCount);
+                },
+                error: function(error) {
+                    // This function is executed if there's an error in the AJAX request
+                    console.error('Like request error:', error);
+                }
+            });
+        });
+    });
+
     //react
     const react =document.querySelector('.react');
   const react_emojis=document.querySelector('.react-emojis');

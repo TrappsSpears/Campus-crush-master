@@ -20,6 +20,11 @@ include('../includes/headall.php'); ?>
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
         <div class="nav">
+        <div class="profile" id="prof_menuBtn">                          
+         <div>
+       <img src="../images/menu-button-of-three-horizontal-lines.png" alt="Menu" class='icons'>  Menu 
+       </div>
+      </div>
             <h3>#<?= $topic ?></h3>
         </div>
 <?php 
@@ -51,6 +56,11 @@ if(!$selectPostLoc ->execute(array($loc))){
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
         <div class="nav">
+        <div class="profile" id="prof_menuBtn">                          
+         <div>
+       <img src="../images/menu-button-of-three-horizontal-lines.png" alt="Menu" class='icons'>  Menu 
+       </div>
+      </div>
             <h3>@<?= $loc ?></h3>
         </div>
 <?php 
@@ -84,6 +94,11 @@ if(!$selectPostLoc ->execute(array($react))){
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
         <div class="nav">
+        <div class="profile" id="prof_menuBtn">                          
+         <div>
+       <img src="../images/menu-button-of-three-horizontal-lines.png" alt="Menu" class='icons'>  Menu 
+       </div>
+      </div>
             <h3>Reaction.<?= $react ?></h3>
         </div>
 <?php 

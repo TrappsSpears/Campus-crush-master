@@ -121,8 +121,18 @@ a{
     text-align: left;
     position: sticky;
     top: 0;
-    padding: 10px;
+    padding: 5px;
     border-bottom: 2px solid darkorchid;
+    display: flex;
+}
+.nav .profile .icons{
+    width: 10px;
+}
+.nav .profile{
+    box-shadow: 0 0 0 0;
+    cursor: pointer;
+    margin-left: 40px;
+    display: none;
 }
 .posts{
     padding: 10px 20%; 
@@ -1181,29 +1191,45 @@ cursor: pointer;
     border-bottom: 3px solid rgb(2, 70, 118);
     border-left:  3px solid rgb(2, 70, 118);
 }
+
 /* Responcive Design*/
 
 /* Tablets */
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
+@media only screen and (min-width: 700px) and (max-width: 1023px) {
     /* CSS styles here */
     .leftbar{
-        display: none;
+        width: 400px;
     }
     .sidebar-nav{
         width: 20%;
+    }
+    .emojis{
+        left: 0;
+        width: fit-content;
+    }
+    .emojis .icons{
+        width: 20px;
     }
   
   }
+  .nav .profile{
+    display: block;
+  }
 
   /* Smartphones */
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 700px) {
     /* CSS styles here */
     .leftbar{
         display: none;
     }
+    .posts{
+        margin-left: -30px;
+    }
     .sidebar-nav{
-        width: 20%;
-        background-color: #fff;
+        z-index: 200;
+        position: fixed;
+        left: 0;
+        display: none;
     }
     .sidebar-nav span {
         display: none;
@@ -1213,9 +1239,11 @@ cursor: pointer;
     }
     
     .post-choice-active{
-        width: 60%;
-        left: 20%;
-       
+        width: 100%;
+        z-index: 300;  
+    }
+    .post-choice{
+        left: 0;
     }
     .input-form textarea{
         min-width: 20px;
@@ -1232,5 +1260,11 @@ cursor: pointer;
     .con_form{
         left: 15%;
     }
+  }
+  .form-comment button{
+    margin-left: 0;
+  }
+  .nav .profile{
+    display: block;
   }
   </style>

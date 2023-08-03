@@ -9,7 +9,12 @@ include('../includes/headall.php');
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
         <div class="nav" style="border-bottom:2px solid rgb(1, 28, 47)">
-           <b>Messages</b>
+        <div class="profile" id="prof_menuBtn">                          
+         <div>
+       <img src="../images/menu-button-of-three-horizontal-lines.png" alt="Menu" class='icons'>  Menu 
+       </div>
+      </div>
+           <h3>Messages</h3>
         </div>
 <?php 
 
