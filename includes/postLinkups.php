@@ -52,8 +52,14 @@
     <div class="post-box">
         <a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
         <div class="location_div">
-                    @<?= $post['location'] ?>  #<?= $post['topic']?>
-                </div>
+            <a href="../Trends/trends.php?location=<?= $post['location'] ?>">     
+                @<?= $post['location'] ?>
+            </a> 
+            <a href="../Trends/trends.php?trends=<?= $post['topic'] ?>">
+                #<?= $post['topic']?>
+            </a>
+            
+        </div>
             <?php if(strlen($post['post_body']) > 500){ ?>
                 
             <div class='readmoreBtn'>

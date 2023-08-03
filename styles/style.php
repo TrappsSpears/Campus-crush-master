@@ -6,7 +6,7 @@
     box-sizing: border-box;
 }
 body{
-    background-color: #2b2a2a;
+    background-color: #201f1f;
     max-width: 1800px;
     margin-left: auto;
     margin-right: auto;
@@ -180,7 +180,7 @@ a{
 }
 .post-container{
     box-shadow: 2px 6px 10px 0px rgb(29, 28, 28);
-    background-color: #201f1f;
+    background-color: #252323;
     height: auto;
     max-width: 550px;
     min-width: 260px;
@@ -188,7 +188,7 @@ a{
     border-radius: 8px;
   margin-bottom: 20px;
     text-align: left;
-    padding-bottom: 12px;
+    padding-bottom: 6px;
    }
    .post-container-comment{
     box-shadow: 2px 6px 10px 0px rgb(29, 28, 28);
@@ -358,8 +358,9 @@ a{
     display: block;
 }
 .comment{
+    height: 50px;
     display: grid;
-    padding: 8px 1px 12px 12px;
+    padding: 4px 1px 12px 12px;
     grid-template-columns: 13% 80%;
 }
 .deal-input{
@@ -424,8 +425,10 @@ cursor: pointer;
 .react small{
     position: relative;
     color:inherit;
-    
-    font-weight: 899;
+    top: -15px;
+    left: 27px;
+    font-size: 12px;
+    font-weight:100 ;
     border-radius: 43px;
     padding: 5px 7px;
 
@@ -526,22 +529,22 @@ cursor: pointer;
     font-size: 18px;
     max-width: 100%;
 }
-.comment-post div{
-    margin-top: 10px;
-}
+
 .comment-post div small{
-    font-size: 14px;
-    margin-top: 10px;
+    font-size: 10px;
     color: green;
     cursor: pointer;
 }
 .comments_posts div span{
     padding: 6px;
     margin-left: 5px;
-    box-shadow: 0px 1px 1px 0px black;
+    
     border-radius: 98px;
     cursor: pointer;
     color: #fff;
+}
+.comments_posts div span img{
+    width: 15px;
 }
 .reply_comm{
     margin-top: 17px;
@@ -832,12 +835,32 @@ cursor: pointer;
 /* Main things End */
 /*Left bar*/
 .leftbar{
-    width: 450px;
+    width: 700px;
     padding: 40px;
+    overflow-y: scroll;
 }
 .leftbar .leftbar-container{
     position: relative;
     top: 100px;
+}
+.leftbar .leftbar-container h2{
+    font-size: 20px;
+}
+.emojis{
+    position: relative;
+    top: -40px;
+    border-radius: 32px;
+    width: 100%;
+    background-color: #000;
+    padding: 8px;
+    display: flex;
+}
+.emojis div{
+    padding-right: 10px;
+}
+.emojis div:hover{
+    transform: scale(1.2);
+    transition: 0.3s ease;
 }
 .icons-men{
    margin-top: 85px;
@@ -847,15 +870,19 @@ cursor: pointer;
     position: relative;
     top: 60%;
 }
-.icons-men div span{
+.icons-men .icons{
+    width: 20px;
+}
+.icons-men span{
     background-color: black;
-    padding: 2px;
+    padding: 6px;
     margin-right: 8px;
     position: relative;
     top: 32px;
     border-radius: 30px;
     height: 4px;
     color: black;
+    box-shadow: 2px 3px 3px 0px rgb(95, 44, 80);
 }
 .icons div{
     margin-bottom: 15px;
@@ -928,21 +955,27 @@ cursor: pointer;
 }
 
 .trends{
-    background-color: #292929;
-    height: 400px;
+    background-color: #2e2e2e;
     margin-top: 12px;
     border-radius: 8px;
-    padding: 12px;
-    font-size: 20px;
-    
+    font-size: 15px;
+    margin-bottom: 20px;
 }
-.trends p{
-    padding: 8px;
+.trends .trndItms{
+    padding: 5px 20px;
     cursor: pointer;
-    border-radius: 32px;
+    margin-top: 10px;
 }
-.trends p:hover{
+.trends  .trndItms:hover{
     background-color: #383838;
+}
+.trends .trndItms small{
+    color: #201f1f;
+    font-size: 15px;
+    padding: 5px;
+}
+.trends .trndItms div{
+    margin-bottom: 5px;
 }
 
 
@@ -1008,8 +1041,8 @@ cursor: pointer;
 }
 .profile-menue{
     position:fixed;
-    top:48%;
-    left:80px;
+    top:52%;
+    left:90px;
     padding: 12px;
     
     backdrop-filter: blur(2px);
@@ -1054,7 +1087,7 @@ cursor: pointer;
     position: absolute;
 }
 .locs{
-    padding-top: 10px;
+    padding: 10px;
 }
 .locs p{
     margin-top: 5px;

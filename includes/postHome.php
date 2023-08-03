@@ -138,7 +138,8 @@ textarea_Post.addEventListener('input', function() {
                 #<?= $post['topic']?>
             </a>
             
-        </div><a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
+        </div>
+        <a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
         <?php if(strlen($post['post_body']) > 500){ ?>
             
         <div class='readmoreBtn'>

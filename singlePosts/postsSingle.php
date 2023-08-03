@@ -142,17 +142,18 @@
 
         <div class="reply-container">
             <h3>Comments</h3>
-        <?php foreach($post_comment as $comment){ ?>
+
+        <?php
+        if($userLogged){
+        foreach($post_comment as $comment){ ?>
             <div class="comments_posts">
                 <div class="comment-post">
                     <?= $comment['comment'] ?>
                     <div>
-                        <small>@<?= $comment['username'] ?><span>like</span><span>reply</span> </small>
+                        <small>@<?= $comment['username'] ?> <span>
+                            <img src="../images/<?php echo $resultsall['type'];?>.png" alt="<?= $resultsall['type'] ?>" class='icons'></span></small>
                     </div>
-                    <div class='reply_comm'>
-                        <textarea name="reply-comment" placeholder='reply comment'></textarea> 
-                        <button>post</button>
-                    </div>
+                    
                 </div>
                 <div class="comm_likNreply"> 
                     <div class="react-emojis">
@@ -160,7 +161,9 @@
                     </div>
                 </div>
             </div>
-        <?php } ?>    
+        <?php } }else{?>
+            <small>Please log in</small>
+            <?php } ?>
         </div>
 
 </div>

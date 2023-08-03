@@ -135,9 +135,9 @@
                        else{ ?>
                              <!-- when user is signed in -->
                              <div class='icons-men' >
-                             <div>
-                                    <span>.</span><span>.</span><span>.</span>
-                                </div>
+                             
+                                    <span></span><span></span><span></span>
+                                
                              <div class="profile" id="prof_menuBtn">
                                 
                                 <div>
