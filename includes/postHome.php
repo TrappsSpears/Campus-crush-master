@@ -5,7 +5,7 @@
             <button></button>
         </div>
         <div>
-            <span>P</span>
+            
         </div>
         <div>
             <button></button>
@@ -65,7 +65,7 @@
                 </div>
                
             </div>
-            <small>Don Worry You got all the <a href="#" style="color:blueviolet"> privacy</a> YOU need...No one will ever know who post this</small>
+            <small>Don Worry ,your <a href="../privacy/privacy.html" style="color:blueviolet"> privacy</a> is assured.No one will ever know who made this post</small>
         </div>
         </div>
         <script>
@@ -102,7 +102,7 @@ textarea_Post.addEventListener('input', function() {
         </script>
         <?php } ?>
     </div>
-
+    
 <!--...............------------------- Now Posting --------------------------------------------------------------->
 
     <?php 
@@ -160,7 +160,7 @@ textarea_Post.addEventListener('input', function() {
     <div class="post-box">
         <div class="location_div">
             <a href="../Trends/trends.php?location=<?= $post['location'] ?>">     
-                @<?= $post['location'] ?>
+                -<?= $post['location'] ?>
             </a> 
             <a href="../Trends/trends.php?trends=<?= $post['topic'] ?>">
                 #<?= $post['topic']?>
@@ -174,10 +174,7 @@ textarea_Post.addEventListener('input', function() {
         <button> Read More</button>
         </div>
             <?php } ?>
-    <p <?php if(strlen($post['post_body']) < 60){echo "style='font-size:48px'";}
-                elseif(strlen($post['post_body']) <45){echo "style='font-size:58px'";}
-    
-    ?>> <?= $post['post_body'] ?></p>
+    <p> <?= $post['post_body'] ?></p>
     </a>
 </div>
 <?php if($userLogged){ ?>
@@ -186,10 +183,10 @@ textarea_Post.addEventListener('input', function() {
     <div>
         <?php
             $post_id = $post['post_id'];
-            $sql = "SELECT COUNT(*) as total FROM likes WHERE user_id = ? AND post_id = ?;";
+            $sql = "SELECT COUNT(*) as total FROM likes WHERE post_id = ?;";
 
             $result = $dbh->connect()->prepare($sql);
-            if(!$result->execute(array($user_id,$post_id))){
+            if(!$result->execute(array($post_id))){
                 $result = null;
             }else{
                 $results = $result->fetch(PDO::FETCH_ASSOC);
@@ -200,11 +197,14 @@ textarea_Post.addEventListener('input', function() {
                         $result = null;
                     }else{
                         $resultsall = $result->fetch(PDO::FETCH_ASSOC);}
+                        if($resultsall != ''){
+                            $resultall=$resultsall;
+                        }
                     ?>
 
                 <div class="react">
                 <div class="react">
-                <img src="../images/<?php echo $resultsall['type'];?>.png" alt="<?= $resultsall['type'] ?>" class='icons'>
+                <img src="../images/<?php echo $resultall['type'];?>.png" alt="<?= $resultall['type'] ?>" class='icons'>
                 <small><?= $results['total']; ?></small>
                 </div>
                 </div>
@@ -367,10 +367,10 @@ textarea_Post.addEventListener('input', function() {
     <div>
             <?php
             $post_id = $post['post_id'];
-            $sql = "SELECT COUNT(*) as total FROM likes WHERE user_id = ? AND post_id = ?;";
+            $sql = "SELECT COUNT(*) as total FROM likes WHERE post_id = ?;";
 
             $result = $dbh->connect()->prepare($sql);
-            if(!$result->execute(array($user_id,$post_id))){
+            if(!$result->execute(array($post_id))){
                 $result = null;
             }else{
                 $results = $result->fetch(PDO::FETCH_ASSOC);
@@ -381,11 +381,14 @@ textarea_Post.addEventListener('input', function() {
                         $result = null;
                     }else{
                         $resultsall = $result->fetch(PDO::FETCH_ASSOC);}
+                        if($resultsall!= ''){
+                            $resultall=$resultsall;
+                        }
                     ?>
 
                 <div class="react">
                 <div class="react">
-                <img src="../images/<?php echo $resultsall['type'];?>.png" alt="<?= $resultsall['type'] ?>" class='icons'>
+                <img src="../images/<?php echo $resultall['type'];?>.png" alt="<?= $resultall['type'] ?>" class='icons'>
                 <small>
                     <?php if($results>0){ ?>
                     <?= $results['total']; ?> <?php } ?></small>

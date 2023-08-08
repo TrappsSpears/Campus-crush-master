@@ -151,15 +151,13 @@
                     <?= $comment['comment'] ?>
                     <div>
                         <small>@<?= $comment['username'] ?> <span>
-                            <img src="../images/<?php echo $resultsall['type'];?>.png" alt="<?= $resultsall['type'] ?>" class='icons'></span></small>
+                         
+                            </span></small>
                     </div>
                     
+                   
                 </div>
-                <div class="comm_likNreply"> 
-                    <div class="react-emojis">
-                        <div>like</div><div>love</div><div>funny</div><div>sad</div><div>fire</div>
-                    </div>
-                </div>
+               
             </div>
         <?php } }else{?>
             <small>Please log in</small>

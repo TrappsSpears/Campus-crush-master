@@ -110,10 +110,10 @@ foreach($posts_Thrills as $post){
     <div>
         <?php
             $post_id = $post['post_id'];
-            $sql = "SELECT COUNT(*) as total FROM likes WHERE user_id = ? AND post_id = ?;";
+            $sql = "SELECT COUNT(*) as total FROM likes WHERE  post_id = ?;";
 
             $result = $dbh->connect()->prepare($sql);
-            if(!$result->execute(array($user_id,$post_id))){
+            if(!$result->execute(array($post_id))){
                 $result = null;
             }else{
                 $results = $result->fetch(PDO::FETCH_ASSOC);

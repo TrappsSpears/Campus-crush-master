@@ -1,5 +1,20 @@
-<div class="leftbar">
-    <div class="leftbar-container">
+<?php 
+$page = 'search';
+include('../includes/headall.php'); ?>
+
+<body>  
+    <div class="main">
+    <div class="main-content">
+    <div class="nav">
+
+<div>
+      <h2>Search</h2>
+ </div>
+
+</div>
+<div class="posts" id="search-conts">
+
+    <div class="search-conts" id="search-conts">
         <div class="emojis">
             <div>
             <a href="../Trends/trends.php?reaction=like">   
@@ -73,5 +88,15 @@
     </div>
         </div>
 
+    
+
+
+</div>
     </div>
 
+
+ 
+    </div>
+  <<?php include('../includes/footer.php') ?>
+</body>
+</html>

@@ -22,6 +22,7 @@ include('../includes/headall.php'); ?>
  
     </div>
     <script src="./Js/script.js"></script>
+    <?php include('../includes/footer.php') ?>
 </body>
 </html>
 <?php } ?>

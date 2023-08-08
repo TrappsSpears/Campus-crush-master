@@ -34,7 +34,7 @@
     #//-------------------------------------------------------------------\\##
 
         ##------------------Trends #tags----------------------------------##
-        $selectTrends = $dbh->connect()->prepare("SELECT DISTINCT topic FROM posts  ORDER BY date_created DESC LIMIT 5");
+        $selectTrends = $dbh->connect()->prepare("SELECT DISTINCT topic FROM posts WHERE topic IS NOT NULL AND topic <> '' ORDER BY date_created DESC LIMIT 5");
         if(!$selectTrends ->execute()){
             echo 'Failed To Load Posts';
         }else{
@@ -43,7 +43,7 @@
         #//-------------------------------------------------------------------\\##
 
      ##------------------Trends Location Tops----------------------------------##
-         $selectLoc = $dbh->connect()->prepare("SELECT DISTINCT location FROM posts  ORDER BY date_created DESC LIMIT 3");
+         $selectLoc = $dbh->connect()->prepare("SELECT DISTINCT location FROM posts WHERE location IS NOT NULL AND location <> ''  ORDER BY date_created DESC LIMIT 3");
          if(!$selectLoc ->execute()){
             echo 'Failed To Load Posts';
          }else{

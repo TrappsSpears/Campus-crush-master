@@ -102,6 +102,83 @@ a{
       }
 }
 /* Sidebar Ends*/
+.footer-nav{
+   background-color: inherit;
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+    width: 100%;
+    border-top: 1px solid #252323;
+}
+.footer_items{
+    padding: 10px 25px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto 20px;
+}
+.footer_items div{
+   
+    padding: 8px;
+    border-radius: 32px;
+    width: 60%;
+    max-width: 50px;
+    min-width: 40px;
+    cursor: pointer;
+
+    text-align: center;
+}
+ .icons-nav{
+    width: 20px;
+    transform: scale(1.4);
+    filter: brightness(0) invert(1) sepia(100%) hue-rotate(30deg) saturate(500%);
+}
+.icons-active img{
+    filter: invert(100%);
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+#menu {
+    display: none;
+    position: fixed;
+    top: 72%;
+    right: 20px;
+    background-color: #333;
+    width: auto;
+    border-radius: 12px;
+}
+
+#menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#menu ul li {
+    padding: 10px;
+    text-align: center;
+}
+
+#menu ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+.menu_show{
+    display: block;
+}
+
+    
+    
+    #menu ul {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    #toggleBtn {
+        display: block;
+    }
+
 
 /* Main Content */
 .main-content{
@@ -125,13 +202,15 @@ a{
     border-bottom: 2px solid darkorchid;
     display: flex;
 }
+.nav h2 ,h3{
+    margin-left: 35px;
+}
 .nav .profile .icons{
     width: 10px;
 }
-.nav .profile{
+ #menue_mob{
     box-shadow: 0 0 0 0;
     cursor: pointer;
-    margin-left: 40px;
     display: none;
 }
 .posts{
@@ -139,6 +218,27 @@ a{
     width: 100%;  
    height: 91%;
   
+}
+#search-conts{
+    padding: 20px;
+    margin-left: -5px;
+}
+
+#search-conts .search-conts .emojis{
+   top: 0; 
+   left: 0;
+   background-color: wheat;
+   width: 100%;
+   display: grid;
+   grid-template-columns: auto auto auto auto auto;
+   max-width: 450px;
+   min-width: 200px;
+}
+.posts .search-conts .trends{
+    width: 100%;
+    text-align: left;
+    max-width: 450px;
+    min-width: 200px;
 }
 .con_form{
     padding: 20px;
@@ -235,22 +335,23 @@ a{
     box-shadow: 2px 6px 14px 0px rgb(29, 28, 18);
 }
 .post-box{
-    background: #313131;
+    background: rgb(201, 200, 200);
     padding: 12px;
     height: 300px;
     margin-bottom: 8px;
     text-align: center;
      overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow:ellipsis;
     cursor: pointer; 
 }
 .post-box p{
-    padding: 12px;
-    font-size: 24px;
+    padding:52px 6px;
+    font-size: 20px;
     text-align: center;
-    height: 210px;
+    height: 230px;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: #252323;
 }
 .readmoreBtn{
     position:relative;
@@ -265,22 +366,19 @@ a{
     padding-left: 12px;
     text-align: left;
     margin-top: -30px;
-    font-size: 20px;
+    font-size: 16px;
+    color: #1a1a1a;
 }
 .readmoreBtn button{
-    padding: 8px 12px;
-    font-size: 20px;
-    font-weight: 600;
-    background-color: rgb(101,109,101);
-    color: white;
-    border-radius: 12px;
-    border: none;
+    padding: 8px ;
+    font-size: 18px;
+    color: #1a1a1a;
+    border: 1px solid black;
     cursor: pointer;
-    box-shadow: 0px 1px 8px 0px black;
     max-width: 100%;
+    background-color: inherit;
 }.readmoreBtn button:hover{
-    transform: scale(1.1);
-    transition: 0.1s ease;
+    color: #880281;
 }
 
 .post-head{
@@ -649,7 +747,8 @@ cursor: pointer;
     padding: 12px;
     text-align: center;
     z-index: 100;
-    left:30%
+    left:30%;
+    width: 40%;
 }
 .post-choice-bg{
     position: fixed;
@@ -853,6 +952,8 @@ cursor: pointer;
     position: relative;
     top: 100px;
 }
+
+
 .leftbar .leftbar-container h2{
     font-size: 20px;
 }
@@ -866,6 +967,13 @@ cursor: pointer;
     padding: 8px;
     display: flex;
     text-align: center;
+}
+#emojis_post{
+    position: relative;
+    top: 10px;
+    left: 0;
+    background-color: inherit;
+
 }
 .emojis div{
     padding-right: 10px;
@@ -1203,6 +1311,9 @@ cursor: pointer;
     .sidebar-nav{
         width: 20%;
     }
+    nav{
+        margin-left: -20px;
+    }
     .emojis{
         left: 0;
         width: fit-content;
@@ -1215,6 +1326,15 @@ cursor: pointer;
   .nav .profile{
     display: block;
   }
+  #C_con{
+    font-size: 16px;
+  }
+  #post_linkups div {
+    display: block;
+  }
+  #post_linkups div input{
+    margin-bottom: 10px;
+  }
 
   /* Smartphones */
 @media only screen and (max-width: 700px) {
@@ -1223,7 +1343,7 @@ cursor: pointer;
         display: none;
     }
     .posts{
-        margin-left: -30px;
+        padding: 10px 20px;
     }
     .sidebar-nav{
         z-index: 200;
@@ -1237,13 +1357,16 @@ cursor: pointer;
     .sidebar-nav .nav-a{
         width: 5px;
     }
-    
+    #post_choice{
+        font-size: 15px;
+    }
     .post-choice-active{
         width: 100%;
         z-index: 300;  
     }
     .post-choice{
         left: 0;
+        width: 100%;
     }
     .input-form textarea{
         min-width: 20px;
@@ -1260,11 +1383,12 @@ cursor: pointer;
     .con_form{
         left: 15%;
     }
+     #menue_mob{
+    display: block;
+  }
   }
   .form-comment button{
     margin-left: 0;
   }
-  .nav .profile{
-    display: block;
-  }
+ 
   </style>

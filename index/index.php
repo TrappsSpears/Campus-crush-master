@@ -14,6 +14,6 @@ include('../includes/headall.php'); ?>
 <?php include('../includes/leftbar.php') ;?>
  
     </div>
-  
+  <?php include('../includes/footer.php') ?>
 </body>
 </html>

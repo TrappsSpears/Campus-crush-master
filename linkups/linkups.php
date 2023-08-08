@@ -7,11 +7,6 @@ include('../includes/headall.php'); ?>
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
         <div class="nav">
-        <div class="profile" id="prof_menuBtn">                          
-         <div>
-       <img src="../images/menu-button-of-three-horizontal-lines.png" alt="Menu" class='icons'>  Menu 
-       </div>
-      </div>
             <h3>Need anything?</h3>
         </div>
 <?php 
@@ -23,5 +18,6 @@ include('../includes/headall.php'); ?>
  
     </div>
     <script src="./Js/script.js"></script>
+    <?php include('../includes/footer.php') ?>
 </body>
 </html>
