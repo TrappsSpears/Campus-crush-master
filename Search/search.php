@@ -1,9 +1,10 @@
 <?php 
-$page = 'search';
+    $page = 'search';
 include('../includes/headall.php'); ?>
 
 <body>  
     <div class="main">
+    <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
     <div class="nav">
 
@@ -15,10 +16,16 @@ include('../includes/headall.php'); ?>
 <div class="posts" id="search-conts">
 
     <div class="search-conts" id="search-conts">
+        <h3>Filter Posts By their reactions</h3>
         <div class="emojis">
             <div>
             <a href="../Trends/trends.php?reaction=like">   
             <img src="../images/like.png" class='icons' alt="like">
+            </a> 
+            </div>
+            <div>
+            <a href="../Trends/trends.php?reaction=shocking">   
+            <img src="../images/shocking.png" class='icons' alt="like">
             </a> 
             </div>
             <div>
@@ -66,8 +73,12 @@ include('../includes/headall.php'); ?>
         </a>
    <?php } ?>
 
-  
-    <h3 class='locs'>Top Places</h3>
+    </div>
+    <div class="trends">
+        <div class="locs">
+            <h2>Top Places</h2>
+        </div>
+    
     <?php foreach($location as $trend){ ?>
         <a href="../Trends/trends.php?trends=<?= $trend['location'] ?>">
             <div class='trndItms'>
@@ -93,10 +104,7 @@ include('../includes/headall.php'); ?>
 
 </div>
     </div>
-
-
- 
     </div>
-  <<?php include('../includes/footer.php') ?>
+  <?php include('../includes/footer.php') ?>
 </body>
 </html>

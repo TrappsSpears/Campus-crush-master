@@ -8,14 +8,14 @@
                     </a>
                 </div>
                 <?php if($userLogged){ ?>
-                <div <?php if ($page == 'linkups'){ echo 'class="active"';} ?>>
-                    <a href="../linkups/linkups.php" class="nav-a"><?php if ($page == 'linkups'){ echo '<span></span>';} ?>
-                        <span></span><span></span><li>linkUps</li>
+                <div <?php if ($page == 'search'){ echo 'class="active"';} ?>>
+                    <a href="../Search/search.php" class="nav-a"><?php if ($page == 'linkups'){ echo '<span></span>';} ?>
+                        <span></span><span></span><li>Explore</li>
                     </a>
                 </div>
-                <div <?php if ($page == 'hot'){ echo 'class="active"';} ?>>
-                    <a href="../Hot/hots.php" class="nav-a"><?php if ($page == 'hot'){ echo '<span></span>';} ?>
-                        <span></span><span></span><li>Thrilling</li>
+                <div <?php if ($page == 'nots'){ echo 'class="active"';} ?>>
+                    <a href="../Notifications/notifications.php" class="nav-a"><?php if ($page == 'hot'){ echo '<span></span>';} ?>
+                        <span></span><span></span><li>Notifications</li>
                     </a>
                 </div>
                 <div <?php if ($page == 'bookmarks'){ echo 'class="active"';} ?>>
@@ -23,9 +23,9 @@
                         <span></span><span></span><li>Bookmarks</li>
                     </a>
                 </div>
-                <div <?php if ($page == 'inbox'){ echo 'class="active"';} ?>>
-                    <a href="../inbox/inbox.php" class="nav-a"><?php if ($page == 'bookmarks'){ echo '<span></span>';} ?>
-                        <span></span><span></span><li>Inbox</li>
+                <div <?php if ($page == 'profile'){ echo 'class="active"';} ?>>
+                    <a href="../userProfile/profileUserCurrent.php" class="nav-a"><?php if ($page == 'bookmarks'){ echo '<span></span>';} ?>
+                        <span></span><span></span><li>Profile</li>
                     </a>
                 </div>
                 
@@ -134,42 +134,7 @@
                        <?php } 
                        else{ ?>
                              <!-- when user is signed in -->
-                             <div class='icons-men' >
-                             
-                                    <span></span><span></span><span></span>
-                                
-                             <div class="profile" id="prof_menuBtn">
-                                
-                                <div>
-                                 <img src="../images/menu-button-of-three-horizontal-lines.png" alt="Menu" class='icons'>   
-                                </div>
-                     
-                             </div>
-                             <div class="profile-menue" id ='prof_menu'>
-                                
-                             
-                <div class=" profile">
-                    <a href="../userProfile/profileUserCurrent.php">
-                    <img src="../images/profile-user.png" alt="LogOut" class='icons'>
-                    </a>
-                 </div>
-                                 <div class='profile'>
-                                 <img src="../images/gear.png" alt="Settings" class='icons'>
-                                 </div>
-                                 <div class='profile' id='logoutBtn'>
-                                     <img src="../images/exit.png" alt="LogOut" class='icons'>
-                                 </div>
-                                 <div class="logout_confirm">
-                                    <p>Confirm LogOut</p>
-                                    <div>
-                                        <form action="../classes_incs/log-out.inc.php">
-                                           <button class='yes'>Yes</button> 
-                                        </form>
-                                        <button class='no' id='noBtn'>No</button>
-                                    </div>
-                                 </div>
-                             </div>
-                          </div>
+                            
                       <?php } ?>
             
          

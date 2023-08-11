@@ -7,6 +7,11 @@
             </a> 
             </div>
             <div>
+            <a href="../Trends/trends.php?reaction=shoking">   
+            <img src="../images/shocking.png" class='icons' alt="like">
+            </a> 
+            </div>
+            <div>
             <a href="../Trends/trends.php?reaction=love">
             <img src="../images/love.png" class='icons' alt="love">
             </a>    
@@ -50,9 +55,12 @@
                    
         </a>
    <?php } ?>
-
-  
-    <h3 class='locs'>Top Places</h3>
+    </div>
+    <div class="trends">
+        <div class="locs">
+            <h2>Top Places</h2>
+        </div>
+    
     <?php foreach($location as $trend){ ?>
         <a href="../Trends/trends.php?trends=<?= $trend['location'] ?>">
             <div class='trndItms'>

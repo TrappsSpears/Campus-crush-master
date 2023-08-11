@@ -6,7 +6,7 @@
     box-sizing: border-box;
 }
 body{
-    background-color: #201f1f;
+    background-color: rgb(44, 47, 60);
     max-width: 1800px;
     margin-left: auto;
     margin-right: auto;
@@ -43,20 +43,19 @@ a{
     list-style: none;
     padding: 12px;
     margin-top: 20px;
-    background-color: #ff9b05;
+    background-color: #1a1a1a;;
     border-radius: 42px;
     font-size: 18px;
     font-weight: 550;
     margin-right: 20px;
     cursor: pointer;
-    width: 300px;
     box-shadow: 2px 6px 5px 0px rgb(29, 28, 28);
   
 }
 .sidebar-nav ul .active li{
-    background-color: #1a1a1a;
+    background-color: rgb(0, 101, 196);
     color: white;
-    min-width: 100px;
+    
     }
     .sidebar-nav ul .active span{
         background-color: #1a1a1a;
@@ -74,7 +73,7 @@ a{
     transition: 0.3s ease;
 }
 .sidebar-nav ul span{
-    background-color: #ff9b05;
+    background-color: rgb(0, 101, 196);
     padding: 6px;
     border-radius: 30px;
     height: 4px;
@@ -199,7 +198,7 @@ body {
     position: sticky;
     top: 0;
     padding: 5px;
-    border-bottom: 2px solid darkorchid;
+    border-bottom: 2px solid rgb(0, 101, 196);
     display: flex;
 }
 .nav h2 ,h3{
@@ -214,25 +213,31 @@ body {
     display: none;
 }
 .posts{
-    padding: 10px 20%; 
+    padding: 10px 50px; 
     width: 100%;  
    height: 91%;
   
 }
-#search-conts{
-    padding: 20px;
-    margin-left: -5px;
+#search-conts .trends{
+    max-width: 600px;
+   min-width: 200px;
+   background-color: #111;
 }
 
 #search-conts .search-conts .emojis{
    top: 0; 
    left: 0;
-   background-color: wheat;
+   background-color: #111;
    width: 100%;
    display: grid;
-   grid-template-columns: auto auto auto auto auto;
-   max-width: 450px;
+   grid-template-columns: auto auto auto auto auto auto;
+   max-width: 600px;
    min-width: 200px;
+   margin-top: 10px;
+}
+#search-conts h3{
+    text-align: left;
+
 }
 .posts .search-conts .trends{
     width: 100%;
@@ -243,35 +248,75 @@ body {
 .con_form{
     padding: 20px;
     background-color: #1d1c1c;
-    max-width: 550px;
+    max-width: 100%;
     margin-top: 10px;
     min-width: 260px;
     border-radius: 6px;
+    position: sticky;
+    top: 0;
+}
+.con_form textarea{
+    padding: 6px;
+    font-size: 20px;
+    background-color: inherit;
+    resize: none;
+    border: none;
+    color: white;
+    min-width: 85%;
+    max-width: 90%;
+    height: auto;
+    text-align: center;
+    outline: none;
+    border-bottom: 2px solid #2c2d2e;
+}
+.con_form .post_header{
+    display: flex;
+    margin-top: 10px;
+    display: none;
+}
+.post_header .input_hme{
+    display: flex;
+   margin-left:7%;
+}
+.con_form .post_header input{
+    width: 50%;
+    border: 1px solid #2c2d2e ;
+    background-color: inherit;
+    border-radius: 8px;
+    padding: 6px;
+    color: white;
+    outline: none;
+    margin-right: 10px;
+}
+.con_form .post_header div{
+    width: 50%;
 }
 .con_form span{
     box-shadow: 1px 3px 3px 0px black;
-    padding: 16px;
+    padding: 6px;
     border-radius: 54px;
-    margin-right: 22px;
     background-color: #3a3938e1;
     cursor: pointer;
+    font-size: 8px;
+    position: absolute;
+    
 }
 .con_form span:hover{
-    box-shadow: 1px 3px 3px 0px #8b078b;
+    box-shadow: 1px 3px 3px 0px rgb(0, 101, 196);
 }
 .con_form button{
     font-size: 16px;
-    width:100%;
+    width:60%;
     padding: 8px;
-    border-radius: 32px;
+    border-radius: 8px;
     border: none;
-    background-color: #201f1f;
+    background-color: rgb(0, 101, 196);
     cursor: pointer;
     outline: none;
-    color: grey;
+    color: white;
 }
 .con_form button:hover{
-    background-color: rgb(109, 109, 109);
+    background-color: rgb(0, 131, 196);
     color: #000000;
     transition: 0.3s;
 }
@@ -286,79 +331,117 @@ body {
     padding: 2px;
     backdrop-filter: blur(4px);
     border: 1px solid rgb(20, 20, 20);
-    box-shadow: 0px 1px 3px 0px blueviolet;
+    box-shadow: 0px 1px 3px 0px rgb(0, 101, 196);
 }
 .post-container{
-    box-shadow: 2px 6px 10px 0px rgb(29, 28, 28);
-    background-color: #252323;
+    box-shadow: 2px 3px 10px 0px #111;
+    background-color: #1a1a1a;
     height: auto;
-    max-width: 550px;
+    max-width: 650px;
     min-width: 260px;
     margin-top: 16px;
     border-radius: 8px;
   margin-bottom: 20px;
     text-align: left;
-    padding-bottom: 6px;
+    padding: 0px 12px 12px 12px;
    }
-   .post-container-comment{
-    box-shadow: 2px 6px 10px 0px rgb(29, 28, 28);
-    background-color: #201f1f;
-    height: auto;
-    max-width: 550px;
-    min-width: 260px;
-    margin-top: 16px;
-    border-radius: 8px;
-  margin-bottom: 20px;
-    text-align: left;
-    
-   }
-   .loc-trend-spost{
-    padding-left: 12px;
-    text-align: center;
-    padding-bottom: 12px;
-   }
-   .loc-trend-spost a:hover{
-    text-decoration: underline;
-   }
-   .reply-container{
-    box-shadow: 2px 6px 10px 0px rgb(29, 28, 28);
-    background-color: #201f1f;
-    height: auto;
-    padding: 12px;
-    max-width: 550px;
-    min-width: 260px;
-    margin-top: 16px;
-    border-radius: 8px;
-  margin-bottom: 20px;    
-   }
+   
+  
 .post-container:hover{
-    box-shadow: 2px 6px 14px 0px rgb(29, 28, 18);
+    box-shadow: 2px 6px 14px 0px #111;
 }
 .post-box{
-    background: rgb(201, 200, 200);
+    border:2px solid #2c2d2e;
     padding: 12px;
-    height: 300px;
+    height:auto;
+    min-height: 100px;
     margin-bottom: 8px;
     text-align: center;
      overflow: hidden;
     text-overflow:ellipsis;
     cursor: pointer; 
+    border-radius: 32px;
+    background-color: inherit;
+    color: white;
+    line-height: 1.9;
 }
-.post-box p{
-    padding:52px 6px;
-    font-size: 20px;
+.post-box .post_b{
+    font-weight: 100;
+    font-style: thin;
+    font-size: 18px;
     text-align: center;
-    height: 230px;
     overflow: hidden;
-    text-overflow: ellipsis;
-    color: #252323;
+    text-overflow: ellipsis;   
+    border-radius: 10px;
+    padding:0 10px 10px 20px;
+    max-height: 200px;
+    
+}
+.engage_btn span{
+    position: relative;
+    text-align: right;
+    font-size: 20px;
+    margin-top: -60px;
+    background-color: #252323;
+    border: 3px solid #2c2d2e;
+    padding: 8px 4px 8px 8px;
+    border-radius: 8px;
+    left: 73%;
+    top: -40px;
+    cursor: pointer;
+}
+.engage_btn small{
+    position: relative;
+    top: -4px;
+}
+.engage_btn img{
+    width: 22px;
+    margin-right: 10px;
+}
+.post_insights{
+    text-align: right;
+    
+    margin-top: -20px;
+    color: gray;
+}
+.post_insights small{
+    position: relative;
+    top: -5px;
+    left: 3px;
+    font-size: 10px;
+}
+.post_insights img{
+    width: 20px;
+}
+.post_insights span{
+    margin-right: 10px;
+}
+.engage{
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: -10px;
+    
+}
+.engage .span{
+    position: relative;
+    top: -20px;
+    background-color: #252323;
+    padding: 6px;
+    border-radius: 32px;
+    border: 2px solid #2c2d2e;
+    font-size: 12px;
+    left: -40%;
+}
+.engage div{
+    margin-left: 100px;
 }
 .readmoreBtn{
     position:relative;
-    top: 100%;
+    top: 108%;
     left: 30%;
     margin-top: -40px;
-    
+    color: gray;
 }
 .location_div{
     position:relative;
@@ -421,22 +504,22 @@ body {
 .head-dots{
     display: block;
     cursor: pointer;
+    border-radius: 32px;
 }
-.head-dots small{
-    
-   margin-right: 4px;
+.head-dots img{
     text-align: center;
     position: relative;
-    top: -5px;
-    background-color: #fff;
-    border-radius: 43px;
+    filter: invert(100%);
     cursor: pointer;
-    padding: 1px;
+  height: 10px;
+  width: 10px;
 }
 .head-dots:hover{
     transform: scale(1.1);
     transition: 0.3s ease;
+    background-color: #1d1c1c;
 }
+
 .head-menu{
     position: relative;
     margin-left: -120px;
@@ -533,13 +616,13 @@ cursor: pointer;
 .react small{
     position: relative;
     color:inherit;
-    top: -15px;
-    left: 27px;
     font-size: 12px;
     font-weight:100 ;
     border-radius: 43px;
     padding: 5px 7px;
-
+    background-color: #201f1f;
+    margin-left: -10px;
+    margin-top: 10px;
 }
 
 .icons {
@@ -560,7 +643,7 @@ cursor: pointer;
 }
 .react-emojis-active{
   display: grid; 
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto;
 }
 .react-emojis button{
     padding: 2px;
@@ -584,42 +667,40 @@ cursor: pointer;
     cursor: pointer;
     
 }
+
 .comment_in .textarea_reply{
     padding: 9px;
-    font-size: 18px;
+    font-size: 16px;
     height: 35px;
     resize: none;
-    border-radius: 32px 0px 0px 32px;
+    border-radius:8px;
     border: none;
     outline: none;
     width: 100%;
     overflow-y: hidden;
-    text-align: center;
     margin-left: 20px;
-    font-weight: 600;
     cursor: pointer;
     background-color: #383838;
 }
-.form-comment{
-    display: grid;
-    grid-template-columns: 80% 20%;
-    
-}
+
 .form-comment button:hover{
     background-color: #ff9b05;
     box-shadow: 2px 2px 3px 0px black;
     transition: 0.2s ease;
 }
 .form-comment button{
-    margin-left: 15px;
+    width: 40%;
     cursor: pointer;
     background-color: #880281;
-    border-radius: 0px 32px 32px 0px;
+    border-radius: 8px;
     border: none;
     border-left:1px solid #000;
     height: 35px;
     color: white;
     font-weight: 600;
+    margin-top: 10px;
+    position: relative;
+    left: 70%;
 }
 .comments_posts{
     text-align: left;
@@ -633,11 +714,87 @@ cursor: pointer;
 .comment-post{
     border-radius: 6px;
     background-color: #2b2a2a;
-    padding: 12px 30px;
-    font-size: 18px;
+    padding: 6px ;
+    font-size: 15px;
     max-width: 100%;
 }
+.comments_posts img{
+    width: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.replys{
+    border-radius: 6px;
+    background-color: #2b2a2a;
+    padding: 6px ;
+    font-size: 15px;
+    max-width: 200px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10%;
+    text-align: left;
+}
+.replys small{
+    color: rgb(0, 101, 196);
+}
+.reply_com{
+    margin-left: 10px;
+}
+.reply_com button{
+    background-color: inherit;
+    border: none;
+    border-radius: 6px;
+    color: white;
+}
+.divider{
+    border-radius: 6px;
+    padding: 6px ;
+    font-size: 15px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+}
+.reply_com textarea{
+    outline: none;
+    height: 40px;
+    background-color: inherit;
+    resize: none;
+    padding: 6px;
+    border: none;
+    border-bottom: 2px solid #201f1f;
+    color: white;
+    width: 60%;
+    
+    font-size: 13px;
+}
+.reply_react input[type="checkbox"] {
+    display: none;
+}
+.reply_react #emoji_reply:checked ~ #reply_emoji{
+    visibility: visible;
+}
 
+.reply_react #reply_emoji{
+  display: none;
+}
+.reply_react{
+    margin-bottom: -35px;
+}
+.reply_react img{
+    filter: invert(100%);
+    display: flex;
+    width: 15px;
+}
+.reply_react #reply_emoji{
+      display: grid;
+    grid-template-columns: auto auto auto auto auto auto;  
+    background-color: inherit;
+    position: relative;
+    top: -23px;
+    margin-bottom: 0;
+    visibility: hidden;
+}
 .comment-post div small{
     font-size: 10px;
     color: green;
@@ -654,204 +811,7 @@ cursor: pointer;
 .comments_posts div span img{
     width: 15px;
 }
-.reply_comm{
-    margin-top: 17px;
-    display: flex;
-}
-.reply_comm textarea{
-    height: 27px;
-    padding: 6px 8px;
-    border-radius: 32px 0px 0px 32px;
-    resize: none;
-    border: none;
-    backdrop-filter: blur(32px);
-    background-color: #383838;
-    outline: none;
-    font-weight: 600;
-}
-.reply_comm button{
-    border: none;
-    border-radius: 0px 32px 32px 0px;
-    padding: 6px 12px;
-    height: 27px;
-    background-color: #880281;
-    color: #fff;
-    font-weight: 600;
 
-}
-.comm_likNreply .react-emojis{
-    position: absolute;
-    margin-top: 30px;
-    height: 60px;
-    margin-left: -130px;
-    min-width: 100px;
-    box-shadow:0px 3px 5px 0px #252323;
-}
-.comm_likNreply .react-emojis div{
-    padding: 6px;
-}
-.comm_likNreply{
-    position: relative;
-    top: 40px;
-}
-.comm_likNreply span:hover{
-    transform: scale(1.1);
-}
-.comment .reply_button{
-    height: 40px;
-    width: 100%;
-    background-color: #ff9b05;
-    color: #fff;
-    font-weight: 600;
-    border-radius: 6px;
-    border: none;
-    padding: 0 6px;
-    cursor: pointer;
-}
-.reply-form-bg{
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(32px);
-    z-index: 100;
-      visibility: hidden;
-     display: none;
-}
-
-.reply-form{
-    position: relative;
-    backdrop-filter: blur(30px);
-    top: 100px;
-    left: 28%;
-    border-radius: 8px;
-    box-shadow: 0px 3px 3px 0px black;
-    padding: 12px;
-    text-align: center;
-     min-height: 500px;
-    width: 600px;
-}
-.reply-form-active{
-   
-    display: block;
-    visibility: visible;
-}
-.post-choice{
-    position: absolute;
-    backdrop-filter: blur(30px);
-    width: auto;
-    top: 100px;
-    border-radius: 8px;
-    box-shadow: 0px 3px 3px 0px black;
-    padding: 12px;
-    text-align: center;
-    z-index: 100;
-    left:30%;
-    width: 40%;
-}
-.post-choice-bg{
-    position: fixed;
-    backdrop-filter: blur(30px);
-    left: 0;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    z-index: 100;
-    display: none;
-    
-}
-.btn_reply{
-    width: 100%;
-    margin-left: 10px;
-    background-color: #292929;
-    padding: 6px;
-    border-radius: 32px;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    text-align: center;
-    color: #383838;
-}
-.post-choice-active{
-    display: flex;
-    align-items: center;
-
-}
-.input-form{
-    padding: 12px;
-}
-.post-choice button{
-    cursor: pointer;
-    background: rgb(44, 42, 42);
-    border: 1px solid rgb(5, 5, 5);
-    padding: 8px;
-    border-radius: 8px;
-    width: 100%;
-    color: white;
-    font-weight: 600;
-    
-}
-.post-choice button:hover{
-    background-color: #640564;
-    transition: 0.3s ease-in-out;
-    transform: scale(1.02);
-}.input-form input{
-    padding: 12px;
-    border-radius: 6px;
-    outline: none;
-    background-color:#2c2d2e ;
-    border: none;
-    margin-right: 10px;
-    width: 100%;
-}
-.input-form textarea{
-    border-radius: 6px;
-    background-color: #2c2d2e;
-    outline: none;
-    border: 1px solid rgb(29, 29, 29);
-    padding: 12px;
-    resize: none;
-    min-height: 80px;
-    width: 100%;
-    font-size: 22px;
-    margin-bottom: 10px;
-}
-.input-form div{
-    display: flex;
-}
-.post_formHC{
-    display: none;
-}
-.post_formHC-active{
-    display: block;
-}
-.post-choice .select-post-type, .select-post-type{
-    padding: 12px;
-    font-weight: 600;
-    font-size: 20px;
-    text-align: left;
-    border-radius: 12px;
-    border: 1px solid black;
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-.post-choice .select-post-type:hover{
-    background-color: #252323;
-    
-}
-.post-choice small{
-    margin-bottom: 10px;
-}
-.post-choice .dot{
-    margin-top: 10px;
-    padding:1px;
-    border-radius: 43px;
-    backdrop-filter: blur(4px);
-    border: 1px solid rgb(20, 20, 20);
-    box-shadow: 0px 1px 3px 0px blueviolet;
-    background-color: #fff;
-}
 .post_head .dot{
     margin-top: 10px;
     padding:1px;
@@ -944,7 +904,7 @@ cursor: pointer;
 /* Main things End */
 /*Left bar*/
 .leftbar{
-    width: 700px;
+    width: 450px;
     padding: 40px;
     overflow-y: scroll;
 }
@@ -975,9 +935,7 @@ cursor: pointer;
     background-color: inherit;
 
 }
-.emojis div{
-    padding-right: 10px;
-}
+
 .emojis div:hover{
     transform: scale(1.2);
     transition: 0.3s ease;
@@ -1002,7 +960,7 @@ cursor: pointer;
     border-radius: 30px;
     height: 4px;
     color: black;
-    box-shadow: 2px 3px 3px 0px rgb(95, 44, 80);
+    box-shadow: 2px 3px 3px 0px rgb(0, 101, 196);
 }
 .icons div{
     margin-bottom: 15px;
@@ -1014,10 +972,11 @@ cursor: pointer;
     border-radius: 43px;
     margin-right: 12px;
     font-weight: 600;
-    box-shadow: 2px 3px 3px 0px rgb(95, 44, 80);
+    box-shadow: 2px 3px 3px 0px rgb(0, 101, 196);
     margin-bottom: 10px;
     width: fit-content;
 }
+
 .profile div span{
     background-color: inherit ;
     box-shadow: inherit;
@@ -1075,7 +1034,7 @@ cursor: pointer;
 }
 
 .trends{
-    background-color: #2e2e2e;
+    background-color:#1a1a1a;;
     margin-top: 12px;
     border-radius: 8px;
     font-size: 15px;
@@ -1273,6 +1232,12 @@ cursor: pointer;
     text-align: center;
     padding: 12px;
 }
+.reply-container{
+    background-color: #111;
+    margin-bottom: 70px;
+    padding: 8px;
+    border-radius: 8px;
+}
 .reply-box div{
     display: flex;
     margin-bottom: 10px;
@@ -1309,7 +1274,7 @@ cursor: pointer;
         width: 400px;
     }
     .sidebar-nav{
-        width: 20%;
+       display: none;
     }
     nav{
         margin-left: -20px;
@@ -1321,7 +1286,20 @@ cursor: pointer;
     .emojis .icons{
         width: 20px;
     }
-  
+    #menue_mob{
+    display: block;
+  }
+  .react small{
+    position: relative;
+    color:inherit;
+    font-size: 12px;
+    font-weight:100 ;
+    border-radius: 43px;
+    padding: 5px 7px;
+    background-color: #201f1f;
+    margin-left: -10px;
+    margin-top: 10px;
+}
   }
   .nav .profile{
     display: block;
@@ -1329,13 +1307,50 @@ cursor: pointer;
   #C_con{
     font-size: 16px;
   }
-  #post_linkups div {
-    display: block;
+  #post_linkups p {
+    margin-top: 10px;
+   font-weight: 300;
+    font-size: 14px;
   }
   #post_linkups div input{
     margin-bottom: 10px;
   }
-
+  #settings{
+    padding: 12px
+  }
+  #settings input{
+    background-color: inherit;
+    padding: 8px;
+    width: 70%;
+    margin-bottom: 10px;
+    color: wheat;
+    border-radius: 8px;
+    border: 2px solid #2b2a2a;
+  }
+#settings button{
+    width: 80%;
+    background-color: rgb(0, 101, 196);
+    border-radius: 8px;
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 8px;
+    cursor: pointer;
+}
+#settings h3{
+    text-align: center;
+    margin-left: -10px;
+    margin-bottom: 10px;
+}
+ #logOut button{
+    background-color: brown;
+    padding: 10px;
+    border-radius: inherit;
+    color: whitesmoke;
+    width: 100%;
+    font-weight: 600;
+    border: none;
+}
   /* Smartphones */
 @media only screen and (max-width: 700px) {
     /* CSS styles here */
@@ -1380,12 +1395,21 @@ cursor: pointer;
         display:none;
         margin-top: -90px;
     }
-    .con_form{
-        left: 15%;
-    }
+    
      #menue_mob{
     display: block;
   }
+  .react small{
+    position: relative;
+    color:inherit;
+    font-size: 12px;
+    font-weight:100 ;
+    border-radius: 43px;
+    padding: 5px 7px;
+    background-color: #201f1f;
+    margin-left: -10px;
+    margin-top: 10px;
+}
   }
   .form-comment button{
     margin-left: 0;
