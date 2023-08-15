@@ -211,7 +211,7 @@ foreach($post_single as $post){
             $dbh = New Dbh();
 
 ##-------------------Replys for comments--------------------------------------##
-$selectReply = $dbh->connect()->prepare("SELECT username, reply FROM reply JOIN users ON users.id=reply.user_id WHERE com_id = ? ");
+$selectReply = $dbh->connect()->prepare("SELECT username, reply ,emoji FROM reply JOIN users ON users.id=reply.user_id WHERE com_id = ? ");
 if(!$selectReply ->execute(array($com_id))){
     echo 'Failed To Load Posts';
 }else{
@@ -229,25 +229,66 @@ if(!$selectReply ->execute(array($com_id))){
                 </div>
                 
                 <div class="reply_com">
-                    
-                    <form action="../classes_incs/postReply.inc.php" method='Post'>
-                        <div class="reply_react">
+              
+                    <div class="reply_react">
                             <div>
-                                
+                       
                                 <input type="checkbox" name="reply" id="emoji_reply">
                                <label for="emoji_reply"> <img src="../images/happiness.png" alt="react" class='icons'></label>
                            
                             <div class="emojis" id='reply_emoji'>
+                            <form action="../classes_incs/postReply.inc.php" method='post'>
+                            <input type="hidden" name="user_id"  value="<?= $user_id?>">
+                            <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
+                            <input type="hidden" name='emoji' value='like'>
+                            <input type="hidden" name='reply' value=''>
                                     <button type='submit' name='submit_reply'><img src="../images/like.png" alt="like"></button>
+                            </form>
+                            <input type="hidden" name="user_id"  value="<?= $user_id?>">
+                            <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
+                            <form action="../classes_incs/postReply.inc.php" method='post'>
+                            <input type="hidden" name="user_id"  value="<?= $user_id?>">
+                            <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
+                            <input type="hidden" name='emoji' value='shocking'>
+                            <input type="hidden" name='reply' value=''>
                                     <button type='submit' name='submit_reply'><img src="../images/shocking.png" alt="like"></button>
+                            </form>
+                            <form action="../classes_incs/postReply.inc.php" method='post'>
+                            <input type="hidden" name="user_id"  value="<?= $user_id?>">
+                            <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
+                            <input type="hidden" name='emoji' value='love'>
+                            <input type="hidden" name='reply' value=''>
                                     <button type='submit' name='submit_reply'> <img src="../images/love.png" alt="like"></button>
+                            </form>
+                            <form action="../classes_incs/postReply.inc.php" method='post'>
+                            <input type="hidden" name="user_id"  value="<?= $user_id?>">
+                            <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
+                            <input type="hidden" name='emoji' value='funny'>
+                            <input type="hidden" name='reply' value=''>
                                     <button type='submit' name='submit_reply'><img src="../images/funny.png" alt="like"></button>
+                            </form>
+                            <form action="../classes_incs/postReply.inc.php" method='post'>
+                            <input type="hidden" name="user_id"  value="<?= $user_id?>">
+                            <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
+                            <input type="hidden" name='emoji' value='sad'>
+                            <input type="hidden" name='reply' value=''>
                                     <button type='submit' name='submit_reply'><img src="../images/sad.png" alt="like"></button>
+                            </form>
+                            <form action="../classes_incs/postReply.inc.php" method='post'>
+                            <input type="hidden" name="user_id"  value="<?= $user_id?>">
+                            <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
+                            <input type="hidden" name='emoji' value='fire'>
+                            <input type="hidden" name='reply' value=''>
                                     <button type='submit' name='submit_reply'><img src="../images/fire.png" alt="like"></button>
+                            </form>
                             </div>
                          </div>
                         </div>
+                    
+                    <form action="../classes_incs/postReply.inc.php" method='Post'>
+                       
                         <div class="replyform">
+                        <input type="hidden" name='emoji' value=''>
                             <input type="hidden" name="user_id"  value="<?= $user_id?>">
                             <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
                                 <textarea name="reply" id="reply_input" placeholder="reply"></textarea>
@@ -261,13 +302,22 @@ if(!$selectReply ->execute(array($com_id))){
             </div>
         
             <?php 
-                foreach($reply as $reply){ ?>
+                foreach($reply as $reply){ 
+                    if($reply['reply'] != ''){?>
+
             <div class="replys">
                        <p><?=$reply['reply'] ?></p>  
                        <div>
                         <small>@<?= $reply['username'] ?></small>
                        </div>                       
             </div>
+                        <?php }elseif($reply['emoji']!=''){ ?> 
+                            <div class="emoji_cont">
+                                
+                               <img src="../images/<?= $reply['emoji'] ?>.png" alt="<?= $reply['emoji'] ?>" class='icons'> <small>@<?= $reply['username'] ?></small>
+                            </div>
+
+                            <?php } ?>
                       
             <?php } ?>
             <div class="divider">

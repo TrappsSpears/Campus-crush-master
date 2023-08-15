@@ -245,6 +245,21 @@ body {
     max-width: 450px;
     min-width: 200px;
 }
+.progress-container {
+            width: 100%;
+            background-color: #f0f0f0;
+            height: 5px;
+            border-radius: 10px;
+            display: none;
+            position: relative;
+        }
+.progress-bar {
+            height: 100%;
+            border-radius: 10px;
+            background-color: #4caf50;
+            width: 100%;
+            position: absolute;
+   }
 .con_form{
     padding: 20px;
     background-color: #1d1c1c;
@@ -272,11 +287,83 @@ body {
 .con_form .post_header{
     display: flex;
     margin-top: 10px;
+    display: non;
+}
+.img_hot{
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+}
+.img_hot img{
+    height: auto;
+    max-height: 300px;
+    width: auto;
+    border-radius: 8px;
+    border: 1px solid #313131;
+    object-fit: contain;
+}
+#imageInput{
     display: none;
 }
+.custom-file-input span {
+            display: inline-block;
+            background: #ccc;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 .post_header .input_hme{
     display: flex;
    margin-left:7%;
+   background-color: inherit;
+}
+#hotSeat_form{
+    margin-top: 10PX;
+    display: flex;
+}
+#hotSeat_form .post_header{
+    width: 100%;
+}
+
+#hotSeat_header {
+    margin-bottom: 10px;
+   background-color: inherit;
+   margin-left: 0px;
+   width: 100%;
+}#caption {
+    max-width: 99%;
+    height: 50px;
+}
+#caption , select , input{
+    text-align: left;
+    background-color: inherit;
+    margin-bottom: 10px;
+    outline: none;
+    color: floralwhite;
+    width: 100%;
+    border-radius: 0px;
+    border-bottom:2px solid #313131 ;
+    padding: 6px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+}
+.caption_div{
+    width: 100%;
+}
+
+
+.post_header select{
+    background-color: inherit;
+    border-radius: 6px;
+    padding: 6px;
+    color: white;
+    border: 1px solid #333;
+    margin-right: 7%;
+}
+.input_htSt select option{
+    background-color: #313131;
+    color: floralwhite;
 }
 .con_form .post_header input{
     width: 50%;
@@ -380,35 +467,55 @@ body {
 .engage_btn span{
     position: relative;
     text-align: right;
-    font-size: 20px;
+    font-size: 10px;
     margin-top: -60px;
-    background-color: #252323;
-    border: 3px solid #2c2d2e;
-    padding: 8px 4px 8px 8px;
+    background-color: #1a1a1a;
+    
+    padding: 6px;
     border-radius: 8px;
-    left: 73%;
-    top: -40px;
+    left: 83%;
+    top: -55px;
     cursor: pointer;
 }
-.engage_btn small{
-    position: relative;
-    top: -4px;
-}
+
 .engage_btn img{
-    width: 22px;
+    width: 15px;
+    position: relative;
     margin-right: 10px;
+    top: 4px;
 }
 .post_insights{
     text-align: right;
     
-    margin-top: -20px;
+    margin-top: -15px;
     color: gray;
+}
+
+.post_insights #reaction_emoj img{
+    width: 15px;
+    margin-left: -10px;
+}
+.post_insights #bookmark img{
+    filter: invert(100%);
+    width: 16px;
+    margin-left: -20px;
 }
 .post_insights small{
     position: relative;
-    top: -5px;
-    left: 3px;
+    background-color: #313131;
     font-size: 10px;
+    left: -8px;
+    top: -3px;
+    color: white;
+    padding: 4px 4px 4px 6px;
+    border-radius: 43px;
+}
+.thot{
+    border-radius: 43px;
+    background-color: rgb(44, 47, 60);
+    padding: 6px 12px 6px 12px;
+    font-size: 15px;
+    cursor: pointer;
 }
 .post_insights img{
     width: 20px;
@@ -599,6 +706,14 @@ body {
 }
 .deal-input textarea:focus{
     outline: 1px solid wheat;
+
+}
+
+.react_select select > option{
+    background-color: #2c2d2e;
+    padding: 6px;
+    border: none;
+    border-radius: 8px;
 }
 .react{
 text-align: center;
@@ -734,8 +849,20 @@ cursor: pointer;
     margin-left: 10%;
     text-align: left;
 }
-.replys small{
+.emoji_cont{
+    text-align: left;
+    padding: 6px;
+    margin-left: 15%;
+    margin-top: 10px;
+}
+.emoji_cont .icons{
+    width: 50px;
+}
+
+
+.replys small ,.emoji_cont small{
     color: rgb(0, 101, 196);
+    font-size: 11px;
 }
 .reply_com{
     margin-left: 10px;

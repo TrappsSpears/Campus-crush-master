@@ -7,6 +7,7 @@
                        <span></span><span></span>  <li>   Home</li>
                     </a>
                 </div>
+                
                 <?php if($userLogged){ ?>
                 <div <?php if ($page == 'search'){ echo 'class="active"';} ?>>
                     <a href="../Search/search.php" class="nav-a"><?php if ($page == 'linkups'){ echo '<span></span>';} ?>
