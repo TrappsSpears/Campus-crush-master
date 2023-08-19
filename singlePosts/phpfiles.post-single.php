@@ -5,7 +5,7 @@ include_once('../classes_incs/dbh.class.php');
 $dbh = New Dbh();
 
 ##-------------------Posts for Single Post--------------------------------------##
-$selectPost = $dbh->connect()->prepare("SELECT * FROM posts WHERE post_id = ? ORDER BY date_created DESC");
+$selectPost = $dbh->connect()->prepare("SELECT * FROM posts JOIN users ON users.id = posts.user_id WHERE post_id = ? ORDER BY date_created DESC");
 if(!$selectPost ->execute(array($post_id))){
     echo 'Failed To Load Posts';
 }else{

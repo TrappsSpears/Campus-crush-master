@@ -9,21 +9,21 @@
 <body>
     <div class="signup-container">
         <h1>ConfessConnect</h1>
-        <p>Share your confessions and connect with others.</p>
+        <p>Where Anonymity Meets Understanding, Sharing Unspoken Stories</p>
         <form class="signup-form" action="classes_incs/signup.inc.php" method="post">
             <input type="text" placeholder="Full Name" required name='name'>
             <input type="text" placeholder="Username" required name='username'>
-            <input type="email" placeholder="Email" required name='name' name='email'>
+            <input type="email" placeholder="Email" required  name='email'>
             <input type="password" placeholder="Password" required name='password'>
-            <input type="text" placeholder="City" required name='city'>
-            <input type="text" placeholder="School (optional)" name='school'>
+            <input type="text" placeholder="Neigbour Hood / Town" required name='city'>
+            <input type="text" placeholder="University / College / School / Workplace" name='school'>
             <button type="submit">Sign Up</button>
             <p class="toggle-button" >Already have an account? Log in</p>
         </form>
         <form class="login-form" action="classes_incs/login.inc.php" method="post">
             <input type="email" placeholder="Email" required name='email'>
             <input type="password" placeholder="Password" required name='password'>
-            <button type="submit">Log In</button>
+            <button type="submit" name='submit'>Log In</button>
             <p class="toggle-button-sign" >Don't have an account? Sign up</p>
         </form>
     </div>

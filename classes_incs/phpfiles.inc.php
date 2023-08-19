@@ -5,42 +5,21 @@
     }
     
     $dbh = New Dbh();
+    $selectUser = $dbh->connect()->prepare("SELECT * FROM users Where id = ?");
+    if(!$selectUser ->execute(array($user_id))){
+        echo 'Failed To Load Posts';
+    }else{
+        $user = $selectUser->fetch(PDO::FETCH_ASSOC);
+    }
     
     ##-------------------Posts for All, HomePage--------------------------------------##
-    $selectAllPosts = $dbh->connect()->prepare("SELECT * FROM posts ORDER BY date_created DESC , time DESC");
+    $selectAllPosts = $dbh->connect()->prepare("SELECT * FROM posts JOIN users ON posts.user_id = users.id ORDER BY date_created DESC , time DESC");
     if(!$selectAllPosts ->execute()){
         echo 'Failed To Load Posts';
     }else{
         $posts = $selectAllPosts->fetchAll(PDO::FETCH_ASSOC);
     }
-    #//-------------------------------------------------------------------\\##
-    
-    ##------------------Posts for Linkups-----------------------------------##
-    $selectLinkPosts = $dbh->connect()->prepare("SELECT * FROM posts WHERE post_type = 'linkup' ORDER BY date_created DESC , time DESC");
-    if(!$selectLinkPosts ->execute()){
-        echo 'Failed To Load Posts';
-    }else{
-        $posts_links = $selectLinkPosts->fetchAll(PDO::FETCH_ASSOC);
-    }
-    #//-------------------------------------------------------------------\\##
-    
-    ##------------------Posts for Thrills----------------------------------##
-    $selectThrillsPosts = $dbh->connect()->prepare("SELECT * FROM posts WHERE post_type = 'thrill' ORDER BY date_created DESC ,  time DESC");
-    if(!$selectThrillsPosts ->execute()){
-        echo 'Failed To Load Posts';
-    }else{
-        $posts_Thrills = $selectThrillsPosts->fetchAll(PDO::FETCH_ASSOC);
-    }
-    #//-------------------------------------------------------------------\\##
-
-        ##------------------Trends #tags----------------------------------##
-        $selectTrends = $dbh->connect()->prepare("SELECT DISTINCT topic FROM posts WHERE topic IS NOT NULL AND topic <> '' ORDER BY date_created DESC LIMIT 5");
-        if(!$selectTrends ->execute()){
-            echo 'Failed To Load Posts';
-        }else{
-            $trends = $selectTrends->fetchAll(PDO::FETCH_ASSOC);
-        }
-        #//-------------------------------------------------------------------\\##
+    #//-------------------------------------------------------------------\\##    
 
      ##------------------Trends Location Tops----------------------------------##
          $selectLoc = $dbh->connect()->prepare("SELECT DISTINCT location FROM posts WHERE location IS NOT NULL AND location <> ''  ORDER BY date_created DESC LIMIT 3");
@@ -59,20 +38,7 @@
         $posts_User = $selectUserPosts->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    $selectUserPosts_Thrills = $dbh->connect()->prepare("SELECT * FROM posts WHERE user_id = ? AND post_type='thrill' ORDER BY date_created DESC , time DESC");
-    if(!$selectUserPosts_Thrills ->execute(array($user_id))){
-        echo 'Failed To Load Posts';
-    }else{
-        $posts_User_thrills = $selectUserPosts_Thrills->fetchAll(PDO::FETCH_ASSOC);
-    }
 
-    $selectUserPosts_Linkups = $dbh->connect()->prepare("SELECT * FROM posts WHERE user_id = ? AND post_type='linkup' ORDER BY date_created DESC , time DESC");
-    if(!$selectUserPosts_Linkups ->execute(array($user_id))){
-        echo 'Failed To Load Posts';
-    }else{
-        $posts_User_linkups = $selectUserPosts_Linkups->fetchAll(PDO::FETCH_ASSOC);
-    }
-    #//-------------------------------------------------------------------\\##
 
      ##-------------------Bookmarks--------------------------------------##
      $selectBookmarks = $dbh->connect()->prepare("SELECT * FROM posts 

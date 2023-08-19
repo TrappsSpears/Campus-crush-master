@@ -37,84 +37,100 @@ foreach($post_single as $post){
         <div class="post-container">
         <div class="post-head">
             <div class="heading-post">
-            <img src="../images/incognito.png" alt="anonymouse" class="icons"> <span><?= $formattedDate ?></span>   
-            </div>
-            <div class="head-dots">
+                <?php if($post['anonymous'] == 'yes'){ ?>
+                       <img src="../images/incognito.png" alt="anonymouse" class="icons"><span><small>-Anonymous</small></span>
+            <?php }else { ?> 
+                <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'> <span>-<?= $post['username'] ?></span> 
+                <?php } ?>   
+                
+                <span><small><?= $formattedDate ?></small></span>   
+        </div>
+            <div class="head-dots" id = 'head-dots<?php echo $idUnique;?>'>
                 <div>
-                  <small>.</small><small>.</small><small>.</small>   
+                  <img src="../images/menu.png" alt="..." class="icons">
                 </div>
-               <div class="head-menu">
+                <?php if($userLogged){ ?> 
+               <div class="head-menu" id='head-menu<?php echo $idUnique;?>'>
                <form action="../classes_incs/bookmarks.inc.php" method='post'>
                 <input type="hidden" name="post_id" value="<?= $post['post_id'] ?>">
                 <input type="hidden" name='user_id' value='<?= $user_id ?>'>
                <button name="bookmark"> Bookmark Post</button>
                </form>
                   
-                <p> Copy Link</p>
+                <p> Share Post</p>
                </div>
+               <?php } ?>
             </div>
         </div>
-    <div class="post-box">
+        <div class="post-box">
         <a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
-       
-        <p class='post_b'> <?= $post['post_body'] ?></p>
-        </a>
+        <div class="post_b">
+        <?php if($post['post_pic'] != ''){?> 
+    <div class="img_post">
+        <img src="../images/imagePosts/<?= $post['post_pic'] ?>" alt="">
     </div>
-
-    <?php if($userLogged){ ?>
-        <div class="engage">
-            <div>
-                <span class='span'> <a href="../Trends/trends.php?trends=<?= $post['topic'] ?>">
-                #<?= $post['topic']?>
-                </a>
-        </span>
-         <span class='span'><a href="../Trends/trends.php?location=<?= $post['location'] ?>">     
-                -<?= $post['location'] ?>
-            </a> </span>
-                   
-
-            </div>
-             
+    <?php } ?>
+    <h4>Confession:</h4>
+    <p >  <?= $post['post_body'] ?></p>
+    <div>
+              
+              <span class='span-loc'><a href="../Trends/trends.php?location=<?= $post['location'] ?>">     
+                     -<?= $post['location'] ?>
+                 </a> </span>
+                        
+                 </div>
         </div>
-        <a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
-        <div class='engage_btn'>
-            <span><img src="../images/group.png" alt="Engage"><small>Engage</small></span>   
+        
+
+    </a>
+</div>
+    <?php if($userLogged){ ?>
+ 
+        <div class="engage_btn">
+                <span>..Read More</span>
             </div>
+            <div class="engage">
+           
+            </div>
+        <a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
+        
+            
+
             <?php
             $post_id = $post['post_id'];
-            $sql = "SELECT COUNT(*) as total FROM likes WHERE user_id = ? AND post_id = ?;";
+            $sql = "SELECT COUNT(*) as total FROM likes WHERE post_id = ? LIMIT 5;";
 
             $result = $dbh->connect()->prepare($sql);
-            if(!$result->execute(array($user_id,$post_id))){
+            if(!$result->execute(array( $post_id))){
                 $result = null;
             }else{
                 $results = $result->fetch(PDO::FETCH_ASSOC);
-                if(!$results['total'] == 0) { 
-                    $sql = "SELECT * FROM likes WHERE user_id = ? AND post_id = ?;";
+                
+                    $sql = "SELECT type FROM likes WHERE post_id = ?;";
                     $result = $dbh->connect()->prepare($sql);
-                    if(!$result->execute(array($user_id,$post_id))){
+                    if(!$result->execute(array($post_id))){
                         $result = null;
                     }else{
-                        $resultsall = $result->fetch(PDO::FETCH_ASSOC);}
+                        $resultsall = $result->fetchAll(PDO::FETCH_ASSOC);}
                     ?>
 
                 <div class="post_insights">
-                    <span><img src="../images/<?php echo $resultsall['type'];?>.png" alt="<?= $resultsall['type'] ?>" class='icons'>  <small>
-                    <?php if($results>0){ ?>
-                    <?= $results['total']; ?> <?php } ?> Reactions</small>
-                </span>
-                <span><img src="../images/social-media.png" alt="engagement"><small>Engagements</small></span>
+                    <span id = 'bookmark'><img src="../images/saved.png" alt=""><small>0</small></span>
+                        <span id='reaction_emoj'>
+                    <?php foreach($resultsall as $type){ ?> 
+                    <img src="../images/<?php echo $type['type'];?>.png" alt="<?= $type['type'] ?>" class='icons'>  
+                       
+                        <?php } ?>
+                        <?php if($results==0){ ?>
+                            <img src="../images/happiness.png" alt="smiley">
+                            <?php } ?>
+                   <small> <?php if($results>0){ ?>
+                    <?= $results['total']; ?> <?php } ?></small></span>
                 
-            <?php }else{?>
-                <div class="post_insights">
-                    <span><img src="../images/happiness.png" alt="react">  <small>
-                    <?= $results['total']; ?> Reactions </small>
-                    </span>
-                    <span><img src="../images/social-media.png" alt="engagement"><small>Engagements</small></span>
-                    
-            <?php }} ?>
+                <span class='thot'>Thoughts!?</span>
+                     </div>      
+            <?php } ?>
             </a>
-        </div>
     <?php } else{?>
         Sign In to ingage
        <?php } ?>

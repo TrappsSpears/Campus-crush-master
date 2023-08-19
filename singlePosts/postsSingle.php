@@ -36,7 +36,12 @@ foreach($post_single as $post){
         <div class="post-container">
         <div class="post-head">
             <div class="heading-post">
-            <img src="../images/incognito.png" alt="anonymouse" class="icons"> <span><?= $formattedDate ?></span>   
+        <?php if($post['anonymous'] == 'yes'){ ?>
+                       <img src="../images/incognito.png" alt="anonymouse" class="icons">
+            <?php }else { ?> 
+                <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'> <span><?= $post['username'] ?>...</span> 
+                <?php } ?>       
+         <span><?= $formattedDate ?></span>   
             </div>
             <div class="head-dots">
                 <div>
@@ -55,6 +60,11 @@ foreach($post_single as $post){
         </div>
     <div class="post-box" style='height:auto'>
         <a href="#">
+        <?php if($post['post_pic'] != ''){?> 
+    <div class="img_post">
+        <img src="../images/imagePosts/<?= $post['post_pic'] ?>" alt="">
+    </div>
+    <?php } ?>
         <p <?php if(strlen($post['post_body']) < 60){echo "style='font-size:48px'";}
                 elseif(strlen($post['post_body']) <45){echo "style='font-size:58px'";}
 
@@ -66,9 +76,7 @@ foreach($post_single as $post){
     if($userLogged) { ?>
     <div class="engage">
             <div>
-                <span class='span'> <a href="../Trends/trends.php?trends=<?= $post['topic'] ?>">
-                #<?= $post['topic']?>
-                </a>
+                
         </span>
          <span class='span'><a href="../Trends/trends.php?location=<?= $post['location'] ?>">     
                 -<?= $post['location'] ?>

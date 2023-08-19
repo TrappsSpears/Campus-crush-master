@@ -27,18 +27,30 @@ if(isset($_SESSION['user_id'])){
             <div class="post-box">
                     
                     <div>
+                        <form action="../classes_incs/update_profPic.php" method="post" enctype="multipart/form-data">
+                           <div class="center">
+                        <label for="profile-photo-input" class="profile-photo-label">
+                          <img id="profile-image" src="path_to_default_image.jpg" alt="Profile Photo">
+                         <span>Upload Photo</span>
+                          </label>
+                           <input type="file" name="profile_photo" id="profile-photo-input" accept="image/*">
+                           <button type='submit' name='submit_prof'>Update Photo</button>
+                        </div> 
+                        </form>
+                        
                         <form action="../classes_incs/update-user.inc.php" method="post">
+                        
                             <div>
                                 <input type="text" placeholder='name' value="<?= $user['name'] ?>" name="name">
-                            </div>
-                            <div>
-                                <input type="text" placeholder='surname' value="<?= $user['surname'] ?>" name="surname" required>
                             </div>
                             <div>
                                 <input type="text" placeholder="username" value="<?= $user['username'] ?>" name="username" required>
                             </div>
                             <div>
-                                <input type="text" placeholder='email' value="<?= $user['email'] ?>" name="email" required>
+                                <input type="email" placeholder='email' value="<?= $user['email'] ?>" name="email" required>
+                            </div>
+                            <div>
+                                <input type="text" placeholder='school' value="<?= $user['school'] ?>" name="school" required>
                             </div>
                             <div>
                                 <button type="submit" name='update'>Update</button>
@@ -54,7 +66,24 @@ if(isset($_SESSION['user_id'])){
             </div>
         </div>
     </div>
+    <script>
+    const profileImage = document.getElementById('profile-image');
+    const profilePhotoInput = document.getElementById('profile-photo-input');
 
+    profilePhotoInput.addEventListener('change', function(event) {
+        const selectedFile = event.target.files[0];
+
+        if (selectedFile) {
+            const reader = new FileReader();
+
+            reader.onload = function() {
+                profileImage.src = reader.result;
+            };
+
+            reader.readAsDataURL(selectedFile);
+        }
+    });
+</script>
  
     </div>
     <?php include('../includes/footer.php') ?>

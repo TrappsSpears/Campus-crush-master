@@ -1,6 +1,6 @@
 <style>
 *{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -28,6 +28,18 @@ a{
     justify-content: center;
 }
 /* Side-Bar */
+.footer-about{
+    position: absolute;
+    bottom: 0;
+    color: gray;
+    font-size: 10px;
+    left: 0;
+    padding: 8px;
+    border-top: 1px solid #201f1f;
+}
+.footer-about a{
+    color: #880281;
+}
 .sidebar-nav{
    flex: 0.2;
   max-width: 20%;
@@ -213,7 +225,7 @@ body {
     display: none;
 }
 .posts{
-    padding: 10px 50px; 
+    padding: 10px 15%; 
     width: 100%;  
    height: 91%;
   
@@ -246,12 +258,14 @@ body {
     min-width: 200px;
 }
 .progress-container {
-            width: 100%;
-            background-color: #f0f0f0;
+            width: 20%;
+            background-color: #333;
             height: 5px;
             border-radius: 10px;
             display: none;
             position: relative;
+            margin-left: 21%;
+            margin-top: -10px;
         }
 .progress-bar {
             height: 100%;
@@ -262,13 +276,12 @@ body {
    }
 .con_form{
     padding: 20px;
-    background-color: #1d1c1c;
+    background-color: #1a1a1a;
     max-width: 100%;
     margin-top: 10px;
     min-width: 260px;
     border-radius: 6px;
-    position: sticky;
-    top: 0;
+    
 }
 .con_form textarea{
     padding: 6px;
@@ -279,15 +292,76 @@ body {
     color: white;
     min-width: 85%;
     max-width: 90%;
-    height: auto;
-    text-align: center;
+    height: 42px;
     outline: none;
-    border-bottom: 2px solid #2c2d2e;
+    border-radius: 8px;
+    background-color: #2c2d2e;
+    
 }
 .con_form .post_header{
     display: flex;
+    width: 100%;
+    text-align: center;
     margin-top: 10px;
-    display: non;
+    display: none;
+    
+}
+
+.switch{
+    position: relative;
+    border-radius: 6px;
+   color: #313131;
+   width: auto;
+    display: flex;
+    left: 10%;
+}
+.switch img{
+    position: relative;
+    left: -3px;
+}
+.uploaded_img{
+    position: relative;
+margin-top: 10px;
+    width: 74%;
+    left: 18%;
+}
+
+
+#label_upload{
+    display: flex;   
+}
+#upload_profile_pic{
+    display: none;
+}
+.uploaded_img img{
+    
+    max-height: 300px;
+    width: 100%;
+    border-radius: 8px;
+    object-fit: contain;
+    border: 1px solid #222;
+}
+
+.input_img{
+    padding-left: 5%;
+    display: grid;
+    grid-template-columns: 40px auto;
+}
+.input_img img{
+    height: 50px;
+    width: 50px;
+    border: 1px solid #222;
+    border-radius: 32px;
+    position: relative;
+    top: -5px;
+}
+#remainingChars{
+    position: relative;
+  margin-left: 100%;
+}
+.prof_img{
+    margin-top: -20px;
+    object-fit: cover;
 }
 .img_hot{
     text-align: center;
@@ -312,11 +386,7 @@ body {
             border-radius: 4px;
             cursor: pointer;
         }
-.post_header .input_hme{
-    display: flex;
-   margin-left:7%;
-   background-color: inherit;
-}
+
 #hotSeat_form{
     margin-top: 10PX;
     display: flex;
@@ -354,19 +424,18 @@ body {
 
 
 .post_header select{
-    background-color: inherit;
+    background-color: #2c2d2e;
     border-radius: 6px;
     padding: 6px;
     color: white;
     border: 1px solid #333;
-    margin-right: 7%;
 }
 .input_htSt select option{
     background-color: #313131;
     color: floralwhite;
 }
 .con_form .post_header input{
-    width: 50%;
+    width: 90%;
     border: 1px solid #2c2d2e ;
     background-color: inherit;
     border-radius: 8px;
@@ -377,9 +446,10 @@ body {
 }
 .con_form .post_header div{
     width: 50%;
+    margin-right: 10px;
 }
 .con_form span{
-    box-shadow: 1px 3px 3px 0px black;
+   
     padding: 6px;
     border-radius: 54px;
     background-color: #3a3938e1;
@@ -388,12 +458,10 @@ body {
     position: absolute;
     
 }
-.con_form span:hover{
-    box-shadow: 1px 3px 3px 0px rgb(0, 101, 196);
-}
+
 .con_form button{
     font-size: 16px;
-    width:60%;
+    width:100%;
     padding: 8px;
     border-radius: 8px;
     border: none;
@@ -432,47 +500,136 @@ body {
     text-align: left;
     padding: 0px 12px 12px 12px;
    }
+   #profile_pic{
+    height: 30px;
+    width: 30px;
+    border-radius: 32px;
+   }
+
+    .toggle-switch {        
+        position: relative;
+        width: 50px;
+        height: 24px;
+    }
+
+    .toggle-switch input[type="checkbox"] {
+        opacity: 0;
+        width: 50px;
+        height: 0;
+    }
+    #profile-photo-input{
+        display: none;
+    }
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 34px;
+        height: 24px;
+        width: 50px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+    }
+
+    input[type="checkbox"]:checked + .slider {
+        background-color: #880281;
+    }
+
+    input[type="checkbox"]:checked + .slider:before {
+        transform: translateX(26px);
+    }
+
+    #profile-photo-container {
+        display: non;
+    }
+
+    input[type="checkbox"]:checked ~ #profile-photo-container {
+        display: block;
+    }
+
+    #profile-image {
+        border-radius: 32px;
+        height: 80px;
+        width: 80px;
+        background-color: #fff;
+    }
    
   
 .post-container:hover{
     box-shadow: 2px 6px 14px 0px #111;
 }
 .post-box{
-    border:2px solid #2c2d2e;
+  
     padding: 12px;
     height:auto;
     min-height: 100px;
     margin-bottom: 8px;
-    text-align: center;
+    text-align: left;
      overflow: hidden;
     text-overflow:ellipsis;
     cursor: pointer; 
-    border-radius: 32px;
+    border-radius: 6px;
     background-color: inherit;
     color: white;
-    line-height: 1.9;
+    line-height: 1.2;
 }
 .post-box .post_b{
+    border: 1px solid #383838;
+    border-radius: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.post-box p{
     font-weight: 100;
     font-style: thin;
-    font-size: 18px;
-    text-align: center;
+    font-size: 14px;
     overflow: hidden;
     text-overflow: ellipsis;   
-    border-radius: 10px;
-    padding:0 10px 10px 20px;
+    margin-top: -12px;
+   line-height: 1.5;
     max-height: 200px;
-    
+    padding: 12px;
+}
+.post-box .span-loc{
+    font-style: arial;
+    font-weight: 600;
+    padding: 10px 6px;
+    margin-bottom: 10px;
+}
+.post-box h4{
+    padding-left: 10px;
+}
+.img_post img{
+   max-height: 350px;
+    width: 100%;
+    border-radius: 6px 6px 0px 0px;
+    object-fit: cover;
+    object-position: top;
 }
 .engage_btn span{
     position: relative;
     text-align: right;
-    font-size: 10px;
+    font-size: 13px;
     margin-top: -60px;
     background-color: #1a1a1a;
     
     padding: 6px;
-    border-radius: 8px;
+    border-radius: 10px;
     left: 83%;
     top: -55px;
     cursor: pointer;
@@ -496,9 +653,12 @@ body {
     margin-left: -10px;
 }
 .post_insights #bookmark img{
-    filter: invert(100%);
-    width: 16px;
-    margin-left: -20px;
+    filter: invert(10%);
+    position: relative;
+    top: 2px;
+}
+.post_insights #bookmark small{
+    left: -5px;
 }
 .post_insights small{
     position: relative;
@@ -512,10 +672,11 @@ body {
 }
 .thot{
     border-radius: 43px;
-    background-color: rgb(44, 47, 60);
-    padding: 6px 12px 6px 12px;
+    border: 2px solid #201f1f;
+    padding: 6px 23px 6px 23px;
     font-size: 15px;
     cursor: pointer;
+    
 }
 .post_insights img{
     width: 20px;
@@ -533,10 +694,10 @@ body {
 .engage .span{
     position: relative;
     top: -20px;
-    background-color: #252323;
+  margin-right: 10px;
     padding: 6px;
-    border-radius: 32px;
-    border: 2px solid #2c2d2e;
+    border-radius: 6px;
+    border: 1px solid #212121;
     font-size: 12px;
     left: -40%;
 }
@@ -1092,6 +1253,7 @@ cursor: pointer;
 .icons div{
     margin-bottom: 15px;
 }
+
 .profile, .settings{
     padding: 10px;
     cursor: pointer;
@@ -1427,6 +1589,17 @@ cursor: pointer;
     margin-left: -10px;
     margin-top: 10px;
 }
+.posts{
+    padding: 10px 0px 0px 10px;
+}
+.con_form .post_header{
+    display: flex;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    display: non;
+    margin-left: 1%;
+}
   }
   .nav .profile{
     display: block;
@@ -1442,6 +1615,12 @@ cursor: pointer;
   #post_linkups div input{
     margin-bottom: 10px;
   }
+  #post_linkups img{
+    width: 80px;
+    border-radius: 32px;
+    height: 80px;
+    object-fit: fill;
+  }
   #settings{
     padding: 12px
   }
@@ -1454,6 +1633,42 @@ cursor: pointer;
     border-radius: 8px;
     border: 2px solid #2b2a2a;
   }
+  #settings .center {
+        height: auto;
+    }
+
+    #settings .center input {
+        display: none;
+    }
+
+    #settings .center label.profile-photo-label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    #settingsBtn{
+        position: relative;
+        
+        top: -120px;
+        
+    }
+    #settingsBtn span{
+        border-radius: 6px;
+        background-color: #111;
+    }
+
+    #settings .center img {
+        border-radius: 32px;
+        height: 80px;
+        width: 80px;
+        background-color: #fff;
+    }
+
+    #settings .center span {
+        margin-top: 8px;
+    }
 #settings button{
     width: 80%;
     background-color: rgb(0, 101, 196);
@@ -1478,6 +1693,7 @@ cursor: pointer;
     font-weight: 600;
     border: none;
 }
+
   /* Smartphones */
 @media only screen and (max-width: 700px) {
     /* CSS styles here */
@@ -1485,7 +1701,7 @@ cursor: pointer;
         display: none;
     }
     .posts{
-        padding: 10px 20px;
+        padding: 10px 0px;
     }
     .sidebar-nav{
         z-index: 200;
@@ -1536,6 +1752,13 @@ cursor: pointer;
     background-color: #201f1f;
     margin-left: -10px;
     margin-top: 10px;
+    
+}
+.con_form .post_header{
+    display: flex;
+    width: 100%;
+    
+    margin-left: -1%;
 }
   }
   .form-comment button{

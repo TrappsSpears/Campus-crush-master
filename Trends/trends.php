@@ -40,7 +40,7 @@ include('../includes/headall.php'); ?>
      include_once('../classes_incs/dbh.class.php');
  
  $dbh = New Dbh();
-     $selectPostLoc = $dbh->connect()->prepare("SELECT * FROM posts WHERE location = ?  ORDER BY date_created DESC");
+     $selectPostLoc = $dbh->connect()->prepare("SELECT * FROM posts JOIN users ON users.id =posts.user_id WHERE location = ?  ORDER BY date_created DESC");
 if(!$selectPostLoc ->execute(array($loc))){
     echo 'Failed To Load Posts';
 }else{
@@ -74,7 +74,7 @@ if(!$selectPostLoc ->execute(array($loc))){
      include_once('../classes_incs/dbh.class.php');
  
  $dbh = New Dbh();
-     $selectPostLoc = $dbh->connect()->prepare("SELECT * FROM posts JOIN likes ON posts.post_id=likes.post_id WHERE likes.type = ?  
+     $selectPostLoc = $dbh->connect()->prepare("SELECT * FROM posts JOIN users ON users.id =posts.user_id JOIN likes ON posts.post_id=likes.post_id WHERE likes.type = ?  
      ORDER BY date_created DESC");
 if(!$selectPostLoc ->execute(array($react))){
     echo 'Failed To Load Posts';

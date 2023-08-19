@@ -39,22 +39,7 @@
               Trends
         </h2> 
         </div>
-    <?php foreach($trends as $trend){ ?>
-        <a href="../Trends/trends.php?trends=<?= $trend['topic'] ?>" >
-        <div class='trndItms'>
-            <div>
-                <small>Location.Loc</small>
-            </div>
-          <div>
-              <p>  #<?= $trend['topic'] ?></p>
-            </div> 
-            <div>
-               <small>Reactions:Like</small> 
-            </div>   
-        </div>    
-                   
-        </a>
-   <?php } ?>
+    
     </div>
     <div class="trends">
         <div class="locs">

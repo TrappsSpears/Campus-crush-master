@@ -25,34 +25,15 @@ if(isset($_SESSION['user_id'])){
         <?php $user_page = 'all'; 
 ?>
 <div class="posts">
-    <div class="con_form">
-    <div class="post_head">
-            <div class="select-post-type">
-                <p id="C_con">
-                      Your Profile
-                    <button class="dot" id="CC_span"></button> 
- 
-                </p>
-                
+    <div class="con_form">  
                 <div class="post_linkups" id="post_linkups">
-                    <div>
-                   <p><?= $user['name']?> .<?$user['surname']?></p>
+                   <img src="../images/users/<?= $user['profile_pic'] ?>" alt="" class='icons'>
                    <p><?= $user['username']?></p>
-                   <p><?= $user['email']?></p>
-                   <button></button>
                 </div>
-                </div>
-
-            </div>   
             <small id='privacy_msg' class='privacy_msg'>
                 Feel Free to say whats in your mind..Your <a href="../privacy/privacy.html" style="color:blueviolet"> privacy</a> is all urs
             </small> 
-            <div class="nav">
-                <u class="nav-itemsPost">
-                        <li> <a href="settings.php"> Settings</a></li> 
-                </u>
-            </div>
-        </div>
+ <a href="settings.php" id='settingsBtn'>   <span > Settings</span></a> 
     </div>
    
 <!--...............------------------- Now Posting --------------------------------------------------------------->
@@ -73,21 +54,19 @@ if(isset($_SESSION['user_id'])){
                 </div>
             </div>
     <div class="post-box">
+    <?php if($post['post_pic'] != ''){?> 
+    <div class="img_post">
+        <img src="../images/imagePosts/<?= $post['post_pic'] ?>" alt="">
+    </div>
+    <?php } ?>
         <a href="../singlePosts/singleposts.php">
-        <div class="location_div">
-                    @<?= $post['location'] ?>  #<?= $post['topic']?>
-                </div>
-            <?php if(strlen($post['post_body']) > 500){ ?>
-                
-            <div class='readmoreBtn'>
-            <button> Read More</button>
-            </div>
-                <?php } ?>
+        
         <p <?php if(strlen($post['post_body']) < 60){echo "style='font-size:48px'";}
                     elseif(strlen($post['post_body']) <45){echo "style='font-size:58px'";}
         
         ?>> <?= $post['post_body'] ?></p>
         </a>
+       - <?= $post['location'] ?>  
     </div>
     
         </div>
