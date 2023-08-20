@@ -258,22 +258,66 @@ body {
     min-width: 200px;
 }
 .progress-container {
-            width: 20%;
-            background-color: #333;
+            width: 50%;
             height: 5px;
             border-radius: 10px;
             display: none;
             position: relative;
             margin-left: 21%;
-            margin-top: -10px;
+                
+            
         }
 .progress-bar {
             height: 100%;
             border-radius: 10px;
             background-color: #4caf50;
-            width: 100%;
-            position: absolute;
+            position: relative;
+            margin-left: 21%;
+            margin-top: -10px;
+            
    }
+   .progress-container span{
+    background-color: none;
+}
+#emojiContainer {
+    position: relative;
+    display: block;
+    left: 50px;
+}
+#emojiContainer span{
+    margin-top: -16px;
+    font-size: 17px;
+}
+#emojiMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    font-size: 15px;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto;
+    border: 1px solid #ccc;
+    padding: 5px;
+    display: none;
+    background-color: gray;
+    z-index: 100;
+    border: 6px;
+    cursor:default;
+    margin-left: 55px;
+    border-radius: 6px;
+    height: 300px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+}
+#emojiMenu small{
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#emojiButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
 .con_form{
     padding: 20px;
     background-color: #1a1a1a;
@@ -285,7 +329,7 @@ body {
 }
 .con_form textarea{
     padding: 6px;
-    font-size: 20px;
+    font-size: 14px;
     background-color: inherit;
     resize: none;
     border: none;
@@ -647,26 +691,34 @@ margin-top: 10px;
     margin-top: -15px;
     color: gray;
 }
-
+.post_insights #comment img{
+    filter: invert(100%);
+    position: relative;
+    top: 5px;
+    width: 24px;
+}
+.post_insights small{
+    left: 2px;
+    background-color: inherit;
+}
 .post_insights #reaction_emoj img{
     width: 15px;
     margin-left: -10px;
+    position: relative;
+    left: 8px;
 }
 .post_insights #bookmark img{
     filter: invert(10%);
     position: relative;
     top: 2px;
 }
-.post_insights #bookmark small{
-    left: -5px;
-}
+
 .post_insights small{
     position: relative;
-    background-color: #313131;
     font-size: 10px;
-    left: -8px;
-    top: -3px;
-    color: white;
+    left: -2px;
+    top: 3px;
+    color: gray;
     padding: 4px 4px 4px 6px;
     border-radius: 43px;
 }
@@ -694,12 +746,10 @@ margin-top: 10px;
 .engage .span{
     position: relative;
     top: -20px;
-  margin-right: 10px;
     padding: 6px;
     border-radius: 6px;
     border: 1px solid #212121;
     font-size: 12px;
-    left: -40%;
 }
 .engage div{
     margin-left: 100px;
@@ -760,6 +810,37 @@ margin-top: 10px;
 }
 .heading-post{
     flex: 1;
+}
+.heading-post #username{
+    position: relative;
+    top: -18px;
+    color: floralwhite;
+}
+.heading-post  #date{
+    position: relative;
+    top: -20px;
+    left: 35px;
+    color: gray;
+}
+.heading-post  #time{
+    position: relative;
+    top: -19px;
+    left: 29px;
+}
+ .head_post_el{
+    position: relative;
+    margin-top: -16px;
+    top: 25px;
+    font-size: 13px;
+    border-radius: 32px;
+    background-color: #1a1a1a;
+    padding: 6px;
+    width: fit-content;
+}
+ .head_post_el img{
+    width: 15px;
+    position: relative;
+    top: 5px;
 }
 .heading-post span{
     position: relative;
@@ -1702,6 +1783,9 @@ cursor: pointer;
     }
     .posts{
         padding: 10px 0px;
+    }
+    .post-container ,.reply-container,.con_form{
+        border-radius: 0px;
     }
     .sidebar-nav{
         z-index: 200;

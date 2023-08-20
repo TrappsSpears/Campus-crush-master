@@ -59,12 +59,9 @@ if(isset($_SESSION['user_id'])){
         <img src="../images/imagePosts/<?= $post['post_pic'] ?>" alt="">
     </div>
     <?php } ?>
-        <a href="../singlePosts/singleposts.php">
+        <a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
         
-        <p <?php if(strlen($post['post_body']) < 60){echo "style='font-size:48px'";}
-                    elseif(strlen($post['post_body']) <45){echo "style='font-size:58px'";}
-        
-        ?>> <?= $post['post_body'] ?></p>
+        <p> <?= $post['post_body'] ?></p>
         </a>
        - <?= $post['location'] ?>  
     </div>

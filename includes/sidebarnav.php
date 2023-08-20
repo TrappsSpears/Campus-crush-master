@@ -37,6 +37,6 @@
             </ul>
         </nav>
         <div class="footer-about">
-            2023 DailyDee Production || <a href="../privacy/about.html">About</a> || <a href="../privacy/privacy.html">  Privacy</a>
+            2023 Your Confession Platform || DailyDee || <a href="../privacy/about.html">About</a> || <a href="../privacy/privacy.html">  Privacy</a>
         </div>
     </div>

@@ -35,14 +35,20 @@
             </div>
             <div>
                <textarea id="post_choice" placeholder=" What's Your Story <?= $username ?>?!" name="post" required></textarea> 
-               
+         
             </div>
+                  <div id="emojiContainer">
+        <span id="emojiButton">😀</span>
+        <div id="emojiMenu">
+            <!-- Emoji buttons will be added dynamically using JavaScript -->
+        </div>
+    </div>
             
         </div>
       
       
       <div class="progress-container" id='prog_div'>
-        <span id="remainingChars" style='top: -45px;left:238%'>600</span>
+        <span id="remainingChars" style='top: -45px;left:236%'>600</span>
         <div class="progress-bar" id="progressBar"></div>
     </div>
     <div class="uploaded_img">
@@ -106,7 +112,7 @@
        const anoymousProfimg =document.querySelector('#anoymousProfimg');
        const maxLength = 600;
 
-       textarea_Post.addEventListener("click", function() {
+       textarea_Post.addEventListener("input", function() {
             prog_div.style.display ='block';
             const currentLength = textarea_Post.value.length;
             const remainingChars = maxLength - currentLength;
@@ -124,7 +130,7 @@
                 remainingCharsSpan.textContent = 0;
             } });
 
-textarea_Post.addEventListener('click', function() {
+textarea_Post.addEventListener('input', function() {
     textarea_Post.style.height = 'auto';
     textarea_Post.style.height = textarea_Post.scrollHeight + 'px';
     // postbtn.style.display = 'flex';
@@ -146,7 +152,64 @@ textarea_Post.addEventListener('click', function() {
             reader.readAsDataURL(selectedFile);
         }
     });
-  
+    const emojis = [
+    '😀', '😃', '😄', '😁', '😆', '😅', '😂', '🤣', '😊', '😇',
+    '🙂', '🙃', '😉', '😍', '🥰', '😘', '😗', '😚', '😙', '😋',
+    '😛', '😜', '🤪', '🤨', '🧐', '🤓', '😎', '🤩', '🥳', '😏',
+    '😒', '😞', '😔', '😟', '😕', '🙁', '☹️', '😣', '😖', '😫',
+    '😩', '🥺', '😢', '😭', '😤', '😠', '😡', '🤬', '🤯', '😳',
+    '😱', '😨', '😰', '😥', '😓', '🤗', '🤔', '🤭', '🤫', '🤥',
+    '😶', '😐', '😑', '😬', '🙄', '😯', '😦', '😧', '😮', '😲',
+    '🥱', '😴', '🤤', '😪', '😵', '🥴', '🤢', '🤮', '🤑', '😎',
+    '😍', '🥰', '😘', '😗', '😚', '😙', '😋', '😛', '😜', '🤪',
+    '🤨', '🧐', '🤓', '😎', '🤩','✋', '🤚', '🖐️', '✌️', '🤞', '🤟', '🤘', '🤙', '👈', '👉',
+    '👆', '👇', '☝️', '👍', '👎', '✊', '👊', '🤛', '🤜', '👏',
+    '🙌', '👐', '🤲', '🤝', '🙏', '✍️', '💅', '🤳', '💪', '🦵',
+    '🦶', '👂', '🦻', '👃', '🥳', '😏', '😒', '😞', '😔',
+    '😟', '😕', '🙁', '☹️', '😣', '😖', '😫', '😩', '🥺', '😢',
+    '😭', '😤', '😠', '😡', '🤬', '🤯', '😳', '😱', '😨', '😰',
+    '😥', '😓', '🤗', '🤔', '🤭', '🤫', '🤥', '😶', '😐', '😑',
+    '😬', '🙄', '😯', '😦', '😧', '😮', '😲', '🥱', '😴', '🤤',
+    '😪', '😵', '🥴', '🤢', '🤮', '🤑', '😀', '😃', '😄', '😁',
+    '😆', '😅', '😂', '🤣', '😊', '😇', '🙂', '🙃', '😉', '😍',
+    '🥰', '😘', '😗', '😚', '😙', '😋', '😛', '😜', '🤪', '🤨',
+    '🧐', '🤓', '😎', '🤩', '🥳', '😏', '😒', '😞', '😔', '😟',
+    '😕', '🙁', '☹️', '😣', '😖', '😫', '😩', '🥺', '😢', '😭',
+    '😤', '😠', '😡', '🤬', '🤯', '😳', '😱', '😨', '😰', '😥',
+    '😓', '🤗', '🤔', '🤭', '🤫', '🤥', '😶', '😐', '😑', '😬',
+    '🙄', '😯', '😦', '😧', '😮', '😲', '🥱', '😴', '🤤', '😪',
+    '😵', '🥴', '🤢', '🤮', '🤑', '😲', '🤑', '😲', '🤑', '😲',
+    '😶', '😐', '😶', '😐', '😶', '😐', '🤐', '😴', '🤤', '😪',
+    '😵', '🥴', '🤢', '🤮', '🤑', '😲', '🤑', '😲', '🤑', '😲',
+    // ... More emojis can be added here
+];
+
+
+
+const emojiButton = document.getElementById('emojiButton');
+const emojiMenu = document.getElementById('emojiMenu');
+
+
+emojis.forEach(emoji => {
+    const emojiOption = document.createElement('small');
+    emojiOption.textContent = emoji;
+    emojiOption.addEventListener('click', () => {
+        textarea_Post.value += emoji;
+    });
+    emojiMenu.appendChild(emojiOption);
+});
+
+emojiButton.addEventListener('click', () => {
+    emojiMenu.style.display = emojiMenu.style.display === 'grid' ? 'none' : 'grid';
+});
+
+// Close emoji menu when user clicks outside of it
+document.addEventListener('click', (event) => {
+    if (!emojiButton.contains(event.target) && !emojiMenu.contains(event.target)) {
+        emojiMenu.style.display = 'none';
+    }
+});
+
         </script>
         <?php } ?>
     </div>
@@ -189,12 +252,15 @@ textarea_Post.addEventListener('click', function() {
         <div class="post-head">
             <div class="heading-post">
                 <?php if($post['anonymous'] == 'yes'){ ?>
-                       <img src="../images/incognito.png" alt="anonymouse" class="icons"><span><small>-Anonymous</small></span>
+                       <img src="../images/incognito.png" alt="anonymouse" class="icons"><span><small>Anonymous</small></span><span><small><?= $formattedDate ?></small> at <small><?= $post['time']  ?></small> </span>
             <?php }else { ?> 
-                <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'> <span>-<?= $post['username'] ?></span> 
+                <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'> <span id='username'><?= $post['username'] ?></span> 
+                <div>
+                <span><small id='date'><?= $formattedDate ?></small></span> <span><small id='time'>at <?= $post['time'] ?></small> </span>
+                </div>
                 <?php } ?>   
                 
-                <span><small><?= $formattedDate ?></small></span>   
+                  
         </div>
             <div class="head-dots" id = 'head-dots<?php echo $idUnique;?>'>
                 <div>
@@ -208,8 +274,36 @@ textarea_Post.addEventListener('click', function() {
                <button name="bookmark"> Bookmark Post</button>
                </form>
                   
-                <p> Share Post</p>
+                <p id="copyButton"> Share Post</p>
                </div>
+               <script>
+                // Get the reference to the "Copy Link" button
+const copyButton = document.getElementById('copyButton');
+
+// Add a click event listener to the button
+copyButton.addEventListener('click', () => {
+    // Select the text you want to copy (e.g., the URL of the post)
+    const postContent = document.querySelector('.post').textContent;
+    
+    // Create a new temporary textarea element to hold the text
+    const tempTextarea = document.createElement('textarea');
+    tempTextarea.value = postContent;
+    
+    // Append the textarea to the body and select its content
+    document.body.appendChild(tempTextarea);
+    tempTextarea.select();
+    
+    // Copy the selected text to the clipboard
+    document.execCommand('copy');
+    
+    // Remove the temporary textarea from the DOM
+    document.body.removeChild(tempTextarea);
+    
+    // Show an alert message indicating successful copy
+    alert('Link copied successfully!');
+});
+
+               </script>
                <?php } ?>
             </div>
         </div>
@@ -247,7 +341,7 @@ textarea_Post.addEventListener('click', function() {
 
             <?php
             $post_id = $post['post_id'];
-            $sql = "SELECT COUNT(*) as total FROM likes WHERE post_id = ? LIMIT 5;";
+            $sql = "SELECT COUNT(*) as total FROM likes WHERE post_id = ?;";
 
             $result = $dbh->connect()->prepare($sql);
             if(!$result->execute(array( $post_id))){
@@ -262,17 +356,26 @@ textarea_Post.addEventListener('click', function() {
                     }else{
                         $resultsall = $result->fetchAll(PDO::FETCH_ASSOC);}
                     ?>
+                    <?php
+            $post_id = $post['post_id'];
+            $sql = "SELECT COUNT(*) as total FROM comments WHERE  post_id = ?;";
 
+            $resultC = $dbh->connect()->prepare($sql);
+            if(!$resultC->execute(array($post_id))){
+                $resultC = null;
+            }else{
+                $count= $resultC->fetch(PDO::FETCH_ASSOC);}
+               
+                    ?>
                 <div class="post_insights">
+                    <span id='comment'><img src="../images/bubble-chat.png" alt=""><small><?= $count['total']?></small></span>
                     <span id = 'bookmark'><img src="../images/saved.png" alt=""><small>0</small></span>
                         <span id='reaction_emoj'>
                     <?php foreach($resultsall as $type){ ?> 
                     <img src="../images/<?php echo $type['type'];?>.png" alt="<?= $type['type'] ?>" class='icons'>  
                        
                         <?php } ?>
-                        <?php if($results==0){ ?>
-                            <img src="../images/happiness.png" alt="smiley">
-                            <?php } ?>
+                        
                    <small> <?php if($results>0){ ?>
                     <?= $results['total']; ?> <?php } ?></small></span>
                 
@@ -284,6 +387,30 @@ textarea_Post.addEventListener('click', function() {
     <?php } else{?>
         Sign In to ingage
        <?php } ?>
+       <div class='head_post_el'>
+                <?php   
+                $sql ="SELECT p.post_id, l.type, COUNT(*) AS like_count
+                FROM posts p
+                JOIN likes l ON p.post_id = l.post_id
+                WHERE p.post_id = ? -- Replace 'specific_type' with the actual type you're interested in
+                GROUP BY p.post_id, l.type
+                ORDER BY like_count DESC
+                LIMIT 1";
+                $typeResult = $dbh->connect()->prepare($sql);
+                
+                if(!$typeResult->execute(array($post['post_id']))){
+                    $typeResult = null;
+                }else{
+                    $typeLike = $typeResult->fetch(PDO::FETCH_ASSOC);
+                    if($typeLike!==false){
+                        $typeLikee=$typeLike;
+                    }else{
+                        $typeLikee= null;
+                    }
+                }
+                ?><?php if($typeLikee !== null && $typeLikee['post_id']===$post['post_id']){ ?> 
+                <span><img src="../images/<?= $typeLikee['type']?>.png" alt="<?= $typeLikee['type']?>"> </span><?php } ?>
+        </div>
     </div>
 <script >
 

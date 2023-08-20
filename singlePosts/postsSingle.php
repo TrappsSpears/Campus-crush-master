@@ -65,10 +65,7 @@ foreach($post_single as $post){
         <img src="../images/imagePosts/<?= $post['post_pic'] ?>" alt="">
     </div>
     <?php } ?>
-        <p <?php if(strlen($post['post_body']) < 60){echo "style='font-size:48px'";}
-                elseif(strlen($post['post_body']) <45){echo "style='font-size:58px'";}
-
-            ?> style='height:auto'> <?= $post['post_body'] ?></p>
+        <p style='height:auto'> <?= $post['post_body'] ?></p>
         </a>
     </div>
     
