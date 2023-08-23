@@ -9,6 +9,7 @@ include('../includes/headall.php'); ?>
 <?php include('../includes/nav.php');
 
     include('../includes/postHome.php') ?>
+
     </div>
 
 <?php include('../includes/leftbar.php') ;?>

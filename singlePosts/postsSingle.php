@@ -35,14 +35,18 @@ foreach($post_single as $post){
     
         <div class="post-container">
         <div class="post-head">
-            <div class="heading-post">
-        <?php if($post['anonymous'] == 'yes'){ ?>
-                       <img src="../images/incognito.png" alt="anonymouse" class="icons">
+        <div class="heading-post">
+                <?php if($post['anonymous'] == 'yes'){ ?>
+                       <img src="../images/incognito.png" alt="anonymouse" class="icons"><span><small>Anonymous</small></span><span><small><?= $formattedDate ?></small> at <small><?= $post['time']  ?></small> </span>
             <?php }else { ?> 
-                <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'> <span><?= $post['username'] ?>...</span> 
-                <?php } ?>       
-         <span><?= $formattedDate ?></span>   
-            </div>
+                <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'> <span id='username'><?= $post['username'] ?></span> 
+                <div>
+                <span><small id='date'><?= $formattedDate ?></small></span> <span><small id='time'>at <?= $post['time'] ?></small> </span>
+                </div>
+                <?php } ?>   
+                
+                  
+        </div>
             <div class="head-dots">
                 <div>
                   <small>.</small><small>.</small><small>.</small>   
@@ -58,17 +62,20 @@ foreach($post_single as $post){
                </div>
             </div>
         </div>
-    <div class="post-box" style='height:auto'>
+    <div class="post-box" >
         <a href="#">
+            <div class="post_b">
+
+            
         <?php if($post['post_pic'] != ''){?> 
     <div class="img_post">
         <img src="../images/imagePosts/<?= $post['post_pic'] ?>" alt="">
     </div>
     <?php } ?>
-        <p style='height:auto'> <?= $post['post_body'] ?></p>
+        <p > <?= $post['post_body'] ?></p>
         </a>
     </div>
-    
+    </div>
     <?php 
     if($userLogged) { ?>
     <div class="engage">
@@ -81,13 +88,17 @@ foreach($post_single as $post){
                    
             </div>
             </div>
-        <div class="engage_btn">
-            <span></span>
-        </div>
-    <div class="comment">
+      
+    <div class="comment" style='height:fit-content'>
     <div>
             <?php
             $post_id = $post['post_id'];
+            $sql = "SELECT COUNT(*) as total FROM likes WHERE  post_id = ?;";
+            $result = $dbh->connect()->prepare($sql);
+            if(!$result->execute(array($post_id))){
+                $result = null;
+            }else{
+                $totalLikes = $result->fetch(PDO::FETCH_ASSOC); }
             $sql = "SELECT COUNT(*) as total FROM likes WHERE user_id = ? AND post_id = ?;";
 
             $result = $dbh->connect()->prepare($sql);
@@ -97,24 +108,25 @@ foreach($post_single as $post){
                 $results = $result->fetch(PDO::FETCH_ASSOC);
                 if(!$results['total'] == 0) { 
                     $sql = "SELECT * FROM likes WHERE user_id = ? AND post_id = ?;";
-                    $result = $dbh->connect()->prepare($sql);
-                    if(!$result->execute(array($user_id,$post_id))){
-                        $result = null;
+                    $resultlike = $dbh->connect()->prepare($sql);
+                    if(!$resultlike->execute(array($user_id,$post_id))){
+                        $resultlike = null;
                     }else{
-                        $resultsall = $result->fetch(PDO::FETCH_ASSOC);}
+                        $resultsall = $resultlike->fetch(PDO::FETCH_ASSOC); 
+                       }
                     ?>
 
                 <div class="react">
                 <div class="react">
                 <img src="../images/<?php echo $resultsall['type'];?>.png" alt="<?= $resultsall['type'] ?>" class='icons'>
                 <small>
-                    <?php if($results>0){ ?>
-                    <?= $results['total']; ?> <?php } ?></small>
+                    
+                    <?= $totalLikes['total']; ?> </small>
                 </div>
                 </div>
             <?php }else{?>
-                <div class="react" id='react'>
-                <img src="../images/happiness.png" alt="smiley" class='icons'>
+                <div class="react" id='react' style="font-size: 23px;">
+                🙂
                 <small><?= $results['total']; ?></small>
                 </div>
             <?php }} ?>
@@ -180,11 +192,26 @@ foreach($post_single as $post){
                      <input type="hidden" name = 'post_id' value="<?= $post['post_id'] ?>">
                      <input type="hidden" name='user_id' value='<?= $user_id ?>'>
                      <input type="hidden" name='page' value='<?= $page ?>'>
-                     <input type="hidden" name="type" value='comm'>
+                 
         </div>
-        <div>
+                <div class="comOpt">
+                <div id="emojiContainer">
+        <span id="emojiButton">😀</span>
+        <div id="emojiMenu">
+            <!-- Emoji buttons will be added dynamically using JavaScript -->
+        </div>
+    </div>
+    <div>
+            <select name="type" >
+                <option value='public'>Public</option>
+                 <option value='private'>Private</option>
+            </select>
+             </div>   
+             
             <button name='submit_comment'>Post</button>
-        </div> 
+        
+       </div>
+    
         
         </form>
     </div>
@@ -222,73 +249,35 @@ if(!$selectReply ->execute(array($com_id))){
 }else{
     $reply = $selectReply->fetchAll(PDO::FETCH_ASSOC);
 }
-            ?>
-            <div class="comments_posts">
-                <div class="comment-post">
-                    <?= $comment['comment'] ?>
+$selectPostIDUSER = $dbh->connect()->prepare("SELECT user_id FROM posts WHERE post_id = ? ");
+if(!$selectPostIDUSER ->execute(array($post_id))){
+    echo 'Failed To Load Posts';
+}else{
+    $userPost_id = $selectPostIDUSER->fetch(PDO::FETCH_ASSOC);
+    if($userPost_id!==false){
+        $posterId=$userPost_id;
+    }else{
+        $posterId= null
+        ;
+    }
+}
+
+            ?> 
+            <?php if($comment['type']=='private'){ if($comment['user_id'] == $user_id || $posterId['user_id']==$user_id){ ?>
+            <div class="comments_posts" style="border-left: 2px solid green;">
+             
+                <div class="comment-post"> <p id='type_com'> <small style='color:green'><?= $comment['type'] ?></small></p>
+                   <p> <?= $comment['comment'] ?></p>
                     <div>
-                        <small>@<?= $comment['username'] ?> <span>
-                         
-                            </span></small>
+                        <small>@ <?php if($user_id == $comment['user_id']){ ?> You <?php }else{ echo $comment['username'];} ?>.<span><?= $comment['school'] ?></span> </small>
                     </div>
                 </div>
+                   
+               
                 
                 <div class="reply_com">
               
-                    <div class="reply_react">
-                            <div>
-                       
-                                <input type="checkbox" name="reply" id="emoji_reply">
-                               <label for="emoji_reply"> <img src="../images/happiness.png" alt="react" class='icons'></label>
-                           
-                            <div class="emojis" id='reply_emoji'>
-                            <form action="../classes_incs/postReply.inc.php" method='post'>
-                            <input type="hidden" name="user_id"  value="<?= $user_id?>">
-                            <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
-                            <input type="hidden" name='emoji' value='like'>
-                            <input type="hidden" name='reply' value=''>
-                                    <button type='submit' name='submit_reply'><img src="../images/like.png" alt="like"></button>
-                            </form>
-                            <input type="hidden" name="user_id"  value="<?= $user_id?>">
-                            <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
-                            <form action="../classes_incs/postReply.inc.php" method='post'>
-                            <input type="hidden" name="user_id"  value="<?= $user_id?>">
-                            <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
-                            <input type="hidden" name='emoji' value='shocking'>
-                            <input type="hidden" name='reply' value=''>
-                                    <button type='submit' name='submit_reply'><img src="../images/shocking.png" alt="like"></button>
-                            </form>
-                            <form action="../classes_incs/postReply.inc.php" method='post'>
-                            <input type="hidden" name="user_id"  value="<?= $user_id?>">
-                            <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
-                            <input type="hidden" name='emoji' value='love'>
-                            <input type="hidden" name='reply' value=''>
-                                    <button type='submit' name='submit_reply'> <img src="../images/love.png" alt="like"></button>
-                            </form>
-                            <form action="../classes_incs/postReply.inc.php" method='post'>
-                            <input type="hidden" name="user_id"  value="<?= $user_id?>">
-                            <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
-                            <input type="hidden" name='emoji' value='funny'>
-                            <input type="hidden" name='reply' value=''>
-                                    <button type='submit' name='submit_reply'><img src="../images/funny.png" alt="like"></button>
-                            </form>
-                            <form action="../classes_incs/postReply.inc.php" method='post'>
-                            <input type="hidden" name="user_id"  value="<?= $user_id?>">
-                            <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
-                            <input type="hidden" name='emoji' value='sad'>
-                            <input type="hidden" name='reply' value=''>
-                                    <button type='submit' name='submit_reply'><img src="../images/sad.png" alt="like"></button>
-                            </form>
-                            <form action="../classes_incs/postReply.inc.php" method='post'>
-                            <input type="hidden" name="user_id"  value="<?= $user_id?>">
-                            <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
-                            <input type="hidden" name='emoji' value='fire'>
-                            <input type="hidden" name='reply' value=''>
-                                    <button type='submit' name='submit_reply'><img src="../images/fire.png" alt="like"></button>
-                            </form>
-                            </div>
-                         </div>
-                        </div>
+               
                     
                     <form action="../classes_incs/postReply.inc.php" method='Post'>
                        
@@ -305,7 +294,6 @@ if(!$selectReply ->execute(array($com_id))){
                 </div>
          
             </div>
-        
             <?php 
                 foreach($reply as $reply){ 
                     if($reply['reply'] != ''){?>
@@ -325,6 +313,26 @@ if(!$selectReply ->execute(array($com_id))){
                             <?php } ?>
                       
             <?php } ?>
+            <?php }else{ ?> 
+                <div class="comments_posts" id="pvt_com">
+                <div class="comment-post">
+                this comment is private
+             </div></div>
+            <?php }}else{ ?> 
+                <div class="comments_posts">
+             
+             <div class="comment-post"> <p id='type_com'> <small style='color:#880281'><?= $comment['type'] ?></small></p>
+                <p> <?= $comment['comment'] ?></p>
+                 <div>
+                     <small>@
+                     <?php if($user_id == $comment['user_id']){ ?> You <?php }else{ echo $comment['username'];} ?> 
+                     .<span><?= $comment['school'] ?></span> </small>
+                 </div>
+             </div>      
+         </div>
+                <?php } ?>
+        
+           
             <div class="divider">
                 
                </div>
@@ -354,8 +362,64 @@ const react =document.querySelector('.react');
   const head_dots =document.querySelector('.head-dots');
   const head_menu =document.querySelector('.head-menu');
   head_dots.addEventListener('click',() =>{
-    head_menu.classList.toggle('head-menu-active');
+    head_menu.style.display = head_menu.style.display=== 'block' ? 'none' : 'block';
   })
+  const textarea_Post = document.querySelector('#reply-textarea');
+  const emojis = [
+    '😀', '😃', '😄', '😁', '😆', '😅', '😂', '🤣', '😊', '😇',
+    '🙂', '🙃', '😉', '😍', '🥰', '😘', '😗', '😚', '😙', '😋',
+    '😛', '😜', '🤪', '🤨', '🧐', '🤓', '😎', '🤩', '🥳', '😏',
+    '😒', '😞', '😔', '😟', '😕', '🙁', '☹️', '😣', '😖', '😫',
+    '😩', '🥺', '😢', '😭', '😤', '😠', '😡', '🤬', '🤯', '😳',
+    '😱', '😨', '😰', '😥', '😓', '🤗', '🤔', '🤭', '🤫', '🤥',
+    '😶', '😐', '😑', '😬', '🙄', '😯', '😦', '😧', '😮', '😲',
+    '🥱', '😴', '🤤', '😪', '😵', '🥴', '🤢', '🤮', '🤑', '😎',
+    '😍', '🥰', '😘', '😗', '😚', '😙', '😋', '😛', '😜', '🤪',
+    '🤨', '🧐', '🤓', '😎', '🤩','✋', '🤚', '🖐️', '✌️', '🤞', '🤟', '🤘', '🤙', '👈', '👉',
+    '👆', '👇', '☝️', '👍', '👎', '✊', '👊', '🤛', '🤜', '👏',
+    '🙌', '👐', '🤲', '🤝', '🙏', '✍️', '💅', '🤳', '💪', '🦵',
+    '🦶', '👂', '🦻', '👃', '🥳', '😏', '😒', '😞', '😔',
+    '😟', '😕', '🙁', '☹️', '😣', '😖', '😫', '😩', '🥺', '😢',
+    '😭', '😤', '😠', '😡', '🤬', '🤯', '😳', '😱', '😨', '😰',
+    '😥', '😓', '🤗', '🤔', '🤭', '🤫', '🤥', '😶', '😐', '😑',
+    '😬', '🙄', '😯', '😦', '😧', '😮', '😲', '🥱', '😴', '🤤',
+    '😪', '😵', '🥴', '🤢', '🤮', '🤑', '😀', '😃', '😄', '😁',
+    '😆', '😅', '😂', '🤣', '😊', '😇', '🙂', '🙃', '😉', '😍',
+    '🥰', '😘', '😗', '😚', '😙', '😋', '😛', '😜', '🤪', '🤨',
+    '🧐', '🤓', '😎', '🤩', '🥳', '😏', '😒', '😞', '😔', '😟',
+    '😕', '🙁', '☹️', '😣', '😖', '😫', '😩', '🥺', '😢', '😭',
+    '😤', '😠', '😡', '🤬', '🤯', '😳', '😱', '😨', '😰', '😥',
+    '😓', '🤗', '🤔', '🤭', '🤫', '🤥', '😶', '😐', '😑', '😬',
+    '🙄', '😯', '😦', '😧', '😮', '😲', '🥱', '😴', '🤤', '😪',
+    '😵', '🥴', '🤢', '🤮', '🤑', '😲', '🤑', '😲', '🤑', '😲',
+    '😶', '😐', '😶', '😐', '😶', '😐', '🤐', '😴', '🤤', '😪',
+    '😵', '🥴', '🤢', '🤮', '🤑', '😲', '🤑', '😲', '🤑', '😲',
+    // ... More emojis can be added here
+];
 
 
+
+const emojiButton = document.getElementById('emojiButton');
+const emojiMenu = document.getElementById('emojiMenu');
+
+
+emojis.forEach(emoji => {
+    const emojiOption = document.createElement('small');
+    emojiOption.textContent = emoji;
+    emojiOption.addEventListener('click', () => {
+        textarea_Post.value += emoji;
+    });
+    emojiMenu.appendChild(emojiOption);
+});
+
+emojiButton.addEventListener('click', () => {
+    emojiMenu.style.display = emojiMenu.style.display === 'grid' ? 'none' : 'grid';
+});
+
+// Close emoji menu when user clicks outside of it
+document.addEventListener('click', (event) => {
+    if (!emojiButton.contains(event.target) && !emojiMenu.contains(event.target)) {
+        emojiMenu.style.display = 'none';
+    }
+});
 </script>

@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['submit'])) {
-    $post = $_POST['post'];
+    $post = nl2br(htmlspecialchars($_POST['post']));
     $location = $_POST['location'];
     $user_id = $_POST['user_id'];
     $date = date('Y-m-d H:i:s');

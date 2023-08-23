@@ -38,7 +38,7 @@
          
             </div>
                   <div id="emojiContainer">
-        <span id="emojiButton">😀</span>
+        <span id="emojiButton" style='left:-10px;font-size:23px'>🙂</span>
         <div id="emojiMenu">
             <!-- Emoji buttons will be added dynamically using JavaScript -->
         </div>
@@ -246,7 +246,7 @@ document.addEventListener('click', (event) => {
         $post_date = $post['date_created'];
         $formattedDate = format_post_date($post_date);
         ?>
-        
+      
     
     <div class="post-container">
         <div class="post-head">
@@ -316,7 +316,7 @@ copyButton.addEventListener('click', () => {
     </div>
     <?php } ?>
     <h4>Confession:</h4>
-    <p >  <?= $post['post_body'] ?></p>
+    <p id='post-bAllP'>  <?= $post['post_body'] ?></p>
     <div>
               
               <span class='span-loc'><a href="../Trends/trends.php?location=<?= $post['location'] ?>">     
@@ -412,15 +412,35 @@ copyButton.addEventListener('click', () => {
                 <span><img src="../images/<?= $typeLikee['type']?>.png" alt="<?= $typeLikee['type']?>"> </span><?php } ?>
         </div>
     </div>
-<script >
 
-  const head_dots =document.querySelector('#head-dots<?php echo $idUnique;?>');
-  const head_menu =document.querySelector('#head-menu<?php echo $idUnique;?>');
-  head_dots.addEventListener('click',() =>{
-    head_menu.classList.toggle('head-menu-active');
-  })
 
-</script>
     <?php } ?> 
-    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Your JavaScript code here
+    const headDotsContainers = document.querySelectorAll('.head-dots-container');
+
+    headDotsContainers.forEach(container => {
+        const headDots = container.querySelector('.head-dots');
+        const headMenu = container.querySelector('.head-menu');
+
+        headDots.addEventListener('click', event => {
+            event.stopPropagation();
+
+            headMenu.classList.toggle('head-menu-active');
+
+            headDotsContainers.forEach(otherContainer => {
+                if (otherContainer !== container) {
+                    const otherMenu = otherContainer.querySelector('.head-menu');
+                    otherMenu.classList.remove('head-menu-active');
+                }
+            });
+        });
+    });
+});
+
+</script><div class="footer_">
+         <a href="../privacy/about.html">About</a> || <a href="../privacy/privacy.html">  Privacy</a>
+        </div>
 </div>
+

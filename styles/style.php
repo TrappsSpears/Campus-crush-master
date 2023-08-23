@@ -7,7 +7,7 @@
 }
 body{
     background-color: rgb(44, 47, 60);
-    max-width: 1800px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     color: white;
@@ -55,7 +55,7 @@ a{
     list-style: none;
     padding: 12px;
     margin-top: 20px;
-    background-color: #1a1a1a;;
+    background-color: #111;;
     border-radius: 42px;
     font-size: 18px;
     font-weight: 550;
@@ -77,8 +77,7 @@ a{
 .sidebar-nav ul li:hover{
     transform: scale(1.1);
     transition: 0.3s ease;
-    background-color: #1d1c1c;
-    box-shadow: 0px 2px 3px 0px;
+    box-shadow: 0px 2px 3px 0px orange;
 }
 .sidebar-nav ul span:hover {
     transform: scale(1.2);
@@ -122,9 +121,12 @@ a{
     border-top: 1px solid #252323;
 }
 .footer_items{
+    position: sticky;
+    bottom: 0;
     padding: 10px 25px;
     display: grid;
-    grid-template-columns: auto auto auto auto auto 20px;
+    grid-template-columns: auto auto auto auto auto;
+    background-color: #111;
 }
 .footer_items div{
    
@@ -137,10 +139,13 @@ a{
 
     text-align: center;
 }
+.footer-nav img{
+    width: 15px;
+}
  .icons-nav{
     width: 20px;
     transform: scale(1.4);
-    filter: brightness(0) invert(1) sepia(100%) hue-rotate(30deg) saturate(500%);
+   
 }
 .icons-active img{
     filter: invert(100%);
@@ -204,7 +209,7 @@ body {
  justify-content: center;
 }
 .nav{
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(44px);
     z-index: 100;
     text-align: left;
     position: sticky;
@@ -228,7 +233,13 @@ body {
     padding: 10px 15%; 
     width: 100%;  
    height: 91%;
-  
+   margin-bottom: 100px;
+}
+.footer_{
+    margin-top: 50px;
+}
+.footer_ a{
+    color: #880281;
 }
 #search-conts .trends{
     max-width: 600px;
@@ -316,11 +327,17 @@ body {
     background: none;
     border: none;
     cursor: pointer;
+
+}
+#emojiButton img{
+    width: 30px;
+    height: auto;
+    filter: invert(10%);
 }
 
 .con_form{
     padding: 20px;
-    background-color: #1a1a1a;
+    background-color: #111;
     max-width: 100%;
     margin-top: 10px;
     min-width: 260px;
@@ -338,8 +355,7 @@ body {
     max-width: 90%;
     height: 42px;
     outline: none;
-    border-radius: 8px;
-    background-color: #2c2d2e;
+    border-bottom: 2px solid #201f1f;
     
 }
 .con_form .post_header{
@@ -382,11 +398,12 @@ margin-top: 10px;
     max-height: 300px;
     width: 100%;
     border-radius: 8px;
-    object-fit: contain;
-    border: 1px solid #222;
+    object-fit: cover;
+    object-position: top;
 }
 
 .input_img{
+    
     padding-left: 5%;
     display: grid;
     grid-template-columns: 40px auto;
@@ -398,6 +415,9 @@ margin-top: 10px;
     border-radius: 32px;
     position: relative;
     top: -5px;
+    object-fit: cover;
+    background: url('../images/profile-user.png');
+    
 }
 #remainingChars{
     position: relative;
@@ -534,7 +554,7 @@ margin-top: 10px;
 }
 .post-container{
     box-shadow: 2px 3px 10px 0px #111;
-    background-color: #1a1a1a;
+    background-color: #111;
     height: auto;
     max-width: 650px;
     min-width: 260px;
@@ -548,6 +568,7 @@ margin-top: 10px;
     height: 30px;
     width: 30px;
     border-radius: 32px;
+    object-fit: cover;
    }
 
     .toggle-switch {        
@@ -617,6 +638,7 @@ margin-top: 10px;
 .post-container:hover{
     box-shadow: 2px 6px 14px 0px #111;
 }
+
 .post-box{
   
     padding: 12px;
@@ -641,13 +663,16 @@ margin-top: 10px;
 .post-box p{
     font-weight: 100;
     font-style: thin;
-    font-size: 14px;
+    font-size: 16px;
     overflow: hidden;
     text-overflow: ellipsis;   
     margin-top: -12px;
    line-height: 1.5;
-    max-height: 200px;
+    
     padding: 12px;
+}
+#post-bAllP{
+    max-height: 400px;
 }
 .post-box .span-loc{
     font-style: arial;
@@ -660,10 +685,10 @@ margin-top: 10px;
 }
 .img_post img{
    max-height: 350px;
-    width: 100%;
+   width: 100%;
     border-radius: 6px 6px 0px 0px;
     object-fit: cover;
-    object-position: top;
+    text-align: center;
 }
 .engage_btn span{
     position: relative;
@@ -829,11 +854,11 @@ margin-top: 10px;
 }
  .head_post_el{
     position: relative;
-    margin-top: -16px;
+    margin-top: -10px;
     top: 25px;
     font-size: 13px;
     border-radius: 32px;
-    background-color: #1a1a1a;
+    background-color: #111;
     padding: 6px;
     width: fit-content;
 }
@@ -898,9 +923,8 @@ margin-top: 10px;
     display: block;
 }
 .comment{
-    height: 50px;
-    display: grid;
-    padding: 4px 1px 12px 12px;
+        display: grid;
+    padding: 14px 1px 12px 12px;
     grid-template-columns: 13% 80%;
 }
 .deal-input{
@@ -1038,6 +1062,7 @@ cursor: pointer;
     margin-left: 20px;
     cursor: pointer;
     background-color: #383838;
+    color: floralwhite;
 }
 
 .form-comment button:hover{
@@ -1055,9 +1080,11 @@ cursor: pointer;
     height: 35px;
     color: white;
     font-weight: 600;
-    margin-top: 10px;
     position: relative;
-    left: 70%;
+    left: 35%;
+}
+.form-comment{
+    z-index:100;
 }
 .comments_posts{
     text-align: left;
@@ -1067,6 +1094,20 @@ cursor: pointer;
     margin-left: 20px;
     margin-top: 10px;
     display: flex;
+}
+.comments_posts small{
+    font-size: 8px;
+    margin-top: -10px;
+}
+.comment-post #type_com{
+    margin-top: -10px;
+    color: salmon;
+}
+#pvt_com{
+    
+    font-style: italic;
+    color: gray;
+    border-left: 2px solid rgb(44, 47, 60);
 }
 .comment-post{
     border-radius: 6px;
@@ -1098,7 +1139,7 @@ cursor: pointer;
     margin-top: 10px;
 }
 .emoji_cont .icons{
-    width: 50px;
+    width: 30px;
 }
 
 
@@ -1166,8 +1207,26 @@ cursor: pointer;
 }
 .comment-post div small{
     font-size: 10px;
-    color: green;
+    color: gray;
     cursor: pointer;
+}.comment-post div small span{
+    position: relative;
+    left: -10px;
+    color: salmon;
+}
+.comOpt{
+    display: flex;
+    margin-top: 10px;
+}
+.comOpt select{
+    width: fit-content;
+    margin-left: 20px;
+}
+.comOpt select option{
+    background-color:#201f1f;
+}
+.comOpt #emojiContainer{
+    position: relative;left: 0;
 }
 .comments_posts div span{
     padding: 6px;
@@ -1289,12 +1348,13 @@ cursor: pointer;
 .emojis{
     position: relative;
     top: -40px;
-    left: 10%;
+    
     border-radius: 32px;
-    width: fit-content;
+    
     background-color: #000;
     padding: 8px;
-    display: flex;
+    display: grid;
+   grid-template-columns: auto auto auto auto auto auto;
     text-align: center;
 }
 #emojis_post{
@@ -1404,7 +1464,7 @@ cursor: pointer;
 }
 
 .trends{
-    background-color:#1a1a1a;;
+    background-color:#111;
     margin-top: 12px;
     border-radius: 8px;
     font-size: 15px;
@@ -1672,6 +1732,7 @@ cursor: pointer;
 }
 .posts{
     padding: 10px 0px 0px 10px;
+    margin-bottom: 100px;
 }
 .con_form .post_header{
     display: flex;
@@ -1700,10 +1761,23 @@ cursor: pointer;
     width: 80px;
     border-radius: 32px;
     height: 80px;
-    object-fit: fill;
+    object-fit: cover;
+    background-color: orange;
+    border: none;
+  }
+  #profile-image{
+    object-fit: cover;
   }
   #settings{
     padding: 12px
+  }
+  #sbmit_picChange{
+    margin-bottom: 15px;
+  }
+  #prof_imgLab span{
+    border: 8px;
+    background-color:#313131 ;
+    padding: 6px;
   }
   #settings input{
     background-color: inherit;
@@ -1731,7 +1805,7 @@ cursor: pointer;
     }
     #settingsBtn{
         position: relative;
-        
+        left: 30px;
         top: -120px;
         
     }
@@ -1781,8 +1855,12 @@ cursor: pointer;
     .leftbar{
         display: none;
     }
+    #logOut{
+        margin-bottom: 50px;
+    }
     .posts{
         padding: 10px 0px;
+        margin-bottom: 100px;
     }
     .post-container ,.reply-container,.con_form{
         border-radius: 0px;
@@ -1844,9 +1922,15 @@ cursor: pointer;
     
     margin-left: -1%;
 }
+.react-emojis{
+    left: 5px;
+    top: -5px;
+    z-index: 100;
+}
+.react-emojis img{
+    width: 15px;
+}
   }
-  .form-comment button{
-    margin-left: 0;
-  }
+  
  
   </style>

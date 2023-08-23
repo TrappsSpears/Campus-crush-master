@@ -65,7 +65,7 @@ include('../includes/headall.php'); ?>
         </div>
     
     <?php foreach($location as $trend){ ?>
-        <a href="../Trends/trends.php?trends=<?= $trend['location'] ?>">
+        <a href="../Trends/trends.php?location=<?= $trend['location'] ?>">
             <div class='trndItms'>
                 <div>
                     <small>Confessions.321K</small>

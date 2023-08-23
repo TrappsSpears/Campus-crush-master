@@ -11,7 +11,7 @@ include('../includes/headall.php'); ?>
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
         <div class="nav">
-            <h3></h3>
+            <h3>Post</h3>
         </div>
 <?php 
 

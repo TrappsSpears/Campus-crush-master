@@ -24,17 +24,17 @@ if(isset($_SESSION['user_id'])){
         <div class="posts">
             <div class="post-container" id='settings'>
             <h3>Update Profile</h3>    
-            <div class="post-box">
+            <div class="post-box" style="text-align: center;">
                     
                     <div>
                         <form action="../classes_incs/update_profPic.php" method="post" enctype="multipart/form-data">
                            <div class="center">
-                        <label for="profile-photo-input" class="profile-photo-label">
-                          <img id="profile-image" src="path_to_default_image.jpg" alt="Profile Photo">
-                         <span>Upload Photo</span>
+                        <label for="profile-photo-input" class="profile-photo-label" id='prof_imgLab'>
+                          <img id="profile-image" src="../images/users/<?= $user['profile_pic'] ?>" alt="Profile Photo">
+                         <span>Change</span>
                           </label>
                            <input type="file" name="profile_photo" id="profile-photo-input" accept="image/*">
-                           <button type='submit' name='submit_prof'>Update Photo</button>
+                           <button type='submit' name='submit_prof' id="sbmit_picChange" style='width:fit-content'>Update Photo</button>
                         </div> 
                         </form>
                         

@@ -36,14 +36,17 @@ foreach($post_single as $post){
     
         <div class="post-container">
         <div class="post-head">
-            <div class="heading-post">
+        <div class="heading-post">
                 <?php if($post['anonymous'] == 'yes'){ ?>
-                       <img src="../images/incognito.png" alt="anonymouse" class="icons"><span><small>-Anonymous</small></span>
+                       <img src="../images/incognito.png" alt="anonymouse" class="icons"><span><small>Anonymous</small></span><span><small><?= $formattedDate ?></small> at <small><?= $post['time']  ?></small> </span>
             <?php }else { ?> 
-                <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'> <span>-<?= $post['username'] ?></span> 
+                <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'> <span id='username'><?= $post['username'] ?></span> 
+                <div>
+                <span><small id='date'><?= $formattedDate ?></small></span> <span><small id='time'>at <?= $post['time'] ?></small> </span>
+                </div>
                 <?php } ?>   
                 
-                <span><small><?= $formattedDate ?></small></span>   
+                  
         </div>
             <div class="head-dots" id = 'head-dots<?php echo $idUnique;?>'>
                 <div>

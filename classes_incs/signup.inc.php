@@ -23,9 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql = "INSERT INTO users (name, username, email, password, city, school) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $dbh->connect()->prepare($sql);
     $stmt->execute([$fullName, $username, $email, $password, $city, $school]);
+    $successMsg = 'SignUp successful..Now LogIn';
 
-
-    header("Location: ../index.php?LogInSuccessful"); 
+    header("Location: ../index.php?msg=$successMsg"); 
     exit();
 } else {
     header("Location: ../index.php"); // Redirect if accessed directly

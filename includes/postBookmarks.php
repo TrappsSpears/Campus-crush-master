@@ -3,7 +3,7 @@
     <div class="post_head">
             <div class="select-post-type">
                 <p id="C_con">
-                  <span class="dot" id="CC_span"> </span> 
+                  
                   Your saved Posts
                 </p>
             </div>    
@@ -11,13 +11,47 @@
     </div>
    
  
-    <?php foreach($posts_B as $post){ 
-        ?>
+    <?php 
+    function format_post_date($post_date) {
+        // Convert the input date to a timestamp
+        $timestamp = strtotime($post_date);
+        
+        // Get today's date at midnight
+        $today = strtotime('today midnight');
+        
+        // Get yesterday's date at midnight
+        $yesterday = strtotime('yesterday midnight');
+    
+        // Check if the post date is today
+        if ($timestamp >= $today) {
+            return 'Today';
+        }
+        // Check if the post date is yesterday
+        elseif ($timestamp >= $yesterday) {
+            return 'Yesterday';
+        }
+        // For other days, format the date as "Thursday 23 May 2023" using the date() function
+        else {
+            return date('l j F Y', $timestamp);
+        }
+    }
+    foreach($posts_B as $post){ 
+        $post_date = $post['date_created'];
+        $formattedDate = format_post_date($post_date);  ?>
     <div class="post-container">
         <div class="post-head">
-            <div class="heading-post">
-             <small>Anonymous . <span><?= $post['date_created'] ?></span> </small>   
-            </div>
+        <div class="heading-post">
+                <?php if($post['anonymous'] == 'yes'){ ?>
+                       <img src="../images/incognito.png" alt="anonymouse" class="icons"><span><small>Anonymous</small></span><span><small><?= $formattedDate ?></small> at <small><?= $post['time']  ?></small> </span>
+            <?php }else { ?> 
+                <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'> <span id='username'><?= $post['username'] ?></span> 
+                <div>
+                <span><small id='date'><?= $formattedDate ?></small></span> <span><small id='time'>at <?= $post['time'] ?></small> </span>
+                </div>
+                <?php } ?>   
+                
+                  
+        </div>
             <div class="head-dots">
                 <div>
                   <small>.</small><small>.</small><small>.</small>   
@@ -35,21 +69,10 @@
             <a href="../Trends/trends.php?location=<?= $post['location'] ?>">     
                 @<?= $post['location'] ?>
             </a> 
-            <a href="../Trends/trends.php?trends=<?= $post['topic'] ?>">
-                #<?= $post['topic']?>
-            </a>
-            
+  
         </div><a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
-        <?php if(strlen($post['post_body']) > 500){ ?>
-            
-        <div class='readmoreBtn'>
-        <button> Read More</button>
-        </div>
-            <?php } ?>
-    <p <?php if(strlen($post['post_body']) < 60){echo "style='font-size:48px'";}
-                elseif(strlen($post['post_body']) <45){echo "style='font-size:58px'";}
-    
-    ?>> <?= $post['post_body'] ?></p>
+
+    <p> <?= $post['post_body'] ?></p>
     </a>
 </div>
 
