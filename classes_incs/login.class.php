@@ -26,7 +26,8 @@
                 }
                 if($stmt->rowCount()==0){
                     $stmt = null;
-                    header("location: ../index/index.php?=usersNotFound");
+
+                    header("location: ../index/index.php?Error=usersNotFound");
                 }
                 $user =$stmt->fetchAll(PDO::FETCH_ASSOC);
                 session_start();

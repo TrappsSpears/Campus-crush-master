@@ -20,20 +20,32 @@ if(isset($_SESSION['user_id'])){
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
         <div class="nav">
+        <div class="conFess_icon" id='small_screen_icon'>
+        <h2><span> Confess</span>Connect</h2>
+        <p>Speaking Unspoken Stories</p>
+    </div>
             <h3>Profile</h3>
         </div>
         <?php $user_page = 'all'; 
 ?>
 <div class="posts">
-    <div class="con_form">  
+    <div class="con_form">           <div>
+             <a href="settings.php" id='settingsBtn'>   <span > Settings</span></a>     
+            </div> <a href="settings.php" id='settingsBtn'> 
                 <div class="post_linkups" id="post_linkups">
-                   <img src="../images/users/<?= $user['profile_pic'] ?>" alt="" class='icons'>
-                   <p><?= $user['username']?></p>
-                </div>
+                <?php if($user['profile_pic']!=''){ ?> 
+                    <img src="../images/users/<?= $user['profile_pic'] ?>" alt="" class="icons" >
+                    <?php } else{ ?> 
+                        <img src="../images/profile-user.png" alt="" style="filter: invert(100%);" class="icons" >
+                        <?php } ?>
+                 
+                   <p><b> <?= $user['name']?></b> <small style='color:gray'>@ <?= $user['username']?></small> - <small> <?= $user['school']?> </small></p>
+                </div> </a>
             <small id='privacy_msg' class='privacy_msg'>
                 Feel Free to say whats in your mind..Your <a href="../privacy/privacy.html" style="color:blueviolet"> privacy</a> is all urs
             </small> 
- <a href="settings.php" id='settingsBtn'>   <span > Settings</span></a> 
+            
+    
     </div>
    
 <!--...............------------------- Now Posting --------------------------------------------------------------->
@@ -54,20 +66,79 @@ if(isset($_SESSION['user_id'])){
                 </div>
             </div>
     <div class="post-box">
+    <a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
     <?php if($post['post_pic'] != ''){?> 
     <div class="img_post">
         <img src="../images/imagePosts/<?= $post['post_pic'] ?>" alt="">
     </div>
     <?php } ?>
-        <a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
+      
         
         <p> <?= $post['post_body'] ?></p>
         </a>
        - <?= $post['location'] ?>  
     </div>
+    <div class="engage_btn">
+        <form action="../classes_incs/deletepost.inc.php" method="post">
+        <input type="hidden" value="<?=$post['post_pic'] ?>" name="post_pic">
+            <input type="hidden" value="<?=$post['post_id'] ?>" name='post_id'>
+            <button name='submit'> <small>X</small> Delete</button>
+        </form>
+    </div>
+    <a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
+        
+            
+
+            <?php
+            $post_id = $post['post_id'];
+            $sql = "SELECT COUNT(*) as total FROM likes WHERE post_id = ?;";
+
+            $result = $dbh->connect()->prepare($sql);
+            if(!$result->execute(array( $post_id))){
+                $result = null;
+            }else{
+                $results = $result->fetch(PDO::FETCH_ASSOC);
+                
+                    $sql = "SELECT type FROM likes WHERE post_id = ?;";
+                    $result = $dbh->connect()->prepare($sql);
+                    if(!$result->execute(array($post_id))){
+                        $result = null;
+                    }else{
+                        $resultsall = $result->fetchAll(PDO::FETCH_ASSOC);}
+                    ?>
+                    <?php
+            $post_id = $post['post_id'];
+            $sql = "SELECT COUNT(*) as total FROM comments WHERE  post_id = ?;";
+
+            $resultC = $dbh->connect()->prepare($sql);
+            if(!$resultC->execute(array($post_id))){
+                $resultC = null;
+            }else{
+                $count= $resultC->fetch(PDO::FETCH_ASSOC);}
+               
+                    ?>
+                <div class="post_insights">
+                    <span id='comment'><img src="../images/bubble-chat.png" alt=""><small><?= $count['total']?></small></span>
+                    <span id = 'bookmark'><img src="../images/saved.png" alt=""><small>0</small></span>
+                        <span id='reaction_emoj'>
+                    <?php foreach($resultsall as $type){ ?> 
+                    <img src="../images/<?php echo $type['type'];?>.png" alt="<?= $type['type'] ?>" class='icons'>  
+                       
+                        <?php } ?>
+                        
+                   <small> <?php if($results>0){ ?>
+                    <?= $results['total']; ?> <?php } ?></small></span>
+                
+              
+                     </div>      
+            <?php } ?>
+            </a>
     
         </div>
         <?php } ?> 
+        <div class="footer_">
+         <a href="../privacy/about.html">About</a> || <a href="../privacy/privacy.html">  Privacy</a>
+        </div>
         </div>
   
     </div>
@@ -85,7 +156,7 @@ if(isset($_SESSION['user_id'])){
         <div class="post-container">
             <div class="post-box">
                 <h3>Page Not available</h3>
-                <p>Go <a href="../index/index.php">Log In</a> </p>
+                <p>Go <a href="../index.php">Log In</a> </p>
             </div>
         </div>
     </div>

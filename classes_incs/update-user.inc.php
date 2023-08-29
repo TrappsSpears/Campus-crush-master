@@ -21,6 +21,8 @@ if (isset($_POST['update'])) {
     $stmt = $dbh->connect()->prepare($query);
     if ($stmt->execute([$updatedName, $updatedSchool, $updatedUsername, $updatedEmail, $userId])) {
         $_SESSION['user_name'] = $updatedUsername; 
+        $_SESSION['school'] = $updatedSchool; 
+       
         header('Location: ../userProfile/profileUserCurrent.php?msg=Updated');
     } else {
         header('Location: ../userProfile/profileUserCurrent.php?msg=Failed');

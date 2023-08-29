@@ -3,15 +3,20 @@
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     padding: 0;
     margin: 0;
+    outline: none;
     box-sizing: border-box;
 }
 body{
-    background-color: rgb(44, 47, 60);
+    background-color: #121212;
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     color: white;
+    
+
 }
+
+
 .nav-a{
    
     display: flex;
@@ -28,6 +33,42 @@ a{
     justify-content: center;
 }
 /* Side-Bar */
+.conFess_icon {
+    
+    position: relative;
+    top: -76px;
+    margin-bottom: 25px;
+    
+}
+.conFess_icon h2{
+    transform: scale(1.3);
+    color:#1e90ff ;
+}
+.conFess_icon p{
+    position: relative;
+    left:-25px;
+    color: gainsboro;
+    font-size: 12px;
+}
+.conFess_icon span{
+    color: #880281;
+}
+#small_screen_icon{
+    position: relative;
+    top: 0;
+    margin-bottom: 0;
+    display: none;
+}
+#small_screen_icon h2{
+transform: scale(1.0);
+font-size: 19px;
+left:-33px;
+position: relative;
+}
+#small_screen_icon p{
+    left: 5px;
+    font-size: 10px;
+}
 .footer-about{
     position: absolute;
     bottom: 0;
@@ -36,6 +77,11 @@ a{
     left: 0;
     padding: 8px;
     border-top: 1px solid #201f1f;
+}
+#info_App{
+    position: relative;
+    font-size: 10px;
+    text-align: left;
 }
 .footer-about a{
     color: #880281;
@@ -46,16 +92,22 @@ a{
     padding: 90px 40px;
     color: white;
 
+position: fixed;
+left: 0;
+top:0;
+z-index: 400;
+
 }
 
 .sidebar-nav ul div{
     display: flex;
+    
 }
 .sidebar-nav ul li{
     list-style: none;
     padding: 12px;
     margin-top: 20px;
-    background-color: #111;;
+    background-color: #121212;;
     border-radius: 42px;
     font-size: 18px;
     font-weight: 550;
@@ -70,7 +122,7 @@ a{
     
     }
     .sidebar-nav ul .active span{
-        background-color: #1a1a1a;
+        background-color: #333333;
     color: white;
     animation: span 1s infinite linear;
     }
@@ -92,7 +144,7 @@ a{
     top: 48px;
     margin-right: 10px;
     box-shadow: 2px 2px 3px 0px black;
-    
+   
 }
 @keyframes span{
     0% {
@@ -130,7 +182,7 @@ a{
 }
 .footer_items div{
    
-    padding: 8px;
+    padding: 12px;
     border-radius: 32px;
     width: 60%;
     max-width: 50px;
@@ -140,7 +192,7 @@ a{
     text-align: center;
 }
 .footer-nav img{
-    width: 15px;
+    width: 20px;
 }
  .icons-nav{
     width: 20px;
@@ -203,10 +255,8 @@ body {
     text-align: center;
     justify-content: center;
     height: 100%;
-    -ms-overflow-style: none;
-  scrollbar-width: none;
-    overflow-y: scroll; 
  justify-content: center;
+ margin-left: 20%;
 }
 .nav{
     backdrop-filter: blur(44px);
@@ -217,6 +267,8 @@ body {
     padding: 5px;
     border-bottom: 2px solid rgb(0, 101, 196);
     display: flex;
+    justify-content: center;
+    padding-bottom: 30px;
 }
 .nav h2 ,h3{
     margin-left: 35px;
@@ -246,7 +298,27 @@ body {
    min-width: 200px;
    background-color: #111;
 }
+ .search_place{
+    padding: 6px;
+   display: flex;
+}
+.search_place button{
+    padding: 6px;
+    height: 36px;
+    border: none;
+    background-color:  #212121;
+    border-radius: 6px;
+    color: gray;
+    margin-left: 10px;
+}
+ .search_place input{
+    width: 80%;
+    border-radius: 63px;
+    padding: 6px 10px;
+    font-size: 18px;
+    border: 1px solid #313131;
 
+}
 #search-conts .search-conts .emojis{
    top: 0; 
    left: 0;
@@ -292,7 +364,7 @@ body {
 }
 #emojiContainer {
     position: relative;
-    display: block;
+    display: none;
     left: 50px;
 }
 #emojiContainer span{
@@ -309,7 +381,7 @@ body {
     padding: 5px;
     display: none;
     background-color: gray;
-    z-index: 100;
+    z-index: 400;
     border: 6px;
     cursor:default;
     margin-left: 55px;
@@ -327,7 +399,7 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-
+    margin-left: 15px;
 }
 #emojiButton img{
     width: 30px;
@@ -336,8 +408,9 @@ body {
 }
 
 .con_form{
+    
     padding: 20px;
-    background-color: #111;
+    background-color: #121212;
     max-width: 100%;
     margin-top: 10px;
     min-width: 260px;
@@ -345,9 +418,9 @@ body {
     
 }
 .con_form textarea{
-    padding: 6px;
+    padding: 10px;
     font-size: 14px;
-    background-color: inherit;
+    background-color:  #212121;
     resize: none;
     border: none;
     color: white;
@@ -355,25 +428,24 @@ body {
     max-width: 90%;
     height: 42px;
     outline: none;
-    border-bottom: 2px solid #201f1f;
+    border-radius: 38px;
+  
     
 }
 .con_form .post_header{
     display: flex;
     width: 100%;
     text-align: center;
-    margin-top: 10px;
-    display: none;
-    
+    margin-top: 10px;   
 }
 
 .switch{
     position: relative;
     border-radius: 6px;
-   color: #313131;
+   color: gainsboro;
    width: auto;
     display: flex;
-    left: 10%;
+    left: 8%;
 }
 .switch img{
     position: relative;
@@ -481,6 +553,7 @@ margin-top: 10px;
     border-top: 0px;
     border-left: 0px;
     border-right: 0px;
+    
 }
 .caption_div{
     width: 100%;
@@ -488,12 +561,15 @@ margin-top: 10px;
 
 
 .post_header select{
-    background-color: #2c2d2e;
-    border-radius: 6px;
-    padding: 6px;
-    color: white;
-    border: 1px solid #333;
+    border-radius: 32px;
+    padding: 6px 10px;
+    color: gainsboro;
+    border: 1px solid #1e90ff;
+    border-left: 1px solid #880281;
+     background-color: #212121;
+    width: fit-content;
 }
+
 .input_htSt select option{
     background-color: #313131;
     color: floralwhite;
@@ -522,17 +598,33 @@ margin-top: 10px;
     position: absolute;
     
 }
-
+.back_btn{
+    border-radius: 6px;
+   position: absolute;
+   top: 45px;
+   margin-left: 75%;
+   border: 1px solid rgb(0, 101, 196);
+}
+.back_btn button{
+    border: none;
+    padding: 6px;
+    border-radius: 6px;
+    background-color: #201f1f;
+    color: gainsboro;
+    font-size: 16px;
+    
+}
 .con_form button{
     font-size: 16px;
     width:100%;
     padding: 8px;
     border-radius: 8px;
     border: none;
-    background-color: rgb(0, 101, 196);
+    background-color:#1e90ff ;
     cursor: pointer;
     outline: none;
     color: white;
+    font-weight: 600;
 }
 .con_form button:hover{
     background-color: rgb(0, 131, 196);
@@ -553,22 +645,23 @@ margin-top: 10px;
     box-shadow: 0px 1px 3px 0px rgb(0, 101, 196);
 }
 .post-container{
-    box-shadow: 2px 3px 10px 0px #111;
-    background-color: #111;
+    background-color: #121212;
     height: auto;
     max-width: 650px;
     min-width: 260px;
-    margin-top: 16px;
-    border-radius: 8px;
-  margin-bottom: 20px;
     text-align: left;
-    padding: 0px 12px 12px 12px;
+   padding: 10px 0;
+    color: grey;
+    border-bottom: 1px solid gray;
    }
    #profile_pic{
-    height: 30px;
-    width: 30px;
+    height: 50px;
+    width: 50px;
     border-radius: 32px;
     object-fit: cover;
+    padding: 3px;
+    background-color: #121212;
+    margin-left: 10px;
    }
 
     .toggle-switch {        
@@ -635,12 +728,10 @@ margin-top: 10px;
     }
    
   
-.post-container:hover{
-    box-shadow: 2px 6px 14px 0px #111;
-}
+
 
 .post-box{
-  
+    background-color: #1a1a1a;
     padding: 12px;
     height:auto;
     min-height: 100px;
@@ -650,26 +741,30 @@ margin-top: 10px;
     text-overflow:ellipsis;
     cursor: pointer; 
     border-radius: 6px;
-    background-color: inherit;
+
     color: white;
     line-height: 1.2;
+
 }
+
 .post-box .post_b{
-    border: 1px solid #383838;
+   
     border-radius: 10px;
     padding-bottom: 10px;
     margin-bottom: 10px;
+    padding: 10px 20px;
+    margin-top: 10px;
 }
 .post-box p{
-    font-weight: 100;
+   margin-bottom: 10px;
     font-style: thin;
-    font-size: 16px;
+    font-size: 18px;
     overflow: hidden;
     text-overflow: ellipsis;   
-    margin-top: -12px;
    line-height: 1.5;
+   padding: 0 10px;
+  
     
-    padding: 12px;
 }
 #post-bAllP{
     max-height: 400px;
@@ -679,24 +774,43 @@ margin-top: 10px;
     font-weight: 600;
     padding: 10px 6px;
     margin-bottom: 10px;
+    
+    margin-top: 10px;
 }
+
 .post-box h4{
     padding-left: 10px;
 }
-.img_post img{
-   max-height: 350px;
-   width: 100%;
-    border-radius: 6px 6px 0px 0px;
+.img_post{
+    
+    border-radius:10px ;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+.img_post img{    
+    border: 1px solid #121212;
+    border-radius: 10px;
+   max-height: 450px;
+   max-width: 100%;
+    
     object-fit: cover;
     text-align: center;
+    object-position: top;
 }
-.engage_btn span{
+.engage_btn button small{
+    position: relative;
+    font-weight: 600;
+    color: red;
+}
+.engage_btn button{
     position: relative;
     text-align: right;
     font-size: 13px;
     margin-top: -60px;
     background-color: #1a1a1a;
-    
+    color: gainsboro;
+    border: none;
     padding: 6px;
     border-radius: 10px;
     left: 83%;
@@ -712,7 +826,7 @@ margin-top: 10px;
 }
 .post_insights{
     text-align: right;
-    
+    margin-bottom: 10px;
     margin-top: -15px;
     color: gray;
 }
@@ -726,7 +840,7 @@ margin-top: 10px;
     left: 2px;
     background-color: inherit;
 }
-.post_insights #reaction_emoj img{
+ #reaction_emoj img{
     width: 15px;
     margin-left: -10px;
     position: relative;
@@ -743,17 +857,18 @@ margin-top: 10px;
     font-size: 10px;
     left: -2px;
     top: 3px;
-    color: gray;
+    color: gainsboro;
     padding: 4px 4px 4px 6px;
     border-radius: 43px;
 }
 .thot{
+    text-align: left;
     border-radius: 43px;
-    border: 2px solid #201f1f;
-    padding: 6px 23px 6px 23px;
+    border: 2px solid  gray;
+    padding: 6px 10px ;
     font-size: 15px;
     cursor: pointer;
-    
+    color: #777;
 }
 .post_insights img{
     width: 20px;
@@ -838,24 +953,30 @@ margin-top: 10px;
 }
 .heading-post #username{
     position: relative;
-    top: -18px;
+    top: -30px;
     color: floralwhite;
+   left: -10px;
 }
-.heading-post  #date{
+.heading-post #name{
+    top: -30px;
+    left: -20px;
+    color: gray;
+}
+.heading-post #date {
     position: relative;
     top: -20px;
-    left: 35px;
+    left: 55px;
     color: gray;
 }
 .heading-post  #time{
     position: relative;
-    top: -19px;
-    left: 29px;
+    top: -20px;
+    left: 44px;
+}
+.heading-post small{
+    color: gray;
 }
  .head_post_el{
-    position: relative;
-    margin-top: -10px;
-    top: 25px;
     font-size: 13px;
     border-radius: 32px;
     background-color: #111;
@@ -888,11 +1009,7 @@ margin-top: 10px;
   height: 10px;
   width: 10px;
 }
-.head-dots:hover{
-    transform: scale(1.1);
-    transition: 0.3s ease;
-    background-color: #1d1c1c;
-}
+
 
 .head-menu{
     position: relative;
@@ -1001,23 +1118,25 @@ cursor: pointer;
     font-weight:100 ;
     border-radius: 43px;
     padding: 5px 7px;
-    background-color: #201f1f;
+    
     margin-left: -10px;
     margin-top: 10px;
 }
 
 .icons {
-    width:30px
+    width:30px;
+    height: auto;
 }
 
 .react-emojis{
     display: none;
     position: relative;
     margin-top: -100px;
-    background-color: #313131;
+    background-color: #212121;
     padding: 8px 10px;
     min-width: 300px;
-    left: -50px;
+    left: -20px;
+    z-index: 400;
     border-radius: 90px;
     box-shadow: 0px 2px 16px 0px #1a1a1a;
     
@@ -1055,13 +1174,13 @@ cursor: pointer;
     height: 35px;
     resize: none;
     border-radius:8px;
-    border: none;
+    background-color: inherit;
     outline: none;
     width: 100%;
     overflow-y: hidden;
     margin-left: 20px;
     cursor: pointer;
-    background-color: #383838;
+    border: 1px solid #333;
     color: floralwhite;
 }
 
@@ -1071,7 +1190,7 @@ cursor: pointer;
     transition: 0.2s ease;
 }
 .form-comment button{
-    width: 40%;
+    width: 20%;
     cursor: pointer;
     background-color: #880281;
     border-radius: 8px;
@@ -1081,7 +1200,7 @@ cursor: pointer;
     color: white;
     font-weight: 600;
     position: relative;
-    left: 35%;
+    left: 53%;
 }
 .form-comment{
     z-index:100;
@@ -1092,7 +1211,7 @@ cursor: pointer;
     padding-left: 12px;
     width: fit-content;
     margin-left: 20px;
-    margin-top: 10px;
+    margin-top: 20px;
     display: flex;
 }
 .comments_posts small{
@@ -1110,9 +1229,8 @@ cursor: pointer;
     border-left: 2px solid rgb(44, 47, 60);
 }
 .comment-post{
-    border-radius: 6px;
-    background-color: #2b2a2a;
-    padding: 6px ;
+    
+    padding: 10px ;
     font-size: 15px;
     max-width: 100%;
 }
@@ -1122,9 +1240,9 @@ cursor: pointer;
     cursor: pointer;
 }
 .replys{
+    background-color: #1f1f1f;
     border-radius: 6px;
-    background-color: #2b2a2a;
-    padding: 6px ;
+    padding: 6px 30px ;
     font-size: 15px;
     max-width: 200px;
     margin-top: 10px;
@@ -1149,6 +1267,7 @@ cursor: pointer;
 }
 .reply_com{
     margin-left: 10px;
+    margin-top: 10px;
 }
 .reply_com button{
     background-color: inherit;
@@ -1171,12 +1290,12 @@ cursor: pointer;
     background-color: inherit;
     resize: none;
     padding: 6px;
-    border: none;
-    border-bottom: 2px solid #201f1f;
+    border:none;
+    
     color: white;
     width: 60%;
+    padding: 6px ;
     
-    font-size: 13px;
 }
 .reply_react input[type="checkbox"] {
     display: none;
@@ -1219,8 +1338,10 @@ cursor: pointer;
     margin-top: 10px;
 }
 .comOpt select{
+    background-color: #201f1f;
     width: fit-content;
-    margin-left: 20px;
+    margin-left: 24px;
+    border-radius: 6px;
 }
 .comOpt select option{
     background-color:#201f1f;
@@ -1334,7 +1455,8 @@ cursor: pointer;
 .leftbar{
     width: 450px;
     padding: 40px;
-    overflow-y: scroll;
+    position: sticky;
+    top:0;
 }
 .leftbar .leftbar-container{
     position: relative;
@@ -1480,8 +1602,8 @@ cursor: pointer;
     background-color: #383838;
 }
 .trends .trndItms small{
-    color: #201f1f;
-    font-size: 15px;
+    color: gainsboro;
+    font-size: 10px;
     padding: 5px;
 }
 .trends .trndItms div{
@@ -1662,9 +1784,12 @@ cursor: pointer;
     text-align: center;
     padding: 12px;
 }
+.reply-container h3{
+    text-align: left;
+}
 .reply-container{
-    background-color: #111;
-    margin-bottom: 70px;
+    background-color: #121212;
+    margin-bottom: 100px;
     padding: 8px;
     border-radius: 8px;
 }
@@ -1700,6 +1825,9 @@ cursor: pointer;
 /* Tablets */
 @media only screen and (min-width: 700px) and (max-width: 1023px) {
     /* CSS styles here */
+    #small_screen_icon{
+        display: block;
+    }
     .leftbar{
         width: 400px;
     }
@@ -1731,16 +1859,24 @@ cursor: pointer;
     margin-top: 10px;
 }
 .posts{
-    padding: 10px 0px 0px 10px;
+    padding: 10px 0px;
     margin-bottom: 100px;
+}
+.con_form textarea{
+    font-size: 12px;
 }
 .con_form .post_header{
     display: flex;
     width: 100%;
     text-align: center;
     margin-top: 10px;
-    display: non;
     margin-left: 1%;
+}
+#emojiContainer{
+    display: none;
+}
+.form-comment button{
+    left: 40%;
 }
   }
   .nav .profile{
@@ -1804,14 +1940,15 @@ cursor: pointer;
         cursor: pointer;
     }
     #settingsBtn{
-        position: relative;
-        left: 30px;
-        top: -120px;
-        
+       position: relative;
+      
     }
-    #settingsBtn span{
+    #settingsBtn span{ font-size: 15px;
+        padding: 8px;
+        left: 40px;
         border-radius: 6px;
         background-color: #111;
+        border-radius: 1px solid gainsboro;
     }
 
     #settings .center img {
@@ -1852,6 +1989,9 @@ cursor: pointer;
   /* Smartphones */
 @media only screen and (max-width: 700px) {
     /* CSS styles here */
+    #small_screen_icon{
+        display: block;
+    }
     .leftbar{
         display: none;
     }
@@ -1911,10 +2051,11 @@ cursor: pointer;
     font-weight:100 ;
     border-radius: 43px;
     padding: 5px 7px;
-    background-color: #201f1f;
-    margin-left: -10px;
-    margin-top: 10px;
+   
     
+}
+.form-comment button{
+    left: 43%;
 }
 .con_form .post_header{
     display: flex;
@@ -1922,14 +2063,40 @@ cursor: pointer;
     
     margin-left: -1%;
 }
+.con_form .post_header select{
+    width: fit-content;
+}
 .react-emojis{
     left: 5px;
-    top: -5px;
+    top: -25px;
     z-index: 100;
 }
 .react-emojis img{
-    width: 15px;
+    width: 25px;
 }
+
+body{
+    opacity: 1;
+}
+.switch small{
+font-size: 10px;
+position: relative;
+top: -5px;
+left: 10px;
+}
+#emojiContainer{
+    display: none;
+}
+.main-content{
+    margin-left: 0;
+}
+.img_post img{    
+    border: 1px solid #121212;
+    border-radius: 10px;
+   max-height: 400px;
+   width: 100%;
+}
+
   }
   
  

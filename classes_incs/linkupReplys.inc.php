@@ -15,16 +15,8 @@
         $result = $dbh->connect()->prepare($sql);
         if($result->execute(array($post_id,$reply,$replied_user_id,$user_id,$date))){
 
-            if($page == 'home'){
-                header("Location: ../index/index.php?secceeded,Page=$page");
-            }elseif($page == 'linkup_page'){
-                header("Location: ../linkups/linkups.php?secceeded,Page=$page");
-            }elseif($page == 'postSingle'){
                 header("Location: ../singlePosts/singleposts.php?post_id=$post_id");
-            }
-            else{
-                header("Location: ../index/index.php?secceeded,Page=$page");
-            }
+            
 
 
          

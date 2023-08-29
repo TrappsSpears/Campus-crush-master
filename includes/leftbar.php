@@ -46,11 +46,19 @@
             <h2>Top Places</h2>
         </div>
     
-    <?php foreach($location as $trend){ ?>
+    <?php foreach($location as $trend){ 
+        $loc=$trend['location'];
+        $sql = "SELECT COUNT(*) as total FROM posts WHERE  location = ?;";
+
+            $resultC = $dbh->connect()->prepare($sql);
+            if(!$resultC->execute(array($loc))){
+                $resultC = null;
+            }else{$count= $resultC->fetch(PDO::FETCH_ASSOC);}
+        ?>
         <a href="../Trends/trends.php?location=<?= $trend['location'] ?>">
             <div class='trndItms'>
                 <div>
-                    <small>Confessions.321K</small>
+                    <small>Confessions.<?= $count['total'] ?></small>
                 </div>
                 <div>
                 <p>- <?= $trend['location'] ?></p>

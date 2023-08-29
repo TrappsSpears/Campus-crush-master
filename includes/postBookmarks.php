@@ -44,10 +44,11 @@
                 <?php if($post['anonymous'] == 'yes'){ ?>
                        <img src="../images/incognito.png" alt="anonymouse" class="icons"><span><small>Anonymous</small></span><span><small><?= $formattedDate ?></small> at <small><?= $post['time']  ?></small> </span>
             <?php }else { ?> 
-                <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'> <span id='username'><?= $post['username'] ?></span> 
-                <div>
-                <span><small id='date'><?= $formattedDate ?></small></span> <span><small id='time'>at <?= $post['time'] ?></small> </span>
-                </div>
+                <?php if($user['profile_pic']!=''){ ?> 
+                    <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
+                    <?php } else{ ?> 
+                        <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
+                        <?php } ?>
                 <?php } ?>   
                 
                   
@@ -65,17 +66,73 @@
             </div>
         </div>
 <div class="post-box">
-        <div class="location_div">
-            <a href="../Trends/trends.php?location=<?= $post['location'] ?>">     
-                @<?= $post['location'] ?>
-            </a> 
-  
-        </div><a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
-
-    <p> <?= $post['post_body'] ?></p>
+<a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
+<div class="post_b">
+        <?php if($post['post_pic'] != 'Array'){?> 
+    <div class="img_post">
+        <img src="../images/imagePosts/<?= $post['post_pic'] ?>" alt="">
+    </div>
+    <?php } ?>
+    
+    <p id='post-bAllP'>  <?= $post['post_body'] ?></p>
+    <div>
+              
+              <span class='span-loc'><a href="../Trends/trends.php?location=<?= $post['location'] ?>" style='border-top:1px solid #212121'>     
+                     -<?= $post['location'] ?>
+                 </a> </span>
+                        
+                 </div>
+        </div>
     </a>
 </div>
+<a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
+        
+            
 
+            <?php
+            $post_id = $post['post_id'];
+            $sql = "SELECT COUNT(*) as total FROM likes WHERE post_id = ?;";
+
+            $result = $dbh->connect()->prepare($sql);
+            if(!$result->execute(array( $post_id))){
+                $result = null;
+            }else{
+                $results = $result->fetch(PDO::FETCH_ASSOC);
+                
+                    $sql = "SELECT type FROM likes WHERE post_id = ?;";
+                    $result = $dbh->connect()->prepare($sql);
+                    if(!$result->execute(array($post_id))){
+                        $result = null;
+                    }else{
+                        $resultsall = $result->fetchAll(PDO::FETCH_ASSOC);}
+                    ?>
+                    <?php
+            $post_id = $post['post_id'];
+            $sql = "SELECT COUNT(*) as total FROM comments WHERE  post_id = ?;";
+
+            $resultC = $dbh->connect()->prepare($sql);
+            if(!$resultC->execute(array($post_id))){
+                $resultC = null;
+            }else{
+                $count= $resultC->fetch(PDO::FETCH_ASSOC);}
+               
+                    ?>
+                <div class="post_insights">
+                    <span id='comment'><img src="../images/bubble-chat.png" alt=""><small><?= $count['total']?></small></span>
+                    <span id = 'bookmark'><img src="../images/saved.png" alt=""><small>0</small></span>
+                        <span id='reaction_emoj'>
+                    <?php foreach($resultsall as $type){ ?> 
+                    <img src="../images/<?php echo $type['type'];?>.png" alt="<?= $type['type'] ?>" class='icons'>  
+                       
+                        <?php } ?>
+                        
+                   <small> <?php if($results>0){ ?>
+                    <?= $results['total']; ?> <?php } ?></small></span>
+                
+                <span class='thot'> <img src="../" alt=""> Write a thought...</span>
+                     </div>      
+            <?php } ?>
+            </a>
     </div>
     <script >
     

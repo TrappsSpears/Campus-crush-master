@@ -1,4 +1,5 @@
 <div class="posts">
+    
     <div class="con_form">
     </div>
    
@@ -28,6 +29,16 @@
             return date('l j F Y', $timestamp);
         }
     }
+    function formatPostContent($content) {
+        // Search for URLs in the content
+        $pattern = '/https?:\/\/\S+/i'; // Regular expression pattern to match URLs
+        $formattedContent = preg_replace_callback($pattern, function($match) {
+            // Use the matched URL as the link text and href
+            return '<a style="color:#1e90ff" href="' . $match[0] . '" target="_blank">' . $match[0] . '</a>'; 
+        }, $content);
+    
+        return $formattedContent;
+    }
 foreach($post_single as $post){ 
     $post_date = $post['date_created'];
     $formattedDate = format_post_date($post_date);?>
@@ -39,7 +50,11 @@ foreach($post_single as $post){
                 <?php if($post['anonymous'] == 'yes'){ ?>
                        <img src="../images/incognito.png" alt="anonymouse" class="icons"><span><small>Anonymous</small></span><span><small><?= $formattedDate ?></small> at <small><?= $post['time']  ?></small> </span>
             <?php }else { ?> 
-                <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'> <span id='username'><?= $post['username'] ?></span> 
+                <?php if($user['profile_pic']!=''){ ?> 
+                    <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
+                    <?php } else{ ?> 
+                        <img src="../images/profile-user.png" alt="" style="filter: invert(100%);" class="icons" id='profile_pic'>
+                        <?php } ?><span id='username'><?= $post['username'] ?></span> 
                 <div>
                 <span><small id='date'><?= $formattedDate ?></small></span> <span><small id='time'>at <?= $post['time'] ?></small> </span>
                 </div>
@@ -48,17 +63,36 @@ foreach($post_single as $post){
                   
         </div>
             <div class="head-dots">
-                <div>
-                  <small>.</small><small>.</small><small>.</small>   
+            <div>
+                  <img src="../images/menu.png" alt="..." class="icons" style='width:20px'>
                 </div>
                <div class="head-menu">
+                <div class="post-container" style='background-color:#212121;'>
+                    <div class="post-head">
+                    <div class="heading-post">
+                <?php if($post['anonymous'] == 'yes'){ ?>
+                       <img src="../images/incognito.png" alt="anonymouse" class="icons"><span><small>Anonymous</small></span><span><?= $post['school'] ?></span>
+                     <?php }else { ?> 
+                <?php if($user['profile_pic']!=''){ ?> 
+                    <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
+                    <?php } else{ ?> 
+                        <img src="../images/profile-user.png" alt="" style="filter: invert(100%);" class="icons" id='profile_pic'>
+                        <?php } ?><span id='username'><?= $post['username'] ?></span> 
+                <div>
+                <span><small id='date'><?= $post['name'] ?></small></span> <span><small id='time'>. <?= $post['school'] ?></small> </span>
+                </div>
+                <?php } ?>   
+                
+                  
+                      </div>    
+                    </div>
+                
+                </div>
                <form action="../classes_incs/bookmarks.inc.php" method='post'>
                 <input type="hidden" name="post_id" value="<?= $post['post_id'] ?>">
                 <input type="hidden" name='user_id' value='<?= $user_id ?>'>
                <button name="bookmark"> Bookmark Post</button>
                </form>
-                  
-                <p> Share Post</p>
                </div>
             </div>
         </div>
@@ -69,25 +103,23 @@ foreach($post_single as $post){
             
         <?php if($post['post_pic'] != ''){?> 
     <div class="img_post">
-        <img src="../images/imagePosts/<?= $post['post_pic'] ?>" alt="">
+        <img src="../images/imagePosts/<?= $post['post_pic'] ?>" alt="" style='height:auto'>
     </div>
     <?php } ?>
-        <p > <?= $post['post_body'] ?></p>
+        <p > <?= formatPostContent($post['post_body']) ?></p>
         </a>
+        <div>
+              
+              <span class='span-loc'><a href="../Trends/trends.php?location=<?= $post['location'] ?>" style='border-top:1px solid #212121'>     
+                     -<?= $post['location'] ?>
+                 </a> </span>
+                        
+                 </div>
     </div>
-    </div>
+    
     <?php 
     if($userLogged) { ?>
-    <div class="engage">
-            <div>
-                
-        </span>
-         <span class='span'><a href="../Trends/trends.php?location=<?= $post['location'] ?>">     
-                -<?= $post['location'] ?>
-            </a> </span>
-                   
-            </div>
-            </div>
+   
       
     <div class="comment" style='height:fit-content'>
     <div>
@@ -114,25 +146,52 @@ foreach($post_single as $post){
                     }else{
                         $resultsall = $resultlike->fetch(PDO::FETCH_ASSOC); 
                        }
+                       $sql = "SELECT COUNT(*) as total FROM likes WHERE post_id = ?;";
+
+            $result = $dbh->connect()->prepare($sql);
+            if(!$result->execute(array( $post_id))){
+                $result = null;
+            }else{
+                $results = $result->fetch(PDO::FETCH_ASSOC);
+                
+                    $sql = "SELECT type FROM likes WHERE post_id = ? LIMIT 5;";
+                    $result = $dbh->connect()->prepare($sql);
+                    if(!$result->execute(array($post_id))){
+                        $result = null;
+                    }else{
+                        $type = $result->fetchAll(PDO::FETCH_ASSOC);}}
                     ?>
 
                 <div class="react">
                 <div class="react">
                 <img src="../images/<?php echo $resultsall['type'];?>.png" alt="<?= $resultsall['type'] ?>" class='icons'>
-                <small>
-                    
-                    <?= $totalLikes['total']; ?> </small>
+                <small style='background-color:inherit;margin-top:40px'>
+              <span style=' visibility: hidden;'>Reactions</span>  
+                </small>
+                </div>
+                <div>
+                <span id='reaction_emoj'>
+                    <?php foreach($type as $type){ ?> 
+                    <img src="../images/<?php echo $type['type'];?>.png" alt="<?= $type['type'] ?>" class='icons'>  
+                       
+                        <?php } ?>
+                        
+                   <small>  <?php if($results>0){ ?>
+                    <?= $results['total']; ?> <?php } ?></small></span>
+
                 </div>
                 </div>
             <?php }else{?>
                 <div class="react" id='react' style="font-size: 23px;">
                 🙂
                 <small><?= $results['total']; ?></small>
+                
                 </div>
             <?php }} ?>
     <div class="react-emojis" id="reacts">
         <div>
             <form action="../classes_incs/liking.inc.php" method='post'>
+            <input type="hidden" name="user_id"  value="<?= $user_id?>">
             <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
             <input type="hidden" name="user_id" value='<?= $user_id ?>'>
             <input type="hidden" name="type" value='like'>
@@ -141,6 +200,7 @@ foreach($post_single as $post){
         </div>
         <div>
             <form action="../classes_incs/liking.inc.php" method='post'>
+            <input type="hidden" name="user_id"  value="<?= $user_id?>">
             <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
             <input type="hidden" name="user_id" value='<?= $user_id ?>'>
             <input type="hidden" name="type" value='shocking'>
@@ -149,6 +209,7 @@ foreach($post_single as $post){
         </div>
         <div>
         <form action="../classes_incs/liking.inc.php" method='post'>
+        <input type="hidden" name="user_id"  value="<?= $user_id?>">
             <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
             <input type="hidden" name="user_id" value='<?= $user_id ?>'>
             <input type="hidden" name="type" value='love'>
@@ -158,6 +219,7 @@ foreach($post_single as $post){
         </div>
         <div>
         <form action="../classes_incs/liking.inc.php" method='post'>
+        <input type="hidden" name="user_id"  value="<?= $user_id?>">
             <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
             <input type="hidden" name="user_id" value='<?= $user_id ?>'>
             <input type="hidden" name="type" value='funny'>
@@ -167,6 +229,7 @@ foreach($post_single as $post){
         </div>
         <div>
         <form action="../classes_incs/liking.inc.php" method='post'>
+        <input type="hidden" name="user_id"  value="<?= $user_id?>">
             <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
             <input type="hidden" name="user_id" value='<?= $user_id ?>'>
             <input type="hidden" name="type" value='sad'>
@@ -176,6 +239,7 @@ foreach($post_single as $post){
         </div>
         <div>
         <form action="../classes_incs/liking.inc.php" method='post'>
+        <input type="hidden" name="user_id"  value="<?= $user_id?>">
             <input type="hidden" name='post_id' value='<?= $post['post_id'] ?>'>
             <input type="hidden" name="user_id" value='<?= $user_id ?>'>
             <input type="hidden" name="type" value='fire'>
@@ -188,7 +252,7 @@ foreach($post_single as $post){
     
         <form action="../classes_incs/postcomments.php" method="post" class='form-comment'>
          <div class="comment_in" >
-                <textarea placeholder="What are your Thoughts" class="textarea_reply" id="reply-textarea" name="comment" required></textarea> 
+                <textarea placeholder="What are your Thoughts" class="textarea_reply" id="reply-textarea" name="comment" required  ></textarea> 
                      <input type="hidden" name = 'post_id' value="<?= $post['post_id'] ?>">
                      <input type="hidden" name='user_id' value='<?= $user_id ?>'>
                      <input type="hidden" name='page' value='<?= $page ?>'>
@@ -206,6 +270,10 @@ foreach($post_single as $post){
                 <option value='public'>Public</option>
                  <option value='private'>Private</option>
             </select>
+            <div>
+               <small>Private-Direct Message</small> 
+            </div>
+            
              </div>   
              
             <button name='submit_comment'>Post</button>
@@ -215,6 +283,7 @@ foreach($post_single as $post){
         
         </form>
     </div>
+</div>
     <?php }else{ ?>
             <div class="form-comment">
                 <h4 style='text-align:center'>Sign in to comment and Like</h4>
@@ -249,7 +318,7 @@ if(!$selectReply ->execute(array($com_id))){
 }else{
     $reply = $selectReply->fetchAll(PDO::FETCH_ASSOC);
 }
-$selectPostIDUSER = $dbh->connect()->prepare("SELECT user_id FROM posts WHERE post_id = ? ");
+$selectPostIDUSER = $dbh->connect()->prepare("SELECT user_id, post_id FROM posts WHERE post_id = ? ");
 if(!$selectPostIDUSER ->execute(array($post_id))){
     echo 'Failed To Load Posts';
 }else{
@@ -264,37 +333,90 @@ if(!$selectPostIDUSER ->execute(array($post_id))){
 
             ?> 
             <?php if($comment['type']=='private'){ if($comment['user_id'] == $user_id || $posterId['user_id']==$user_id){ ?>
-            <div class="comments_posts" style="border-left: 2px solid green;">
+                <div class="post-container" style='border-bottom:1px solid #1f1f1f'>
+                    <div class="post-head">
+                    <div class="heading-post">
+<img src="../images/users/<?= $comment['profile_pic'] ?>" alt="" class="icons" id='profile_pic'> <b> <span id='username'><?= $comment['username'] ?></span></b>
+<div>
+   <span><small id='date' style='color:green'><?= $comment['type'] ?></span> <span> <?= $user['email'] ?></span>
+  </div> 
+</div>
+                    </div>
+                    <div class="comments_posts" style="border-left: 2px solid green;">
              
-                <div class="comment-post"> <p id='type_com'> <small style='color:green'><?= $comment['type'] ?></small></p>
+                <div class="comment-post"> <p id='type_com'> </small></p>
                    <p> <?= $comment['comment'] ?></p>
                     <div>
-                        <small>@ <?php if($user_id == $comment['user_id']){ ?> You <?php }else{ echo $comment['username'];} ?>.<span><?= $comment['school'] ?></span> </small>
+                        <small>@ <?php if($user_id == $comment['user_id']){ ?> You <?php } ?>.<span><?= $comment['school'] ?></span> </small>
                     </div>
                 </div>
                    
                
                 
-                <div class="reply_com">
-              
-               
-                    
-                    <form action="../classes_incs/postReply.inc.php" method='Post'>
-                       
-                        <div class="replyform">
-                        <input type="hidden" name='emoji' value=''>
-                            <input type="hidden" name="user_id"  value="<?= $user_id?>">
-                            <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
-                                <textarea name="reply" id="reply_input" placeholder="reply"></textarea>
-                                <button type='submit' name='submit_reply'><img src="../images/reply.png" alt="reply" class='icons'></button>
-                            </div>
-                    </form>
-                            
-                        
-                </div>
          
             </div>
             <?php 
+                foreach($reply as $reply){ 
+                    if($reply['reply'] != ''){?>
+
+            <div class="replys">
+                       <p><?=$reply['reply'] ?></p>  
+                       <div>
+                        <small>@<?= $reply['username'] ?></small>
+                       </div>                       
+            </div>
+                        <?php } ?>
+                      
+            <?php } ?>
+            
+            <div class="reply_com">
+              
+               
+                    
+              <form action="../classes_incs/postReply.inc.php" method='Post'>
+                 
+                  <div class="replyform">
+                  <input type="hidden" name='emoji' value=''>
+                  
+                  <input type="hidden" name='post_id' value='<?= $posterId['post_id'] ?>'>
+                      <input type="hidden" name="user_id"  value="<?= $user_id?>">
+                      <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
+                          <textarea name="reply" id="reply_input" placeholder="reply"></textarea>
+                          <button type='submit' name='submit_reply'><img src="../images/reply.png" alt="reply" class='icons'></button>
+                      </div>
+              </form>
+                      
+                  
+          </div>
+                </div>
+            
+            <?php }else{ ?> 
+                <div class="comments_posts" id="pvt_com">
+                <div class="comment-post">
+                this comment is private
+             </div></div>
+            <?php }}else{ ?> 
+                <div class="post-container" style='border-bottom:1px solid #1f1f1f'>
+                <div class="post-head">
+                    <div class="heading-post">
+<img src="../images/users/<?= $comment['profile_pic'] ?>" alt="" class="icons" id='profile_pic'> <b> <span id='username'><?= $comment['username'] ?></span></b>
+<div>
+   <span><small id='date'> <?= $user['email'] ?></small></span>
+  </div> 
+</div>
+                    </div>
+                <div class="comments_posts">
+             
+             <div class="comment-post"> <p id='type_com'> <small style='color:#880281'><?= $comment['type'] ?></small></p>
+                <p> <?= $comment['comment'] ?></p>
+                 <div>
+                     <small>@
+                     <?php if($user_id == $comment['user_id']){ ?> You <?php }else{ echo $comment['username'];} ?> 
+                     .<span><?= $comment['school'] ?></span> </small>
+                 </div>
+             </div>      
+         </div>
+         <?php 
                 foreach($reply as $reply){ 
                     if($reply['reply'] != ''){?>
 
@@ -313,23 +435,27 @@ if(!$selectPostIDUSER ->execute(array($post_id))){
                             <?php } ?>
                       
             <?php } ?>
-            <?php }else{ ?> 
-                <div class="comments_posts" id="pvt_com">
-                <div class="comment-post">
-                this comment is private
-             </div></div>
-            <?php }}else{ ?> 
-                <div class="comments_posts">
-             
-             <div class="comment-post"> <p id='type_com'> <small style='color:#880281'><?= $comment['type'] ?></small></p>
-                <p> <?= $comment['comment'] ?></p>
-                 <div>
-                     <small>@
-                     <?php if($user_id == $comment['user_id']){ ?> You <?php }else{ echo $comment['username'];} ?> 
-                     .<span><?= $comment['school'] ?></span> </small>
-                 </div>
-             </div>      
-         </div>
+         <div class="reply_com">
+              
+               
+                    
+              <form action="../classes_incs/postReply.inc.php" method='Post'>
+                 
+                  <div class="replyform">
+                  <input type="hidden" name='emoji' value=''>
+                  
+                  <input type="hidden" name='post_id' value='<?= $posterId['post_id'] ?>'>
+                      <input type="hidden" name="user_id"  value="<?= $user_id?>">
+                      <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
+                          <textarea name="reply" id="reply_input" placeholder="reply"></textarea>
+                          <button type='submit' name='submit_reply'><img src="../images/reply.png" alt="reply" class='icons'></button>
+                      </div>
+              </form>
+                      
+                  
+          </div>  
+                </div>
+                
                 <?php } ?>
         
            
@@ -340,8 +466,11 @@ if(!$selectPostIDUSER ->execute(array($post_id))){
             <small>Please log in</small>
             <?php } ?>
         </div>
-
+        <div class="footer_">
+         <a href="../privacy/about.html">About</a> || <a href="../privacy/privacy.html">  Privacy</a>
+        </div>
 </div>
+
 <script>
     // when user wanna post somthing
 
@@ -362,7 +491,7 @@ const react =document.querySelector('.react');
   const head_dots =document.querySelector('.head-dots');
   const head_menu =document.querySelector('.head-menu');
   head_dots.addEventListener('click',() =>{
-    head_menu.style.display = head_menu.style.display=== 'block' ? 'none' : 'block';
+    head_menu.style.display = head_menu.style.display === 'block' ? 'none' : 'block';
   })
   const textarea_Post = document.querySelector('#reply-textarea');
   const emojis = [
@@ -423,3 +552,11 @@ document.addEventListener('click', (event) => {
     }
 });
 </script>
+<script>
+        // Add a click event listener to the back button
+        document.getElementById("backButton").addEventListener("click", function() {
+            // Use the history object's back() method to navigate to the previous page
+            history.back();
+        });
+    </script>
+    

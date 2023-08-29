@@ -1,4 +1,8 @@
 <div class="sidebar-nav">
+    <div class="conFess_icon">
+    <h2><span> W</span>itter</h2>
+        <p> Speaking Unspoken Stories</p>
+    </div>
     
         <nav>
 
@@ -37,6 +41,6 @@
             </ul>
         </nav>
         <div class="footer-about">
-            2023 Your Confession Platform || DailyDee || <a href="../privacy/about.html">About</a> || <a href="../privacy/privacy.html">  Privacy</a>
+            Your Confessions Platform - DailyDee - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a>
         </div>
     </div>

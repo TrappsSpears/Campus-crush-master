@@ -28,19 +28,40 @@
             return date('l j F Y', $timestamp);
         }
     }
+    function formatPostContent($content) {
+        // Search for URLs in the content
+        $pattern = '/https?:\/\/\S+/i'; // Regular expression pattern to match URLs
+        $formattedContent = preg_replace_callback($pattern, function($match) {
+            // Use the matched URL as the link text and href
+            return '<a style="color:#1e90ff" href="' . $match[0] . '" target="_blank">' . $match[0] . '</a>'; 
+        }, $content);
+    
+        return $formattedContent;
+    }
 foreach($post_single as $post){ 
     $post_date = $post['date_created'];
     $formattedDate = format_post_date($post_date);
+    $highlightedContent = preg_replace('/(' . preg_quote($loc, '/') . ')/i', '<strong style="color:black;background:white;padding:0 4px">$1</strong>', formatPostContent($post['post_body']));
+
     ?>
         
     
         <div class="post-container">
         <div class="post-head">
-        <div class="heading-post">
+            <div class="heading-post">
                 <?php if($post['anonymous'] == 'yes'){ ?>
-                       <img src="../images/incognito.png" alt="anonymouse" class="icons"><span><small>Anonymous</small></span><span><small><?= $formattedDate ?></small> at <small><?= $post['time']  ?></small> </span>
+                       <img src="../images/anonymousPic.avif" alt="anonymouse" class="icons" id='profile_pic'>
+                       <b> <span id='username'>Hidey</span></b><span id='name'>-Anonymouse</span> 
+                <div>
+                <span><small id='date'><?= $formattedDate ?></small></span> <span><small id='time'>at <?= $post['time'] ?></small> </span>
+                </div>
             <?php }else { ?> 
-                <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'> <span id='username'><?= $post['username'] ?></span> 
+                <?php if($user['profile_pic']!=''){ ?> 
+                    <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
+                    <?php } else{ ?> 
+                        <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
+                        <?php } ?>
+                <b> <span id='username'><?= $post['username'] ?></span></b><span id='name'>-<?= $post['name'] ?></span> 
                 <div>
                 <span><small id='date'><?= $formattedDate ?></small></span> <span><small id='time'>at <?= $post['time'] ?></small> </span>
                 </div>
@@ -53,15 +74,8 @@ foreach($post_single as $post){
                   <img src="../images/menu.png" alt="..." class="icons">
                 </div>
                 <?php if($userLogged){ ?> 
-               <div class="head-menu" id='head-menu<?php echo $idUnique;?>'>
-               <form action="../classes_incs/bookmarks.inc.php" method='post'>
-                <input type="hidden" name="post_id" value="<?= $post['post_id'] ?>">
-                <input type="hidden" name='user_id' value='<?= $user_id ?>'>
-               <button name="bookmark"> Bookmark Post</button>
-               </form>
-                  
-                <p> Share Post</p>
-               </div>
+               
+              
                <?php } ?>
             </div>
         </div>
@@ -74,7 +88,7 @@ foreach($post_single as $post){
     </div>
     <?php } ?>
     <h4>Confession:</h4>
-    <p >  <?= $post['post_body'] ?></p>
+    <p >  <?= $highlightedContent ?></p>
     <div>
               
               <span class='span-loc'><a href="../Trends/trends.php?location=<?= $post['location'] ?>">     
@@ -86,16 +100,7 @@ foreach($post_single as $post){
         
 
     </a>
-</div>
-    <?php if($userLogged){ ?>
- 
-        <div class="engage_btn">
-                <span>..Read More</span>
-            </div>
-            <div class="engage">
-           
-            </div>
-        <a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
+    <a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
         
             
 
@@ -130,18 +135,42 @@ foreach($post_single as $post){
                    <small> <?php if($results>0){ ?>
                     <?= $results['total']; ?> <?php } ?></small></span>
                 
-                <span class='thot'>Thoughts!?</span>
+                <span class='thot'>Witt your Thoughts...</span>
                      </div>      
             <?php } ?>
             </a>
-    <?php } else{?>
-        Sign In to ingage
-       <?php } ?>
-
+</div>
+       <div class='head_post_el'>
+        
+        <?php   
+        $sql ="SELECT p.post_id, l.type, COUNT(*) AS like_count
+        FROM posts p
+        JOIN likes l ON p.post_id = l.post_id
+        WHERE p.post_id = ? -- Replace 'specific_type' with the actual type you're interested in
+        GROUP BY p.post_id, l.type
+        ORDER BY like_count DESC
+        LIMIT 1";
+        $typeResult = $dbh->connect()->prepare($sql);
+        
+        if(!$typeResult->execute(array($post['post_id']))){
+            $typeResult = null;
+        }else{
+            $typeLike = $typeResult->fetch(PDO::FETCH_ASSOC);
+            if($typeLike!==false){
+                $typeLikee=$typeLike;
+            }else{
+                $typeLikee= null;
+            }
+        }
+        ?><?php if($typeLikee !== null && $typeLikee['post_id']===$post['post_id']){ ?> 
+       <a href="../Trends/trends.php?reaction=<?= $typeLikee['type']?>"> <span><img src="../images/<?= $typeLikee['type']?>.png" alt="<?= $typeLikee['type']?>"> </span></a><?php } ?>
+</div>
     
         </div>
         <?php } ?> 
-
+        <div class="footer_">
+         <a href="../privacy/about.html">About</a> || <a href="../privacy/privacy.html">  Privacy</a>
+        </div>
 </div>
 <script>
     // when user wanna post somthing

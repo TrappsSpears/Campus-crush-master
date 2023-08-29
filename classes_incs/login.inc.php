@@ -11,12 +11,12 @@ if (isset($_POST["submit"])) {
     $dbh = new Dbh();
 
     // Prepare the SQL statement
-    $sql = "SELECT * FROM users WHERE email = ?;";
+    $sql = "SELECT * FROM users WHERE email = ? OR username = ?;";
 
     // Execute the SQL statement using your Dbh class
     $result = $dbh->connect()->prepare($sql);
 
-    if (!$result->execute(array($email))) {
+    if (!$result->execute(array($email,$email))) {
         header("Location: ../index/index.php?error=error");
         exit();
     } else {
@@ -32,7 +32,7 @@ if (isset($_POST["submit"])) {
                 // Redirect to dashboard
                 header("Location: ../index/index.php?log_inSuccessful&username=" . urlencode($row['username']));                   
             } else {
-                $_SESSION['error_log'] = 'Password did not verify';
+                $_SESSION['error_log'] = 'Incorrect Usernme or Email or Password';
                 header("Location: ../index.php?error=Password did not verify");
                 exit();
             }

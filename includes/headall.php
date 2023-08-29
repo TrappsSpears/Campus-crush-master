@@ -6,10 +6,8 @@
         $userLogged = true;
         include('../classes_incs/phpfiles.inc.php');
     }else{
-        $user_id = '5';
-        $username = '';
-        $userLogged = false;
-        include('../classes_incs/phpfiles.inc.php');
+        header('Location: ../index.php');
+        die();
     }
    
 
@@ -20,7 +18,8 @@
     
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
     <?php 
     include('../styles/style.php');
     include('../userProfile/userprofilStyles.php') ?>
@@ -29,5 +28,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engage  </title>
+    <link rel="icon" type="image/png" href="../images/witterlogo2.png">
+    <title>Witter  </title>
 </head>

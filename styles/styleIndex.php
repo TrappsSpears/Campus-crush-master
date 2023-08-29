@@ -9,10 +9,12 @@
             align-items: center;
             height: 100vh;
             color: #fff;
+            background-image: url('images/bg3.jpg');
+            opacity: 0.8;
         }
-
+        h1 span{color: #880281;}
         .signup-container {
-            background-color: #1a1a1a;
+            background-color: #121212;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);

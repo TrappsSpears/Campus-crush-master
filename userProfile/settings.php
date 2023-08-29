@@ -41,16 +41,16 @@ if(isset($_SESSION['user_id'])){
                         <form action="../classes_incs/update-user.inc.php" method="post">
                         
                             <div>
-                                <input type="text" placeholder='name' value="<?= $user['name'] ?>" name="name">
+                                <input type="text" placeholder='name' value="<?= $user['name'] ?>" name="name" pattern="[A-Za-z -]+">
                             </div>
                             <div>
-                                <input type="text" placeholder="username" value="<?= $user['username'] ?>" name="username" required>
+                                <input type="text" placeholder="username" value="<?= $user['username'] ?>" name="username" required pattern="[A-Za-z -]+">
                             </div>
                             <div>
                                 <input type="email" placeholder='email' value="<?= $user['email'] ?>" name="email" required>
                             </div>
                             <div>
-                                <input type="text" placeholder='school' value="<?= $user['school'] ?>" name="school" required>
+                                <input type="text" placeholder='school' value="<?= $user['school'] ?>" name="school" required pattern="[A-Za-z -]+">
                             </div>
                             <div>
                                 <button type="submit" name='update'>Update</button>
