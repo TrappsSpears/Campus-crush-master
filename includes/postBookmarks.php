@@ -44,7 +44,7 @@
                 <?php if($post['anonymous'] == 'yes'){ ?>
                     <div class="post-heading-container">
                   <div class='post-heading'>
-                       <img src="../images/Unkown.jpeg" alt="anonymouse" class="icons" id='profile_pic'>
+                       <img src="../images/unkownface1.png" alt="anonymouse" class="icons" id='profile_pic'>
                        <div id='post_info'>
                         <div>
                              <b> <span id='username'>Hidey</span></b> <span id='name'>_Anonymouse</span> 

@@ -56,7 +56,21 @@ if(isset($_SESSION['user_id'])){
         <div class="post-container">
             <div class="post-head">
             <div class="heading-post">
-            <img src="../images/incognito.png" alt="anonymouse" class="icons"> <span><?= $post['date_created'] ?></span>   
+            <div class="post-heading-container">
+                <div class='post-heading'>
+                <?php if($user['profile_pic']!=''){ ?> 
+                    <img src="../images/users/<?= $user['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
+                    <?php } else{ ?> 
+                        <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
+                        <?php } ?>
+                       <div id='post_info'>
+                        <div>
+                             <b> <span id='username'><?= $user['username'] ?></span></b> <span id='name'> - <?= $user['name'] ?></span> 
+                        </div>
+                  
+                    </div>   
+                </div>
+                </div></a>   
             </div>
                 <div class="head-dots">
                     <div>
@@ -67,16 +81,19 @@ if(isset($_SESSION['user_id'])){
             </div>
     <div class="post-box">
     <a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
-    <?php if($post['post_pic'] != ''){?> 
+  
+      <div class="post_b">
+        <p> <?= $post['post_body'] ?></p>
+        <?php if($post['post_pic'] != ''){?> 
     <div class="img_post">
         <img src="../images/imagePosts/<?= $post['post_pic'] ?>" alt="">
     </div>
     <?php } ?>
-      
-        
-        <p> <?= $post['post_body'] ?></p>
         </a>
        - <?= $post['location'] ?>  
+      </div>
+        
+        
     </div>
     <div class="engage_btn">
         <form action="../classes_incs/deletepost.inc.php" method="post">
