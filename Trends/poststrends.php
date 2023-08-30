@@ -48,22 +48,40 @@ foreach($post_single as $post){
     
         <div class="post-container">
         <div class="post-head">
-            <div class="heading-post">
+        <div class="heading-post">
                 <?php if($post['anonymous'] == 'yes'){ ?>
-                       <img src="../images/anonymousPic.avif" alt="anonymouse" class="icons" id='profile_pic'>
-                       <b> <span id='username'>Hidey</span></b><span id='name'>-Anonymouse</span> 
-                <div>
-                <span><small id='date'><?= $formattedDate ?></small></span> <span><small id='time'>at <?= $post['time'] ?></small> </span>
-                </div>
+                    <div class="post-heading-container">
+                  <div class='post-heading'>
+                       <img src="../images/Unkown.jpeg" alt="anonymouse" class="icons" id='profile_pic'>
+                       <div id='post_info'>
+                        <div>
+                             <b> <span id='username'>Hidey</span></b> <span id='name'>_Anonymouse</span> 
+                        </div>
+                        <div>
+                          <span><small id='date'><?= $formattedDate ?></small><small> at <?= $post['time'] ?></small> </span>
+                      </div>     
+                    </div>   
+                
+                </div>       
+                    </div>
+             
             <?php }else { ?> 
+                <div class="post-heading-container">
+                <div class='post-heading'>
                 <?php if($user['profile_pic']!=''){ ?> 
                     <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
                     <?php } else{ ?> 
                         <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
                         <?php } ?>
-                <b> <span id='username'><?= $post['username'] ?></span></b><span id='name'>-<?= $post['name'] ?></span> 
-                <div>
-                <span><small id='date'><?= $formattedDate ?></small></span> <span><small id='time'>at <?= $post['time'] ?></small> </span>
+                       <div id='post_info'>
+                        <div>
+                             <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'> - <?= $post['name'] ?></span> 
+                        </div>
+                        <div>
+                          <span><small id='date'><?= $formattedDate ?></small><small> . <?= $post['time'] ?></small> </span>
+                      </div>     
+                    </div>   
+                </div>
                 </div>
                 <?php } ?>   
                 
@@ -87,8 +105,8 @@ foreach($post_single as $post){
         <img src="../images/imagePosts/<?= $post['post_pic'] ?>" alt="">
     </div>
     <?php } ?>
-    <h4>Confession:</h4>
-    <p >  <?= $highlightedContent ?></p>
+    
+    <p id='post-bAllP'>  <?= $highlightedContent ?></p>
     <div>
               
               <span class='span-loc'><a href="../Trends/trends.php?location=<?= $post['location'] ?>">     

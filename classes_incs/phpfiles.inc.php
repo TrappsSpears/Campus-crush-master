@@ -17,22 +17,24 @@
 $userSchool = $_SESSION['school']; 
 
 $selectTrendingPosts = $dbh->connect()->prepare("
-       SELECT posts.*, users.*, 
-    COUNT(likes.id) AS like_count, 
-    COUNT(comments.id) AS comment_count,
-    (COUNT(likes.id) + COUNT(comments.id)) / POW((UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(posts.date_created)), 1.8) AS engagement_score
-    FROM posts 
-    JOIN users ON posts.user_id = users.id 
-    LEFT JOIN likes ON posts.post_id = likes.post_id 
-    LEFT JOIN comments ON posts.post_id = comments.post_id 
-    WHERE (posts.location LIKE :userCity OR posts.location LIKE :userSchool) AND (posts.location != :userSchool OR posts.location = 'public')
-    GROUP BY posts.post_id 
-    HAVING engagement_score > 0
-    ORDER BY (posts.location = :userSchool) DESC,engagement_score DESC,like_count DESC, comment_count DESC,  date_created DESC, time DESC
+    SELECT * FROM (
+        SELECT posts.*, users.*, 
+        COUNT(likes.id) AS like_count, 
+        COUNT(comments.id) AS comment_count,
+        (COUNT(likes.id) + COUNT(comments.id)) / POW((UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(posts.date_created)), 1.8) AS engagement_score
+        FROM posts 
+        JOIN users ON posts.user_id = users.id 
+        LEFT JOIN likes ON posts.post_id = likes.post_id 
+        LEFT JOIN comments ON posts.post_id = comments.post_id 
+        WHERE (posts.location LIKE :userCity OR posts.location LIKE :userSchool OR posts.user_id = :user_id) AND (posts.location != :userSchool OR posts.location = 'public')
+            AND posts.date_created >= DATE_SUB(NOW(), INTERVAL 1 WEEK) -- Consider posts from the last week only
+        GROUP BY posts.post_id
+    ) AS subquery
+    ORDER BY (user_id = :user_id) DESC,(like_count = 0 AND comment_count = 0) DESC, (user_id = :user_id) DESC, (location = :userSchool) DESC, engagement_score DESC, date_created DESC, time DESC
 ");
 $selectTrendingPosts->bindValue(':userCity', "%$userCity%", PDO::PARAM_STR);
 $selectTrendingPosts->bindValue(':userSchool', "%$userSchool%", PDO::PARAM_STR);
-
+$selectTrendingPosts->bindValue(':user_id', $user_id, PDO::PARAM_STR);
 
 
 if (!$selectTrendingPosts->execute()) {
@@ -62,7 +64,13 @@ if (!$selectRandomPosts->execute()) {
     $postsRand = $selectRandomPosts->fetchAll(PDO::FETCH_ASSOC);
 }
      ##------------------Trends Location Tops----------------------------------##
-         $selectLoc = $dbh->connect()->prepare("SELECT DISTINCT location FROM posts WHERE location IS NOT NULL AND location <> ''  ORDER BY date_created DESC LIMIT 3");
+         $selectLoc = $dbh->connect()->prepare("SELECT DISTINCT location, COUNT(likes.id) AS like_count, 
+         COUNT(comments.id) AS comment_count,
+         (COUNT(likes.id) + COUNT(comments.id)) / POW((UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(posts.date_created)), 1.8) AS engagement_score
+     FROM posts
+     LEFT JOIN likes ON posts.post_id = likes.post_id 
+    LEFT JOIN comments ON posts.post_id = comments.post_id
+       ORDER BY like_count DESC LIMIT 3");
          if(!$selectLoc ->execute()){
             echo 'Failed To Load Posts';
          }else{

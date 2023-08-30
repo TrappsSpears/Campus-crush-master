@@ -8,9 +8,10 @@ include('../includes/headall.php'); ?>
     <div class="main-content">
     <div class="nav">
 
-<div>
-      <h2>Notiffications</h2>
- </div>
+    <div class="conFess_icon" id='small_screen_icon'>
+        <h2><span><img src="../images/witterLogo2.png" alt="W" class='icons' style="left:-10px;margin-left:-25px">Notifications</span></h2>
+        <p> Speaking Unspoken Stories</p>
+    </div> 
 
 </div>
 <div class="posts" id="search-conts">

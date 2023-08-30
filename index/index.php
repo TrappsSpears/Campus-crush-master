@@ -8,13 +8,9 @@ include('../includes/headall.php'); ?>
     <div class="main-content">
     <div class="nav">
 <div class="conFess_icon" id='small_screen_icon'>
-        <h2><span> W</span>itter</h2>
+        <h2><span><img src="../images/witterLogo2.png" alt="W" class='icons' style="left:-10px;margin-left:-35px">Home - <small> <?= $user['school'] ?></small></span></h2>
         <p> Speaking Unspoken Stories</p>
-    </div>
-     <div>
-          <h2>Home - <small> <?= $user['school'] ?></small></h2>
-       </div>
-   
+    </div>   
 </div>
 <?php include('../includes/postHome.php') ?>
 

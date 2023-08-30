@@ -1,4 +1,4 @@
-<div class="posts">
+<div class="posts" style='margin-top: 0px'>
     
     <div class="con_form">
     </div>
@@ -46,22 +46,47 @@ foreach($post_single as $post){
     
         <div class="post-container">
         <div class="post-head">
-        <div class="heading-post">
+      
+       <div class="heading-post">
                 <?php if($post['anonymous'] == 'yes'){ ?>
-                       <img src="../images/incognito.png" alt="anonymouse" class="icons"><span><small>Anonymous</small></span><span><small><?= $formattedDate ?></small> at <small><?= $post['time']  ?></small> </span>
-            <?php }else { ?> 
+                    <div class="post-heading-container">
+                  <div class='post-heading'>
+                       <img src="../images/Unkown.jpeg" alt="anonymouse" class="icons" id='profile_pic'>
+                       <div id='post_info'>
+                        <div>
+                             <b> <span id='username'>Hidey</span></b> <span id='name'>_Anonymouse</span> 
+                        </div>
+                        <div>
+                          <span><small id='date'><?= $formattedDate ?></small><small> at <?= $post['time'] ?></small> </span>
+                      </div>     
+                    </div>   
+                
+                </div>       
+                    </div>
+             
+            <?php }else { ?>   <a href="../Trends/trends.php?word=<?= $post['username'] ?>">
+                <div class="post-heading-container">
+                <div class='post-heading'>
                 <?php if($user['profile_pic']!=''){ ?> 
                     <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
                     <?php } else{ ?> 
-                        <img src="../images/profile-user.png" alt="" style="filter: invert(100%);" class="icons" id='profile_pic'>
-                        <?php } ?><span id='username'><?= $post['username'] ?></span> 
-                <div>
-                <span><small id='date'><?= $formattedDate ?></small></span> <span><small id='time'>at <?= $post['time'] ?></small> </span>
+                        <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
+                        <?php } ?>
+                       <div id='post_info'>
+                        <div>
+                             <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'> - <?= $post['name'] ?></span> 
+                        </div>
+                        <div>
+                          <span><small id='date'><?= $formattedDate ?></small><small> . <?= $post['time'] ?></small> </span>
+                      </div>     
+                    </div>   
                 </div>
+                </div></a>
                 <?php } ?>   
                 
                   
         </div>
+        
             <div class="head-dots">
             <div>
                   <img src="../images/menu.png" alt="..." class="icons" style='width:20px'>
@@ -110,7 +135,7 @@ foreach($post_single as $post){
         </a>
         <div>
               
-              <span class='span-loc'><a href="../Trends/trends.php?location=<?= $post['location'] ?>" style='border-top:1px solid #212121'>     
+              <span class='span-loc'><a href="../Trends/trends.php?word=<?= $post['location'] ?>" style='border-top:1px solid #212121'>     
                      -<?= $post['location'] ?>
                  </a> </span>
                         
@@ -249,7 +274,7 @@ foreach($post_single as $post){
         </div>
     </div>
     </div>
-    
+   
         <form action="../classes_incs/postcomments.php" method="post" class='form-comment'>
          <div class="comment_in" >
                 <textarea placeholder="What are your Thoughts" class="textarea_reply" id="reply-textarea" name="comment" required  ></textarea> 
@@ -334,12 +359,23 @@ if(!$selectPostIDUSER ->execute(array($post_id))){
             ?> 
             <?php if($comment['type']=='private'){ if($comment['user_id'] == $user_id || $posterId['user_id']==$user_id){ ?>
                 <div class="post-container" style='border-bottom:1px solid #1f1f1f'>
-                    <div class="post-head">
+                <div class="post-head">
                     <div class="heading-post">
-<img src="../images/users/<?= $comment['profile_pic'] ?>" alt="" class="icons" id='profile_pic'> <b> <span id='username'><?= $comment['username'] ?></span></b>
-<div>
-   <span><small id='date' style='color:green'><?= $comment['type'] ?></span> <span> <?= $user['email'] ?></span>
-  </div> 
+                    <a href="../Trends/trends.php?word=<?= $comment['username'] ?>">
+                 <div class="post-heading-container">
+                <div class='post-heading'>
+                <?php if($user['profile_pic']!=''){ ?> 
+                    <img src="../images/users/<?= $comment['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
+                    <?php } else{ ?> 
+                        <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
+                        <?php } ?>
+                       <div id='post_info'>
+                        <div>
+                             <b> <span id='username'><?= $comment['username'] ?></span></b> <span id='name'> - <?= $comment['name'] ?></span> 
+                        </div>   
+                    </div>   
+                </div>
+                </div></a>
 </div>
                     </div>
                     <div class="comments_posts" style="border-left: 2px solid green;">
@@ -399,10 +435,21 @@ if(!$selectPostIDUSER ->execute(array($post_id))){
                 <div class="post-container" style='border-bottom:1px solid #1f1f1f'>
                 <div class="post-head">
                     <div class="heading-post">
-<img src="../images/users/<?= $comment['profile_pic'] ?>" alt="" class="icons" id='profile_pic'> <b> <span id='username'><?= $comment['username'] ?></span></b>
-<div>
-   <span><small id='date'> <?= $user['email'] ?></small></span>
-  </div> 
+                    <a href="../Trends/trends.php?word=<?= $comment['username'] ?>">
+                 <div class="post-heading-container">
+                <div class='post-heading'>
+                <?php if($user['profile_pic']!=''){ ?> 
+                    <img src="../images/users/<?= $comment['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
+                    <?php } else{ ?> 
+                        <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
+                        <?php } ?>
+                       <div id='post_info'>
+                        <div>
+                             <b> <span id='username'><?= $comment['username'] ?></span></b> <span id='name'> - <?= $comment['name'] ?></span> 
+                        </div>   
+                    </div>   
+                </div>
+                </div></a>
 </div>
                     </div>
                 <div class="comments_posts">

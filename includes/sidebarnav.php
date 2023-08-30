@@ -1,11 +1,11 @@
 <div class="sidebar-nav">
-    <div class="conFess_icon">
-    <h2><span> W</span>itter</h2>
-        <p> Speaking Unspoken Stories</p>
-    </div>
+    
     
         <nav>
+<div class="conFess_icon">
+    <h2><span><img src="../images/witterLogo2.png" alt="W" class='icons'></span>itter</h2>
 
+    </div>
             <ul>
                 <div <?php if ($page == 'home'){ echo 'class="active"';} ?>> 
                     <a href="../index/index.php" class='nav-a'> <?php if ($page == 'home'){ echo '<span></span>';} ?>

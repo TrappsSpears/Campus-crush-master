@@ -38,18 +38,18 @@ if(!$selectPostLoc ->execute()){
 </html>
 
 <?php }elseif(isset($_GET['reaction'])) {
-    $react= $_GET['reaction'];
+    $loc= $_GET['reaction'];
      include_once('../classes_incs/dbh.class.php');
  
  $dbh = New Dbh();
- $sql ="SELECT p.post_id,p.post_body,p.user_id,p.date_created,p.location,p.time,p.anonymous,p.post_pic,u.username,u.profile_pic, COUNT(*) AS like_count
+ $sql ="SELECT p.post_id,p.post_body,p.user_id,p.date_created,p.location,p.time,p.anonymous,p.post_pic,u.username,u.profile_pic, u.name, COUNT(*) AS like_count
                 FROM posts p
                 JOIN likes l ON p.post_id = l.post_id JOIN users u ON u.id =p.user_id
                 WHERE l.type = ? -- Replace 'specific_type' with the actual type you're interested in
                 GROUP BY p.post_id, l.type
                 ORDER BY like_count DESC";
      $selectPostLoc = $dbh->connect()->prepare($sql);
-if(!$selectPostLoc ->execute(array($react))){
+if(!$selectPostLoc ->execute(array($loc))){
     echo 'Failed To Load Posts';
 }else{
     $post_single = $selectPostLoc->fetchAll(PDO::FETCH_ASSOC);
@@ -62,7 +62,7 @@ if(!$selectPostLoc ->execute(array($react))){
     <div class="main-content">
         <div class="nav">
         
-            <h3>Reactions - <?= $react ?></h3>
+            <h3>Reactions - <img src="../images/<?= $loc ?>" alt="<?= $loc ?>"></h3>
         </div>
 <?php 
 

@@ -42,13 +42,41 @@
         <div class="post-head">
         <div class="heading-post">
                 <?php if($post['anonymous'] == 'yes'){ ?>
-                       <img src="../images/incognito.png" alt="anonymouse" class="icons"><span><small>Anonymous</small></span><span><small><?= $formattedDate ?></small> at <small><?= $post['time']  ?></small> </span>
+                    <div class="post-heading-container">
+                  <div class='post-heading'>
+                       <img src="../images/Unkown.jpeg" alt="anonymouse" class="icons" id='profile_pic'>
+                       <div id='post_info'>
+                        <div>
+                             <b> <span id='username'>Hidey</span></b> <span id='name'>_Anonymouse</span> 
+                        </div>
+                        <div>
+                          <span><small id='date'><?= $formattedDate ?></small><small> at <?= $post['time'] ?></small> </span>
+                      </div>     
+                    </div>   
+                
+                </div>       
+                    </div>
+             
             <?php }else { ?> 
+                <a href="../Trends/trends.php?word=<?= $post['username'] ?>">
+                <div class="post-heading-container">
+                <div class='post-heading'>
                 <?php if($user['profile_pic']!=''){ ?> 
                     <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
                     <?php } else{ ?> 
                         <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
                         <?php } ?>
+                       <div id='post_info'>
+                        <div>
+                             <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'> - <?= $post['name'] ?></span> 
+                        </div>
+                        <div>
+                          <span><small id='date'><?= $formattedDate ?></small><small> . <?= $post['time'] ?></small> </span>
+                      </div>     
+                    </div>   
+                </div>
+                </div></a>
+                </div>
                 <?php } ?>   
                 
                   

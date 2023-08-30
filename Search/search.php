@@ -8,19 +8,16 @@ include('../includes/headall.php'); ?>
     <div class="main-content">
     <div class="nav">
     <div class="conFess_icon" id='small_screen_icon'>
-        <h2><span> Confess</span>Connect</h2>
-        <p>Speaking Unspoken Stories</p>
+        <h2><span><img src="../images/witterLogo2.png" alt="W" class='icons' style="left:-10px;margin-left:10px">Explore</span></h2>
+        <p> Speaking Unspoken Stories</p>
     </div>
-<div>
-      <h2>Search</h2>
- </div>
-
-</div>
-<div class="posts" id="search-conts">
-<form action="../Trends/trends.php" method="get">
+    <form action="../Trends/trends.php" method="get">
     <div class="search_place">
-        <input type="text" placeholder="Peak in..." id='search' name="word"><button type='submit'> Search</button>
+        <input type="text" placeholder="Search..." id='search' name="word"><button type='submit'> Search</button>
     </div></form>
+</div>
+<div class="posts" id="search-conts" style='margin-top:90px'>
+
     <div class="search-conts" id="search-conts">
         <h3>Filter Posts By their reactions</h3>
         <div class="emojis">
@@ -57,7 +54,7 @@ include('../includes/headall.php'); ?>
         </div>
            
     <div>
-        <div class="locs">
+        <div>
         <h2>
               Randomized Discovery
         </h2> 
@@ -104,20 +101,42 @@ include('../includes/headall.php'); ?>
     
     <div class="post-container">
         <div class="post-head">
-            <div class="heading-post">
+        <div class="heading-post">
                 <?php if($post['anonymous'] == 'yes'){ ?>
-                       <img src="../images/incognito.png" alt="anonymouse" class="icons"><span style='color:gainsboro;'><b><small>Anonymous</small></b></span><span><small><?= $formattedDate ?></small> at <small><?= $post['time']  ?></small> </span>
+                    <div class="post-heading-container">
+                  <div class='post-heading'>
+                       <img src="../images/Unkown.jpeg" alt="anonymouse" class="icons" id='profile_pic'>
+                       <div id='post_info'>
+                        <div>
+                             <b> <span id='username'>Hidey</span></b> <span id='name'>_Anonymouse</span> 
+                        </div>
+                        <div>
+                          <span><small id='date'><?= $formattedDate ?></small><small> at <?= $post['time'] ?></small> </span>
+                      </div>     
+                    </div>   
+                
+                </div>       
+                    </div>
+             
             <?php }else { ?> 
-                <?php if($user['profile_pic']!='Array'){ ?> 
+                <a href="../Trends/trends.php?word=<?= $post['username'] ?>">
+                <div class="post-heading-container">
+                <div class='post-heading'>
+                <?php if($user['profile_pic']!=''){ ?> 
                     <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
                     <?php } else{ ?> 
-                     <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>>
-
+                        <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
                         <?php } ?>
-                <b> <span id='username'><?= $post['username'] ?></span></b> 
-                <div>
-                <span><small id='date'><?= $formattedDate ?></small></span> <span><small id='time'>at <?= $post['time'] ?></small> </span>
+                       <div id='post_info'>
+                        <div>
+                             <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'> - <?= $post['name'] ?></span> 
+                        </div>
+                        <div>
+                          <span><small id='date'><?= $formattedDate ?></small><small> . <?= $post['time'] ?></small> </span>
+                      </div>     
+                    </div>   
                 </div>
+                </div></a>
                 <?php } ?>   
                 
                   

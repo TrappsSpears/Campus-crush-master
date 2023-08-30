@@ -21,10 +21,10 @@ if(isset($_SESSION['user_id'])){
     <div class="main-content">
         <div class="nav">
         <div class="conFess_icon" id='small_screen_icon'>
-        <h2><span> Confess</span>Connect</h2>
-        <p>Speaking Unspoken Stories</p>
+        <h2><span><img src="../images/witterLogo2.png" alt="W" class='icons' style="left:-10px;margin-left:10px">Profile</span></h2>
+        <p> Speaking Unspoken Stories</p>
     </div>
-            <h3>Profile</h3>
+         
         </div>
         <?php $user_page = 'all'; 
 ?>

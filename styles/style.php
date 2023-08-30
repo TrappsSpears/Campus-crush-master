@@ -12,7 +12,7 @@ body{
     margin-left: auto;
     margin-right: auto;
     color: white;
-    
+    min-width: 450px;
 
 }
 
@@ -28,7 +28,7 @@ a{
 }
 
 /* Main things */
-.main{height: 100vh;
+.main{
     display: flex;
     justify-content: center;
 }
@@ -42,7 +42,8 @@ a{
 }
 .conFess_icon h2{
     transform: scale(1.3);
-    color:#1e90ff ;
+    color:#1e90ff;
+    margin-bottom: 10px;
 }
 .conFess_icon p{
     position: relative;
@@ -51,13 +52,18 @@ a{
     font-size: 12px;
 }
 .conFess_icon span{
-    color: #880281;
+    margin-right: 10px;
+}
+.conFess_icon span img{
+    position: relative;
+    top: 5px;
+    left:8px;
 }
 #small_screen_icon{
     position: relative;
     top: 0;
     margin-bottom: 0;
-    display: none;
+    
 }
 #small_screen_icon h2{
 transform: scale(1.0);
@@ -257,18 +263,23 @@ body {
     height: 100%;
  justify-content: center;
  margin-left: 20%;
+ position: relative;
 }
+
 .nav{
     backdrop-filter: blur(44px);
     z-index: 100;
     text-align: left;
-    position: sticky;
+    position:fixed;
     top: 0;
     padding: 5px;
-    border-bottom: 2px solid rgb(0, 101, 196);
+    border-bottom: 2px solid #333;
+    border-left: 1px solid #333;
+    border-right: 1px solid #333;
     display: flex;
     justify-content: center;
     padding-bottom: 30px;
+    width: 58.9%;
 }
 .nav h2 ,h3{
     margin-left: 35px;
@@ -282,10 +293,10 @@ body {
     display: none;
 }
 .posts{
+    margin-top:80px;
     padding: 10px 15%; 
     width: 100%;  
-   height: 91%;
-   margin-bottom: 100px;
+   border: 1px solid #383838;
 }
 .footer_{
     margin-top: 50px;
@@ -301,6 +312,8 @@ body {
  .search_place{
     padding: 6px;
    display: flex;
+   margin-right: 10px;
+   margin-left: 25px;
 }
 .search_place button{
     padding: 6px;
@@ -419,7 +432,7 @@ body {
 }
 .con_form textarea{
     padding: 10px;
-    font-size: 14px;
+    font-size: 13px;
     background-color:  #212121;
     resize: none;
     border: none;
@@ -602,7 +615,7 @@ margin-top: 10px;
     border-radius: 6px;
    position: absolute;
    top: 45px;
-   margin-left: 75%;
+   margin-left: -75%;
    border: 1px solid rgb(0, 101, 196);
 }
 .back_btn button{
@@ -651,15 +664,16 @@ margin-top: 10px;
     min-width: 260px;
     text-align: left;
    padding: 10px 0;
-    color: grey;
-    border-bottom: 1px solid gray;
+border-bottom: 1px solid gray;
+  min-width: 450px;
+    
    }
    #profile_pic{
     height: 50px;
     width: 50px;
     border-radius: 32px;
     object-fit: cover;
-    padding: 3px;
+   
     background-color: #121212;
     margin-left: 10px;
    }
@@ -731,7 +745,6 @@ margin-top: 10px;
 
 
 .post-box{
-    background-color: #1a1a1a;
     padding: 12px;
     height:auto;
     min-height: 100px;
@@ -740,11 +753,9 @@ margin-top: 10px;
      overflow: hidden;
     text-overflow:ellipsis;
     cursor: pointer; 
-    border-radius: 6px;
-
+    border-radius: 8px;
     color: white;
     line-height: 1.2;
-
 }
 
 .post-box .post_b{
@@ -763,7 +774,7 @@ margin-top: 10px;
     text-overflow: ellipsis;   
    line-height: 1.5;
    padding: 0 10px;
-  
+  margin-top: 10px;
     
 }
 #post-bAllP{
@@ -930,6 +941,9 @@ margin-top: 10px;
 .post-head span{
     color: #383838;
 }
+.post-heading{
+    display: flex;
+}
 .post_head{
     padding: 12px;
     height: auto;
@@ -951,27 +965,32 @@ margin-top: 10px;
 .heading-post{
     flex: 1;
 }
-.heading-post #username{
-    position: relative;
-    top: -30px;
-    color: floralwhite;
-   left: -10px;
+.post-heading-container{
+    background-color: #121212;
+    padding: 4px;
+    margin-bottom: 20px;
+    width: fit-content;
+    border-radius: 6px;
+    
 }
-.heading-post #name{
-    top: -30px;
-    left: -20px;
+.post-heading{
+    
+   
+        border-radius: 6px;
+        width: fit-content;
+   padding: 4px 10px 0px 0px;
+}
+.heading-post  #post_info{
+    margin-top: 10px;
+}
+.heading-post  #post_info #username{
+    color: white;
+    font-weight: 600;
+    
+}
+.heading-post  #post_info #name{
     color: gray;
-}
-.heading-post #date {
-    position: relative;
-    top: -20px;
-    left: 55px;
-    color: gray;
-}
-.heading-post  #time{
-    position: relative;
-    top: -20px;
-    left: 44px;
+   
 }
 .heading-post small{
     color: gray;
@@ -979,14 +998,15 @@ margin-top: 10px;
  .head_post_el{
     font-size: 13px;
     border-radius: 32px;
-    background-color: #111;
+    background-color: #121212;
     padding: 6px;
     width: fit-content;
+    margin-top: -25px;
+    margin-left: 10px;
 }
  .head_post_el img{
     width: 15px;
     position: relative;
-    top: 5px;
 }
 .heading-post span{
     position: relative;
@@ -1040,6 +1060,7 @@ margin-top: 10px;
     display: block;
 }
 .comment{
+    border-top: 1px solid #333333;
         display: grid;
     padding: 14px 1px 12px 12px;
     grid-template-columns: 13% 80%;
@@ -1169,9 +1190,9 @@ cursor: pointer;
 }
 
 .comment_in .textarea_reply{
-    padding: 9px;
-    font-size: 16px;
-    height: 35px;
+    padding: 10px;
+    font-size: 20px;
+    height: 45px;
     resize: none;
     border-radius:8px;
     background-color: inherit;
@@ -1180,7 +1201,7 @@ cursor: pointer;
     overflow-y: hidden;
     margin-left: 20px;
     cursor: pointer;
-    border: 1px solid #333;
+    border: none;
     color: floralwhite;
 }
 
@@ -1207,11 +1228,11 @@ cursor: pointer;
 }
 .comments_posts{
     text-align: left;
-    border-left:2px solid #880281;
-    padding-left: 12px;
-    width: fit-content;
-    margin-left: 20px;
-    margin-top: 20px;
+    border-left:2px solid gray;
+    padding-left: 25px;
+    width:100%;
+    margin-left: 50px;
+    margin-top: 30px;
     display: flex;
 }
 .comments_posts small{
@@ -1248,6 +1269,7 @@ cursor: pointer;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 10%;
+    color: white;
     text-align: left;
 }
 .emoji_cont{
@@ -1825,6 +1847,14 @@ cursor: pointer;
 /* Tablets */
 @media only screen and (min-width: 700px) and (max-width: 1023px) {
     /* CSS styles here */
+    .main-content{
+        margin-left: 10%;
+    }
+    .nav{
+        border-left: none;
+        border-right: none;
+        width: 60%;
+    }
     #small_screen_icon{
         display: block;
     }
@@ -1859,8 +1889,9 @@ cursor: pointer;
     margin-top: 10px;
 }
 .posts{
-    padding: 10px 0px;
+    padding: 20px;
     margin-bottom: 100px;
+    border: none;
 }
 .con_form textarea{
     font-size: 12px;
@@ -1992,6 +2023,11 @@ cursor: pointer;
     #small_screen_icon{
         display: block;
     }
+    .nav{
+        border-left: none;
+        border-right: none;
+        width: 100%;
+    }
     .leftbar{
         display: none;
     }
@@ -2001,6 +2037,7 @@ cursor: pointer;
     .posts{
         padding: 10px 0px;
         margin-bottom: 100px;
+        border: none;
     }
     .post-container ,.reply-container,.con_form{
         border-radius: 0px;
