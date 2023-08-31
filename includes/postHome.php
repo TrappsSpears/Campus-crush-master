@@ -10,6 +10,7 @@
      $user = $selectUser->fetch(PDO::FETCH_ASSOC);
  }
 ?>
+ 
 <div class="posts">
     <div class="con_form">
       <div class='conform_desgn_head'>
@@ -34,13 +35,40 @@
                 <?php if($user['profile_pic']!=''){ ?> 
                     <img src="../images/users/<?= $user['profile_pic'] ?>" alt="">
                     <?php } else{ ?> 
-                        <img src="../images/profile-user.png" alt="" style="filter: invert(100%);border:none">
+                        <img src="../images/noProf.jpeg" alt="" class="noProf" style="filter: invert(100%);border:none">
                         <?php } ?>
                
             </div>
             <div>
                <textarea id="post_choice" placeholder="What Happened?! @<?= $username ?> " name="post" required minlength="2    0"></textarea> 
-         
+                  <div class="custom-select">
+                  <select id="themeSelect" name="theme" required>
+                  <option value="" disabled selected>Select a Theme</option>
+                  <option value="other">Unspecified</option>
+            <option value="confessions">Confessions and Secrets</option>
+            <option value="advice">Advice and Support</option>
+            <option value="humor">Funny Stories and Humor</option>
+            <option value="relationships">Relationships and Dating</option>
+            <option value="travel">Travel and Adventures</option>
+            <option value="career">Career and Education</option>
+            <option value="events">Local Events and News</option>
+            <option value="wellness">Wellness and Mental Health</option>
+            <option value="art">Art and Creativity</option>
+            <option value="technology">Technology and Innovations</option>
+            <option value="food">Food and Cooking</option>
+            <option value="fitness">Fitness and Health</option>
+            <option value="books">Books and Literature</option>
+            <option value="parenting">Parenting and Family</option>
+            <option value="hobbies">Hobbies and Interests</option>
+            <option value="social-issues">Social Issues and Advocacy</option>
+            <option value="music">Music and Entertainment</option>
+            <option value="fashion">Fashion and Style</option>
+            <option value="history">History and Culture</option>
+            <option value="pets">Pets and Animals</option>
+            <!-- Add more options here -->
+        </select>
+        <input type="button" class='cancel_post' value='Cancel'>
+                  </div>      
             </div>
                   <div id="emojiContainer">
         <span id="emojiButton" style='left:-10px;font-size:23px'>🙂</span>
@@ -113,6 +141,8 @@
          Your Confessions Platform -  Share Stories - Share Ideas - Ask Ques - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a>
         </div> 
         <script>
+            const cancel_post =document.querySelector('.cancel_post');
+            const customSelect =document.querySelector('.custom-select');
             const postbtn =document.querySelector('.post_header');
        const textarea_Post = document.querySelector('#post_choice');
        const remainingCharsSpan = document.getElementById("remainingChars");
@@ -141,8 +171,22 @@
 
 textarea_Post.addEventListener('input', function() {
     textarea_Post.style.height = 'auto';
+    textarea_Post.style.paddingBottom = '50px';
+    textarea_Post.style.minHeight = '100px';
+    customSelect.style.display = 'block';
+    textarea_Post.style.border = '100px';
+    textarea_Post.style.borderRadius = '6px';
     textarea_Post.style.height = textarea_Post.scrollHeight + 'px';
     // postbtn.style.display = 'flex';
+  });
+  cancel_post.addEventListener('click', function() {
+    textarea_Post.style.height = '40px';
+    textarea_Post.style.paddingBottom = '6px';
+    textarea_Post.style.minHeight = '40px';
+    textarea_Post.value = '';
+    customSelect.style.display = 'none';
+    textarea_Post.style.borderRadius = '32px';
+    prog_div.style.display ='none';
   });
  
   const profileImage = document.getElementById('post-image');
@@ -225,7 +269,7 @@ document.addEventListener('click', (event) => {
     
 <!--...............------------------- Now Posting --------------------------------------------------------------->
 <div class="post-container" style='margin-top:-10px;'>
-<?php if(isset($_GET['log_inSuccessful&username'])){ ?> <?php }?>
+<?php if(isset($_GET['loggedin'])){ ?> 
     <div class="post-head">
         <div class="heading-post">
     <div class="post-heading-container">
@@ -251,7 +295,7 @@ document.addEventListener('click', (event) => {
 <div class="post-box">
     <div class="post_b" >    
         <p>
-    Welcome to Witter! Your spot for local confessions and shared stories. Dive into the buzz around from your city and school.If you can't find yours, try checking the spelling or <a href="../userProfile/settings.php" style='color:#880281'> updating your info </a>. Happy discovering!! - unfiltered, anonymous, and real
+    Welcome you <?= $user['name'] ?>! Witter, Your spot for local confessions and shared stories. Dive into the buzz around from your city and school.If you can't find yours, try checking the spelling or <a href="../userProfile/settings.php" style='color:#880281'> updating your info </a>. Happy discovering!! - unfiltered, anonymous, and real
     </p> <div>
               
        <span class='span-loc'><a href="../Trends/trends.php?location=<?= $user['city'] ?>">     
@@ -264,41 +308,10 @@ document.addEventListener('click', (event) => {
    
 
 </div>
+<?php }?>
 </div>
     <?php 
-    function format_post_date($post_date) {
-            // Convert the input date to a timestamp
-            $timestamp = strtotime($post_date);
-            
-            // Get today's date at midnight
-            $today = strtotime('today midnight');
-            
-            // Get yesterday's date at midnight
-            $yesterday = strtotime('yesterday midnight');
-        
-            // Check if the post date is today
-            if ($timestamp >= $today) {
-                return 'Today';
-            }
-            // Check if the post date is yesterday
-            elseif ($timestamp >= $yesterday) {
-                return 'Yesterday';
-            }
-            // For other days, format the date as "Thursday 23 May 2023" using the date() function
-            else {
-                return date('l j F Y', $timestamp);
-            }
-        }
-        function formatPostContent($content) {
-            // Search for URLs in the content
-            $pattern = '/https?:\/\/\S+/i'; // Regular expression pattern to match URLs
-            $formattedContent = preg_replace_callback($pattern, function($match) {
-                // Use the matched URL as the link text and href
-                return '<a style="color:#1e90ff" href="' . $match[0] . '" target="_blank">' . $match[0] . '</a>'; 
-            }, $content);
-        
-            return $formattedContent;
-        }
+    include_once('../classes_incs/functionsposts.php');
         
     foreach($posts as $post){ 
         $idUnique = $post['post_id'];
@@ -313,7 +326,136 @@ document.addEventListener('click', (event) => {
                 <?php if($post['anonymous'] == 'yes'){ ?>
                     <div class="post-heading-container">
                   <div class='post-heading'>
-                       <img src="../images/unkownface1.png" alt="anonymouse" class="icons" id='profile_pic'>
+                       <img src="../images/noProf.jpeg" alt="anonymouse" class="noProf"  id='profile_pic'>
+                       <div id='post_info'>
+                        <div>
+                             <b> <span id='username'>Hidey</span></b> <span id='name'>_Anonymouse</span> 
+                        </div>
+                        <div>
+                          <span><small id='date'><?= $formattedDate ?></small><small> at <?= $post['time'] ?></small> </span>
+                      </div>     
+                    </div>   
+                
+                </div>       
+                    </div>
+             
+            <?php }else { ?> 
+                <a href="../Trends/trends.php?word=<?= $post['username'] ?>">
+                <div class="post-heading-container">
+                <div class='post-heading'>
+                <?php if($user['profile_pic']!=''){ ?> 
+                    <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
+                    <?php } else{ ?> 
+                        <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
+                        <?php } ?>
+                       <div id='post_info'>
+                        <div>
+                             <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'> - <?= $post['name'] ?></span> 
+                        </div>
+                        <div>
+                          <span><small id='date'><?= $formattedDate ?></small><small> . <?= $post['time'] ?></small> </span>
+                      </div>     
+                    </div>   
+                </div>
+                </div></a>
+                <?php } ?>   
+                
+                  
+        </div>
+            <div class="head-dots" id = 'head-dots<?php echo $idUnique;?>'>
+                <div>
+                  <img src="../images/menu.png" alt="..." class="icons">
+                </div>
+                <?php if($userLogged){ ?> 
+               
+              
+               <?php } ?>
+            </div>
+        </div>
+    <div class="post-box">
+        <a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
+        <div class="post_b">    
+    <p id='post-bAllP'>   <?= formatPostContent($post['post_body']) ?></p>
+    <div class="img_post">
+        <img src="../images/imagePosts/<?= $post['post_pic'] ?>" alt="">
+    </div>
+    <div>
+ 
+       
+              <span class='span-loc'><a href="../Trends/trends.php?word=<?= $post['location'] ?>">     
+                     -<?= $post['location'] ?>
+                 </a> </span>
+             <a href="../Trends/trends.php?word=<?= $post['theme'] ?>">   <span class='theme_span'><?= $post['theme'] ?></span></a>
+                        
+                 </div>
+        </div>
+        
+
+    </a>
+    <a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
+       
+            <div class="post_insights">
+                <span id='comment'><img src="../images/bubble-chat.png" alt=""><small><?= $post['comment_count']?></small></span>
+                <span id = 'bookmark'><img src="../images/saved.png" alt=""><small>0</small></span>
+                    <span id='reaction_emoj'>
+                <img src="../images/<?= $post['type'];?>.png" alt="<?= $post['type'] ?>" class='icons'>  
+               <small> 
+                <?= $post['like_count']; ?></small></span>
+            
+            <span class='thot'> Witt your thought</span>
+                 </div>      
+       
+        </a>
+</div>
+
+       <div class='head_post_el'>
+        
+                <?php   
+                $sql ="SELECT p.post_id, l.type, COUNT(*) AS like_count
+                FROM posts p
+                JOIN likes l ON p.post_id = l.post_id
+                WHERE p.post_id = ? -- Replace 'specific_type' with the actual type you're interested in
+                GROUP BY p.post_id, l.type
+                ORDER BY like_count DESC
+                LIMIT 1";
+                $typeResult = $dbh->connect()->prepare($sql);
+                
+                if(!$typeResult->execute(array($post['post_id']))){
+                    $typeResult = null;
+                }else{
+                    $typeLike = $typeResult->fetch(PDO::FETCH_ASSOC);
+                    if($typeLike!==false){
+                        $typeLikee=$typeLike;
+                    }else{
+                        $typeLikee= null;
+                    }
+                }
+                ?><?php if($typeLikee !== null && $typeLikee['post_id']===$post['post_id']){ ?> 
+               <a href="../Trends/trends.php?reaction=<?= $typeLikee['type']?>"> <span><img src="../images/<?= $typeLikee['type']?>.png" alt="<?= $typeLikee['type']?>"> </span></a><?php } ?>
+        </div>
+    </div>
+
+
+    <?php } ?> 
+    
+<h2>
+              Randomized Discovery
+        </h2> 
+        <?php 
+        foreach($postsRand as $post){ 
+        $idUnique = $post['post_id'];
+        $post_date = $post['date_created'];
+        $formattedDate = format_post_date($post_date);
+        ?>
+      
+    
+    <div class="post-container">
+        <div class="post-head">
+        <div class="heading-post">
+                <?php if($post['anonymous'] == 'yes'){ ?>
+                    <div class="post-heading-container">
+                  <div class='post-heading'>
+                       <img src="../images/noProf.jpeg" alt="anonymouse" class="noProf" id='profile_pic'>
                        <div id='post_info'>
                         <div>
                              <b> <span id='username'>Hidey</span></b> <span id='name'>_Anonymouse</span> 
@@ -368,7 +510,7 @@ document.addEventListener('click', (event) => {
     </div>
     <div>
               
-              <span class='span-loc'><a href="../Trends/trends.php?word=<?= $post['location'] ?>">     
+              <span class='span-loc'><a href="../Trends/trends.php?location=<?= $post['location'] ?>">     
                      -<?= $post['location'] ?>
                  </a> </span>
                         
@@ -377,56 +519,65 @@ document.addEventListener('click', (event) => {
         
 
     </a>
-    <a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
+</div>
+<?php if($userLogged){ ?>
+        
+        
+            <div class="engage">
+           
+            </div>
+        <a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
         
             
 
-        <?php
-        $post_id = $post['post_id'];
-        $sql = "SELECT COUNT(*) as total FROM likes WHERE post_id = ?;";
+            <?php
+            $post_id = $post['post_id'];
+            $sql = "SELECT COUNT(*) as total FROM likes WHERE post_id = ?;";
 
-        $result = $dbh->connect()->prepare($sql);
-        if(!$result->execute(array( $post_id))){
-            $result = null;
-        }else{
-            $results = $result->fetch(PDO::FETCH_ASSOC);
-            
-                $sql = "SELECT type FROM likes WHERE post_id = ?;";
-                $result = $dbh->connect()->prepare($sql);
-                if(!$result->execute(array($post_id))){
-                    $result = null;
-                }else{
-                    $resultsall = $result->fetchAll(PDO::FETCH_ASSOC);}
-                ?>
-                <?php
-        $post_id = $post['post_id'];
-        $sql = "SELECT COUNT(*) as total FROM comments WHERE  post_id = ?;";
+            $result = $dbh->connect()->prepare($sql);
+            if(!$result->execute(array( $post_id))){
+                $result = null;
+            }else{
+                $results = $result->fetch(PDO::FETCH_ASSOC);
+                
+                    $sql = "SELECT type FROM likes WHERE post_id = ?;";
+                    $result = $dbh->connect()->prepare($sql);
+                    if(!$result->execute(array($post_id))){
+                        $result = null;
+                    }else{
+                        $resultsall = $result->fetchAll(PDO::FETCH_ASSOC);}
+                    ?>
+                    <?php
+            $post_id = $post['post_id'];
+            $sql = "SELECT COUNT(*) as total FROM comments WHERE  post_id = ?;";
 
-        $resultC = $dbh->connect()->prepare($sql);
-        if(!$resultC->execute(array($post_id))){
-            $resultC = null;
-        }else{
-            $count= $resultC->fetch(PDO::FETCH_ASSOC);}
-           
-                ?>
-            <div class="post_insights">
-                <span id='comment'><img src="../images/bubble-chat.png" alt=""><small><?= $count['total']?></small></span>
-                <span id = 'bookmark'><img src="../images/saved.png" alt=""><small>0</small></span>
-                    <span id='reaction_emoj'>
-                <?php foreach($resultsall as $type){ ?> 
-                <img src="../images/<?php echo $type['type'];?>.png" alt="<?= $type['type'] ?>" class='icons'>  
-                   
-                    <?php } ?>
-                    
-               <small> <?php if($results>0){ ?>
-                <?= $results['total']; ?> <?php } ?></small></span>
-            
-            <span class='thot'> Witt your thought</span>
-                 </div>      
-        <?php } ?>
-        </a>
-</div>
-
+            $resultC = $dbh->connect()->prepare($sql);
+            if(!$resultC->execute(array($post_id))){
+                $resultC = null;
+            }else{
+                $count= $resultC->fetch(PDO::FETCH_ASSOC);}
+               
+                    ?>
+                <div class="post_insights">
+                    <span id='comment'><img src="../images/bubble-chat.png" alt=""><small><?= $count['total']?></small></span>
+                    <span id = 'bookmark'><img src="../images/saved.png" alt=""><small>0</small></span>
+                        <span id='reaction_emoj'>
+                    <?php foreach($resultsall as $type){ ?> 
+                    <img src="../images/<?php echo $type['type'];?>.png" alt="<?= $type['type'] ?>" class='icons'>  
+                       
+                        <?php } ?>
+                        
+                   <small> <?php if($results>0){ ?>
+                    <?= $results['total']; ?> <?php } ?></small></span>
+                
+                <span class='thot'>  Witt your thought...</span>
+                     </div>      
+            <?php } ?>
+            </a>
+        
+    <?php } else{?>
+        Sign In to ingage
+       <?php } ?>
        <div class='head_post_el'>
         
                 <?php   
@@ -456,31 +607,6 @@ document.addEventListener('click', (event) => {
 
 
     <?php } ?> 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-    // Your JavaScript code here
-    const headDotsContainers = document.querySelectorAll('.head-dots-container');
-
-    headDotsContainers.forEach(container => {
-        const headDots = container.querySelector('.head-dots');
-        const headMenu = container.querySelector('.head-menu');
-
-        headDots.addEventListener('click', event => {
-            event.stopPropagation();
-
-            headMenu.classList.toggle('head-menu-active');
-
-            headDotsContainers.forEach(otherContainer => {
-                if (otherContainer !== container) {
-                    const otherMenu = otherContainer.querySelector('.head-menu');
-                    otherMenu.classList.remove('head-menu-active');
-                }
-            });
-        });
-    });
-});
-
-</script>
 <div class="post-container" style='padding:20px'>
     <p>You've reached the end of the confessions. Thank you for exploring and engaging with our community's stories. If you'd like to see more, consider sharing your own confession or come back later for new posts.</p>
 </div>

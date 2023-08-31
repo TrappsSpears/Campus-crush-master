@@ -1,14 +1,19 @@
 <?php
-    class Dbh{
-        public function connect(){
-            try{
-                $username = 'root';
-                $password = '';
-                $dbh = new PDO('mysql:host=localhost;dbname=campus crush',$username,$password);
-            }catch(PDOException $e){
-                print "Error".$e->getMessage()."<br/>";
-                die();
-            }
+class Dbh {
+    public function connect() {
+        try {
+            $username = 'root';
+            $password = '';
+            $dbh = new PDO('mysql:host=localhost;dbname=campus crush', $username, $password);
+            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $dbh;
+        } catch (PDOException $e) {
+            print "Error: " . $e->getMessage() . "<br/>";
+            die();
         }
     }
+
+    public function getLastInsertId(PDO $dbh) {
+        return $dbh->lastInsertId();
+    }
+}

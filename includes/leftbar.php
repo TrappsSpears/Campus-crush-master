@@ -1,5 +1,10 @@
 <div class="leftbar">
+
     <div class="leftbar-container">
+        <form action="../Trends/trends.php" method="get">
+    <div class="search_place" id='search_place'>
+        <input type="text" style="width:60%" placeholder="Search..." id='search' name="word"><button type='submit'> Search</button>
+    </div></form>
         <div class="emojis">
             <div>
             <a href="../Trends/trends.php?reaction=like">   
@@ -39,6 +44,24 @@
               Trends
         </h2> 
         </div>
+        <?php foreach($trendingThemes as $trend){ ?>
+        <a href="../Trends/trends.php?word=<?= $trend['theme'] ?>">
+            <div class='trndItms'>
+                <div>
+                    <small>Posts <?= $trend['post_count'] ?> - <?= $trend['top_location'] ?></small>
+                </div>
+                <div>
+                <p>#<?= $trend['theme'] ?></p>
+                </div>
+                <div>
+                 <small>Engagements <?php echo $trend['like_count'] + $trend['comment_count'] ?> <a href="../Trends/trends.php?reaction=<?= $trend['type'] ?>"> <span><img src="../images/<?= $trend['type'] ?>.png" alt="<?= $trend['type'] ?>"> </span></a></small>
+                </div>
+            </div>
+        </a>
+ 
+    
+   <?php } ?>
+   
     
     </div>
     <div class="trends">
@@ -46,24 +69,18 @@
             <h2>Top Places</h2>
         </div>
     
-    <?php foreach($location as $trend){ 
-        $loc=$trend['location'];
-        $sql = "SELECT COUNT(*) as total FROM posts WHERE  location = ?;";
-
-            $resultC = $dbh->connect()->prepare($sql);
-            if(!$resultC->execute(array($loc))){
-                $resultC = null;
-            }else{$count= $resultC->fetch(PDO::FETCH_ASSOC);}
-        ?>
-        <a href="../Trends/trends.php?location=<?= $trend['location'] ?>">
+    <?php foreach($location as $trend){ ?>
+        <a href="../Trends/trends.php?word=<?= $trend['location'] ?>">
             <div class='trndItms'>
                 <div>
-                    <small>Confessions.<?= $count['total'] ?></small>
+                    <small>Posts <?= $trend['post_count'] ?> - <?= $trend['theme'] ?></small>
                 </div>
                 <div>
                 <p>- <?= $trend['location'] ?></p>
                 </div>
-            
+                <div>
+                 <small>Engagements <?php echo $trend['like_count'] + $trend['comment_count'] ?> <a href="../Trends/trends.php?reaction=<?= $trend['type'] ?>"> <span><img src="../images/<?= $trend['type'] ?>.png" alt="<?= $trend['type'] ?>"> </span></a></small>
+                </div>
             </div>
         </a>
  

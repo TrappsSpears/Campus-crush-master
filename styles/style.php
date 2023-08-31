@@ -16,6 +16,11 @@ body{
 
 }
 
+.noProf{
+    filter: invert(100%);
+    border:none;
+    width: 30px;
+}
 
 .nav-a{
    
@@ -31,6 +36,7 @@ a{
 .main{
     display: flex;
     justify-content: center;
+ 
 }
 /* Side-Bar */
 .conFess_icon {
@@ -94,6 +100,7 @@ position: relative;
 }
 .sidebar-nav{
    flex: 0.2;
+   height: 100vh;
   max-width: 20%;
     padding: 90px 40px;
     color: white;
@@ -199,6 +206,7 @@ z-index: 400;
 }
 .footer-nav img{
     width: 20px;
+    filter: brightness(89);
 }
  .icons-nav{
     width: 20px;
@@ -262,24 +270,24 @@ body {
     justify-content: center;
     height: 100%;
  justify-content: center;
- margin-left: 20%;
+ margin-left: 21%;
  position: relative;
+ border-left: 1px solid #333;
+        border-right: 1px solid #333;
 }
 
 .nav{
     backdrop-filter: blur(44px);
     z-index: 100;
     text-align: left;
-    position:fixed;
+    position:sticky;
     top: 0;
     padding: 5px;
-    border-bottom: 2px solid #333;
-    border-left: 1px solid #333;
-    border-right: 1px solid #333;
+    border-bottom: 1px solid #333;
     display: flex;
     justify-content: center;
     padding-bottom: 30px;
-    width: 58.9%;
+   min-width:300px;
 }
 .nav h2 ,h3{
     margin-left: 35px;
@@ -293,10 +301,9 @@ body {
     display: none;
 }
 .posts{
-    margin-top:80px;
-    padding: 10px 15%; 
+
     width: 100%;  
-   border: 1px solid #383838;
+   
 }
 .footer_{
     margin-top: 50px;
@@ -307,7 +314,6 @@ body {
 #search-conts .trends{
     max-width: 600px;
    min-width: 200px;
-   background-color: #111;
 }
  .search_place{
     padding: 6px;
@@ -316,21 +322,30 @@ body {
    margin-left: 25px;
 }
 .search_place button{
-    padding: 6px;
-    height: 36px;
-    border: none;
-    background-color:  #212121;
+    padding: 5px 10px;
+    height: 37px;
+    border:none;
+    border-top: 1px solid #313131;
+    border-bottom: 1px solid #313131;
+    border-right: 1px solid #313131;
+   
+    background: inherit;
     border-radius: 6px;
-    color: gray;
-    margin-left: 10px;
+    color: white;
+    border-radius: 0px 63px 63px 0px;
+    position: relative;
+    
 }
  .search_place input{
-    width: 80%;
-    border-radius: 63px;
+    width: 100%;
+    border-radius: 63px 0px 0px 63px;
     padding: 6px 10px;
     font-size: 18px;
-    border: 1px solid #313131;
-
+    border:none;
+    border-top: 1px solid #313131;
+    border-bottom: 1px solid #313131;
+    border-left: 1px solid #313131;
+   
 }
 #search-conts .search-conts .emojis{
    top: 0; 
@@ -343,10 +358,7 @@ body {
    min-width: 200px;
    margin-top: 10px;
 }
-#search-conts h3{
-    text-align: left;
 
-}
 .posts .search-conts .trends{
     width: 100%;
     text-align: left;
@@ -377,7 +389,7 @@ body {
 }
 #emojiContainer {
     position: relative;
-    display: none;
+
     left: 50px;
 }
 #emojiContainer span{
@@ -422,7 +434,7 @@ body {
 
 .con_form{
     
-    padding: 20px;
+    padding: 20px 5%;
     background-color: #121212;
     max-width: 100%;
     margin-top: 10px;
@@ -431,19 +443,48 @@ body {
     
 }
 .con_form textarea{
-    padding: 10px;
-    font-size: 13px;
-    background-color:  #212121;
+    padding: 10px 13px;
+
+    font-size: 25px;
+    background-color:  inherit;
     resize: none;
     border: none;
     color: white;
-    min-width: 85%;
-    max-width: 90%;
-    height: 42px;
+    min-width: 98%;
+   max-width: 100%;
+    height: 40px;
     outline: none;
     border-radius: 38px;
   
     
+}
+.custom-select{
+    margin-top: 10px;
+    text-align: left;
+    margin-left: 10%;
+    display: none;
+    margin-bottom: -50px;
+}
+.custom-select select{
+    border-radius: 32px;
+    padding: 6px 10px;
+    color: gainsboro;
+     background-color: #212121;
+    width:fit-content;
+    position: relative;
+    top: -50px;
+    color: gainsboro;
+}
+.cancel_post{
+    border-radius: 8px;
+    padding: 6px;
+    color: gainsboro;
+     background-color: #121212;
+    width:fit-content;
+    position: relative;
+    border: 1px solid #1a1a1a;
+    top: -50px;
+    color: gainsboro;
 }
 .con_form .post_header{
     display: flex;
@@ -577,8 +618,7 @@ margin-top: 10px;
     border-radius: 32px;
     padding: 6px 10px;
     color: gainsboro;
-    border: 1px solid #1e90ff;
-    border-left: 1px solid #880281;
+   
      background-color: #212121;
     width: fit-content;
 }
@@ -660,12 +700,11 @@ margin-top: 10px;
 .post-container{
     background-color: #121212;
     height: auto;
-    max-width: 650px;
-    min-width: 260px;
     text-align: left;
-   padding: 10px 0;
-border-bottom: 1px solid gray;
+   padding: 10px 1%;
+border-bottom: 1px solid #333;
   min-width: 450px;
+
     
    }
    #profile_pic{
@@ -673,8 +712,7 @@ border-bottom: 1px solid gray;
     width: 50px;
     border-radius: 32px;
     object-fit: cover;
-   
-    background-color: #121212;
+   border: none;
     margin-left: 10px;
    }
 
@@ -763,7 +801,7 @@ border-bottom: 1px solid gray;
     border-radius: 10px;
     padding-bottom: 10px;
     margin-bottom: 10px;
-    padding: 10px 20px;
+    padding: 10px 10%;
     margin-top: 10px;
 }
 .post-box p{
@@ -787,6 +825,14 @@ border-bottom: 1px solid gray;
     margin-bottom: 10px;
     
     margin-top: 10px;
+}
+.post-box .theme_span{
+    padding: 6px;
+    font-size: 12px;
+
+    border-radius: 6px;
+    color: gainsboro;
+    margin-right: 10px;
 }
 
 .post-box h4{
@@ -875,11 +921,11 @@ border-bottom: 1px solid gray;
 .thot{
     text-align: left;
     border-radius: 43px;
-    border: 2px solid  gray;
+   background-color: #212121;
     padding: 6px 10px ;
     font-size: 15px;
     cursor: pointer;
-    color: #777;
+    color: white;
 }
 .post_insights img{
     width: 20px;
@@ -905,13 +951,7 @@ border-bottom: 1px solid gray;
 .engage div{
     margin-left: 100px;
 }
-.readmoreBtn{
-    position:relative;
-    top: 108%;
-    left: 30%;
-    margin-top: -40px;
-    color: gray;
-}
+
 .location_div{
     position:relative;
     top: 100%;
@@ -985,11 +1025,11 @@ border-bottom: 1px solid gray;
 }
 .heading-post  #post_info #username{
     color: white;
-    font-weight: 600;
+    font-weight: 700;
     
 }
 .heading-post  #post_info #name{
-    color: gray;
+    color: gainsboro;
    
 }
 .heading-post small{
@@ -1001,7 +1041,8 @@ border-bottom: 1px solid gray;
     background-color: #121212;
     padding: 6px;
     width: fit-content;
-    margin-top: -25px;
+    position: relative;
+    top: -25px;
     margin-left: 10px;
 }
  .head_post_el img{
@@ -1475,14 +1516,18 @@ cursor: pointer;
 /* Main things End */
 /*Left bar*/
 .leftbar{
-    width: 450px;
+    width: 650px;
     padding: 40px;
-    position: sticky;
-    top:0;
 }
+#search_place input{
+    width: 60%;
+}
+ 
 .leftbar .leftbar-container{
     position: relative;
     top: 100px;
+    position: sticky;
+    top:0;
 }
 
 
@@ -1491,7 +1536,7 @@ cursor: pointer;
 }
 .emojis{
     position: relative;
-    top: -40px;
+    top: 0px;
     
     border-radius: 32px;
     
@@ -1608,20 +1653,26 @@ cursor: pointer;
 }
 
 .trends{
-    background-color:#111;
+    background-color: rgb(4, 28, 46);
     margin-top: 12px;
     border-radius: 8px;
     font-size: 15px;
     margin-bottom: 20px;
     padding-bottom: 12px;
+    text-align: left;
 }
 .trends .trndItms{
     padding: 5px 20px;
     cursor: pointer;
     margin-top: 10px;
 }
+.trends .trndItms img{
+    width: 16px;
+    position: relative;
+    top: 7px;
+}
 .trends  .trndItms:hover{
-    background-color: #383838;
+    background-color: rgb(18, 33, 46);
 }
 .trends .trndItms small{
     color: gainsboro;
@@ -1693,6 +1744,7 @@ cursor: pointer;
     color: #8b078b;
     cursor: pointer;
 }
+
 .profile-menue{
     position:fixed;
     top:52%;
@@ -1848,12 +1900,12 @@ cursor: pointer;
 @media only screen and (min-width: 700px) and (max-width: 1023px) {
     /* CSS styles here */
     .main-content{
-        margin-left: 10%;
+        margin-left: 0;
     }
     .nav{
         border-left: none;
         border-right: none;
-        width: 60%;
+     
     }
     #small_screen_icon{
         display: block;
@@ -1866,6 +1918,9 @@ cursor: pointer;
     }
     nav{
         margin-left: -20px;
+    }
+    .con_form{
+        padding: 0;
     }
     .emojis{
         left: 0;
@@ -1893,8 +1948,8 @@ cursor: pointer;
     margin-bottom: 100px;
     border: none;
 }
-.con_form textarea{
-    font-size: 12px;
+#emojiContainer{
+    display: none;
 }
 .con_form .post_header{
     display: flex;
@@ -1909,6 +1964,12 @@ cursor: pointer;
 .form-comment button{
     left: 40%;
 }
+.post-container{
+        padding: 0;
+    }
+    #search_place input{
+        width: 200px;
+    }
   }
   .nav .profile{
     display: block;
@@ -2042,6 +2103,9 @@ cursor: pointer;
     .post-container ,.reply-container,.con_form{
         border-radius: 0px;
     }
+    .post-container{
+        padding: 0;
+    }
     .sidebar-nav{
         z-index: 200;
         position: fixed;
@@ -2054,9 +2118,7 @@ cursor: pointer;
     .sidebar-nav .nav-a{
         width: 5px;
     }
-    #post_choice{
-        font-size: 15px;
-    }
+   
     .post-choice-active{
         width: 100%;
         z-index: 300;  
@@ -2133,7 +2195,9 @@ left: 10px;
    max-height: 400px;
    width: 100%;
 }
-
+#emojiContainer{
+    display: none;
+}
   }
   
  

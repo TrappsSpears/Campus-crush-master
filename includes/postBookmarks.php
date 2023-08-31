@@ -12,29 +12,7 @@
    
  
     <?php 
-    function format_post_date($post_date) {
-        // Convert the input date to a timestamp
-        $timestamp = strtotime($post_date);
-        
-        // Get today's date at midnight
-        $today = strtotime('today midnight');
-        
-        // Get yesterday's date at midnight
-        $yesterday = strtotime('yesterday midnight');
-    
-        // Check if the post date is today
-        if ($timestamp >= $today) {
-            return 'Today';
-        }
-        // Check if the post date is yesterday
-        elseif ($timestamp >= $yesterday) {
-            return 'Yesterday';
-        }
-        // For other days, format the date as "Thursday 23 May 2023" using the date() function
-        else {
-            return date('l j F Y', $timestamp);
-        }
-    }
+        include_once('../classes_incs/functionsposts.php');
     foreach($posts_B as $post){ 
         $post_date = $post['date_created'];
         $formattedDate = format_post_date($post_date);  ?>
@@ -44,7 +22,7 @@
                 <?php if($post['anonymous'] == 'yes'){ ?>
                     <div class="post-heading-container">
                   <div class='post-heading'>
-                       <img src="../images/unkownface1.png" alt="anonymouse" class="icons" id='profile_pic'>
+                       <img src="../images/noProf.jpeg" alt="anonymouse" class="noProf" id='profile_pic'>
                        <div id='post_info'>
                         <div>
                              <b> <span id='username'>Hidey</span></b> <span id='name'>_Anonymouse</span> 

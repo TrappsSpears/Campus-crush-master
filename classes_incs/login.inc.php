@@ -30,10 +30,10 @@ if (isset($_POST["submit"])) {
                 $_SESSION['city'] = $row['city'];
                 $_SESSION['school'] = $row['school'];                
                 // Redirect to dashboard
-                header("Location: ../index/index.php?log_inSuccessful&username=" . urlencode($row['username']));                   
+                header("Location: ../index/index.php?loggedin=log_inSuccessful&username");                   
             } else {
                 $_SESSION['error_log'] = 'Incorrect Usernme or Email or Password';
-                header("Location: ../index.php?error=Password did not verify");
+                header("Location: ../index.php?error=Incorrect Password");
                 exit();
             }
         } else {

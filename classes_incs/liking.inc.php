@@ -42,11 +42,14 @@
                 $sql = "INSERT INTO likes(post_id,type,user_id,created_at) VALUES(?,?,?,?)";
                 $result = $dbh->connect()->prepare($sql);
                 if($result->execute(array($post_id,$type,$user_id,$date))){
-        
-                    header("Location: ../singlePosts/singleposts.php?post_id=$post_id");
-            
-        
-                 
+                    $lastInsertedPostId = $dbh->connect()->lastInsertId();
+                    $sql = "INSERT INTO notifications(post_id, user_id, date_created, type) VALUES (?, ?, ?, 'like')";
+                    $result = $dbh->connect()->prepare($sql);
+                    if ($result->execute([$post_id, $user_id, $date])) {
+                        header("Location: ../singlePosts/singleposts.php?post_id=$post_id");
+                    }else{
+                        header("Location: ../index/index.php?Error_Query");
+                    }
                 }else{
                     echo'not done';
                 }

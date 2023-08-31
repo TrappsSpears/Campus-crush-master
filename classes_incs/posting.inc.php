@@ -5,7 +5,7 @@ if (isset($_POST['submit'])) {
     $user_id = $_POST['user_id'];
     $date = date('Y-m-d H:i:s');
     $anonym = $_POST['show_profile'];
-
+    $theme=$_POST['theme'];
     include_once('dbh.class.php');
     $dbh = new Dbh();
 
@@ -36,13 +36,12 @@ if (isset($_POST['submit'])) {
     }
 
     // Prepare and execute the post insertion query
-    $sql = "INSERT INTO posts(post_body, user_id, date_created, location, time, post_pic, anonymous) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO posts(post_body, user_id, date_created, location, time, post_pic, anonymous,theme) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
     $result = $dbh->connect()->prepare($sql);
 
     // Check if the query executed successfully
-    if ($result->execute([$post, $user_id, $date, $location, $date, $post_pic, $anonym])) {
-        // Successfully inserted the post
-        header("Location: ../index/index.php?succeeded");
+    if ($result->execute([$post, $user_id, $date, $location, $date, $post_pic, $anonym,$theme])) {      
+            header("Location: ../index/index.php?succeeded");
         exit();
     } else {
         // Error while executing the query

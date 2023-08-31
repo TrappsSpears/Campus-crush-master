@@ -6,39 +6,7 @@
 <!--...............------------------- Now Posting --------------------------------------------------------------->
 
 <?php 
-    function format_post_date($post_date) {
-        // Convert the input date to a timestamp
-        $timestamp = strtotime($post_date);
-        
-        // Get today's date at midnight
-        $today = strtotime('today midnight');
-        
-        // Get yesterday's date at midnight
-        $yesterday = strtotime('yesterday midnight');
-    
-        // Check if the post date is today
-        if ($timestamp >= $today) {
-            return 'Today';
-        }
-        // Check if the post date is yesterday
-        elseif ($timestamp >= $yesterday) {
-            return 'Yesterday';
-        }
-        // For other days, format the date as "Thursday 23 May 2023" using the date() function
-        else {
-            return date('l j F Y', $timestamp);
-        }
-    }
-    function formatPostContent($content) {
-        // Search for URLs in the content
-        $pattern = '/https?:\/\/\S+/i'; // Regular expression pattern to match URLs
-        $formattedContent = preg_replace_callback($pattern, function($match) {
-            // Use the matched URL as the link text and href
-            return '<a style="color:#1e90ff" href="' . $match[0] . '" target="_blank">' . $match[0] . '</a>'; 
-        }, $content);
-    
-        return $formattedContent;
-    }
+      include_once('../classes_incs/functionsposts.php');
 foreach($post_single as $post){ 
     $post_date = $post['date_created'];
     $formattedDate = format_post_date($post_date);?>
@@ -51,7 +19,7 @@ foreach($post_single as $post){
                 <?php if($post['anonymous'] == 'yes'){ ?>
                     <div class="post-heading-container">
                   <div class='post-heading'>
-                       <img src="../images/Unkown.jpeg" alt="anonymouse" class="icons" id='profile_pic'>
+                       <img src="../images/noProf.jpeg" alt="anonymouse" class="noProf" id='profile_pic'>
                        <div id='post_info'>
                         <div>
                              <b> <span id='username'>Hidey</span></b> <span id='name'>_Anonymouse</span> 
@@ -319,16 +287,8 @@ foreach($post_single as $post){
         <?php } ?> 
 
         <div class="reply-container">
-        <?php 
-         $sql = "SELECT COUNT(*) as total FROM comments WHERE  post_id = ?;";
-
-         $result = $dbh->connect()->prepare($sql);
-         if(!$result->execute(array($post_id))){
-             $result = null;}else{
-                $total = $result->fetch(PDO::FETCH_ASSOC);
-             }
-    ?>
-            <h3>Comments <small> <?= $total['total'] ?></small></h3>
+      
+            <h3>Comments <small> <?= $post['comment_count'] ?></small></h3>
 
         <?php
         if($userLogged){

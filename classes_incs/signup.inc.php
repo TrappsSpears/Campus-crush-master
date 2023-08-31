@@ -7,6 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $city = $_POST['city'];
     $school = $_POST['school'];
+    $date = $_POST['dob'];
+    $country = $_POST['country'];
     include_once('dbh.class.php');
         $dbh = new Dbh();
     // Check if username or email is already in the database
@@ -20,9 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Insert user data into the database
-    $sql = "INSERT INTO users (name, username, email, password, city, school) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO users (name, username, email, password, city, school,country,DOB) VALUES (?, ?, ?, ?, ?, ?,?,?)";
     $stmt = $dbh->connect()->prepare($sql);
-    $stmt->execute([$fullName, $username, $email, $password, $city, $school]);
+    $stmt->execute([$fullName, $username, $email, $password, $city, $school,$country,$date]);
     $successMsg = 'SignUp successful..Now LogIn';
 
     header("Location: ../index.php?msg=$successMsg"); 

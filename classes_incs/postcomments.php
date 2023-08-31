@@ -14,20 +14,14 @@
         $sql = "INSERT INTO comments(post_id,comment,user_id,date_created,type) VALUES(?,?,?,?,?)";
         $result = $dbh->connect()->prepare($sql);
         if($result->execute(array($post_id,$comment,$user_id,$date,$type))){
-
-            if($page == 'home'){
-                header("Location: ../index/index.php?secceeded,Page=$page");
-            }elseif($page == 'thrill_page'){
-                header("Location: ../Hot/hots.php?secceeded,Page=$page");
-            }elseif($page == 'linkup_page'){
-                header("Location: ../linkups/linkups.php?secceeded,Page=$page");
-            }elseif($page == 'postSingle'){
-            
+            $sql = "INSERT INTO notifications(post_id, user_id, date_created, type) VALUES (?, ?, ?, 'comment')";
+            $result = $dbh->connect()->prepare($sql);
+            if ($result->execute([$post_id, $user_id, $date])) {
                 header("Location: ../singlePosts/singleposts.php?post_id=$post_id");
+            }else{
+                header("Location: ../index/index.php?Error_Query");
             }
-            else{
-                header("Location: ../index/index.php?secceeded,Page=$page");
-            }
+            
 
 
          

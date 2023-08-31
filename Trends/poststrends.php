@@ -52,7 +52,7 @@ foreach($post_single as $post){
                 <?php if($post['anonymous'] == 'yes'){ ?>
                     <div class="post-heading-container">
                   <div class='post-heading'>
-                       <img src="../images/Unkown.jpeg" alt="anonymouse" class="icons" id='profile_pic'>
+                       <img src="../images/noProf.jpeg" alt="anonymouse" class="noProf" id='profile_pic'>
                        <div id='post_info'>
                         <div>
                              <b> <span id='username'>Hidey</span></b> <span id='name'>_Anonymouse</span> 
@@ -66,6 +66,7 @@ foreach($post_single as $post){
                     </div>
              
             <?php }else { ?> 
+                <a href="../Trends/trends.php?word=<?= $post['username'] ?>">
                 <div class="post-heading-container">
                 <div class='post-heading'>
                 <?php if($user['profile_pic']!=''){ ?> 
@@ -82,7 +83,7 @@ foreach($post_single as $post){
                       </div>     
                     </div>   
                 </div>
-                </div>
+                </div></a>
                 <?php } ?>   
                 
                   

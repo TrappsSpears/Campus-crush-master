@@ -33,6 +33,7 @@
                 session_start();
                 $_SESSION['user_id']=$user[0]['user_id'];
                 $_SESSION['username']=$user[1]['username'];
+                
             
             }
 

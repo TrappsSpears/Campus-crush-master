@@ -1,11 +1,12 @@
 <div class="sidebar-nav">
     
     
-        <nav>
-<div class="conFess_icon">
-    <h2><span><img src="../images/witterLogo2.png" alt="W" class='icons'></span>itter</h2>
+        <nav><a href="../index/index.php">
+    <div class="conFess_icon">
+    <h2><span><img src="../images/witterLogo.png" alt="W" class='icons'></span>itter</h2>
 
     </div>
+    </a>
             <ul>
                 <div <?php if ($page == 'home'){ echo 'class="active"';} ?>> 
                     <a href="../index/index.php" class='nav-a'> <?php if ($page == 'home'){ echo '<span></span>';} ?>

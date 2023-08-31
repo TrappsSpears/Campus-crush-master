@@ -5,7 +5,14 @@ include_once('../classes_incs/dbh.class.php');
 $dbh = New Dbh();
 
 ##-------------------Posts for Single Post--------------------------------------##
-$selectPost = $dbh->connect()->prepare("SELECT * FROM posts JOIN users ON users.id = posts.user_id WHERE post_id = ? ORDER BY date_created DESC");
+$selectPost = $dbh->connect()->prepare("SELECT posts.*, users.*, likes.type as type,
+COUNT(bookmarks.id) AS save_count, 
+COUNT(likes.id) AS like_count, 
+COUNT(comments.id) AS comment_count
+ FROM posts JOIN users ON posts.user_id = users.id 
+        LEFT JOIN likes ON posts.post_id = likes.post_id 
+        LEFT JOIN bookmarks ON posts.post_id = bookmarks.post_id 
+        LEFT JOIN comments ON posts.post_id = comments.post_id  WHERE posts.post_id = ? ORDER BY date_created DESC");
 if(!$selectPost ->execute(array($post_id))){
     echo 'Failed To Load Posts';
 }else{
