@@ -23,6 +23,7 @@ include('../includes/headall.php'); ?>
 
 </div>
     </div>
+    <?php include('../includes/leftbar.php') ?>
     </div>
   <?php include('../includes/footer.php') ?>
 </body>

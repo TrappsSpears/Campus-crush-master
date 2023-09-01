@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/witterlogo2.png">
     <title>Witter</title>
     <?php include('styles/styleIndex.php') ?>
     <!-- Add this to your HTML -->
@@ -31,7 +32,7 @@
         </div>
              <p id="password_match_error" style="color: red;"></p>
      
-        
+        <p>When is your Birthday</p>
         <input type="date" placeholder="Date of Birth" required name="dob" id="dob">
 <p id="dob_error" style="color: red;"></p>
         <!-- Instructions for School -->

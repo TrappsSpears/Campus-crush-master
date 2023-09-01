@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
 
 } else {
     // Form not submitted
-    header("Location: ../index/index.php?FormNotSubmitted");
+    header("Location: ../home/home.php?FormNotSubmitted");
     exit();
 }
 ?>

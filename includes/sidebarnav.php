@@ -9,7 +9,7 @@
     </a>
             <ul>
                 <div <?php if ($page == 'home'){ echo 'class="active"';} ?>> 
-                    <a href="../index/index.php" class='nav-a'> <?php if ($page == 'home'){ echo '<span></span>';} ?>
+                    <a href="../home/home.php" class='nav-a'> <?php if ($page == 'home'){ echo '<span></span>';} ?>
                        <span></span><span></span>  <li>   Home</li>
                     </a>
                 </div>

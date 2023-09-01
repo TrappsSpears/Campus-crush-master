@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
         // Validate file type
         $imageFileType = strtolower(pathinfo($_FILES["post_pic"]["name"], PATHINFO_EXTENSION));
         if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png") {
-            header('Location: ../index/index.php?InvalidFormat');
+            header('Location: ../home/home.php.php?InvalidFormat');
             exit();
         } else {
             if (move_uploaded_file($_FILES["post_pic"]["tmp_name"], $targetFile)) {
@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
                 $post_pic = $uniqueFilename; // Set the file path
             } else {
                 // Error while moving the uploaded file
-                header("Location: ../index/index.php?Error_MovingFile");
+                header("Location: ../home/home.php.php?Error_MovingFile");
                 exit();
             }
         }
@@ -41,16 +41,16 @@ if (isset($_POST['submit'])) {
 
     // Check if the query executed successfully
     if ($result->execute([$post, $user_id, $date, $location, $date, $post_pic, $anonym,$theme])) {      
-            header("Location: ../index/index.php?succeeded");
+            header("Location: ../home/home.php?succeeded");
         exit();
     } else {
         // Error while executing the query
-        header("Location: ../index/index.php?Error_Query");
+        header("Location: ../home/home.php?Error_Query");
         exit();
     }
 } else {
     // Form not submitted
-    header("Location: ../index/index.php?FormNotSubmitted");
+    header("Location: ../home/home.php.php?FormNotSubmitted");
     exit();
 }
 ?>

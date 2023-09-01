@@ -12,19 +12,9 @@
         if(!$result->execute(array($post_id,$user_id))){
             header('location: ../index/index.php?error=Failed');
         }else{
-            if($page == 'home'){
-                header("Location: ../index/index.php?secceeded,Page=$page");
-            }elseif($page == 'thrill_page'){
-                header("Location: ../Hot/hots.php?secceeded,Page=$page");
-            }elseif($page == 'linkup_page'){
-                header("Location: ../linkups/linkups.php?secceeded,Page=$page");
-            }elseif($page == 'postSingle'){
             
-                header("Location: ../singlePosts/singleposts.php?post_id=$post_id");
-            }
-            else{
-                header("Location: ../index/index.php?secceeded,Page=$page");
-            }
+                header("Location: ../posts/posts.php?post_id=$post_id");
+           
 
         }
  }else{

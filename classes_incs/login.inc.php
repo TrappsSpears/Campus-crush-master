@@ -17,7 +17,7 @@ if (isset($_POST["submit"])) {
     $result = $dbh->connect()->prepare($sql);
 
     if (!$result->execute(array($email,$email))) {
-        header("Location: ../index/index.php?error=error");
+        header("Location: ../home/home.php?error=error");
         exit();
     } else {
         if ($result->rowCount() == 1) {
@@ -30,7 +30,7 @@ if (isset($_POST["submit"])) {
                 $_SESSION['city'] = $row['city'];
                 $_SESSION['school'] = $row['school'];                
                 // Redirect to dashboard
-                header("Location: ../index/index.php?loggedin=log_inSuccessful&username");                   
+                header("Location: ../home/home.php?loggedin=log_inSuccessful&username");                   
             } else {
                 $_SESSION['error_log'] = 'Incorrect Usernme or Email or Password';
                 header("Location: ../index.php?error=Incorrect Password");

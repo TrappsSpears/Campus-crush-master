@@ -44,7 +44,7 @@
         /* Additional styling as needed */
         .signup-form button {
             width: 100%;
-      
+            text-align: left;
             border: none;
             background-color: #007bff;
             color: #fff;

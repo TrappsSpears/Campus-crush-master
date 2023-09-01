@@ -16,7 +16,7 @@
         $result = $dbh->connect()->prepare($sql);
         if(!$result->execute(array($user_id,$post_id))){
             $result = null;
-            header("location ../index/index.php?error=error");
+            header("location ../posts/posts.php?error=error,post=$post_id");
             exit();
         }else{
             $results = $result->fetch(PDO::FETCH_ASSOC);
@@ -30,7 +30,7 @@
                     $result = $dbh->connect()->prepare($sql);
                     if($result->execute(array($post_id,$type,$user_id,$date))){
             
-                        header("Location: ../singlePosts/singleposts.php?post_id=$post_id");
+                        header("Location: ../posts/posts.php?post=$post_id");
             
             
                      

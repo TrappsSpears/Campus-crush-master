@@ -3,7 +3,7 @@
     <div class="leftbar-container">
         <form action="../Trends/trends.php" method="get">
     <div class="search_place" id='search_place'>
-        <input type="text" style="width:60%" placeholder="Search..." id='search' name="word"><button type='submit'> Search</button>
+        <input type="text" style="width:60%" placeholder="Search..." id='search' name="word"><button type='submit' required> <img src="../images/search.png" alt="search" class='icons'></button>
     </div></form>
         <div class="emojis">
             <div>
@@ -76,7 +76,7 @@
                     <small>Posts <?= $trend['post_count'] ?> - <?= $trend['theme'] ?></small>
                 </div>
                 <div>
-                <p>- <?= $trend['location'] ?></p>
+                <p> <img src="../images/placeholder.png" alt="-" class='icons' style='width:15px'><?= $trend['location'] ?></p>
                 </div>
                 <div>
                  <small>Engagements <?php echo $trend['like_count'] + $trend['comment_count'] ?> <a href="../Trends/trends.php?reaction=<?= $trend['type'] ?>"> <span><img src="../images/<?= $trend['type'] ?>.png" alt="<?= $trend['type'] ?>"> </span></a></small>
@@ -89,7 +89,10 @@
    
 
     </div>
+    <div class="footer-about" id='info_App'>
+        Share Stories - Share Ideas - Ask Ques - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a>
         </div>
-
+        </div>
+        
     </div>
 

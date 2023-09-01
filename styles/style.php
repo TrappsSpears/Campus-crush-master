@@ -85,7 +85,7 @@ position: relative;
     position: absolute;
     bottom: 0;
     color: gray;
-    font-size: 10px;
+    font-size: 14px;
     left: 0;
     padding: 8px;
     border-top: 1px solid #201f1f;
@@ -311,6 +311,9 @@ body {
 .footer_ a{
     color: #880281;
 }
+#search-conts{
+    padding: 10px 4%;
+}
 #search-conts .trends{
     max-width: 600px;
    min-width: 200px;
@@ -320,31 +323,30 @@ body {
    display: flex;
    margin-right: 10px;
    margin-left: 25px;
+   font-size: 25px;
+   width: 95%;
 }
 .search_place button{
-    padding: 5px 10px;
-    height: 37px;
+    padding: 4.3px 10px;
+
     border:none;
-    border-top: 1px solid #313131;
-    border-bottom: 1px solid #313131;
-    border-right: 1px solid #313131;
    
+    font-size: 25px;
     background: inherit;
     border-radius: 6px;
     color: white;
     border-radius: 0px 63px 63px 0px;
     position: relative;
     
+    
 }
  .search_place input{
     width: 100%;
-    border-radius: 63px 0px 0px 63px;
+    border-radius: 63px;
     padding: 6px 10px;
-    font-size: 18px;
-    border:none;
-    border-top: 1px solid #313131;
-    border-bottom: 1px solid #313131;
-    border-left: 1px solid #313131;
+    font-size: 25px;
+      border: 1px solid #313131;
+  
    
 }
 #search-conts .search-conts .emojis{
@@ -434,7 +436,7 @@ body {
 
 .con_form{
     
-    padding: 20px 5%;
+    padding: 20px 4%;
     background-color: #121212;
     max-width: 100%;
     margin-top: 10px;
@@ -450,8 +452,9 @@ body {
     resize: none;
     border: none;
     color: white;
-    min-width: 98%;
-   max-width: 100%;
+    margin-left: 10px;
+    margin-top: -10px;
+   width: 100%;
     height: 40px;
     outline: none;
     border-radius: 38px;
@@ -1970,6 +1973,9 @@ cursor: pointer;
     #search_place input{
         width: 200px;
     }
+    .post_b{
+        padding: 10px 13%;
+    }
   }
   .nav .profile{
     display: block;
@@ -2099,6 +2105,9 @@ cursor: pointer;
         padding: 10px 0px;
         margin-bottom: 100px;
         border: none;
+    }
+    .post_b{
+        padding: 10px 17%;
     }
     .post-container ,.reply-container,.con_form{
         border-radius: 0px;

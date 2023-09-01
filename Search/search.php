@@ -13,7 +13,7 @@ include('../includes/headall.php'); ?>
     </div>
     <form action="../Trends/trends.php" method="get">
     <div class="search_place">
-        <input type="text" placeholder="Search..." id='search' name="word"><button type='submit'> Search</button>
+        <input type="text" placeholder="Search..." id='search' name="word"><button type='submit' >  <img src="../images/search.png" alt="search" class='icons'></button>
     </div></form>
 </div>
 <div class="posts" id="search-conts" >
@@ -58,7 +58,7 @@ include('../includes/headall.php'); ?>
                     <small>Posts <?= $trend['post_count'] ?> - <?= $trend['theme'] ?></small>
                 </div>
                 <div>
-                <p>- <?= $trend['location'] ?></p>
+                <p> <img src="../images/placeholder.png" alt="-" class='icons' style='width:15px'><?= $trend['location'] ?></p>
                 <div>
                  <small>Engagements <?php echo $trend['like_count'] + $trend['comment_count'] ?> <a href="../Trends/trends.php?reaction=<?= $trend['type'] ?>"> <span><img src="../images/<?= $trend['type'] ?>.png" alt="<?= $trend['type'] ?>"> </span></a></small>
                 </div>
@@ -112,173 +112,14 @@ include('../includes/headall.php'); ?>
         <h2>
               Randomized Discovery
         </h2> 
-        <?php 
-                include_once('../classes_incs/functionsposts.php');
-        foreach($postsRand as $post){ 
-        $idUnique = $post['post_id'];
-        $post_date = $post['date_created'];
-        $formattedDate = format_post_date($post_date);
-        ?>
-      
-    
-    <div class="post-container">
-        <div class="post-head">
-        <div class="heading-post">
-                <?php if($post['anonymous'] == 'yes'){ ?>
-                    <div class="post-heading-container">
-                  <div class='post-heading'>
-                       <img src="../images/noProf.jpeg" alt="anonymouse" class="noProf" id='profile_pic'>
-                       <div id='post_info'>
-                        <div>
-                             <b> <span id='username'>Hidey</span></b> <span id='name'>_Anonymouse</span> 
-                        </div>
-                        <div>
-                          <span><small id='date'><?= $formattedDate ?></small><small> at <?= $post['time'] ?></small> </span>
-                      </div>     
-                    </div>   
-                
-                </div>       
-                    </div>
-             
-            <?php }else { ?> 
-                <a href="../Trends/trends.php?word=<?= $post['username'] ?>">
-                <div class="post-heading-container">
-                <div class='post-heading'>
-                <?php if($user['profile_pic']!=''){ ?> 
-                    <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
-                    <?php } else{ ?> 
-                        <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
-                        <?php } ?>
-                       <div id='post_info'>
-                        <div>
-                             <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'> - <?= $post['name'] ?></span> 
-                        </div>
-                        <div>
-                          <span><small id='date'><?= $formattedDate ?></small><small> . <?= $post['time'] ?></small> </span>
-                      </div>     
-                    </div>   
-                </div>
-                </div></a>
-                <?php } ?>   
-                
-                  
-        </div>
-            <div class="head-dots" id = 'head-dots<?php echo $idUnique;?>'>
-                <div>
-                  <img src="../images/menu.png" alt="..." class="icons">
-                </div>
-                <?php if($userLogged){ ?> 
-               
-              
-               <?php } ?>
-            </div>
-        </div>
-    <div class="post-box">
-        <a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
-        <div class="post_b">    
-    <p id='post-bAllP'>   <?= formatPostContent($post['post_body']) ?></p>
-    <div class="img_post">
-        <img src="../images/imagePosts/<?= $post['post_pic'] ?>" alt="">
-    </div>
-    <div>
-              
-              <span class='span-loc'><a href="../Trends/trends.php?location=<?= $post['location'] ?>">     
-                     -<?= $post['location'] ?>
-                 </a> </span>
-                        
-                 </div>
-        </div>
-        
-
-    </a>
-</div>
-<?php if($userLogged){ ?>
-        
-        
-            <div class="engage">
-           
-            </div>
-        <a href="../singlePosts/singleposts.php?post_id=<?= $post['post_id'] ?>">
-        
-            
-
-            <?php
-            $post_id = $post['post_id'];
-            $sql = "SELECT COUNT(*) as total FROM likes WHERE post_id = ?;";
-
-            $result = $dbh->connect()->prepare($sql);
-            if(!$result->execute(array( $post_id))){
-                $result = null;
-            }else{
-                $results = $result->fetch(PDO::FETCH_ASSOC);
-                
-                    $sql = "SELECT type FROM likes WHERE post_id = ?;";
-                    $result = $dbh->connect()->prepare($sql);
-                    if(!$result->execute(array($post_id))){
-                        $result = null;
-                    }else{
-                        $resultsall = $result->fetchAll(PDO::FETCH_ASSOC);}
-                    ?>
-                    <?php
-            $post_id = $post['post_id'];
-            $sql = "SELECT COUNT(*) as total FROM comments WHERE  post_id = ?;";
-
-            $resultC = $dbh->connect()->prepare($sql);
-            if(!$resultC->execute(array($post_id))){
-                $resultC = null;
-            }else{
-                $count= $resultC->fetch(PDO::FETCH_ASSOC);}
-               
-                    ?>
-                <div class="post_insights">
-                    <span id='comment'><img src="../images/bubble-chat.png" alt=""><small><?= $count['total']?></small></span>
-                    <span id = 'bookmark'><img src="../images/saved.png" alt=""><small>0</small></span>
-                        <span id='reaction_emoj'>
-                    <?php foreach($resultsall as $type){ ?> 
-                    <img src="../images/<?php echo $type['type'];?>.png" alt="<?= $type['type'] ?>" class='icons'>  
-                       
-                        <?php } ?>
-                        
-                   <small> <?php if($results>0){ ?>
-                    <?= $results['total']; ?> <?php } ?></small></span>
-                
-                <span class='thot'>  Witt your thought...</span>
-                     </div>      
-            <?php } ?>
-            </a>
-        
-    <?php } else{?>
-        Sign In to ingage
-       <?php } ?>
-       <div class='head_post_el'>
-        
-                <?php   
-                $sql ="SELECT p.post_id, l.type, COUNT(*) AS like_count
-                FROM posts p
-                JOIN likes l ON p.post_id = l.post_id
-                WHERE p.post_id = ? -- Replace 'specific_type' with the actual type you're interested in
-                GROUP BY p.post_id, l.type
-                ORDER BY like_count DESC
-                LIMIT 1";
-                $typeResult = $dbh->connect()->prepare($sql);
-                
-                if(!$typeResult->execute(array($post['post_id']))){
-                    $typeResult = null;
-                }else{
-                    $typeLike = $typeResult->fetch(PDO::FETCH_ASSOC);
-                    if($typeLike!==false){
-                        $typeLikee=$typeLike;
-                    }else{
-                        $typeLikee= null;
-                    }
-                }
-                ?><?php if($typeLikee !== null && $typeLikee['post_id']===$post['post_id']){ ?> 
-               <a href="../Trends/trends.php?reaction=<?= $typeLikee['type']?>"> <span><img src="../images/<?= $typeLikee['type']?>.png" alt="<?= $typeLikee['type']?>"> </span></a><?php } ?>
-        </div>
-    </div>
-
-
-    <?php } ?> 
+        <?php
+    include('../classes_incs/functionsposts.php');
+foreach($postsRand as $post){ 
+    $post_date = $post['date_created'];
+    $formattedDate = format_post_date($post_date);
+   
+    include_once('../includes/posts.php'); }
+    ?> 
         </div>
    
 

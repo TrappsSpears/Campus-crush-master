@@ -17,9 +17,9 @@
             $sql = "INSERT INTO notifications(post_id, user_id, date_created, type) VALUES (?, ?, ?, 'comment')";
             $result = $dbh->connect()->prepare($sql);
             if ($result->execute([$post_id, $user_id, $date])) {
-                header("Location: ../singlePosts/singleposts.php?post_id=$post_id");
+                header("Location: ../posts/posts.php?post=$post_id");
             }else{
-                header("Location: ../index/index.php?Error_Query");
+                header("Location: ../home/home.php?Error_Query");
             }
             
 

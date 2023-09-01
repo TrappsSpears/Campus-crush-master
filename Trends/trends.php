@@ -7,7 +7,7 @@
  $dbh = New Dbh();
  
  $selectPostLoc = $dbh->connect()->prepare("
- SELECT posts.*, users.*,
+ SELECT posts.*, users.*, likes.type,posts.theme,
         COUNT(likes.id) AS like_count, 
         COUNT(comments.id) AS comment_count
  FROM posts 
@@ -58,9 +58,12 @@ if (!$selectPostLoc->execute()) {
      include_once('../classes_incs/dbh.class.php');
  
  $dbh = New Dbh();
- $sql ="SELECT p.post_id,p.post_body,p.user_id,p.date_created,p.location,p.time,p.anonymous,p.post_pic,u.username,u.profile_pic, u.name, COUNT(*) AS like_count
+ $sql ="SELECT  p.post_id,p.post_body,p.user_id,p.date_created,p.location,p.time,p.anonymous,p.post_pic,u.username,u.profile_pic, u.name, COUNT(*) AS like_count,l.type,p.theme,
+ COUNT(l.id) AS like_count, 
+ COUNT(c.id) AS comment_count
                 FROM posts p
                 JOIN likes l ON p.post_id = l.post_id JOIN users u ON u.id =p.user_id
+                LEFT JOIN comments c ON p.post_id = c.post_id 
                 WHERE l.type = ? -- Replace 'specific_type' with the actual type you're interested in
                 GROUP BY p.post_id, l.type
                 ORDER BY like_count DESC";
