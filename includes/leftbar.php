@@ -76,7 +76,7 @@
                     <small>Posts <?= $trend['post_count'] ?> - <?= $trend['theme'] ?></small>
                 </div>
                 <div>
-                <p> <img src="../images/placeholder.png" alt="-" class='icons' style='width:15px'><?= $trend['location'] ?></p>
+                <p> <img src="../images/placeholder.png" alt="-" class='icons' style='width:15px;position:relative;top:3px;margin-right:5px'><?= $trend['location'] ?></p>
                 </div>
                 <div>
                  <small>Engagements <?php echo $trend['like_count'] + $trend['comment_count'] ?> <a href="../Trends/trends.php?reaction=<?= $trend['type'] ?>"> <span><img src="../images/<?= $trend['type'] ?>.png" alt="<?= $trend['type'] ?>"> </span></a></small>

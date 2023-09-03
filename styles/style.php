@@ -50,6 +50,7 @@ a{
     transform: scale(1.3);
     color:#1e90ff;
     margin-bottom: 10px;
+    font-size: 15px;
 }
 .conFess_icon p{
     position: relative;
@@ -94,6 +95,7 @@ position: relative;
     position: relative;
     font-size: 10px;
     text-align: left;
+    margin-top: 10px;
 }
 .footer-about a{
     color: #880281;
@@ -408,7 +410,7 @@ body {
     padding: 5px;
     display: none;
     background-color: gray;
-    z-index: 400;
+    z-index: 100;
     border: 6px;
     cursor:default;
     margin-left: 55px;
@@ -468,15 +470,26 @@ body {
     display: none;
     margin-bottom: -50px;
 }
-.custom-select select{
+select{
+    background-color: #121212;
+    width: fit-content;
     border-radius: 32px;
-    padding: 6px 10px;
-    color: gainsboro;
-     background-color: #212121;
+    color: #1e90ff;
+    border:1px solid #212121;
+}
+select option{
+    background-color: #212121;
+    padding: 6px;
+    font-size: 16px;
+    border: 2px solid #201f1f;
+}
+.custom-select select{
+    padding: 4px 6px;
     width:fit-content;
     position: relative;
     top: -50px;
-    color: gainsboro;
+   
+    font-weight: 700;
 }
 .cancel_post{
     border-radius: 8px;
@@ -523,11 +536,12 @@ margin-top: 10px;
     display: none;
 }
 .uploaded_img img{
-    
-    max-height: 300px;
-    width: 100%;
-    border-radius: 8px;
+    border: 1px solid #121212;
+    border-radius: 10px;
+   max-height: 450px;
+   max-width: 100%;
     object-fit: cover;
+    text-align: center;
     object-position: top;
 }
 
@@ -597,7 +611,7 @@ margin-top: 10px;
     max-width: 99%;
     height: 50px;
 }
-#caption , select , input{
+#caption  , input{
     text-align: left;
     background-color: inherit;
     margin-bottom: 10px;
@@ -619,17 +633,10 @@ margin-top: 10px;
 
 .post_header select{
     border-radius: 32px;
-    padding: 6px 10px;
-    color: gainsboro;
-   
-     background-color: #212121;
-    width: fit-content;
+    padding: 4px 6px;
 }
 
-.input_htSt select option{
-    background-color: #313131;
-    color: floralwhite;
-}
+
 .con_form .post_header input{
     width: 90%;
     border: 1px solid #2c2d2e ;
@@ -800,7 +807,7 @@ border-bottom: 1px solid #333;
 }
 
 .post-box .post_b{
-   
+
     border-radius: 10px;
     padding-bottom: 10px;
     margin-bottom: 10px;
@@ -891,7 +898,7 @@ border-bottom: 1px solid #333;
     color: gray;
 }
 .post_insights #comment img{
-    filter: invert(100%);
+   
     position: relative;
     top: 5px;
     width: 24px;
@@ -901,10 +908,11 @@ border-bottom: 1px solid #333;
     background-color: inherit;
 }
  #reaction_emoj img{
-    width: 15px;
+    width: 24px;
     margin-left: -10px;
     position: relative;
     left: 8px;
+    top: 4px;
 }
 .post_insights #bookmark img{
     filter: invert(10%);
@@ -924,8 +932,8 @@ border-bottom: 1px solid #333;
 .thot{
     text-align: left;
     border-radius: 43px;
-   background-color: #212121;
-    padding: 6px 10px ;
+   background-color: #1a1a1a;
+    padding: 10px ;
     font-size: 15px;
     cursor: pointer;
     color: white;
@@ -1157,12 +1165,7 @@ border-bottom: 1px solid #333;
 
 }
 
-.react_select select > option{
-    background-color: #2c2d2e;
-    padding: 6px;
-    border: none;
-    border-radius: 8px;
-}
+
 .react{
 text-align: center;
 padding: 5px 0px 0px 0px;
@@ -1404,16 +1407,14 @@ cursor: pointer;
     margin-top: 10px;
 }
 .comOpt select{
-    background-color: #201f1f;
-    width: fit-content;
+    padding: 4px 6px;
     margin-left: 24px;
-    border-radius: 6px;
+  
 }
-.comOpt select option{
-    background-color:#201f1f;
-}
+
 .comOpt #emojiContainer{
     position: relative;left: 0;
+    z-index: 100;
 }
 .comments_posts div span{
     padding: 6px;

@@ -13,22 +13,10 @@
  
 <div class="posts">
     <div class="con_form">
-      <div class='conform_desgn_head'>
-        <div>
-            <button></button>
-        </div>
-        <div>
-            
-        </div>
-        <div>
-            <button></button>
-        </div>
-      </div>
+      
          
       <?Php if($userLogged){ ?>
-        <div class="prof_img">
-            <img src="../images/incognito.png" alt="." class='icons'>
-        </div>
+       
         <form action="../classes_incs/posting.inc.php" method='Post' enctype="multipart/form-data">
         <div class='input_img'>
             <div class='userImg'>
@@ -39,8 +27,13 @@
                         <?php } ?>
                
             </div>
+          
             <div>
-               <textarea id="post_choice" placeholder="What Happened?! @<?= $username ?> " name="post" required minlength="2    0"></textarea> 
+               <textarea id="post_choice" placeholder="What Happened?! " name="post" required minlength="2    0"></textarea> 
+               <div class="progress-container" id='prog_div'>
+        <span id="remainingChars">1050</span>
+        <div class="progress-bar" id="progressBar"></div>
+    </div> 
                   <div class="custom-select">
                   <select id="themeSelect" name="theme" required>
                   <option value="" disabled selected>Select a Theme</option>
@@ -68,7 +61,11 @@
             <!-- Add more options here -->
         </select>
         <input type="button" class='cancel_post' value='Cancel'>
-                  </div>      
+         
+      
+     
+                  </div>   
+            
             </div>
                   <div id="emojiContainer">
         <span id="emojiButton" style='left:-10px;font-size:23px'>🙂</span>
@@ -78,12 +75,7 @@
     </div>
             
         </div>
-      
-      
-      <div class="progress-container" id='prog_div'>
-        <span id="remainingChars">1050</span>
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
+     
     <div class="uploaded_img">
         <img src="" alt="" id='post-image'>
     </div>
@@ -138,7 +130,7 @@
         
         </form>
         <div class="footer-about" id='info_App'>
-         Your Confessions Platform -  Share Stories - Share Ideas - Ask Ques - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a>
+           Share Stories - Share Ideas - Ask Ques - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a>
         </div> 
         <script>
             const cancel_post =document.querySelector('.cancel_post');
@@ -384,7 +376,7 @@ document.addEventListener('click', (event) => {
  
        
               <span class='span-loc'><a href="../Trends/trends.php?word=<?= $post['location'] ?>">     
-              <img src="../images/placeholder.png" alt="-" class='icons' style='width:20px'><?= $post['location'] ?>
+              <img src="../images/placeholder.png" alt="-" class='icons' style='width:20px;position:relative;top:5px'><?= $post['location'] ?>
                  </a> </span>
              <a href="../Trends/trends.php?word=<?= $post['theme'] ?>">   <span class='theme_span'><?= $post['theme'] ?></span></a>
                         
@@ -396,14 +388,15 @@ document.addEventListener('click', (event) => {
     <a href="../posts/posts.php?post=<?= $post['post_id'] ?>">
        
             <div class="post_insights">
-                <span id='comment'><img src="../images/bubble-chat.png" alt=""><small><?= $post['comment_count']?></small></span>
-                <span id = 'bookmark'><img src="../images/saved.png" alt=""><small>0</small></span>
+            <span class='thot'>    <span id='comment'><img src="../images/comment.png" alt=""><small><?= $post['comment_count']?> Comments</small></span>
+                
                     <span id='reaction_emoj'>
+                        <img src="../images/happiness.png" alt="">
                 <img src="../images/<?= $post['type'];?>.png" alt="<?= $post['type'] ?>" class='icons'>  
                <small> 
-                <?= $post['like_count']; ?></small></span>
+                <?= $post['like_count']; ?> Reactions</small></span>
             
-            <span class='thot'> Witt your thought</span>
+              </span>
                  </div>      
        
         </a>

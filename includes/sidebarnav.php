@@ -3,7 +3,7 @@
     
         <nav><a href="../index/index.php">
     <div class="conFess_icon">
-    <h2><span><img src="../images/witterLogo.png" alt="W" class='icons'></span>itter</h2>
+    <h2><span><img src="../images/witterLogo.png" alt="W" class='icons'></span>itterVerse</h2>
 
     </div>
     </a>

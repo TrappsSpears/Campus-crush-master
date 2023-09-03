@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="images/witterlogo2.png">
-    <title>Witter</title>
+    <title>WitterVerse</title>
     <?php include('styles/styleIndex.php') ?>
     <!-- Add this to your HTML -->
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="signup-container">
-    <h1><span> W</span>itter</h1>
+    <h1><span> W</span>itterVerse</h1>
         <p  >Where Anonymity Meets Understanding, Sharing Unspoken Stories</p>
         <?php if(isset($_GET['error'])){ ?> <p style="color:brown"><?= $_GET['error'] ?></p> <?php } ?>
         

@@ -12,9 +12,9 @@
         $sql = "INSERT INTO reply(com_id,reply,user_id,emoji) VALUES(?,?,?,?)";
         $result = $dbh->connect()->prepare($sql);
         if($result->execute(array($com_id,$comment,$user_id,$emoji))){
-            header("Location: ../singlePosts/singleposts.php?post_id=$post_id");  
+            header("Location: ../posts/posts.php?post=$post_id");  
         }else{
-            header("Location: ../index/index.php?Notsecceed");   
+            header("Location: ../home/home.php?Notsecceed");   
         }
         
 

@@ -44,10 +44,7 @@
                 <div>
                   <img src="../images/menu.png" alt="..." class="icons">
                 </div>
-                <?php if($userLogged){ ?> 
-               
-              
-               <?php } ?>
+                
             </div>
         </div>
     <div class="post-box">
@@ -61,7 +58,7 @@
  
        
               <span class='span-loc'><a href="../Trends/trends.php?word=<?= $post['location'] ?>">     
-                     <img src="../images/placeholder.png" alt="" class='icons' style='width:20px'> <?= $post['location'] ?>
+                     <img src="../images/placeholder.png" alt="" class='icons' style='width:20px;position:relative;top:5px'> <?= $post['location'] ?>
                  </a> </span>
              <a href="../Trends/trends.php?word=<?= $post['theme'] ?>">   <span class='theme_span'><?= $post['theme'] ?></span></a>
                         
@@ -79,17 +76,17 @@
     </div>
     <?php } ?>
     <a href="../posts/posts.php?post=<?= $post['post_id'] ?>">
-       
-            <div class="post_insights">
-                <span id='comment'><img src="../images/bubble-chat.png" alt=""><small><?= $post['comment_count']?></small></span>
-                <span id = 'bookmark'><img src="../images/saved.png" alt=""><small>0</small></span>
-                    <span id='reaction_emoj'>
+    <div class="post_insights">
+            <span class='thot'>    <span id='comment'><img src="../images/comment.png" alt=""><small><?= $post['comment_count']?> Comments</small></span>
+                
+                    <span id='reaction_emoj' >
+                        <img src="../images/happiness.png" alt="">
                 <img src="../images/<?= $post['type'];?>.png" alt="<?= $post['type'] ?>" class='icons'>  
                <small> 
-                <?= $post['like_count']; ?></small></span>
+                <?= $post['like_count']; ?> Reactions</small></span>
             
-            <span class='thot'> Witt your thought</span>
-                 </div>      
+              </span>
+                 </div>       
        
         </a>
 </div>
