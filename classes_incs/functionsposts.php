@@ -1,20 +1,30 @@
 <?php
- function format_post_date($post_date) {
+function format_post_date($post_date) {
     // Convert the input date to a timestamp
     $timestamp = strtotime($post_date);
     
-    // Get today's date at midnight
-    $today = strtotime('today midnight');
-    
-    // Get yesterday's date at midnight
-    $yesterday = strtotime('yesterday midnight');
+    // Get the current timestamp
+    $now = time();
 
+    // Calculate the time difference in seconds
+    $time_diff = $now - $timestamp;
+
+    // Check if the post date is within the last minute
+    if ($time_diff < 60) {
+        return $time_diff . ' secs ago';
+    }
+    // Check if the post date is within the last hour
+    elseif ($time_diff < 3600) {
+        $minutes = floor($time_diff / 60);
+        return $minutes . ' mins ago';
+    }
     // Check if the post date is today
-    if ($timestamp >= $today) {
-        return 'Today';
+    elseif (date('Y-m-d', $timestamp) == date('Y-m-d', $now)) {
+        $hours = floor($time_diff / 3600);
+        return $hours . ' hrs ago';
     }
     // Check if the post date is yesterday
-    elseif ($timestamp >= $yesterday) {
+    elseif (date('Y-m-d', $timestamp) == date('Y-m-d', strtotime('yesterday', $now))) {
         return 'Yesterday';
     }
     // For other days, format the date as "Thursday 23 May 2023" using the date() function
@@ -22,6 +32,8 @@
         return date('l j F Y', $timestamp);
     }
 }
+
+
 function formatPostContent($content) {
     // Search for URLs in the content
     $pattern = '/https?:\/\/\S+/i'; // Regular expression pattern to match URLs

@@ -2,8 +2,8 @@
 
     <div class="leftbar-container">
         <form action="../Trends/trends.php" method="get">
-    <div class="search_place" id='search_place'>
-        <input type="text" style="width:60%" placeholder="Search..." id='search' name="word"><button type='submit' required> <img src="../images/search.png" alt="search" class='icons'></button>
+    <div class="search_place" id='search_place' style='margin-bottom: 10px;'>
+        <input type="text"  placeholder="Search..." id='search' name="word"><button type='submit' required> <img src="../images/search.png" alt="search" class='icons'></button>
     </div></form>
         <div class="emojis">
             <div>

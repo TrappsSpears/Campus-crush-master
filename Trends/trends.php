@@ -34,11 +34,10 @@ if (!$selectPostLoc->execute()) {
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
     <div class="nav">
-        <div class="conFess_icon" id='small_screen_icon'>
-        <h2><span><img src="../images/witterLogo.png" alt="W" class='icons' style="left:-10px">Looking for <?= $loc ?></small></span></h2>
-        <p> Speaking Unspoken Stories</p>
-    </div>
-           
+    <form action="../Trends/trends.php" method="get">
+    <div class="search_place">
+        <input type="text" placeholder="<?= $loc ?>" id='search' name="word"><button type='submit' >  <img src="../images/search.png" alt="search" class='icons'></button>
+    </div></form>
         </div>
 <?php 
 
@@ -80,11 +79,10 @@ if(!$selectPostLoc ->execute(array($loc))){
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
     <div class="nav">
-        <div class="conFess_icon" id='small_screen_icon'>
-        <h2><span><img src="../images/witterLogo.png" alt="W" class='icons' style="left:-10px">Reactions <img src="../images/<?= $loc ?>.png" alt="<?= $loc ?>" class='icons'></small></span></h2>
-        <p> Speaking Unspoken Stories</p>
-    </div>
-           
+       <form action="../Trends/trends.php" method="get">
+    <div class="search_place">
+        <input type="text" placeholder="<?= $loc ?>" id='search' name="word"><button type='submit' >  <img src="../images/search.png" alt="search" class='icons'></button>
+    </div></form>
         </div>
 
 <?php 

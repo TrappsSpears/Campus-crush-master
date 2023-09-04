@@ -7,13 +7,10 @@ include('../includes/headall.php'); ?>
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
     <div class="nav">
-    <div class="conFess_icon" id='small_screen_icon'>
-        <h2><span><img src="../images/witterLogo.png" alt="W" class='icons' style="left:-10px;margin-left:10px">Explore</span></h2>
-        <p> Speaking Unspoken Stories</p>
-    </div>
+
     <form action="../Trends/trends.php" method="get">
     <div class="search_place">
-        <input type="text" placeholder="Search..." id='search' name="word"><button type='submit' >  <img src="../images/search.png" alt="search" class='icons'></button>
+        <input type="text" placeholder="Explore..." id='search' name="word"><button type='submit' >  <img src="../images/search.png" alt="search" class='icons'></button>
     </div></form>
 </div>
 <div class="posts" id="search-conts" >
@@ -118,7 +115,7 @@ foreach($postsRand as $post){
     $post_date = $post['date_created'];
     $formattedDate = format_post_date($post_date);
    
-    include_once('../includes/posts.php'); }
+    include('../includes/posts.php'); }
     ?> 
         </div>
    

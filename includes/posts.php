@@ -7,11 +7,9 @@
                        <img src="../images/noProf.jpeg" alt="anonymouse" class="noProf"  id='profile_pic'>
                        <div id='post_info'>
                         <div>
-                             <b> <span id='username'>Hidey</span></b> <span id='name'>_Anonymouse</span> 
+                             <b> <span id='username'>Hidey</span></b><span id='name'> Anonymouse<small> . </small>  <?= $formattedDate ?></span>
                         </div>
-                        <div>
-                          <span><small id='date'><?= $formattedDate ?></small><small> at <?= $post['time'] ?></small> </span>
-                      </div>     
+       
                     </div>   
                 
                 </div>       
@@ -28,11 +26,9 @@
                         <?php } ?>
                        <div id='post_info'>
                         <div>
-                             <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'> - <?= $post['name'] ?></span> 
+                             <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'>  <?= $post['name'] ?><small> . </small>  <?= $formattedDate ?></span>
                         </div>
-                        <div>
-                          <span><small id='date'><?= $formattedDate ?></small><small> . <?= $post['time'] ?></small> </span>
-                      </div>     
+                 
                     </div>   
                 </div>
                 </div></a>
@@ -77,16 +73,16 @@
     <?php } ?>
     <a href="../posts/posts.php?post=<?= $post['post_id'] ?>">
     <div class="post_insights">
-            <span class='thot'>    <span id='comment'><img src="../images/comment.png" alt=""><small><?= $post['comment_count']?> Comments</small></span>
+            <span class='thot'>    <span id='comment'><img src="../images/comment2.png" alt=""><small><?= $post['comment_count']?> Comments</small></span>
                 
-                    <span id='reaction_emoj' >
-                        <img src="../images/happiness.png" alt="">
+                    <span id='reaction_emoj'>
                 <img src="../images/<?= $post['type'];?>.png" alt="<?= $post['type'] ?>" class='icons'>  
+                <img src="../images/love2.png" alt="" class='icons' style='width:30px;position:relative;top:7px'>
                <small> 
                 <?= $post['like_count']; ?> Reactions</small></span>
             
               </span>
-                 </div>       
+                 </div>          
        
         </a>
 </div>

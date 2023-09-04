@@ -124,7 +124,7 @@ z-index: 400;
     margin-top: 20px;
     background-color: #121212;;
     border-radius: 42px;
-    font-size: 18px;
+    font-size: 25px;
     font-weight: 550;
     margin-right: 20px;
     cursor: pointer;
@@ -197,7 +197,7 @@ z-index: 400;
 }
 .footer_items div{
    
-    padding: 12px;
+    padding: 6px;
     border-radius: 32px;
     width: 60%;
     max-width: 50px;
@@ -287,7 +287,6 @@ body {
     padding: 5px;
     border-bottom: 1px solid #333;
     display: flex;
-    justify-content: center;
     padding-bottom: 30px;
    min-width:300px;
 }
@@ -321,12 +320,17 @@ body {
    min-width: 200px;
 }
  .search_place{
-    padding: 6px;
+    padding: 6px 10px;
    display: flex;
-   margin-right: 10px;
-   margin-left: 25px;
-   font-size: 25px;
-   width: 95%;
+   font-size: 16px;
+   width:100%;
+   background-color: #1a1a1a;
+   border-radius: 63px;
+   justify-content: center;
+
+}
+.search_place img{
+    width: 20px;
 }
 .search_place button{
     padding: 4.3px 10px;
@@ -344,11 +348,10 @@ body {
 }
  .search_place input{
     width: 100%;
-    border-radius: 63px;
-    padding: 6px 10px;
-    font-size: 25px;
-      border: 1px solid #313131;
-  
+   border: none;
+    font-size: 16px;
+     
+  background-color: inherit;
    
 }
 #search-conts .search-conts .emojis{
@@ -476,6 +479,7 @@ select{
     border-radius: 32px;
     color: #1e90ff;
     border:1px solid #212121;
+    font-weight: 700;
 }
 select option{
     background-color: #212121;
@@ -718,8 +722,8 @@ border-bottom: 1px solid #333;
     
    }
    #profile_pic{
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     border-radius: 32px;
     object-fit: cover;
    border: none;
@@ -807,17 +811,21 @@ border-bottom: 1px solid #333;
 }
 
 .post-box .post_b{
-
+position: relative;
+left: 53px;
     border-radius: 10px;
     padding-bottom: 10px;
+    padding-right: 40px;
     margin-bottom: 10px;
-    padding: 10px 10%;
-    margin-top: 10px;
+    margin-top: -15px;
+    width: 99%;
+
+
 }
 .post-box p{
    margin-bottom: 10px;
     font-style: thin;
-    font-size: 18px;
+    font-size: 17px;
     overflow: hidden;
     text-overflow: ellipsis;   
    line-height: 1.5;
@@ -827,6 +835,9 @@ border-bottom: 1px solid #333;
 }
 #post-bAllP{
     max-height: 400px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .post-box .span-loc{
     font-style: arial;
@@ -1040,8 +1051,13 @@ border-bottom: 1px solid #333;
     
 }
 .heading-post  #post_info #name{
-    color: gainsboro;
+    color: gray;
    
+}
+.heading-post  #post_info small{
+    position: relative;
+    top: -3px;
+    font-weight: 800;
 }
 .heading-post small{
     color: gray;
@@ -1520,11 +1536,16 @@ cursor: pointer;
 /* Main things End */
 /*Left bar*/
 .leftbar{
-    width: 650px;
+    width: 800px;
     padding: 40px;
 }
+
 #search_place input{
-    width: 60%;
+    width: 100%;
+
+}
+#search_place {
+    margin-bottom: 10px;
 }
  
 .leftbar .leftbar-container{
@@ -1541,10 +1562,7 @@ cursor: pointer;
 .emojis{
     position: relative;
     top: 0px;
-    
     border-radius: 32px;
-    
-    background-color: #000;
     padding: 8px;
     display: grid;
    grid-template-columns: auto auto auto auto auto auto;
@@ -1914,6 +1932,7 @@ cursor: pointer;
     #small_screen_icon{
         display: block;
     }
+    
     .leftbar{
         width: 400px;
     }
@@ -1974,9 +1993,7 @@ cursor: pointer;
     #search_place input{
         width: 200px;
     }
-    .post_b{
-        padding: 10px 13%;
-    }
+   
   }
   .nav .profile{
     display: block;
@@ -1993,11 +2010,10 @@ cursor: pointer;
     margin-bottom: 10px;
   }
   #post_linkups img{
-    width: 80px;
+    width: 60px;
     border-radius: 32px;
-    height: 80px;
+    height: auto;
     object-fit: cover;
-    background-color: orange;
     border: none;
   }
   #profile-image{
@@ -2038,16 +2054,14 @@ cursor: pointer;
         justify-content: center;
         cursor: pointer;
     }
-    #settingsBtn{
-       position: relative;
-      
-    }
+  
     #settingsBtn span{ font-size: 15px;
         padding: 8px;
         left: 40px;
-        border-radius: 6px;
         background-color: #111;
-        border-radius: 1px solid gainsboro;
+        border-radius: 6px;
+        border: 2px solid gainsboro;
+        width: fit-content;
     }
 
     #settings .center img {
@@ -2107,9 +2121,7 @@ cursor: pointer;
         margin-bottom: 100px;
         border: none;
     }
-    .post_b{
-        padding: 10px 17%;
-    }
+    
     .post-container ,.reply-container,.con_form{
         border-radius: 0px;
     }

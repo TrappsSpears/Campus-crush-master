@@ -12,7 +12,7 @@ foreach($post_single as $post){
     $formattedDate = format_post_date($post_date);
     $highlightedContent = preg_replace('/(' . preg_quote($loc, '/') . ')/i', '<strong style="color:black;background:white;padding:0 4px">$1</strong>', formatPostContent($post['post_body']));
         
-    include_once('../includes/posts.php'); }
+    include('../includes/posts.php'); }
     ?> 
         
         <div class="footer_">

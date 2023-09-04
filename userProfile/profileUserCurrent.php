@@ -20,18 +20,13 @@ if(isset($_SESSION['user_id'])){
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
         <div class="nav">
-        <div class="conFess_icon" id='small_screen_icon'>
-        <h2><span><img src="../images/witterLogo.png" alt="W" class='icons' style="left:-10px;margin-left:10px">Profile</span></h2>
-        <p> Speaking Unspoken Stories</p>
-    </div>
-         
+        <h2>Profile</h2>
         </div>
         <?php $user_page = 'all'; 
 ?>
 <div class="posts">
-    <div class="con_form">           <div>
-             <a href="settings.php" id='settingsBtn'>   <span > Settings</span></a>     
-            </div> <a href="settings.php" id='settingsBtn'> 
+    <div class="con_form">  
+     <a href="settings.php" id='settingsBtn'> 
                 <div class="post_linkups" id="post_linkups">
                 <?php if($user['profile_pic']!=''){ ?> 
                     <img src="../images/users/<?= $user['profile_pic'] ?>" alt="" class="icons" >
@@ -41,6 +36,7 @@ if(isset($_SESSION['user_id'])){
                  
                    <p><b> <?= $user['name']?></b> <small style='color:gray'>@ <?= $user['username']?></small> - <small> <?= $user['school']?> </small></p>
                 </div> </a>
+                <a href="settings.php" id='settingsBtn'>   <span >Edit Profile</span></a>     
             <small id='privacy_msg' class='privacy_msg'>
                 Feel Free to say whats in your mind..Your <a href="../privacy/privacy.html" style="color:blueviolet"> privacy</a> is all urs
             </small> 
@@ -50,15 +46,16 @@ if(isset($_SESSION['user_id'])){
    
 <!--...............------------------- Now Posting --------------------------------------------------------------->
 <?php 
-    include_once('../classes_incs/functionsposts.php');
+    include('../classes_incs/functionsposts.php');
         
     foreach($posts_User as $post){ 
         $idUnique = $post['post_id'];
-        $post_date = $post['date_created'];
+        $post_date = $post['date_created'].''.$post['time'];
         $formattedDate = format_post_date($post_date);
         
-        include_once('../includes/posts.php'); }
+        include('../includes/posts.php'); }
         ?>  
+        
         <div class="footer_">
          <a href="../privacy/about.html">About</a> || <a href="../privacy/privacy.html">  Privacy</a>
         </div>

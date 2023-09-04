@@ -10,10 +10,7 @@ include('indexstyles.php');
     <div class="main-content">
  
     <div class="nav">
-<div class="conFess_icon" id='small_screen_icon'>
-        <h2><span><img src="../images/witterLogo.png" alt="W" class='icons' style="left:-10px;margin-left:-35px">Home - <small> <?= $user['school'] ?></small></span></h2>
-        <p> Speaking Unspoken Stories</p>
-    </div> 
+<h2> Home</h2>
     <div id="scrollButton" class="scroll-button">
     <button onclick="scrollToTop()">Back to Top</button>
   </div> 

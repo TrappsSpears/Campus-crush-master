@@ -42,6 +42,6 @@
             </ul>
         </nav>
         <div class="footer-about">
-            Your Confessions Platform - DailyDee - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a>
+           Share Express Engage - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a>
         </div>
     </div>

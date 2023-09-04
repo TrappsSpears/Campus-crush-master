@@ -8,31 +8,32 @@
 <?php 
       include_once('../classes_incs/functionsposts.php');
 foreach($post_single as $post){ 
-    $post_date = $post['date_created'];
-    $formattedDate = format_post_date($post_date);?>
+    $post_date =$post['date_created'].''.$post['time'];
+    $formattedDate = format_post_date($post_date);
+    
+    ?>
         
     
         <div class="post-container">
         <div class="post-head">
       
        <div class="heading-post">
-                <?php if($post['anonymous'] == 'yes'){ ?>
+       <?php if($post['anonymous'] == 'yes'){ ?>
                     <div class="post-heading-container">
                   <div class='post-heading'>
-                       <img src="../images/noProf.jpeg" alt="anonymouse" class="noProf" id='profile_pic'>
+                       <img src="../images/noProf.jpeg" alt="anonymouse" class="noProf"  id='profile_pic'>
                        <div id='post_info'>
                         <div>
-                             <b> <span id='username'>Hidey</span></b> <span id='name'>_Anonymouse</span> 
+                             <b> <span id='username'>Hidey</span></b><span id='name'> Anonymouse</span><span><?= $formattedDate ?></span>
                         </div>
-                        <div>
-                          <span><small id='date'><?= $formattedDate ?></small><small> at <?= $post['time'] ?></small> </span>
-                      </div>     
+       
                     </div>   
                 
                 </div>       
                     </div>
              
-            <?php }else { ?>   <a href="../Trends/trends.php?word=<?= $post['username'] ?>">
+            <?php }else { ?> 
+                <a href="../Trends/trends.php?word=<?= $post['username'] ?>">
                 <div class="post-heading-container">
                 <div class='post-heading'>
                 <?php if($user['profile_pic']!=''){ ?> 
@@ -42,15 +43,13 @@ foreach($post_single as $post){
                         <?php } ?>
                        <div id='post_info'>
                         <div>
-                             <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'> - <?= $post['name'] ?></span> 
+                             <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'>  <?= $post['name'] ?></span><span><small id='date'><?= $formattedDate ?></small></span>
                         </div>
-                        <div>
-                          <span><small id='date'><?= $formattedDate ?></small><small> . <?= $post['time'] ?></small> </span>
-                      </div>     
+                 
                     </div>   
                 </div>
                 </div></a>
-                <?php } ?>   
+                <?php } ?>  
                 
                   
         </div>
@@ -177,7 +176,7 @@ foreach($post_single as $post){
                 </div>
             <?php }else{?>
                 <div class="react" id='react' style="font-size: 23px;">
-                🙂
+                <img src="../images/love2.png" alt="" class='icons' >
                 <small><?= $results['total']; ?></small>
                 
                 </div>
