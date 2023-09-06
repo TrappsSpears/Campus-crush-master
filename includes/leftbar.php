@@ -1,10 +1,11 @@
 <div class="leftbar">
 
     <div class="leftbar-container">
+        <?php if($page !='search'){ ?> 
         <form action="../Trends/trends.php" method="get">
     <div class="search_place" id='search_place' style='margin-bottom: 10px;'>
         <input type="text"  placeholder="Search..." id='search' name="word"><button type='submit' required> <img src="../images/search.png" alt="search" class='icons'></button>
-    </div></form>
+    </div></form><?php } ?>
         <div class="emojis">
             <div>
             <a href="../Trends/trends.php?reaction=like">   
@@ -90,7 +91,7 @@
 
     </div>
     <div class="footer-about" id='info_App'>
-        Share Stories - Share Ideas - Ask Ques - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a>
+        Share Stories - Confess - Share Ideas - Ask Ques - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a>
         </div>
         </div>
         

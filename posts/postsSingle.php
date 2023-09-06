@@ -1,5 +1,7 @@
 <div class="posts" style='margin-top: 0px'>
-    
+    <div class="backbtn">
+
+    </div>
     <div class="con_form">
     </div>
    
@@ -24,7 +26,7 @@ foreach($post_single as $post){
                        <img src="../images/noProf.jpeg" alt="anonymouse" class="noProf"  id='profile_pic'>
                        <div id='post_info'>
                         <div>
-                             <b> <span id='username'>Hidey</span></b><span id='name'> Anonymouse</span><span><?= $formattedDate ?></span>
+                             <b> <span id='username'>Hidey</span></b><span id='name'> Anonymouse<small> . </small>  <?= $formattedDate ?></span>
                         </div>
        
                     </div>   
@@ -43,13 +45,13 @@ foreach($post_single as $post){
                         <?php } ?>
                        <div id='post_info'>
                         <div>
-                             <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'>  <?= $post['name'] ?></span><span><small id='date'><?= $formattedDate ?></small></span>
+                             <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'>  <?= $post['name'] ?><small> . </small>  <?= $formattedDate ?></span>
                         </div>
                  
                     </div>   
                 </div>
                 </div></a>
-                <?php } ?>  
+                <?php } ?>   
                 
                   
         </div>
@@ -94,12 +96,13 @@ foreach($post_single as $post){
             <div class="post_b">
 
             
+        
+        <p > <?= formatPostContent($post['post_body']) ?></p>
         <?php if($post['post_pic'] != ''){?> 
     <div class="img_post">
         <img src="../images/imagePosts/<?= $post['post_pic'] ?>" alt="" style='height:auto'>
     </div>
     <?php } ?>
-        <p > <?= formatPostContent($post['post_body']) ?></p>
         </a>
         <div>
               
@@ -169,8 +172,7 @@ foreach($post_single as $post){
                        
                         <?php } ?>
                         
-                   <small>  <?php if($results>0){ ?>
-                    <?= $results['total']; ?> <?php } ?></small></span>
+                   </span>
 
                 </div>
                 </div>
@@ -253,7 +255,7 @@ foreach($post_single as $post){
         </div>
                 <div class="comOpt">
                 <div id="emojiContainer">
-        <span id="emojiButton">😀</span>
+        <span id="emojiButton"><img src="../images/smile.png" alt="" class='icons'></span>
         <div id="emojiMenu">
             <!-- Emoji buttons will be added dynamically using JavaScript -->
         </div>

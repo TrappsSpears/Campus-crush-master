@@ -36,7 +36,7 @@
         <input type="date" placeholder="Date of Birth" required name="dob" id="dob">
 <p id="dob_error" style="color: red;"></p>
         <!-- Instructions for School -->
-        <p class="input-hint">Enter the name of your school/university/college or the community you're a part of.</p>
+        <p class="input-hint">Where are you at?</p>
         
         <div class="input-container">
             <input type="text" placeholder="e.g. Eden University..." required name="school" id="school" minlength="3" maxlength="15">

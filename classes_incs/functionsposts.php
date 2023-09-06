@@ -9,29 +9,44 @@ function format_post_date($post_date) {
     // Calculate the time difference in seconds
     $time_diff = $now - $timestamp;
 
+    // Calculate the number of seconds in a minute, hour, day, week, and month
+    $minute = 60;
+    $hour = 3600;
+    $day = 86400;
+    $week = 604800;
+    $month = 2628000; // An approximate value for a month
+
     // Check if the post date is within the last minute
-    if ($time_diff < 60) {
-        return $time_diff . ' secs ago';
+    if ($time_diff < $minute) {
+        return $time_diff . ' secs ';
     }
     // Check if the post date is within the last hour
-    elseif ($time_diff < 3600) {
-        $minutes = floor($time_diff / 60);
-        return $minutes . ' mins ago';
+    elseif ($time_diff < $hour) {
+        $minutes = floor($time_diff / $minute);
+        return $minutes . ' mins ';
     }
-    // Check if the post date is today
-    elseif (date('Y-m-d', $timestamp) == date('Y-m-d', $now)) {
-        $hours = floor($time_diff / 3600);
-        return $hours . ' hrs ago';
+    // Check if the post date is within the last day
+    elseif ($time_diff < $day) {
+        $hours = floor($time_diff / $hour);
+        return $hours . ' hrs ';
     }
-    // Check if the post date is yesterday
-    elseif (date('Y-m-d', $timestamp) == date('Y-m-d', strtotime('yesterday', $now))) {
-        return 'Yesterday';
+    // Check if the post date is within the last week
+    elseif ($time_diff < $week) {
+        $days = floor($time_diff / $day);
+        return $days == 1 ? '1 day ' : $days . ' days ';
     }
-    // For other days, format the date as "Thursday 23 May 2023" using the date() function
+    // Check if the post date is within the last month
+    elseif ($time_diff < $month) {
+        $weeks = floor($time_diff / $week);
+        return $weeks == 1 ? '1 week ' : $weeks . ' weeks ';
+    }
+    // For older posts, return the date as "1 month ago," "3 months ago," etc.
     else {
-        return date('l j F Y', $timestamp);
+        $months = floor($time_diff / $month);
+        return $months == 1 ? '1 month ' : $months . ' months';
     }
 }
+
 
 
 function formatPostContent($content) {

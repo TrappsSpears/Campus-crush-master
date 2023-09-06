@@ -1,6 +1,7 @@
 
 <?php if(isset($_GET['word'])){ 
      $loc= $_GET['word'];
+
      $searchTerm = $_GET['word'];
      include_once('../classes_incs/dbh.class.php');
  
@@ -27,14 +28,14 @@ if (!$selectPostLoc->execute()) {
  $post_single = $selectPostLoc->fetchAll(PDO::FETCH_ASSOC);
 }
 
- $page = '';
+$page = 'search';
  include('../includes/headall.php'); ?>
     <body>  
     <div class="main">
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
     <div class="nav">
-    <form action="../Trends/trends.php" method="get">
+    <form action="../Trends/trends.php" method="get" style='width:100%'>
     <div class="search_place">
         <input type="text" placeholder="<?= $loc ?>" id='search' name="word"><button type='submit' >  <img src="../images/search.png" alt="search" class='icons'></button>
     </div></form>
@@ -72,14 +73,14 @@ if(!$selectPostLoc ->execute(array($loc))){
 }else{
     $post_single = $selectPostLoc->fetchAll(PDO::FETCH_ASSOC);
 };
- $page = '';
+$page = 'search';
  include('../includes/headall.php'); ?>
     <body>  
     <div class="main">
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
     <div class="nav">
-       <form action="../Trends/trends.php" method="get">
+       <form action="../Trends/trends.php" method="get" style='width:100%'>
     <div class="search_place">
         <input type="text" placeholder="<?= $loc ?>" id='search' name="word"><button type='submit' >  <img src="../images/search.png" alt="search" class='icons'></button>
     </div></form>

@@ -27,11 +27,11 @@
                         <?php } ?>
                
             </div>
-          
+            
             <div>
                <textarea id="post_choice" placeholder="What Happened?! " name="post" required minlength="2    0"></textarea> 
                <div class="progress-container" id='prog_div'>
-        <span id="remainingChars">1050</span>
+        <span id="remainingChars">600</span>
         <div class="progress-bar" id="progressBar"></div>
     </div> 
                   <div class="custom-select">
@@ -67,12 +67,7 @@
                   </div>   
             
             </div>
-                  <div id="emojiContainer">
-        <span id="emojiButton" style='left:-10px;font-size:23px'>🙂</span>
-        <div id="emojiMenu">
-            <!-- Emoji buttons will be added dynamically using JavaScript -->
-        </div>
-    </div>
+               
             
         </div>
      
@@ -83,22 +78,29 @@
         <div class='post_header'>
         
         
-           <div style='display:flex'>
-   
-            <select name="location" id="location">
+           <div style='display:flex; gap:10px'>
+            <div>
+                <select name="location" id="location">
                 <?php if($user['school']!= ''){ ?> 
                 <option value="<?= $user['school'] ?>"> <?= $user['school'] ?></option>
                 <?php }?>
                 <option value="<?= $user['city'] ?>"><?= $user['city'] ?></option>
                 <option value="public">Public</option>
             </select>
-           </div>
+        
+            </div>
+            
                 
-                <div class='label_upload'>
+              <div id="emojiContainer">
+              <img src="../images/smile.png" alt="" class='icons' id="emojiButton" > 
+              <div id="emojiMenu">
+            <!-- Emoji buttons will be added dynamically using JavaScript -->
+        </div>
+              </div>
                      <input type="hidden" name='user_id' value='<?= $user_id ?>'>
-                    <label for="upload_profile_pic" id='label_upload'> <img src="../images/imagegallery.png" alt="" class='icons'></label>
+                    <label for="upload_profile_pic" id='label_upload'> <img src="../images/gallery.png" alt="" class='icons'></label>
                     <input type="file" name='post_pic' id='upload_profile_pic' accept="image/*">
-                </div>
+                
                 
                
                 
@@ -114,13 +116,13 @@
                
               
             </label> 
-            <div>
-                <small style='margin-left:-15px'>Anonymous</small>
+            <div class="small">
+                <small>Anonymous</small>
             </div>
             </div> 
                     </div>
             
-            
+        </div>
         
             <div>
                 <button name='submit'>Post</button>
@@ -141,7 +143,7 @@
        const progressBar = document.getElementById("progressBar");
        const prog_div = document.getElementById("prog_div");
        const anoymousProfimg =document.querySelector('#anoymousProfimg');
-       const maxLength = 1050;
+       const maxLength = 600;
 
        textarea_Post.addEventListener("input", function() {
             prog_div.style.display ='block';
@@ -271,11 +273,8 @@ document.addEventListener('click', (event) => {
 
                        <div id='post_info'>
                         <div>
-                        <b> <span id='username'>Witter</span></b>
-                        </div>
-                        <div>
-                        <span><small id='date'>To you <?= $user['name'] ?></small></span> 
-                      </div>     
+                        <b> <span id='username'>Witter</span></b> <span id="name">To you <?= $user['name'] ?></span> 
+                        </div>  
                     </div>   
                 
                 </div>

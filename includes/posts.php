@@ -2,9 +2,10 @@
         <div class="post-head">
             <div class="heading-post">
                 <?php if($post['anonymous'] == 'yes'){ ?>
+                    <a href="../Trends/trends.php?word=Hidey"> 
                     <div class="post-heading-container">
                   <div class='post-heading'>
-                       <img src="../images/noProf.jpeg" alt="anonymouse" class="noProf"  id='profile_pic'>
+                       <img src="../images/W.png" alt="anonymouse"   id='profile_pic'>
                        <div id='post_info'>
                         <div>
                              <b> <span id='username'>Hidey</span></b><span id='name'> Anonymouse<small> . </small>  <?= $formattedDate ?></span>
@@ -14,7 +15,7 @@
                 
                 </div>       
                     </div>
-             
+                    </a>
             <?php }else { ?> 
                 <a href="../Trends/trends.php?word=<?= $post['username'] ?>">
                 <div class="post-heading-container">
@@ -56,7 +57,7 @@
               <span class='span-loc'><a href="../Trends/trends.php?word=<?= $post['location'] ?>">     
                      <img src="../images/placeholder.png" alt="" class='icons' style='width:20px;position:relative;top:5px'> <?= $post['location'] ?>
                  </a> </span>
-             <a href="../Trends/trends.php?word=<?= $post['theme'] ?>">   <span class='theme_span'><?= $post['theme'] ?></span></a>
+             <a href="../Trends/trends.php?word=<?= $post['theme'] ?>">   <span class='theme_span'>#<?= $post['theme'] ?></span></a>
                         
                  </div>
         </div>

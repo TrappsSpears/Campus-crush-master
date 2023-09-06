@@ -6,9 +6,9 @@ include('../includes/headall.php'); ?>
     <div class="main">
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
-    <div class="nav">
+    <div class="nav" >
 
-    <form action="../Trends/trends.php" method="get">
+    <form action="../Trends/trends.php" method="get" style='width:100%'>
     <div class="search_place">
         <input type="text" placeholder="Explore..." id='search' name="word"><button type='submit' >  <img src="../images/search.png" alt="search" class='icons'></button>
     </div></form>
@@ -131,7 +131,74 @@ foreach($postsRand as $post){
         </div>
 </div>
     </div>
-    <div class="leftbar"></div>
+    <div class="leftbar">
+    <div class="leftbar-container">
+        <?php foreach($postsTrends as $post){ ?> 
+            <div class="trends">
+                <div class="trendItms">
+                <div class="post-head">
+            <div class="heading-post">
+                <?php if($post['anonymous'] == 'yes'){ ?>
+                    <a href="../posts/posts.php?post=Hidey">
+                  <div class='post-heading'>
+                       <img src="../images/noProf.jpeg" alt="anonymouse"   id='profile_pic'>
+                       <div id='post_info'>
+                        <div>
+                             <b> <span id='username'>Hidey</span></b><span id='name'> Anonymouse<small> . </small>  <?= $formattedDate ?></span>
+                        </div>
+       
+                    </div>   
+                
+                </div>       
+                    </a>
+             
+            <?php }else { ?> 
+                <a href="../Trends/trends.php?word=<?= $post['username'] ?>">
+                <div class='post-heading'>
+                <?php if($user['profile_pic']!=''){ ?> 
+                    <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
+                    <?php } else{ ?> 
+                        <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
+                        <?php } ?>
+                       <div id='post_info'>
+                        <div>
+                             <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'>  <?= $post['name'] ?><small> . </small>  <?= $formattedDate ?></span>
+                        </div>
+                    </div>   
+                </div>
+                </a>
+                <?php } ?>   
+                
+                  
+        </div>
+            <div class="head-dots" id = 'head-dots<?php echo $idUnique;?>'>
+                <div>
+                  <img src="../images/menu.png" alt="..." class="icons">
+                </div>
+                
+            </div>
+        </div>      <a href="../posts/posts.php?post=<?= $post['post_id'] ?>">
+        <div class="post_b">    
+    <p id='post-bAllP' style= 'padding:25px;max-height:200px'>   <?= formatPostContent($post['post_body']) ?></p>
+    <div class="img_post">
+        <img src="../images/imagePosts/<?= $post['post_pic'] ?>" alt="">
+    </div>
+    <div style="padding: 12px;color:gray;font-size:14px">
+ 
+       
+              <span class='span-loc'><a href="../Trends/trends.php?word=<?= $post['location'] ?>">     
+                     <img src="../images/placeholder.png" alt="" class='icons' style='width:20px;position:relative;top:5px'> <?= $post['location'] ?>
+                 </a> </span>
+             <a href="../Trends/trends.php?word=<?= $post['theme'] ?>">   <span class='theme_span'>#<?= $post['theme'] ?></span></a>
+                        <span><small> <i>Reactions <?= $post['like_count'] ?></i>  <i>Comments <?= $post['comment_count'] ?></i></small>  </span>
+                 </div>
+        </div> </a>
+                </div>
+            </div>
+        
+        <?php } ?>
+    </div>
+    </div>
     </div>
   <?php include('../includes/footer.php') ?>
 </body>
