@@ -13,14 +13,8 @@ include('../includes/headall.php'); ?>
 </div>
 <div class="posts" id="search-conts">
 
-<div class="post-container">
-
-
-  </div>
   
-<div class="post-container">
 
-  </div>
     </div>
     </div>
     <?php include('../includes/leftbar.php') ?>

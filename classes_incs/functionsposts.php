@@ -59,3 +59,4 @@ function formatPostContent($content) {
 
     return $formattedContent;
 }
+

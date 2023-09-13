@@ -2,11 +2,27 @@
 
     <div class="footer_items">
        
-        <div <?php if ($page == 'home'){ echo 'class="icons-active"';} ?>><a href="../home/home.php"><img src="../images/homeall.png" alt="Home" class='icons-nav'></a></div>
-        <div <?php if ($page == 'search'){ echo 'class="icons-active"';} ?>><a href="../Search/search.php"><img src="../images/explore.png" alt="explore" class='icons-nav'></a></div>
-        <div <?php if ($page == 'nots'){ echo 'class="icons-active"';} ?>><a href="../Notifications/notifications.php"><img src="../images/bell.png" alt="nots" class='icons-nav'></a></div>
-        <div <?php if ($page == 'bookmarks'){ echo 'class="icons-active"';} ?>><a href="../bookmarks/bookmarks.php"><img src="../images/bookmark.png" alt="bookmarks" class='icons-nav'></a></div>
-        <div <?php if ($page == 'profile'){ echo 'class="icons-active"';} ?>><a href="../userProfile/profileUserCurrent.php"><img src="../images/witterLogo.png" alt="W"  class='icons-nav'></a></div>
+        <div <?php if ($page == 'home'){ echo 'class="icons-active"';} ?>>
+        <a href="../home/home.php">  
+         <img src="../images/<?php if ($page == 'home'){ ?>house-blank2.png <?php }else { ?>house-blank.png <?php } ?>" alt="" class='icons-nav'>
+        </a>
+        </div>
+        <div <?php if ($page == 'search'){ echo 'class="icons-active"';} ?>>
+        <a href="../Search/search.php">
+        <img src="../images/<?php if ($page == 'search'){ ?>search2.png <?php }else { ?>search.png <?php } ?>" alt="" class='icons-nav'>
+        </a>
+        </div>
+        <div <?php if ($page == 'nots'){ echo 'class="icons-active"';} ?>>
+        <a href="../Notifications/notifications.php">
+        <img src="../images/<?php if ($page == 'nots'){ ?>bell2.png <?php }else { ?>bell1.png <?php } ?>" alt="" class='icons-nav'>
+        </a>
+        </div>
+        <div <?php if ($page == 'bookmarks'){ echo 'class="icons-active"';} ?>>
+        <a href="../bookmarks/bookmarks.php">
+        <img src="../images/<?php if ($page == 'bookmarks'){ ?>star2.png <?php }else { ?>star(1).png <?php } ?>" alt="" class='icons-nav'>
+        </a>
+        </div>
+        <div <?php if ($page == 'profile'){ echo 'class="icons-active"';} ?>><a href="../userProfile/profileUserCurrent.php"><img src="../images/<?php if ($page == 'profile'){ ?>user.png <?php }else { ?>user2.png <?php } ?>" alt="" class='icons-nav'></a></div>
         <div></div>
                <script>
                     const toggleBtn = document.getElementById('toggleBtn');

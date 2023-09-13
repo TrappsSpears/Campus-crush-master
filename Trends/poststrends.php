@@ -11,7 +11,7 @@ foreach($post_single as $post){
     $post_date = $post['date_created'];
     $formattedDate = format_post_date($post_date);
     $highlightedContent = preg_replace('/(' . preg_quote($loc, '/') . ')/i', '<strong style="color:black;background:white;padding:0 4px">$1</strong>', formatPostContent($post['post_body']));
-        
+    $rand = rand(0,1000);
     include('../includes/posts.php'); }
     ?> 
         

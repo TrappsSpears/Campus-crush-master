@@ -10,11 +10,11 @@ include('../includes/headall.php'); ?>
     <div class="main">
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
-        <div class="nav">
+        <div class="nav" id ='nav'>
             
-            <h3>Post</h3><div class="back_btn">
-            <button id="backButton">< Go Back</button>
-    </div>
+            <h3><div class="back_btn">
+            <button id="backButton"> <img src="../images/arrow.png" alt="Go Back" class='icons'> Post</button>
+    </div></h3>
         </div>
 <?php 
 

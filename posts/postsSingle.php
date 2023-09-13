@@ -2,8 +2,7 @@
     <div class="backbtn">
 
     </div>
-    <div class="con_form">
-    </div>
+   
    
 <!--...............------------------- Now Posting --------------------------------------------------------------->
 
@@ -23,10 +22,11 @@ foreach($post_single as $post){
        <?php if($post['anonymous'] == 'yes'){ ?>
                     <div class="post-heading-container">
                   <div class='post-heading'>
-                       <img src="../images/noProf.jpeg" alt="anonymouse" class="noProf"  id='profile_pic'>
+                       <img src="../images/W.png" alt="anonymouse" class="noProf"  id='profile_pic'>
                        <div id='post_info'>
-                        <div>
-                             <b> <span id='username'>Hidey</span></b><span id='name'> Anonymouse<small> . </small>  <?= $formattedDate ?></span>
+                       <div>
+                             <b> <span id='username'> <?= $post['theme'] ?> </span></b><span id='name'>@hideMe<small> . </small>  <?= $formattedDate ?>
+                            </span>
                         </div>
        
                     </div>   
@@ -38,14 +38,14 @@ foreach($post_single as $post){
                 <a href="../Trends/trends.php?word=<?= $post['username'] ?>">
                 <div class="post-heading-container">
                 <div class='post-heading'>
-                <?php if($user['profile_pic']!=''){ ?> 
+                <?php if($post['profile_pic']!=''){ ?> 
                     <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
                     <?php } else{ ?> 
                         <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
                         <?php } ?>
                        <div id='post_info'>
                         <div>
-                             <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'>  <?= $post['name'] ?><small> . </small>  <?= $formattedDate ?></span>
+                             <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'> <b><?= $post['name'] ?></b><small> . </small>  <?= $formattedDate ?></span>
                         </div>
                  
                     </div>   
@@ -60,33 +60,12 @@ foreach($post_single as $post){
             <div>
                   <img src="../images/menu.png" alt="..." class="icons" style='width:20px'>
                 </div>
-               <div class="head-menu">
-                <div class="post-container" style='background-color:#212121;'>
-                    <div class="post-head">
-                    <div class="heading-post">
-                <?php if($post['anonymous'] == 'yes'){ ?>
-                       <img src="../images/incognito.png" alt="anonymouse" class="icons"><span><small>Anonymous</small></span><span><?= $post['school'] ?></span>
-                     <?php }else { ?> 
-                <?php if($user['profile_pic']!=''){ ?> 
-                    <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
-                    <?php } else{ ?> 
-                        <img src="../images/profile-user.png" alt="" style="filter: invert(100%);" class="icons" id='profile_pic'>
-                        <?php } ?><span id='username'><?= $post['username'] ?></span> 
-                <div>
-                <span><small id='date'><?= $post['name'] ?></small></span> <span><small id='time'>. <?= $post['school'] ?></small> </span>
-                </div>
-                <?php } ?>   
-                
-                  
-                      </div>    
-                    </div>
-                
-                </div>
-               <form action="../classes_incs/bookmarks.inc.php" method='post'>
-               <input type="hidden" name="page" value="postSingle">
-                <input type="hidden" name="post_id" value="<?= $post['post_id'] ?>">
+               <div class="head-menu">       
+               <form action="../privacy/report.php" method='post'>
+               <input type="hidden" name="post_id" value="<?= $post['post_id'] ?>">
+               <input type="hidden" name="post" value="<?= $post['post_body'] ?>">
                 <input type="hidden" name='user_id' value='<?= $user_id ?>'>
-               <button name="bookmark"> Bookmark Post</button>
+               <button name="report">Report </button>
                </form>
                </div>
             </div>
@@ -107,12 +86,22 @@ foreach($post_single as $post){
         <div>
               
               <span class='span-loc'><a href="../Trends/trends.php?word=<?= $post['location'] ?>" style='border-top:1px solid #212121'>     
-                     -<?= $post['location'] ?>
+              <img src="../images/placeholder.png" alt="" class='icons' style='width:20px;position:relative;top:5px'><?= $post['location'] ?>
                  </a> </span>
                         
                  </div>
     </div>
-    
+    <div class="bookmark">
+    <form action="../classes_incs/bookmarks.inc.php" method='post'>
+               <input type="hidden" name="page" value="postSingle">
+                <input type="hidden" name="post_id" value="<?= $post['post_id'] ?>">
+                <input type="hidden" name='user_id' value='<?= $user_id ?>'>
+               <button name="bookmark"> <img src="../images/star(1).png" alt="" class='icons' ></button>
+               </form>
+               <div>
+                <img src="../images/share-square.png" alt="share" class='icons'>
+               </div>
+    </div>
     <?php 
     if($userLogged) { ?>
    
@@ -160,7 +149,7 @@ foreach($post_single as $post){
 
                 <div class="react">
                 <div class="react">
-                <img src="../images/<?php echo $resultsall['type'];?>.png" alt="<?= $resultsall['type'] ?>" class='icons'>
+                <img src="../images/<?php echo $resultsall['type'];?>.png" alt="<?= $resultsall['type'] ?>" class='icons' >
                 <small style='background-color:inherit;margin-top:40px'>
               <span style=' visibility: hidden;'>Reactions</span>  
                 </small>
@@ -168,7 +157,7 @@ foreach($post_single as $post){
                 <div>
                 <span id='reaction_emoj'>
                     <?php foreach($type as $type){ ?> 
-                    <img src="../images/<?php echo $type['type'];?>.png" alt="<?= $type['type'] ?>" class='icons'>  
+                    <img src="../images/<?php echo $type['type'];?>.png" alt="<?= $type['type'] ?>" class='icons' style='width:18px'>  
                        
                         <?php } ?>
                         
@@ -251,11 +240,33 @@ foreach($post_single as $post){
                      <input type="hidden" name = 'post_id' value="<?= $post['post_id'] ?>">
                      <input type="hidden" name='user_id' value='<?= $user_id ?>'>
                      <input type="hidden" name='page' value='<?= $page ?>'>
-                 
+                 <div>
+                    <span id='remainingChars'></span>
+                 </div>
         </div>
+        <script>
+                   const textarea_Reply = document.querySelector('#reply-textarea');
+       const remainingCharsSpan = document.getElementById("remainingChars");
+
+       const maxLength = 300;
+
+       textarea_Reply.addEventListener("input", function() {
+            const currentLength = textarea_Post.value.length;
+            const remainingChars = maxLength - currentLength;
+           
+            if (remainingChars >= 0) {
+               
+                remainingCharsSpan.textContent = remainingChars;
+          
+            } else {
+                // If the text exceeds the limit, truncate the text
+                textarea_Reply.value = textarea_Reply.value.substring(0, maxLength);
+                remainingCharsSpan.textContent = 0;
+            } });
+        </script>
                 <div class="comOpt">
                 <div id="emojiContainer">
-        <span id="emojiButton"><img src="../images/smile.png" alt="" class='icons'></span>
+        <span id="emojiButton"><img src="../images/smile.png" alt="" class='icons' style='width:20px'></span>
         <div id="emojiMenu">
             <!-- Emoji buttons will be added dynamically using JavaScript -->
         </div>
@@ -266,7 +277,7 @@ foreach($post_single as $post){
                  <option value='private'>Private</option>
             </select>
             <div>
-               <small>Private-Direct Message</small> 
+               <small>Private- To Message the poster</small> 
             </div>
             
              </div>   
@@ -299,13 +310,13 @@ foreach($post_single as $post){
             $dbh = New Dbh();
 
 ##-------------------Replys for comments--------------------------------------##
-$selectReply = $dbh->connect()->prepare("SELECT username, reply ,emoji FROM reply JOIN users ON users.id=reply.user_id WHERE com_id = ? ");
+$selectReply = $dbh->connect()->prepare('SELECT username, reply ,emoji, profile_pic FROM reply JOIN users ON users.id=reply.user_id WHERE com_id = ? ');
 if(!$selectReply ->execute(array($com_id))){
     echo 'Failed To Load Posts';
 }else{
     $reply = $selectReply->fetchAll(PDO::FETCH_ASSOC);
 }
-$selectPostIDUSER = $dbh->connect()->prepare("SELECT user_id, post_id FROM posts WHERE post_id = ? ");
+$selectPostIDUSER = $dbh->connect()->prepare('SELECT user_id, post_id FROM posts WHERE post_id = ? ');
 if(!$selectPostIDUSER ->execute(array($post_id))){
     echo 'Failed To Load Posts';
 }else{
@@ -320,7 +331,7 @@ if(!$selectPostIDUSER ->execute(array($post_id))){
 
             ?> 
             <?php if($comment['type']=='private'){ if($comment['user_id'] == $user_id || $posterId['user_id']==$user_id){ ?>
-                <div class="post-container" style='border-bottom:1px solid #1f1f1f'>
+                <div class="post-container">
                 <div class="post-head">
                     <div class="heading-post">
                     <a href="../Trends/trends.php?word=<?= $comment['username'] ?>">
@@ -333,12 +344,12 @@ if(!$selectPostIDUSER ->execute(array($post_id))){
                         <?php } ?>
                        <div id='post_info'>
                         <div>
-                             <b> <span id='username'><?= $comment['username'] ?></span></b> <span id='name'> - <?= $comment['name'] ?></span> 
+                             <b> <span id='username'><?= $comment['username'] ?></span></b> <span id='name'>  <?= $comment['name'] ?></span> 
                         </div>   
                     </div>   
                 </div>
                 </div></a>
-</div>
+                    </div>
                     </div>
                     <div class="comments_posts" style="border-left: 2px solid green;">
              
@@ -394,20 +405,20 @@ if(!$selectPostIDUSER ->execute(array($post_id))){
                 this comment is private
              </div></div>
             <?php }}else{ ?> 
-                <div class="post-container" style='border-bottom:1px solid #1f1f1f'>
+                <div class="post-container">
                 <div class="post-head">
                     <div class="heading-post">
                     <a href="../Trends/trends.php?word=<?= $comment['username'] ?>">
                  <div class="post-heading-container">
                 <div class='post-heading'>
-                <?php if($user['profile_pic']!=''){ ?> 
+                <?php if($comment['profile_pic']!=''){ ?> 
                     <img src="../images/users/<?= $comment['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
                     <?php } else{ ?> 
                         <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
                         <?php } ?>
                        <div id='post_info'>
                         <div>
-                             <b> <span id='username'><?= $comment['username'] ?></span></b> <span id='name'> - <?= $comment['name'] ?></span> 
+                             <b> <span id='username'><?= $comment['username'] ?></span></b> <span id='name'>  <?= $comment['name'] ?></span> 
                         </div>   
                     </div>   
                 </div>
@@ -430,10 +441,23 @@ if(!$selectPostIDUSER ->execute(array($post_id))){
                     if($reply['reply'] != ''){?>
 
             <div class="replys">
-                       <p><?=$reply['reply'] ?></p>  
+                <div>
+                <?php if($reply['profile_pic']!=''){ ?> 
+                    <img src="../images/users/<?=$reply['profile_pic'] ?>" class="icons" alt="" id='profile_pic'>
+                    <?php } else{ ?> 
+                        <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
+                        <?php } ?>
+                   
+                </div>
+                        
                        <div>
+                        <div>
                         <small>@<?= $reply['username'] ?></small>
-                       </div>                       
+                       </div> 
+                            <p><?=$reply['reply'] ?></p>  
+                       
+                        </div>
+                                             
             </div>
                         <?php }elseif($reply['emoji']!=''){ ?> 
                             <div class="emoji_cont">

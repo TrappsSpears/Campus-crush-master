@@ -34,7 +34,7 @@ $page = 'search';
     <div class="main">
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
-    <div class="nav">
+    <div class="nav" id='nav'>
     <form action="../Trends/trends.php" method="get" style='width:100%'>
     <div class="search_place">
         <input type="text" placeholder="<?= $loc ?>" id='search' name="word"><button type='submit' >  <img src="../images/search.png" alt="search" class='icons'></button>
@@ -79,7 +79,7 @@ $page = 'search';
     <div class="main">
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
-    <div class="nav">
+    <div class="nav" id='nav'>
        <form action="../Trends/trends.php" method="get" style='width:100%'>
     <div class="search_place">
         <input type="text" placeholder="<?= $loc ?>" id='search' name="word"><button type='submit' >  <img src="../images/search.png" alt="search" class='icons'></button>

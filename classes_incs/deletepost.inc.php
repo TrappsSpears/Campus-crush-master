@@ -21,6 +21,12 @@ if (isset($_POST['submit'])) {
         $result = $dbh->connect()->prepare($delquery);
         if ($result->execute([$post_id])) {
             // Successfully deleted the post
+            $delquery="DELETE FROM likes WHERE post_id=?";
+            $result = $dbh->connect()->prepare($delquery);
+            $delquery="DELETE FROM comments WHERE post_id=?";
+            $result = $dbh->connect()->prepare($delquery);
+            $delquery="DELETE FROM bookmarks WHERE post_id=?";
+            $result = $dbh->connect()->prepare($delquery);
             header("Location: ../userProfile/profileUserCurrent.php?Deleted=$post_id");
         } else {
             // Error while Deleting

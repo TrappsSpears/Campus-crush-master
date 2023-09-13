@@ -1,3 +1,13 @@
+
+<?php
+    session_start();
+    if(isset($_SESSION['user_id'])){
+        header('Location: home/home.php');
+        die();
+    }
+   
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,10 +28,10 @@
         <?php if(isset($_GET['error'])){ ?> <p style="color:brown"><?= $_GET['error'] ?></p> <?php } ?>
         
     <form class="signup-form" action="classes_incs/signup.inc.php" method="post" onsubmit="return validateForm()" style="display:<?php if(isset($_GET['msg'])){ echo 'none';} ?>">
-        <input type="text" placeholder="Full Name" required name="name" pattern="[A-Za-z -]+" minlength="3" maxlength="30">
+        <input type="text" placeholder="Full Name" required name="name" pattern="[A-Za-z -]+" minlength="3" maxlength="15">
         
         <div class="input-container">
-            <input type="text" placeholder="Username" required name="username" pattern="[A-Za-z -]+" minlength="3" maxlength="20">
+            <input type="text" placeholder="Username" required name="username" pattern="[A-Za-z -]+" minlength="3" maxlength="15">
             <input type="email" placeholder="Email" required name="email">
         </div>
         
@@ -43,7 +53,7 @@
             
             <!-- Country Dropdown -->
             <select name="country" required class='select_country'>
-             
+            <option value="" disabled selected>Country ?</option>
                 <!-- Add more country options here -->
             </select>
         </div>

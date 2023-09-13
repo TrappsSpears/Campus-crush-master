@@ -14,11 +14,11 @@
     <?php 
     include_once('../classes_incs/functionsposts.php');
         
-    foreach($posts as $post){ 
+    foreach($posts_B as $post){ 
         $idUnique = $post['post_id'];
         $post_date = $post['date_created'];
         $formattedDate = format_post_date($post_date);
-        include_once('../includes/posts.php'); }
+        include('../includes/posts.php'); }
     
         ?>
 

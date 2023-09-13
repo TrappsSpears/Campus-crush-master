@@ -1,5 +1,6 @@
 <?php 
 $page = 'home';
+$pagee = 'forYou';
 include_once('../includes/headall.php');
 include('indexstyles.php');
 ?>
@@ -10,10 +11,24 @@ include('indexstyles.php');
     <div class="main-content">
  
     <div class="nav">
-<h2> Home</h2>
-    <div id="scrollButton" class="scroll-button">
+      <div class="icon">
+        <img src="../images/witterlogo.png" alt="" class='icons'>
+      </div>
+      <div>
+        <h2> <span>Home</span> </h2>
+      </div>
+<div id="scrollButton" class="scroll-button">
     <button onclick="scrollToTop()">Back to Top</button>
   </div> 
+<div class="home_opt">
+  <div>
+    <p id='active-home'> <span class='active-home'>For You</span> </p>
+  </div>
+  <a href="homie.php">  <div>
+   <span> <?= $user['school'] ?> </span>
+  </div></a> 
+</div>
+    
 </div>
 
 <?php include('../includes/postHome.php') ?>

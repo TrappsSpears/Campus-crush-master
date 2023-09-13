@@ -1,12 +1,13 @@
 <div class="leftbar">
-
-    <div class="leftbar-container">
-        <?php if($page !='search'){ ?> 
-        <form action="../Trends/trends.php" method="get">
+ <?php if($page =='home'){ ?> 
+    <div class="search-con">
+         <form action="../Trends/trends.php" method="get">
     <div class="search_place" id='search_place' style='margin-bottom: 10px;'>
         <input type="text"  placeholder="Search..." id='search' name="word"><button type='submit' required> <img src="../images/search.png" alt="search" class='icons'></button>
-    </div></form><?php } ?>
-        <div class="emojis">
+    </div></form>
+    </div>
+
+    <div class="emojis">
             <div>
             <a href="../Trends/trends.php?reaction=like">   
             <img src="../images/like.png" class='icons' alt="like">
@@ -39,6 +40,10 @@
             </div>
         </div>
            
+       <?php } ?>
+    <div class="leftbar-container">
+       
+    
     <div class="trends">
         <div class="locs">
         <h2>
@@ -91,7 +96,7 @@
 
     </div>
     <div class="footer-about" id='info_App'>
-        Share Stories - Confess - Share Ideas - Ask Ques - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a>
+        Share Stories - Confess - Share Ideas - <a href="../privacy/report.php"> Ask Ques</a> - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a> - <a href="../privacy/termsOfService.html"> Terms Of Use</a> -  <a href="../privacy/cookies.html"> Cookie Policy</a> 2023 WitterVerse Corp.
         </div>
         </div>
         

@@ -9,6 +9,11 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            text-align: left;
+            margin-top: -10px;
+        }
+        .signup-form p{
+            margin-bottom: -6px;
         }
 
         .input-container {

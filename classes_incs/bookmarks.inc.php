@@ -13,7 +13,7 @@
             header('location: ../index/index.php?error=Failed');
         }else{
             
-                header("Location: ../posts/posts.php?post_id=$post_id");
+                header("Location: ../posts/posts.php?post=$post_id");
            
 
         }

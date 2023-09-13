@@ -19,7 +19,7 @@ if(isset($_SESSION['user_id'])){
     <div class="main">
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
-        <div class="nav">
+        <div class="nav" id='nav'>
         <h2>Profile</h2>
         </div>
         <?php $user_page = 'all'; 
@@ -37,10 +37,10 @@ if(isset($_SESSION['user_id'])){
                    <p><b> <?= $user['name']?></b> <small style='color:gray'>@ <?= $user['username']?></small> - <small> <?= $user['school']?> </small></p>
                 </div> </a>
                 <a href="settings.php" id='settingsBtn'>   <span >Edit Profile</span></a>     
-            <small id='privacy_msg' class='privacy_msg'>
-                Feel Free to say whats in your mind..Your <a href="../privacy/privacy.html" style="color:blueviolet"> privacy</a> is all urs
-            </small> 
             
+                <div class="footer-about" id='info_App'>
+        Share Stories - Confess - Share Ideas - <a href="../privacy/report.php"> Report</a> - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a> - <a href="../privacy/termsOfService.html"> Terms Of Use</a> -  <a href="../privacy/cookies.html"> Cookie Policy</a> 2023 WitterVerse Corp.
+        </div>
     
     </div>
    
@@ -52,7 +52,6 @@ if(isset($_SESSION['user_id'])){
         $idUnique = $post['post_id'];
         $post_date = $post['date_created'].''.$post['time'];
         $formattedDate = format_post_date($post_date);
-        
         include('../includes/posts.php'); }
         ?>  
         

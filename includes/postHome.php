@@ -23,7 +23,7 @@
                 <?php if($user['profile_pic']!=''){ ?> 
                     <img src="../images/users/<?= $user['profile_pic'] ?>" alt="">
                     <?php } else{ ?> 
-                        <img src="../images/noProf.jpeg" alt="" class="noProf" style="filter: invert(100%);border:none">
+                        <img src="../images/noProf.jpeg" alt="" class="noProf" >
                         <?php } ?>
                
             </div>
@@ -31,33 +31,33 @@
             <div>
                <textarea id="post_choice" placeholder="What Happened?! " name="post" required minlength="2    0"></textarea> 
                <div class="progress-container" id='prog_div'>
-        <span id="remainingChars">600</span>
+        <p id="remainingChars">600</p>
         <div class="progress-bar" id="progressBar"></div>
     </div> 
                   <div class="custom-select">
                   <select id="themeSelect" name="theme" required>
                   <option value="" disabled selected>Select a Theme</option>
                   <option value="other">Unspecified</option>
-            <option value="confessions">Confessions and Secrets</option>
-            <option value="advice">Advice and Support</option>
-            <option value="humor">Funny Stories and Humor</option>
-            <option value="relationships">Relationships and Dating</option>
-            <option value="travel">Travel and Adventures</option>
-            <option value="career">Career and Education</option>
-            <option value="events">Local Events and News</option>
-            <option value="wellness">Wellness and Mental Health</option>
-            <option value="art">Art and Creativity</option>
-            <option value="technology">Technology and Innovations</option>
-            <option value="food">Food and Cooking</option>
-            <option value="fitness">Fitness and Health</option>
-            <option value="books">Books and Literature</option>
-            <option value="parenting">Parenting and Family</option>
-            <option value="hobbies">Hobbies and Interests</option>
-            <option value="social-issues">Social Issues and Advocacy</option>
-            <option value="music">Music and Entertainment</option>
-            <option value="fashion">Fashion and Style</option>
-            <option value="history">History and Culture</option>
-            <option value="pets">Pets and Animals</option>
+            <option value="Confessions">Confessions and Secrets</option>
+            <option value="Advice">Advice and Support</option>
+            <option value="Humor">Funny Stories and Humor</option>
+            <option value="Relationships">Relationships and Dating</option>
+            <option value="Travel">Travel and Adventures</option>
+            <option value="Career">Career and Education</option>
+            <option value="Events">Local Events and News</option>
+            <option value="Wellness">Wellness and Mental Health</option>
+            <option value="Art">Art and Creativity</option>
+            <option value="Technology">Technology and Innovations</option>
+            <option value="Food">Food and Cooking</option>
+            <option value="Fitness">Fitness and Health</option>
+            <option value=" Books">Books and Literature</option>
+            <option value="Parenting">Parenting and Family</option>
+            <option value="Hobbies">Hobbies and Interests</option>
+            <option value="Social-issues">Social Issues and Advocacy</option>
+            <option value="Music">Music and Entertainment</option>
+            <option value="Fashion">Fashion and Style</option>
+            <option value="History">History and Culture</option>
+            <option value="Pets">Pets and Animals</option>
             <!-- Add more options here -->
         </select>
         <input type="button" class='cancel_post' value='Cancel'>
@@ -82,10 +82,10 @@
             <div>
                 <select name="location" id="location">
                 <?php if($user['school']!= ''){ ?> 
-                <option value="<?= $user['school'] ?>"> <?= $user['school'] ?></option>
+                <option value="<?= $user['school'] ?>">@<?= $user['school'] ?></option>
                 <?php }?>
-                <option value="<?= $user['city'] ?>"><?= $user['city'] ?></option>
-                <option value="public">Public</option>
+                <option value="<?= $user['city'] ?>">@<?= $user['city'] ?></option>
+             
             </select>
         
             </div>
@@ -162,29 +162,35 @@
                 textarea_Post.value = textarea_Post.value.substring(0, maxLength);
                 remainingCharsSpan.textContent = 0;
             } });
+            const profileImage = document.getElementById('post-image');
+    const profilePhotoInput = document.getElementById('upload_profile_pic');
 
 textarea_Post.addEventListener('input', function() {
     textarea_Post.style.height = 'auto';
+    textarea_Post.style.fontSize = '14px';
     textarea_Post.style.paddingBottom = '50px';
     textarea_Post.style.minHeight = '100px';
     customSelect.style.display = 'block';
     textarea_Post.style.border = '100px';
     textarea_Post.style.borderRadius = '6px';
     textarea_Post.style.height = textarea_Post.scrollHeight + 'px';
-    // postbtn.style.display = 'flex';
+     postbtn.style.marginTop = '15px';
+     profileImage.style.display = 'block';
   });
   cancel_post.addEventListener('click', function() {
     textarea_Post.style.height = '40px';
+    textarea_Post.style.fontSize = '25px';
     textarea_Post.style.paddingBottom = '6px';
-    textarea_Post.style.minHeight = '40px';
+    textarea_Post.style.minHeight = '43px';
     textarea_Post.value = '';
     customSelect.style.display = 'none';
     textarea_Post.style.borderRadius = '32px';
     prog_div.style.display ='none';
+    postbtn.style.margin = '-3px';
+    profileImage.style.display = 'none';
   });
  
-  const profileImage = document.getElementById('post-image');
-    const profilePhotoInput = document.getElementById('upload_profile_pic');
+  
 
     profilePhotoInput.addEventListener('change', function(event) {
         const selectedFile = event.target.files[0];
@@ -262,8 +268,9 @@ document.addEventListener('click', (event) => {
     </div>
     
 <!--...............------------------- Now Posting --------------------------------------------------------------->
-<div class="post-container" style='margin-top:-10px;'>
+
 <?php if(isset($_GET['loggedin'])){ ?> 
+    <div class="post-container" style='margin-top:-10px;'>
     <div class="post-head">
         <div class="heading-post">
     <div class="post-heading-container">
@@ -300,12 +307,13 @@ document.addEventListener('click', (event) => {
    
 
 </div>
-<?php }?>
 </div>
+<?php }?>
+
     <?php 
     include_once('../classes_incs/functionsposts.php');
-        
     foreach($posts as $post){ 
+        $rand = rand(0,1000);
         $idUnique = $post['post_id'];
         $post_date = $post['date_created'].' '.$post['time'];
         $formattedDate = format_post_date($post_date);

@@ -6,14 +6,14 @@ include('../includes/headall.php'); ?>
     <div class="main">
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
-    <div class="nav" >
-
+    <div class="nav" id="nav" >
+    
     <form action="../Trends/trends.php" method="get" style='width:100%'>
     <div class="search_place">
         <input type="text" placeholder="Explore..." id='search' name="word"><button type='submit' >  <img src="../images/search.png" alt="search" class='icons'></button>
     </div></form>
 </div>
-<div class="posts" id="search-conts" >
+<div class="posts" >
     <div class="search-conts" id="search-conts">
     <div class="post_box">
     <div class="trends">
@@ -114,7 +114,7 @@ include('../includes/headall.php'); ?>
 foreach($postsRand as $post){ 
     $post_date = $post['date_created'];
     $formattedDate = format_post_date($post_date);
-   
+    $rand = rand(0,1000);
     include('../includes/posts.php'); }
     ?> 
         </div>
@@ -144,7 +144,7 @@ foreach($postsRand as $post){
                        <img src="../images/noProf.jpeg" alt="anonymouse"   id='profile_pic'>
                        <div id='post_info'>
                         <div>
-                             <b> <span id='username'>Hidey</span></b><span id='name'> Anonymouse<small> . </small>  <?= $formattedDate ?></span>
+                             <b> <span id='username'>Hidey</span></b><span id='name'> Anonymouse<small> 
                         </div>
        
                     </div>   
@@ -162,7 +162,7 @@ foreach($postsRand as $post){
                         <?php } ?>
                        <div id='post_info'>
                         <div>
-                             <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'>  <?= $post['name'] ?><small> . </small>  <?= $formattedDate ?></span>
+                             <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'>  <?= $post['name'] ?><small> 
                         </div>
                     </div>   
                 </div>

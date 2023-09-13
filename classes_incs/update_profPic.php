@@ -17,7 +17,7 @@ if (isset($_POST["submit_prof"]) && isset($_FILES["profile_photo"]) && $_FILES["
     // Validate file type
     $imageFileType = strtolower(pathinfo($_FILES["profile_photo"]["name"], PATHINFO_EXTENSION));
     if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png") {
-        echo 'Invalid file type. Only JPG, JPEG, and PNG files are allowed.';
+        header('Location: ../userProfile/settings.php?error=Wrong File Format');
     } else {
         // Delete current profile picture if it exists
         $queryDelete = "SELECT profile_pic FROM users WHERE id=?";
@@ -38,13 +38,13 @@ if (isset($_POST["submit_prof"]) && isset($_FILES["profile_photo"]) && $_FILES["
                 header('Location: ../userProfile/settings.php?Successfullyupdated');
             } else {
                 // Error while updating profile picture
-                header('Location: ../userProfile/settings.php?Failes');
+                header('Location: ../userProfile/settings.php?error=Failes');
             }
         } else {
             // Error while moving the uploaded file
-            header('Location: ../userProfile/settings.php?Error');;
+            header('Location: ../userProfile/settings.php?error=error');;
         }
     }
 } else {
-    header('Location ../userProfile/settings.php?Err');;
+    header('Location ../userProfile/settings.php?error=Err');;
 }

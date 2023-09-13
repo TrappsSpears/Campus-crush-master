@@ -2,7 +2,7 @@
 .scroll-button {
   display: none;
   position: fixed;
-  bottom: 20px;
+  bottom: 40px;
   right: 20px;
   background-color: #007bff;
   color: white;
