@@ -51,7 +51,7 @@
         </h2> 
         </div>
         <?php foreach($trendingThemes as $trend){ ?>
-        <a href="../Trends/trends.php?word=<?= $trend['theme'] ?>">
+            <a href="../location/location.php?theme=<?= $trend['theme'] ?>&post_count=<?= $trend['post_count'] ?>&topLocation=<?= $trend['top_location'] ?>">
             <div class='trndItms'>
                 <div>
                     <small>Posts <?= $trend['post_count'] ?> - <?= $trend['top_location'] ?></small>
@@ -67,7 +67,15 @@
  
     
    <?php } ?>
-   
+   <a href="../Groups/groups.php">
+            <div class='trndItms'>
+                
+                <div>
+                <p style='color:aqua'>Show More</p>
+                </div>
+                
+            </div>
+        </a>
     
     </div>
     <div class="trends">
@@ -76,7 +84,7 @@
         </div>
     
     <?php foreach($location as $trend){ ?>
-        <a href="../Trends/trends.php?word=<?= $trend['location'] ?>">
+        <a href="../location/location.php?place=<?= $trend['location'] ?>">
             <div class='trndItms'>
                 <div>
                     <small>Posts <?= $trend['post_count'] ?> - <?= $trend['theme'] ?></small>

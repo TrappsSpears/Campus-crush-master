@@ -5,6 +5,7 @@
     margin: 0;
     outline: none;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body{
     background-color: #000;
@@ -14,6 +15,9 @@ body{
     color: white;
     min-width: 200px;
     
+}
+input,textarea,button,a,select{
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 ::-webkit-scrollbar {
     display: none; /* Hide the scrollbar on Webkit-based browsers (e.g., Chrome, Safari) */
@@ -29,15 +33,25 @@ body{
     display: flex;
     min-width: 10px;
 }
+::selection {
+  background-color: yellow;
+  color: inherit; /* Optionally, you can set the text color to the default color */
+}
 a{
      color: inherit;
     text-decoration: none;
 }
+a:focus,a:visited,a:active{
+    outline: none;
+}
 
 a:focus, a:active {
-    outline: none; /* Remove the default focus outline */
-    -webkit-tap-highlight-color: transparent; /* Remove the tap highlight color on Webkit browsers (e.g., Chrome, Safari) */
+  background-color: transparent;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 
+  /* Override focus styles in Chrome and Safari */
+  -webkit-focus-ring-color: transparent;
 }
 /* Main things */
 .main{
@@ -46,32 +60,29 @@ a:focus, a:active {
  
 }
 /* Side-Bar */
-.conFess_icon {
-    
-    position: relative;
-    top: -76px;
-    margin-bottom: 25px;
-    
-}
+
 .conFess_icon h2{
-    transform: scale(1.3);
-    color:#1e90ff;
+    display: flex;
     margin-bottom: 10px;
-    font-size: 15px;
+    font-size: 35px;
+    margin-left: -10px;
 }
-.conFess_icon p{
-    position: relative;
-    left:-25px;
-    color: gainsboro;
-    font-size: 12px;
+
+
+.conFess_icon img {
+    width: 40px;
+    margin-right: 5px;
 }
-.conFess_icon span{
+.conFess_icon small{
+    background-color: rgb(0, 101, 196);
+    padding: 5px;
+    border-radius: 30px;
+    height: 4px;
+    position:relative;
+    top: 15px;
     margin-right: 10px;
-}
-.conFess_icon span img{
-    position: relative;
-    top: 5px;
-    left:8px;
+    box-shadow: 2px 2px 3px 0px black;
+   
 }
 #small_screen_icon{
     position: relative;
@@ -111,8 +122,8 @@ position: relative;
 .sidebar-nav{
    flex: 0.2;
    height: 100vh;
-  max-width: 20%;
-    padding: 90px 40px;
+  max-width: 24%;
+    padding: 50px 40px;
     color: white;
    
 position: fixed;
@@ -121,21 +132,29 @@ top:0;
 z-index: 400;
 
 }
-
+.prof_i{
+    background-color: #1e90ff;
+    font-weight: 700;
+    font-size: 20px;
+ 
+}
 .sidebar-nav ul div{
     display: flex;
     margin-left: -20px;
 }
 .sidebar-nav ul li{
     list-style: none;
-    padding: 12px;
-    margin-top: 20px;
+    padding: 12px 20px;
+    margin-top: 10px;
     border-radius: 42px;
     font-size: 25px;
     margin-right: 20px;
     cursor: pointer;
     display: flex;
-
+   max-width: fit-content;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 53px;
   
 }
 .sidebar-nav ul li img{
@@ -155,9 +174,8 @@ z-index: 400;
     animation: span 1s infinite linear;
     }
 .sidebar-nav ul li:hover{
-    transform: scale(1.1);
     transition: 0.3s ease;
-    box-shadow: 0px 2px 3px 0px orange;
+    background-color: #111;
 }
 .sidebar-nav ul span:hover {
     transform: scale(1.2);
@@ -169,7 +187,7 @@ z-index: 400;
     border-radius: 30px;
     height: 4px;
     position:relative;
-    top: 48px;
+    top: 35px;
     margin-right: 10px;
     box-shadow: 2px 2px 3px 0px black;
    
@@ -206,7 +224,7 @@ z-index: 400;
     padding: 10px;
     padding-left: 30px;
     display: grid;
-    grid-template-columns: auto auto auto auto auto;
+    grid-template-columns: auto auto auto auto;
     background-color: #000;
 }
 .footer_items div{
@@ -286,10 +304,13 @@ body {
     text-align: center;
     justify-content: center;
     height: 100%;
+    min-height: 100vh;
+    padding-bottom: 70px;
  justify-content: center;
- margin-left: 23%;
+ margin-left: 24%;
  position: relative;
-
+border-left: 1px solid #333;
+border-right: 1px solid #333;
      
 }
 
@@ -300,40 +321,44 @@ body {
     position:sticky;
     top: 0;
     padding: 5px;
-    border-bottom: 2px solid rgb(25, 27, 32, 0.616);;
+    border-bottom: 2px solid #333;
     background-color: #000;
     min-width:300px;
 }
 #nav{
     border-bottom: none;
 }
+#navOther{
+    padding-bottom: 20px;
+}
 .nav .icon{
     position: absolute;
     text-align: center;
-    margin-left: 40%;
+    margin-left: 5%;
     margin-top: 5px;
+   margin-bottom: 30px;
     display: none;
 }
 .nav .icon .icons{
-    width: 40px;
+    width: 30px;
 }
-.nav .home_opt{
+ .home_opt{
     display: grid;
     grid-template-columns: auto auto;
    font-weight: 700;
    
 }
-.nav .home_opt div span{
+.home_opt div span{
     padding-bottom: 5px;
     color: #777777b6;
 }
-.nav .active-home{
+.home_opt .active-home{
     border-bottom: 4px solid #1e8fffe2;
     border-radius: 3px;
     
 }
 
-.nav .home_opt div{
+ .home_opt div{
 padding-top: 10px;
 padding-bottom: 10px;
     text-align: center; 
@@ -341,11 +366,11 @@ padding-bottom: 10px;
     cursor: pointer;
     border-radius: 6px;
 }
-.nav .home_opt div:hover{
+.home_opt div:hover{
     background-color:  rgb(25, 27, 32, 0.616);
     backdrop-filter: blur(42px);
 }
-.nav .home_opt div p{
+ .home_opt div p{
     padding: 4px;
     text-align: center;
 }
@@ -459,6 +484,7 @@ background-color: transparent;
 #emojiContainer {
     margin-right: -5px;
     width: fit-content;
+
 }
 #emojiContainer img{
     width: 25px;
@@ -471,8 +497,8 @@ background-color: transparent;
     border: 1px solid #ccc;
     padding: 5px;
     margin-left: 70px;
-
-    box-shadow: 0px 0px 5px 0px white;
+    background-color: #000;
+    box-shadow: 0px 2px 5px 0px white;
     z-index: 100;
     border: 6px;
     display: none;
@@ -495,13 +521,26 @@ background-color: transparent;
 }
 
 .con_form{
-
+text-align: left;
     padding: 20px 5PX;
     border-bottom: 1px solid #333;
     width: 100%;
- 
+    margin-top: 5px;
     min-width: 200px;
     
+}
+ #theme_input{
+    border-radius: 6px;
+    border: 2px solid #333;
+    font-size: 15px;
+    width: 40%;
+    margin-left: 15px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+#create{
+    background-color: #fff;
+    color: #000;
 }
 .con_form textarea{
     padding: 10px 13px;
@@ -528,16 +567,16 @@ background-color: transparent;
     margin-bottom: -50px;
 }
 select{
-    background-color: rgb(25, 27, 32, 0.616);;
+    background-color:#000 ;
     width: fit-content;
     border-radius: 32px;
     color: #1e90ff;
-    border:1px solid rgb(49, 52, 62);
+    border:2px solid rgb(49, 52, 62);
     font-weight: 700;
     max-width: 100%;
 }
 select option{
-    background-color: #212121;
+    background-color: #121212;
     padding: 6px;
     font-size: 16px;
     border: 2px solid #201f1f;
@@ -565,7 +604,8 @@ select option{
     display: flex;
     width: 100%;
     text-align: center;
-    margin-top: 10px;   
+    margin-top: 10px;
+    padding-left: 10px;
 }
 
 .switch{
@@ -897,7 +937,7 @@ left: 48px;
 .post-box p{
    margin-bottom: 10px;
     font-style: thin;
-    font-size: 16px;
+    font-size: 17px;
     overflow: hidden;
     text-overflow: ellipsis;   
    line-height: 1.5;
@@ -907,9 +947,9 @@ left: 48px;
 }
 #post-bAllP{
     max-height: 355px;
-    overflow: hidden;
+    overflow-y:scroll;
     text-overflow: ellipsis;
- 
+    
 }
 .post-box .span-loc{
     font-style: arial;
@@ -974,23 +1014,24 @@ left: 48px;
     top: 4px;
 }
 .post_insights{
-    text-align: center;
+    padding-left: 50px;
     margin-top: -15px;
     color: gray;
 }
+
 .post_insights #comment img{
    
     position: relative;
     top: 5px;
-    width: 24px;
+    width: 15px;
 }
 .post_insights small{
     left: 2px;
     background-color: inherit;
 }
  #reaction_emoj img{
-    width: 24px;
-    margin-left: -10px;
+    width: 15px;
+    margin-left: -13px;
     position: relative;
     left: 8px;
     top: 4px;
@@ -1003,8 +1044,7 @@ left: 48px;
 
 .post_insights small{
     position: relative;
-    font-size: 10px;
-    left: -2px;
+    font-size: 15px;
     top: 3px;
     color: gainsboro;
     padding: 4px 4px 4px 6px;
@@ -1015,8 +1055,10 @@ left: 48px;
     font-size: 15px;
     cursor: pointer;
     color: white;
+    text-align: left;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto auto;
+    
 }
 
 
@@ -1712,6 +1754,109 @@ cursor: pointer;
     margin-bottom: 15px;
 }
 
+.profileContainer .cover{
+    width: 100%;
+}
+.profileContainer .cover img{
+    width: 100%;
+    height: 400px;
+    object-fit: cover;  
+    object-position: top;
+}
+.profileContainer .img_profile {
+    text-align: left;
+    margin-top: -140px;
+    display: flex;
+}
+.profileContainer .img_profile img{
+    margin-left: 15px;
+    background-color: #000;
+    width: 120px;
+    height: 120px;
+    padding: 6px;
+    border-radius: 63px;
+    object-fit: cover;
+}
+.nav_prof{
+    margin-bottom: -20px;
+    display: none;
+    text-align: right;
+}
+#nav_prof{
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+#nav_prof img{
+    width: 25px;
+}
+.nav_prof img{
+    width: 30px;
+    margin-right: 10px;
+}
+.profileContainer .info{
+   padding: 20px;
+    font-size: 20px;
+    color: #777;    
+    width: fit-content;
+   text-align: left;
+}
+.profileContainer .home_opt{
+    display: grid;
+    grid-template-columns:auto auto auto  ;
+    border-bottom: 1px solid #333
+}
+.profileContainer{
+    text-align: left;
+}
+
+.follow_btn {
+    text-align: left;
+    margin-top: 15px;
+    margin-left:15px;
+}
+.info  button{
+
+    font-size: 15px;
+    padding: 6px 12px;
+    font-weight: 600;
+    background-color: white;
+    color: black;
+    border-radius:66px;
+    border: none;
+}
+
+#group_info {
+ margin-bottom: 15px;
+}
+#group_info .home_opt{
+    border-bottom: none;
+}
+
+#group_info .post_b p{
+    max-height: 180px;
+    border-bottom: 2px solid purple;
+    padding-bottom: 10px;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+}
+#group_info .post_b{
+    backdrop-filter: blur(43px);
+    padding: 6px;
+    margin-top: 20px;
+    margin-left: 130px;
+    position: absolute;
+    max-width: 60%;
+    min-width: 40%;
+    height: 250px;
+    border: 2px solid purple;
+    border-radius: 6px;
+}
+.profileContainer .info small{
+    font-size: 15px;
+    color: gainsboro;
+    font-weight: 700;
+}
+
 .profile, .settings{
     padding: 10px;
     cursor: pointer;
@@ -2035,12 +2180,18 @@ cursor: pointer;
         border-right: none;
      
     }
+    .home_h2{
+        text-align: center;
+    }
     #small_screen_icon{
         display: block;
     }
     
     .leftbar{
-        width: 400px;
+        width: 350px;
+    }
+    .leftbar .emojis{
+        display: none;
     }
     .sidebar-nav{
        display: none;
@@ -2085,7 +2236,11 @@ cursor: pointer;
     margin-top: 10px;
     margin-left: 1%;
 }
-
+.nav_prof{
+    display: block;
+    margin-left: 120px;
+    margin-bottom: 20px;
+}
 
 .nav .icon{
     display: block;
@@ -2121,8 +2276,28 @@ cursor: pointer;
     border: none;
   }
   
+  
   #settings{
     padding: 12px
+  }
+  #settings .post-container{
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+  }
+  #settings #update div{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  #settings .post-container input {
+    width: fit-content;
+    
+  }
+  #settings .post-container button{
+    width: fit-content;
+    padding: 4px;
   }
   #sbmit_picChange{
     margin-bottom: 15px;
@@ -2164,7 +2339,7 @@ cursor: pointer;
         border-radius: 6px;
         border: 2px solid gainsboro;
         width: fit-content;
-        margin-top: -80px;
+        margin-top: -30px;
     }
 
     #settings .center img {
@@ -2214,8 +2389,12 @@ cursor: pointer;
         width: 100%;
         backdrop-filter: blur(44px);
     }
+    .home_h2{
+        text-align: center;
+    }
     .leftbar{
         display: none;
+       
     }
     #logOut{
         margin-bottom: 50px;
@@ -2325,6 +2504,10 @@ body{
 }
 #emojiContainer {
     display: none;
+}
+.nav_prof{
+    display: block;
+    margin-left: 120px;
 }
   }
   @media only screen and (max-width: 400px) { 

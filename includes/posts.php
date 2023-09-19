@@ -2,8 +2,12 @@
 <div class="post-container">
         <div class="post-head">
             <div class="heading-post">
-                <?php if($post['anonymous'] == 'yes'){ ?>
-                    <a href="#"> 
+            <?php if($post['anonymous'] == 'yes'){  if($post['theme'] != 'Message'){ ?>
+        <a href="../location/location.php?place=<?=$post['location'] ?>">
+        <?php } else { ?>
+            <a href="#"></a>
+           <?php } ?>
+                    <a href="../location/location.php?place=<?= $post['location'] ?>">
                     <div class="post-heading-container">
                   <div class='post-heading' id='anymous_' style = ' filter: hue-rotate(<?= $rand?>deg);
 '>
@@ -20,7 +24,7 @@
                     </div>
                     </a>
             <?php }else { ?> 
-                <a href="../Trends/trends.php?word=<?= $post['username'] ?>">
+                <a href="../location/location.php?user=<?= $post['username'] ?>">
                 <div class="post-heading-container">
                 <div class='post-heading'>
                 <?php if($post['profile_pic']!=''){ ?> 
@@ -95,14 +99,11 @@
         <div style="margin-left:35px;margin-top:-25px">
          <div class="post-head" >
             <div class="heading-post">
-            <a href="../Trends/trends.php?word=<?= $comment['username'] ?>">
+            <a href="../location/location.php?user=<?=$post['username'] ?>">
          <div class="post-heading-container">
         <div class='post-heading'>
-        <?php if($user['profile_pic']!=''){ ?> 
             <img src="../images/users/<?= $comment['profile_pic'] ?>" alt=""  id='profile_pic'>
-            <?php } else{ ?> 
-                <img src="../images/noProf.jpeg" alt="profile"   id='profile_pic'>
-                <?php } ?>
+ 
                <div id='post_info'>
                 <div>
                      <b> <span id='username'><?= $comment['username'] ?></span></b> <span id='name'> <b><?= $comment['name'] ?></b>
@@ -130,10 +131,14 @@
     <div class="locInfo">
  
        
-              <span class='span-loc'><a href="../Trends/trends.php?word=<?= $post['location'] ?>">     
-                     <img src="../images/placeholder.png" alt="" class='icons' style='width:20px;position:relative;top:5px'> <?= $post['location'] ?>     <?php if($post['country'] != $user['country']) { echo $post['country'];} ?>
+              <span class='span-loc'><img src="../images/map-pin.png" alt="king" class="icons" style='width:12px'>    <?php   if($post['theme'] != 'Message'){ ?>
+        <a href="../location/location.php?place=<?=$post['location'] ?>">
+        <?php } else { ?>
+            <a href="../location/location.php?user=<?=$post['location'] ?>"> 
+           <?php } ?>   
+                     <?= $post['location'] ?>     <?php if($post['country'] != $user['country']) { echo $post['country'];} ?>
                  </a> </span>
-             <a href="../Trends/trends.php?word=<?= $post['theme'] ?>">   <span class='theme_span'>#<?= $post['theme'] ?></span></a>
+             <a href="../location/location.php?theme=<?= $post['theme'] ?>">   <span class='theme_span'>#<?= $post['theme'] ?></span></a>
                         
                  </div>
         </div>
@@ -153,7 +158,7 @@
             <span class='thot'>  
                     <span id='reaction_emoj'>
                 <img src="../images/<?= $post['type'];?>.png" alt="<?= $post['type'] ?>" class='icons'>  
-                <img src="../images/love2.png" alt="" class='icons' style='width:30px;position:relative;top:7px' >
+                <img src="../images/heart.png" alt="" class='icons' style='width:20px;position:relative;top:7px' >
                <small> 
                 <?= $post['like_count']; ?> Reactions</small></span>
               <span id='comment'><img src="../images/comment2.png" alt=""><small><?= $post['comment_count']?> Comments</small></span>

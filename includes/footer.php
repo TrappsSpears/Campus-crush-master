@@ -17,11 +17,7 @@
         <img src="../images/<?php if ($page == 'nots'){ ?>bell2.png <?php }else { ?>bell1.png <?php } ?>" alt="" class='icons-nav'>
         </a>
         </div>
-        <div <?php if ($page == 'bookmarks'){ echo 'class="icons-active"';} ?>>
-        <a href="../bookmarks/bookmarks.php">
-        <img src="../images/<?php if ($page == 'bookmarks'){ ?>star2.png <?php }else { ?>star(1).png <?php } ?>" alt="" class='icons-nav'>
-        </a>
-        </div>
+      
         <div <?php if ($page == 'profile'){ echo 'class="icons-active"';} ?>><a href="../userProfile/profileUserCurrent.php"><img src="../images/<?php if ($page == 'profile'){ ?>user.png <?php }else { ?>user2.png <?php } ?>" alt="" class='icons-nav'></a></div>
         <div></div>
                <script>

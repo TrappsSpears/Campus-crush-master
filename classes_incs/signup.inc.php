@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Insert user data into the database
-    $sql = "INSERT INTO users (name, username, email, password, city, school,country,DOB) VALUES (?, ?, ?, ?, ?, ?,?,?)";
+    $sql = "INSERT INTO users (name, username, email, password, city, school,country,DOB,date_joined,profile_pic) VALUES (?, ?, ?, ?, ?, ?,?,?,?,'noProf.jpeg')";
     $stmt = $dbh->connect()->prepare($sql);
     $stmt->execute([$fullName, $username, $email, $password, $city, $school,$country,$date]);
     $successMsg = 'SignUp successful..Now LogIn';

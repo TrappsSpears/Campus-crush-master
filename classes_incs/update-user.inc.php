@@ -14,30 +14,62 @@ if (isset($_POST['update'])) {
     
     $updatedName = nl2br(htmlspecialchars($_POST['name']));
     $updatedSchool = nl2br(htmlspecialchars($_POST['school']));
-    $updatedUsername = nl2br(htmlspecialchars($_POST['username']));
-    $updatedEmail = nl2br(htmlspecialchars($_POST['email']));
     $updatedCity = nl2br(htmlspecialchars($_POST['city']));
     $updatedCountry = $_POST['country'];
 
-    $sql = "SELECT * FROM users WHERE username = ? OR email = ?";
-    $stmt = $dbh->connect()->prepare($sql);
-    $stmt->execute([$updatedUsername, $updatedEmail]);
-
-    if ($stmt->rowCount() > 0) {
-        header("Location: ../userProfile/settings.php?error=username email taken _Update Both of them");
-        exit();
-    }
     // Update the user's profile information
-    $query = "UPDATE users SET name=?, school=?, username=?, email=? ,city = ? , country = ? WHERE id=?";
+    $query = "UPDATE users SET name=?, school=?, city = ? , country = ? WHERE id=?";
     $stmt = $dbh->connect()->prepare($query);
-    if ($stmt->execute([$updatedName, $updatedSchool, $updatedUsername, $updatedEmail, $updatedCity, $updatedCountry ,$userId ])) {
-        $_SESSION['user_name'] = $updatedUsername; 
-        $_SESSION['school'] = $updatedSchool; 
+    if ($stmt->execute([$updatedName, $updatedSchool, $updatedCity, $updatedCountry ,$userId ])) {
        
         header('Location: ../userProfile/settings.php?msg=Profile Updated');
     } else {
         header('Location: ../userProfile/settings.php?error=Failed');
     }
+
+
+}else if(isset($_POST['updateUsername'])){
+    $Username =$_POST['OldUsername'];
+    $updatedUsername = nl2br(htmlspecialchars($_POST['username']));
+    $sql = "SELECT * FROM users WHERE username = ?";
+    $stmt = $dbh->connect()->prepare($sql);
+    $stmt->execute([$updatedUsername]);
+
+    if ($stmt->rowCount() > 0) {
+        header("Location: ../userProfile/settings.php?error=username  taken ");
+        exit();
+    }
+    // Update the user's profile information
+    $query = "UPDATE users SET username=? WHERE id=?";
+    $stmt = $dbh->connect()->prepare($query);
+    if ($stmt->execute([$updatedUsername ,$userId])) {
+        $queryy = "UPDATE posts SET location=? WHERE location=?";
+        $stmte = $dbh->connect()->prepare($queryy);
+        if($stmte->execute([$Username ,$Username])){
+             header('Location: ../userProfile/settings.php?msg=Profile Updated'); }
+        }
+
+       
+}elseif(isset($_POST['updateEmail'])){
+    $updatedEmail = nl2br(htmlspecialchars($_POST['email']));
+    $sql = "SELECT * FROM users WHERE  email = ?";
+    $stmt = $dbh->connect()->prepare($sql);
+    $stmt->execute([$updatedEmail]);
+
+    if ($stmt->rowCount() > 0) {
+        header("Location: ../userProfile/settings.php?error=Email taken ");
+        exit();
+    }
+    // Update the user's profile information
+    $query = "UPDATE users SET  email=?  WHERE id=?";
+    $stmt = $dbh->connect()->prepare($query);
+    if ($stmt->execute([$updatedEmail,$userId])) {
+
+        header('Location: ../userProfile/settings.php?msg=Profile Updated'); }
+
+
+}else{
+    header('Location: ../userProfile/settings.php?error=what are you tryna do');
 }
 
 // Check if the form has been submitted for profile photo update

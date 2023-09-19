@@ -19,7 +19,12 @@ foreach($post_single as $post){
         <div class="post-head">
       
        <div class="heading-post">
-       <?php if($post['anonymous'] == 'yes'){ ?>
+       <?php if($post['anonymous'] == 'yes'){  if($post['theme'] != 'Message'){ ?>
+        <a href="../location/location.php?place=<?=$post['location'] ?>">
+        <?php } else { ?>
+            <a href="#"></a>
+           <?php } ?>
+        
                     <div class="post-heading-container">
                   <div class='post-heading'>
                        <img src="../images/W.png" alt="anonymouse" class="noProf"  id='profile_pic'>
@@ -33,16 +38,14 @@ foreach($post_single as $post){
                 
                 </div>       
                     </div>
-             
-            <?php }else { ?> 
-                <a href="../Trends/trends.php?word=<?= $post['username'] ?>">
+        </a>
+            <?php }else { ?>
+                <a href="../location/location.php?user=<?=$post['username'] ?>"> 
                 <div class="post-heading-container">
                 <div class='post-heading'>
-                <?php if($post['profile_pic']!=''){ ?> 
+        
                     <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
-                    <?php } else{ ?> 
-                        <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
-                        <?php } ?>
+           
                        <div id='post_info'>
                         <div>
                              <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'> <b><?= $post['name'] ?></b><small> . </small>  <?= $formattedDate ?></span>
@@ -85,8 +88,14 @@ foreach($post_single as $post){
         </a>
         <div>
               
-              <span class='span-loc'><a href="../Trends/trends.php?word=<?= $post['location'] ?>" style='border-top:1px solid #212121'>     
-              <img src="../images/placeholder.png" alt="" class='icons' style='width:20px;position:relative;top:5px'><?= $post['location'] ?>
+              <span class='span-loc'>
+                    <?php   if($post['theme'] != 'Message'){ ?>
+        <a href="../location/location.php?place=<?=$post['location'] ?>">
+        <?php } else { ?>
+            <a href="../location/location.php?user=<?=$post['location'] ?>"> 
+           <?php } ?>  
+            -<?= $post['location'] ?> 
+            <a href="../Trends/trends.php?word=<?= $post['theme'] ?>">   <span class='theme_span'>#<?= $post['theme'] ?></span></a>
                  </a> </span>
                         
                  </div>
@@ -334,14 +343,12 @@ if(!$selectPostIDUSER ->execute(array($post_id))){
                 <div class="post-container">
                 <div class="post-head">
                     <div class="heading-post">
-                    <a href="../Trends/trends.php?word=<?= $comment['username'] ?>">
+                    <a href="../location/location.php?place=<?=$post['location'] ?>">">
                  <div class="post-heading-container">
                 <div class='post-heading'>
-                <?php if($user['profile_pic']!=''){ ?> 
+                
                     <img src="../images/users/<?= $comment['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
-                    <?php } else{ ?> 
-                        <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
-                        <?php } ?>
+                    
                        <div id='post_info'>
                         <div>
                              <b> <span id='username'><?= $comment['username'] ?></span></b> <span id='name'>  <?= $comment['name'] ?></span> 
@@ -408,14 +415,12 @@ if(!$selectPostIDUSER ->execute(array($post_id))){
                 <div class="post-container">
                 <div class="post-head">
                     <div class="heading-post">
-                    <a href="../Trends/trends.php?word=<?= $comment['username'] ?>">
+                    <a href="../location/location.php?place=<?=$post['location'] ?>">
                  <div class="post-heading-container">
                 <div class='post-heading'>
-                <?php if($comment['profile_pic']!=''){ ?> 
+       
                     <img src="../images/users/<?= $comment['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
-                    <?php } else{ ?> 
-                        <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
-                        <?php } ?>
+           
                        <div id='post_info'>
                         <div>
                              <b> <span id='username'><?= $comment['username'] ?></span></b> <span id='name'>  <?= $comment['name'] ?></span> 
@@ -442,12 +447,7 @@ if(!$selectPostIDUSER ->execute(array($post_id))){
 
             <div class="replys">
                 <div>
-                <?php if($reply['profile_pic']!=''){ ?> 
                     <img src="../images/users/<?=$reply['profile_pic'] ?>" class="icons" alt="" id='profile_pic'>
-                    <?php } else{ ?> 
-                        <img src="../images/noProf.jpeg" alt="profile" class="icons"  id='profile_pic'>
-                        <?php } ?>
-                   
                 </div>
                         
                        <div>

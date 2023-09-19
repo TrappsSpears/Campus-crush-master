@@ -48,8 +48,7 @@ include('../includes/headall.php'); ?>
         </div>
        
     <?php foreach($location as $trend){ 
-        ?>
-        <a href="../Trends/trends.php?word=<?= $trend['location'] ?>">
+        ?><a href="../location/location.php?place=<?=$trend['location'] ?>">
             <div class='trndItms'>
                 <div>
                     <small>Posts <?= $trend['post_count'] ?> - <?= $trend['theme'] ?></small>

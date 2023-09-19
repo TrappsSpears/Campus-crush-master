@@ -25,25 +25,53 @@ if(isset($_SESSION['user_id'])){
         <?php $user_page = 'all'; 
 ?>
 <div class="posts">
-    <div class="con_form">  
-     <a href="settings.php" id='settingsBtn'> 
-                <div class="post_linkups" id="post_linkups">
-                <?php if($user['profile_pic']!=''){ ?> 
-                    <img src="../images/users/<?= $user['profile_pic'] ?>" alt="" class="icons" >
-                    <?php } else{ ?> 
-                        <img src="../images/noProf.jpeg" alt=""  class="noProf" >
-                        <?php } ?>
-                 
-                   <p><b> <?= $user['name']?></b> <small style='color:gray'>@ <?= $user['username']?></small> - <small> <?= $user['school']?> </small></p>
-                </div> </a>
-                <a href="settings.php" id='settingsBtn'>   <span >Edit Profile</span></a>     
+<div class ='profileContainer'>
+  <div class="cover">
+    <img src="../images/users/<?= $user['profile_pic'] ?>" alt="">
+  </div>
+  <div class="img_profile">
+    <img src="../images/users/<?= $user['profile_pic'] ?>" alt="" >
+    <div>
+    <a href="settings.php" id='settingsBtn'>   <span >Edit Profile</span></a>  
+    </div>
+    
+ 
+  </div> 
+   <div class="info">
+    <h4>
+      <span><?= $user['username'] ?> <small> <?= $user['name']?></small> </span>
+</h4>
+    <div>
+        <span>You are at <small><?=$user['school']?> . <?=$user['city']?></small></span>
+       
+    </div>
+   
+  </div>
+  <div class='nav_prof'>
+        <a href="../bookmarks/bookmarks.php"> <img src="../images/star2.png" alt="Starred" ></a>
+        <a href="../Messages/message.php"> <img src="../images/envelope-dot(1).png" alt="messages" ></a>
+        <a href="../location/location.php?place=<?=$user['school']?>"> <img src="../images/marker(1).png" alt="Location" ></a>
+        <a href="../Groups/groups.php"><img src="../images/users(1).png" alt=""></a>
+    </div>
+  <div class="con_form">  
+                
             
                 <div class="footer-about" id='info_App'>
         Share Stories - Confess - Share Ideas - <a href="../privacy/report.php"> Report</a> - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a> - <a href="../privacy/termsOfService.html"> Terms Of Use</a> -  <a href="../privacy/cookies.html"> Cookie Policy</a> 2023 WitterVerse Corp.
         </div>
     
+</div>
+    
     </div>
-   
+       <div class="home_opt" style="border-bottom: 1px solid #333;">
+  <div>
+    <p id='active-home'> <span class='active-home'>Posts</span> </p>
+  </div>
+  <div>
+   <a href="../location/direct.php?place=<?= $user['school'] ?>"> <p> <span >Post A Message</span> </p></a>
+  </div>
+  
+</div>
 <!--...............------------------- Now Posting --------------------------------------------------------------->
 <?php 
     include('../classes_incs/functionsposts.php');
@@ -54,10 +82,6 @@ if(isset($_SESSION['user_id'])){
         $formattedDate = format_post_date($post_date);
         include('../includes/posts.php'); }
         ?>  
-        
-        <div class="footer_">
-         <a href="../privacy/about.html">About</a> || <a href="../privacy/privacy.html">  Privacy</a>
-        </div>
         </div>
   
     </div>

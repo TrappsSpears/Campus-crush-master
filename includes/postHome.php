@@ -15,17 +15,12 @@
     <div class="con_form">
       
          
-      <?Php if($userLogged){ ?>
+
        
         <form action="../classes_incs/posting.inc.php" method='Post' enctype="multipart/form-data">
         <div class='input_img'>
             <div class='userImg'>
-                <?php if($user['profile_pic']!=''){ ?> 
                     <img src="../images/users/<?= $user['profile_pic'] ?>" alt="">
-                    <?php } else{ ?> 
-                        <img src="../images/noProf.jpeg" alt="" class="noProf" >
-                        <?php } ?>
-               
             </div>
             
             <div>
@@ -134,137 +129,7 @@
         <div class="footer-about" id='info_App'>
            Share Stories - Share Ideas - Ask Ques - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a>
         </div> 
-        <script>
-            const cancel_post =document.querySelector('.cancel_post');
-            const customSelect =document.querySelector('.custom-select');
-            const postbtn =document.querySelector('.post_header');
-       const textarea_Post = document.querySelector('#post_choice');
-       const remainingCharsSpan = document.getElementById("remainingChars");
-       const progressBar = document.getElementById("progressBar");
-       const prog_div = document.getElementById("prog_div");
-       const anoymousProfimg =document.querySelector('#anoymousProfimg');
-       const maxLength = 600;
-
-       textarea_Post.addEventListener("input", function() {
-            prog_div.style.display ='block';
-            const currentLength = textarea_Post.value.length;
-            const remainingChars = maxLength - currentLength;
-            if (currentLength < maxLength){
-                postbtn.style.display = 'flex';
-                
-            }
-            if (remainingChars >= 0) {
-                const progressPercentage = (currentLength / maxLength) * 100;
-                remainingCharsSpan.textContent = remainingChars;
-                progressBar.style.width = progressPercentage + "%";
-            } else {
-                // If the text exceeds the limit, truncate the text
-                textarea_Post.value = textarea_Post.value.substring(0, maxLength);
-                remainingCharsSpan.textContent = 0;
-            } });
-            const profileImage = document.getElementById('post-image');
-    const profilePhotoInput = document.getElementById('upload_profile_pic');
-
-textarea_Post.addEventListener('input', function() {
-    textarea_Post.style.height = 'auto';
-    textarea_Post.style.fontSize = '14px';
-    textarea_Post.style.paddingBottom = '50px';
-    textarea_Post.style.minHeight = '100px';
-    customSelect.style.display = 'block';
-    textarea_Post.style.border = '100px';
-    textarea_Post.style.borderRadius = '6px';
-    textarea_Post.style.height = textarea_Post.scrollHeight + 'px';
-     postbtn.style.marginTop = '15px';
-     profileImage.style.display = 'block';
-  });
-  cancel_post.addEventListener('click', function() {
-    textarea_Post.style.height = '40px';
-    textarea_Post.style.fontSize = '25px';
-    textarea_Post.style.paddingBottom = '6px';
-    textarea_Post.style.minHeight = '43px';
-    textarea_Post.value = '';
-    customSelect.style.display = 'none';
-    textarea_Post.style.borderRadius = '32px';
-    prog_div.style.display ='none';
-    postbtn.style.margin = '-3px';
-    profileImage.style.display = 'none';
-  });
- 
-  
-
-    profilePhotoInput.addEventListener('change', function(event) {
-        const selectedFile = event.target.files[0];
-
-        if (selectedFile) {
-            const reader = new FileReader();
-
-            reader.onload = function() {
-                profileImage.src = reader.result;
-            };
-
-            reader.readAsDataURL(selectedFile);
-        }
-    });
-    const emojis = [
-    '😀', '😃', '😄', '😁', '😆', '😅', '😂', '🤣', '😊', '😇',
-    '🙂', '🙃', '😉', '😍', '🥰', '😘', '😗', '😚', '😙', '😋',
-    '😛', '😜', '🤪', '🤨', '🧐', '🤓', '😎', '🤩', '🥳', '😏',
-    '😒', '😞', '😔', '😟', '😕', '🙁', '☹️', '😣', '😖', '😫',
-    '😩', '🥺', '😢', '😭', '😤', '😠', '😡', '🤬', '🤯', '😳',
-    '😱', '😨', '😰', '😥', '😓', '🤗', '🤔', '🤭', '🤫', '🤥',
-    '😶', '😐', '😑', '😬', '🙄', '😯', '😦', '😧', '😮', '😲',
-    '🥱', '😴', '🤤', '😪', '😵', '🥴', '🤢', '🤮', '🤑', '😎',
-    '😍', '🥰', '😘', '😗', '😚', '😙', '😋', '😛', '😜', '🤪',
-    '🤨', '🧐', '🤓', '😎', '🤩','✋', '🤚', '🖐️', '✌️', '🤞', '🤟', '🤘', '🤙', '👈', '👉',
-    '👆', '👇', '☝️', '👍', '👎', '✊', '👊', '🤛', '🤜', '👏',
-    '🙌', '👐', '🤲', '🤝', '🙏', '✍️', '💅', '🤳', '💪', '🦵',
-    '🦶', '👂', '🦻', '👃', '🥳', '😏', '😒', '😞', '😔',
-    '😟', '😕', '🙁', '☹️', '😣', '😖', '😫', '😩', '🥺', '😢',
-    '😭', '😤', '😠', '😡', '🤬', '🤯', '😳', '😱', '😨', '😰',
-    '😥', '😓', '🤗', '🤔', '🤭', '🤫', '🤥', '😶', '😐', '😑',
-    '😬', '🙄', '😯', '😦', '😧', '😮', '😲', '🥱', '😴', '🤤',
-    '😪', '😵', '🥴', '🤢', '🤮', '🤑', '😀', '😃', '😄', '😁',
-    '😆', '😅', '😂', '🤣', '😊', '😇', '🙂', '🙃', '😉', '😍',
-    '🥰', '😘', '😗', '😚', '😙', '😋', '😛', '😜', '🤪', '🤨',
-    '🧐', '🤓', '😎', '🤩', '🥳', '😏', '😒', '😞', '😔', '😟',
-    '😕', '🙁', '☹️', '😣', '😖', '😫', '😩', '🥺', '😢', '😭',
-    '😤', '😠', '😡', '🤬', '🤯', '😳', '😱', '😨', '😰', '😥',
-    '😓', '🤗', '🤔', '🤭', '🤫', '🤥', '😶', '😐', '😑', '😬',
-    '🙄', '😯', '😦', '😧', '😮', '😲', '🥱', '😴', '🤤', '😪',
-    '😵', '🥴', '🤢', '🤮', '🤑', '😲', '🤑', '😲', '🤑', '😲',
-    '😶', '😐', '😶', '😐', '😶', '😐', '🤐', '😴', '🤤', '😪',
-    '😵', '🥴', '🤢', '🤮', '🤑', '😲', '🤑', '😲', '🤑', '😲',
-    // ... More emojis can be added here
-];
-
-
-
-const emojiButton = document.getElementById('emojiButton');
-const emojiMenu = document.getElementById('emojiMenu');
-
-
-emojis.forEach(emoji => {
-    const emojiOption = document.createElement('small');
-    emojiOption.textContent = emoji;
-    emojiOption.addEventListener('click', () => {
-        textarea_Post.value += emoji;
-    });
-    emojiMenu.appendChild(emojiOption);
-});
-
-emojiButton.addEventListener('click', () => {
-    emojiMenu.style.display = emojiMenu.style.display === 'grid' ? 'none' : 'grid';
-});
-
-// Close emoji menu when user clicks outside of it
-document.addEventListener('click', (event) => {
-    if (!emojiButton.contains(event.target) && !emojiMenu.contains(event.target)) {
-        emojiMenu.style.display = 'none';
-    }
-});
-
-        </script>
-        <?php } ?>
+     
     </div>
     
 <!--...............------------------- Now Posting --------------------------------------------------------------->
@@ -318,18 +183,11 @@ document.addEventListener('click', (event) => {
         $post_date = $post['date_created'].' '.$post['time'];
         $formattedDate = format_post_date($post_date);
         include('../includes/posts.php'); }
+
+        include('script.php')
         ?>
-      
-
-
-
-    
-
-<div class="post-container" style='padding:20px'>
-    <p>You've reached the end of the confessions. Thank you for exploring and engaging with our community's stories. If you'd like to see more, consider sharing your own confession or come back later for new posts.</p>
-</div>
-<div class="footer_">
-         <a href="../privacy/about.html">About</a> || <a href="../privacy/privacy.html">  Privacy</a>
-        </div>
+        <div class="footer-about" id='info_App'>
+        Share Stories - Confess - Share Ideas - <a href="../privacy/report.php"> Ask Ques</a> - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a> - <a href="../privacy/termsOfService.html"> Terms Of Use</a> -  <a href="../privacy/cookies.html"> Cookie Policy</a> 2023 WitterVerse Corp.
+        </div>  
 </div>
 

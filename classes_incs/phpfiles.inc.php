@@ -18,13 +18,14 @@
     $userCountry = $user['country'];
     $userDOB = $user['DOB']; 
     $userID = $user_id; 
+    $userName = $user['username'];
     
     // Calculate age group based on the user's date of birth
     $today = new DateTime();
     $userBirthDate = new DateTime($userDOB);
     $ageDifference = $userBirthDate->diff($today)->y;
     $ageGroup = floor($ageDifference / 15); // Group users into age groups of 15 years
-    
+    $msg = 'Message';
     $selectTrendingPosts = $dbh->connect()->prepare('
         SELECT * FROM (
             SELECT posts.*, users.*, likes.type as type,
@@ -37,7 +38,7 @@
             LEFT JOIN likes ON posts.post_id = likes.post_id 
             LEFT JOIN bookmarks ON posts.post_id = bookmarks.post_id 
             LEFT JOIN comments ON posts.post_id = comments.post_id 
-            WHERE   
+            WHERE posts.theme != :Message AND
                  posts.date_created >= DATE_SUB(NOW(), INTERVAL 4 WEEK) -- Consider posts from the last week only
                 AND FLOOR(DATEDIFF(NOW(), users.dob) / 365.25 / 15) = :ageGroup -- Match users in the same age group
             GROUP BY posts.post_id
@@ -49,6 +50,7 @@
     $selectTrendingPosts->bindValue(':user_id', $userID, PDO::PARAM_INT);
     $selectTrendingPosts->bindValue(':ageGroup', $ageGroup, PDO::PARAM_INT);
     $selectTrendingPosts->bindValue(':userCountry', $userCountry, PDO::PARAM_STR);
+    $selectTrendingPosts->bindValue(':Message', $msg, PDO::PARAM_STR);
     
     if (!$selectTrendingPosts->execute()) {
         echo 'Failed To Load  Posts';
@@ -139,7 +141,7 @@ if (!$selectRandomTrends->execute()) {
      $selectTrendingThemes = $dbh->connect()->prepare("
      (SELECT
          theme,
-         MAX(location) AS top_location,
+         MAX(posts.location) AS top_location,
          MAX(likes.type) AS type,
          COUNT(likes.id) AS like_count, 
          COUNT(post_body) AS post_count,
@@ -151,7 +153,7 @@ if (!$selectRandomTrends->execute()) {
      WHERE theme IS NOT NULL AND theme <> '' AND location LIKE :userSchool
      GROUP BY theme
      ORDER BY engagement_score DESC, like_count DESC
-     LIMIT 2 -- Select 2 trending themes for the user's school
+     LIMIT 1 -- Select 2 trending themes for the user's school
  )
  UNION ALL
  (
@@ -188,7 +190,7 @@ if (!$selectRandomTrends->execute()) {
      WHERE theme IS NOT NULL AND theme <> ''
      GROUP BY theme
      ORDER BY engagement_score DESC, like_count DESC
-     LIMIT 3 -- Select 3 trending themes for everyone (every location)
+     LIMIT 2 -- Select 3 trending themes for everyone (every location)
  )
  ORDER BY engagement_score DESC, like_count DESC
  LIMIT 7 -- Total limit of 7 trending themes (2 for school, 2 for country, and 3 for everyone)
@@ -229,20 +231,82 @@ if (!$selectRandomTrends->execute()) {
      $location = $selectLoc->fetchAll(PDO::FETCH_ASSOC);
  }
  
+ $selectThemes = $dbh->connect()->prepare('
+ SELECT
+     theme,
+     MAX(location) AS top_location,
+     MAX(likes.type) AS type,
+     profile_pic,
+     COUNT(likes.id) AS like_count, 
+     COUNT(post_body) AS post_count,
+     COUNT(comments.id) AS comment_count,
+     (COUNT(likes.id) + COUNT(comments.id)) / POW((UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(posts.date_created)), 1.8) AS engagement_score
+ FROM posts
+ JOIN Users ON users.id = posts.user_id
+ LEFT JOIN likes ON posts.post_id = likes.post_id 
+ LEFT JOIN comments ON posts.post_id = comments.post_id
+ GROUP BY theme
+ ORDER BY engagement_score DESC, like_count DESC
+ ');
+ if (!$selectThemes->execute()) {
+    echo 'Failed To Load Trending Posts';
+} else {
+    $themes = $selectThemes->fetchAll(PDO::FETCH_ASSOC);
+}
+$selectLocation = $dbh->connect()->prepare('
+SELECT location,
+     MAX(theme) AS theme,
+     MAX(likes.type) AS type,
+     profile_pic,
+            COUNT(likes.id) AS like_count, 
+            COUNT(post_body) AS post_count,
+            COUNT(comments.id) AS comment_count,
+            (COUNT(likes.id) + COUNT(comments.id)) / POW((UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(posts.date_created)), 1.8) AS engagement_score
+     FROM posts
+     JOIN users ON posts.user_id = users.id 
+     LEFT JOIN likes ON posts.post_id = likes.post_id 
+     LEFT JOIN comments ON posts.post_id = comments.post_id
+     GROUP BY location
+     ORDER BY  engagement_score DESC, like_count DESC
+');
+if (!$selectLocation->execute()) {
+   echo 'Failed To Load Trending Posts';
+} else {
+   $locations = $selectLocation->fetchAll(PDO::FETCH_ASSOC);
+}
+
     #//-------------------------------------------------------------------\\##
     
     ##-----------------------------User Posts--------------------------------##
-    $selectUserPosts = $dbh->connect()->prepare('SELECT posts.* , COUNT(comments.id) AS comment_count,likes.type,COUNT(likes.id) AS like_count, users.* FROM posts 
-    JOIN users ON posts.user_id = users.id
-         LEFT JOIN likes ON posts.post_id = likes.post_id 
-     LEFT JOIN comments ON posts.post_id = comments.post_id
-    WHERE users.id = ? ORDER BY date_created DESC ');
-    if(!$selectUserPosts ->execute(array($user_id))){
-        echo 'Failed To Load Posts';
-    }else{
-        $posts_User = $selectUserPosts->fetchAll(PDO::FETCH_ASSOC);
-    }
+    $selectHomePosts = $dbh->connect()->prepare('
+    SELECT * FROM (
+        SELECT posts.*, users.*, likes.type as type,
+        COUNT(bookmarks.id) AS save_count, 
+        COUNT(likes.id) AS like_count, 
+        COUNT(comments.id) AS comment_count,
+        (COUNT(likes.id) + COUNT(comments.id)) / POW((UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(posts.date_created)), 1.8) AS engagement_score
+        FROM posts 
+        JOIN users ON posts.user_id = users.id 
+        LEFT JOIN likes ON posts.post_id = likes.post_id 
+        LEFT JOIN bookmarks ON posts.post_id = bookmarks.post_id 
+        LEFT JOIN comments ON posts.post_id = comments.post_id 
+        WHERE ( users.username = :username)    
+            AND posts.date_created >= DATE_SUB(NOW(), INTERVAL 4 WEEK) -- Consider posts from the last week only
+        GROUP BY posts.post_id
+    ) AS subquery
+    ORDER BY engagement_score DESC, date_created DESC, time DESC
+');
+$username = $user['username'];
+$selectHomePosts->bindValue(':username', $username, PDO::PARAM_STR);
 
+
+
+
+if (!$selectHomePosts->execute()) {
+    echo 'Failed To Load Trending Posts';
+} else {
+    $posts_User = $selectHomePosts->fetchAll(PDO::FETCH_ASSOC);
+}
 
 
      ##-------------------Bookmarks--------------------------------------##
@@ -272,3 +336,4 @@ if(!$selectMsg->execute(array($user_id,$user_id,$user_id,$user_id))){
 }
 
 #//-------------------------------------------------------------------\\##
+

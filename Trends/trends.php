@@ -15,7 +15,7 @@
  JOIN users ON users.id = posts.user_id
  LEFT JOIN likes ON posts.post_id = likes.post_id 
  LEFT JOIN comments ON posts.post_id = comments.post_id 
- WHERE location LIKE :loc OR post_body LIKE :searchTerm OR username LIKE :searchTerm OR name LIKE :searchTerm OR school LIKE :searchTerm or city LIKE :searchTerm or theme LIKE :searchTerm
+ WHERE location LIKE :loc OR post_body LIKE :searchTerm OR school LIKE :searchTerm or city LIKE :searchTerm or theme LIKE :searchTerm
  GROUP BY posts.post_id
  ORDER BY like_count DESC, comment_count DESC, date_created DESC
 ");
@@ -39,6 +39,20 @@ $page = 'search';
     <div class="search_place">
         <input type="text" placeholder="<?= $loc ?>" id='search' name="word"><button type='submit' >  <img src="../images/search.png" alt="search" class='icons'></button>
     </div></form>
+    <div class="home_opt" style='grid-template-columns:auto auto auto auto'>
+  <div>
+    <p id='active-home'> <span class='active-home'>Posts</span> </p>
+  </div>
+  <a href="../location/location.php?place=<?= $_GET['word'] ?>">  <div>
+   <span> Places</span>
+  </div></a> 
+  <a href="../location/location.php?user=<?= $_GET['word'] ?>">  <div>
+   <span>Users</span>
+  </div></a> 
+  <a href="../location/location.php?theme=<?= $_GET['word'] ?>">  <div>
+   <span>Themes</span>
+  </div></a> 
+</div>
         </div>
 <?php 
 
@@ -58,7 +72,7 @@ $page = 'search';
      include_once('../classes_incs/dbh.class.php');
  
  $dbh = New Dbh();
- $sql ="SELECT  p.post_id,p.post_body,p.user_id,p.date_created,p.location,p.time,p.anonymous,p.post_pic,u.username,u.profile_pic, u.name, COUNT(*) AS like_count,l.type,p.theme,
+ $sql ="SELECT  u.*,p.post_id,p.post_body,p.user_id,p.date_created,p.location,p.time,p.anonymous,p.post_pic,u.username,u.profile_pic, u.name, COUNT(*) AS like_count,l.type,p.theme,
  COUNT(l.id) AS like_count, 
  COUNT(c.id) AS comment_count
                 FROM posts p

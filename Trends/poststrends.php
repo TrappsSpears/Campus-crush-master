@@ -15,8 +15,8 @@ foreach($post_single as $post){
     include('../includes/posts.php'); }
     ?> 
         
-        <div class="footer_">
-         <a href="../privacy/about.html">About</a> || <a href="../privacy/privacy.html">  Privacy</a>
+        <div class="footer-about" id='info_App'>
+        Share Stories - Confess - Share Ideas - <a href="../privacy/report.php"> Ask Ques</a> - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a> - <a href="../privacy/termsOfService.html"> Terms Of Use</a> -  <a href="../privacy/cookies.html"> Cookie Policy</a> 2023 WitterVerse Corp.
         </div>
 </div>
 <script>

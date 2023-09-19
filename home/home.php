@@ -14,8 +14,13 @@ include('indexstyles.php');
       <div class="icon">
         <img src="../images/witterlogo.png" alt="" class='icons'>
       </div>
+      <div class='nav_prof' id='nav_prof'>
+        <a href="../bookmarks/bookmarks.php"> <img src="../images/star(1).png" alt="Starred" ></a>
+        <a href="../Messages/message.php"> <img src="../images/envelope-dot(1).png" alt="messages" ></a>
+        <a href="../Groups/groups.php"><img src="../images/users.png" alt=""></a>
+    </div>
       <div>
-        <h2> <span>Home</span> </h2>
+        <h2 class='home_h2'> <span >Home</span> </h2>
       </div>
 <div id="scrollButton" class="scroll-button">
     <button onclick="scrollToTop()">Back to Top</button>
@@ -24,7 +29,7 @@ include('indexstyles.php');
   <div>
     <p id='active-home'> <span class='active-home'>For You</span> </p>
   </div>
-  <a href="homie.php">  <div>
+  <a href="../location/location.php?place=<?= $user['school'] ?> ">  <div>
    <span> <?= $user['school'] ?> </span>
   </div></a> 
 </div>
