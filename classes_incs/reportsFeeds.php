@@ -22,23 +22,7 @@
             header("Location: ../home/home.php?Error_Query");
             exit();
         }
-    }elseif(isset($_POST['submit_Feed'])){
-        $user_id = $_POST['user_id']; 
-        $desc = $_POST['post'];
-        $loc = $_POST['location'];
-        $type = $_POST['type'];
-        $sql = "INSERT INTO msgs(post_id,user_id,type,Detaile,location) VALUES (?, ?, ?, ?, ?)";
-        $result = $dbh->connect()->prepare($sql);
     
-        // Check if the query executed successfully
-        if ($result->execute([$id_post,$user_id,$type,$desc,$loc])) {      
-                header("Location: ../witter/home.php?succeeded");
-            exit();
-        } else {
-            // Error while executing the query
-            header("Location: ../home/home.php?Error_Query");
-            exit();
-        }
     }else{
         header("Location: ../home/home.php?Error_Query");
     }

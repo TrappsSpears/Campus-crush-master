@@ -91,7 +91,7 @@ include('witter.incs.php');
     <div class="post-container" style='padding:8px;text-align:center'>
         <h1>Helloo <?= $_SESSION['name'] ?>! </h1>
     </div>
-    <?php foreach($witter_reps as $post){ ?> 
+    <?php foreach($witter_reps as $post){if($post['type'] == 'FeddBack'){  ?> 
     <div class="post-container">
     <div class="post-head">
         <div class="heading-post">
@@ -123,7 +123,7 @@ include('witter.incs.php');
     </div>
     
     
-    <?php } ?>
+    <?php } }?>
 
         </div>
         <?php

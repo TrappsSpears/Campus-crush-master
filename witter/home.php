@@ -15,9 +15,10 @@ include('witter.incs.php');
          
 
        
-        <form action="../classes_incs/reportsFeeds.php" method='Post' enctype="multipart/form-data">
+        <form action="../classes_incs/feeds.php" method='Post' enctype="multipart/form-data">
         <div class='input_img'>
             <div class='userImg'>
+                <input type="hidden" value='<?= $_SESSION['user_id'] ?>' name='user_id'>
                 <?php if($_SESSION['profile_pic']!=''){ ?> 
                     <img src="../images/users/<?= $_SESSION['profile_pic'] ?>" alt="">
                     <?php } else{ ?> 

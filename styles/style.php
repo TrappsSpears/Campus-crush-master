@@ -13,6 +13,14 @@ border-radius: 6px;
     border: 1px solid #333;
     margin-top: 10px;
 }
+.reported{
+    padding: 6px;
+    border-radius: 6px;
+    max-height: 400px;
+    min-height: 100px;
+    overflow-y: scroll;
+    border: 1px solid #333;
+}
 #data_witt h2{
     font-size: 20px;
     padding: 6px;
