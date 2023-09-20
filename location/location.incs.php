@@ -59,7 +59,7 @@ $directPosts = $selectDirectPosts->fetchAll(PDO::FETCH_ASSOC);
 
 $selectHomeUsersIn = $dbh->connect()->prepare('
 SELECT users.school,
-       COUNT(users.id) AS total_members, SUM(post_count) AS total_posts , school , city
+       COUNT(users.id) AS total_members, SUM(post_count) AS total_posts , school , city 
 FROM users
 LEFT JOIN (
     SELECT user_id, COUNT(*) AS post_count
@@ -82,7 +82,7 @@ $userInfo = $selectHomeUsersIn->fetch(PDO::FETCH_ASSOC);
 ##----------------------------------------------------------------------------------------------------------
 
 $selectHomeRandPic = $dbh->connect()->prepare('
-SELECT  profile_pic from users WHERE school LIKE :getname OR  users.username = :getname ORDER BY RAND()
+SELECT  profile_pic , username from users WHERE school LIKE :getname OR  users.username = :getname ORDER BY RAND()
 
 ');
 

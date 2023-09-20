@@ -21,7 +21,10 @@ if (isset($_POST['update'])) {
     $query = "UPDATE users SET name=?, school=?, city = ? , country = ? WHERE id=?";
     $stmt = $dbh->connect()->prepare($query);
     if ($stmt->execute([$updatedName, $updatedSchool, $updatedCity, $updatedCountry ,$userId ])) {
-       
+        $_SESSION['city'] = $updatedCity;
+        $_SESSION['school'] = $updatedSchool;
+        $_SESSION['name'] = $updatedName;
+         
         header('Location: ../userProfile/settings.php?msg=Profile Updated');
     } else {
         header('Location: ../userProfile/settings.php?error=Failed');
@@ -46,7 +49,9 @@ if (isset($_POST['update'])) {
         $queryy = "UPDATE posts SET location=? WHERE location=?";
         $stmte = $dbh->connect()->prepare($queryy);
         if($stmte->execute([$Username ,$Username])){
-             header('Location: ../userProfile/settings.php?msg=Profile Updated'); }
+            $_SESSION['username'] = $updatedUsername; 
+                
+             header('Location: ../userProfile/settings.php?msg=Username Updated'); }
         }
 
        
@@ -64,8 +69,8 @@ if (isset($_POST['update'])) {
     $query = "UPDATE users SET  email=?  WHERE id=?";
     $stmt = $dbh->connect()->prepare($query);
     if ($stmt->execute([$updatedEmail,$userId])) {
-
-        header('Location: ../userProfile/settings.php?msg=Profile Updated'); }
+        $_SESSION['email'] = $updatedEmail;
+        header('Location: ../userProfile/settings.php?msg=Email Updated'); }
 
 
 }else{

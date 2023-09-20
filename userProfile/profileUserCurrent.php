@@ -1,6 +1,7 @@
 <?php 
 $page = 'profile';
 include('../includes/headall.php');
+include('allPosts.php');
 if(isset($_SESSION['user_id'])){ 
     
     $dbh = New Dbh();
@@ -39,10 +40,10 @@ if(isset($_SESSION['user_id'])){
   </div> 
    <div class="info">
     <h4>
-      <span><?= $user['username'] ?> <small> <?= $user['name']?></small> </span>
+      <span><?= $user['username'] ?> <small> <?= $_SESSION['name']?></small> </span>
 </h4>
     <div>
-        <span>You are at <small><?=$user['school']?> . <?=$user['city']?></small></span>
+        <span>You are at <small><?=$user['school']?> . <?=$_SESSION['city']?></small></span>
        
     </div>
    
@@ -68,7 +69,7 @@ if(isset($_SESSION['user_id'])){
     <p id='active-home'> <span class='active-home'>Posts</span> </p>
   </div>
   <div>
-   <a href="../location/direct.php?place=<?= $user['school'] ?>"> <p> <span >Post A Message</span> </p></a>
+   <a href="../location/direct.php?place=<?= $_SESSION['school'] ?>"> <p> <span >Post A Message</span> </p></a>
   </div>
   
 </div>

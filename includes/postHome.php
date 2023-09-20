@@ -1,15 +1,4 @@
-<?php 
- include_once('../classes_incs/dbh.class.php');
 
- 
- $dbh = New Dbh();
- $selectUser = $dbh->connect()->prepare("SELECT * FROM users WHERE id = ?");
- if(!$selectUser ->execute(array($user_id))){
-     echo 'Failed To Load Posts';
- }else{
-     $user = $selectUser->fetch(PDO::FETCH_ASSOC);
- }
-?>
  
 <div class="posts">
     <div class="con_form">
@@ -20,7 +9,7 @@
         <form action="../classes_incs/posting.inc.php" method='Post' enctype="multipart/form-data">
         <div class='input_img'>
             <div class='userImg'>
-                    <img src="../images/users/<?= $user['profile_pic'] ?>" alt="">
+                    <img src="../images/users/<?= $_SESSION['profile_pic'] ?>" alt="">
             </div>
             
             <div>
@@ -53,7 +42,7 @@
             <option value="Fashion">Fashion and Style</option>
             <option value="History">History and Culture</option>
             <option value="Pets">Pets and Animals</option>
-            <!-- Add more options here -->
+        
         </select>
         <input type="button" class='cancel_post' value='Cancel'>
          
@@ -76,10 +65,10 @@
            <div style='display:flex; gap:10px'>
             <div>
                 <select name="location" id="location">
-                <?php if($user['school']!= ''){ ?> 
-                <option value="<?= $user['school'] ?>">@<?= $user['school'] ?></option>
+                <?php if($_SESSION['school']!= ''){ ?> 
+                <option value="<?= $_SESSION['school'] ?>">@<?= $_SESSION['school'] ?></option>
                 <?php }?>
-                <option value="<?= $user['city'] ?>">@<?= $user['city'] ?></option>
+                <option value="<?= $_SESSION['city'] ?>">@<?= $_SESSION['city'] ?></option>
              
             </select>
         
@@ -92,7 +81,7 @@
             <!-- Emoji buttons will be added dynamically using JavaScript -->
         </div>
               </div>
-                     <input type="hidden" name='user_id' value='<?= $user_id ?>'>
+                     <input type="hidden" name='user_id' value='<?= $_SESSION['user_id'] ?>'>
                     <label for="upload_profile_pic" id='label_upload'> <img src="../images/gallery.png" alt="" class='icons'></label>
                     <input type="file" name='post_pic' id='upload_profile_pic' accept="image/*">
                 
@@ -105,13 +94,13 @@
             <div>
                 <div>
                    <label class="toggle-switch">
-                <input type="checkbox" name="show_profile" value="yes" checked>
+                <input type="checkbox" name="show_profile" value="yes">
                 <span class="slider"></span> 
                 </div>
                
               
             </label> 
-            <div class="small">
+            <div class="small" style='color:#888'>
                 <small>Anonymous</small>
             </div>
             </div> 
@@ -145,7 +134,7 @@
 
                        <div id='post_info'>
                         <div>
-                        <b> <span id='username'>Witter</span></b> <span id="name">To you <?= $user['name'] ?></span> 
+                        <b> <span id='username'>Witter</span></b> <span id="name">To you <?= $_SESSION['name'] ?></span> 
                         </div>  
                     </div>   
                 
@@ -158,12 +147,12 @@
 <div class="post-box">
     <div class="post_b" >    
     <p>
-    Welcome, <?= $user['name'] ?>! Witter - Your Hub for Local Stories and Anonymously Shared Experiences. Dive into the latest buzz from <?= $user['school'] ?> and communitys in <?= $user['city'] ?>. If you can't find your location, feel free to check and update your information in the <a href="../userProfile/settings.php" style='color:#880281'>settings</a>. Happy discovering! It's unfiltered, anonymous, and real.
+    Welcome, <?= $_SESSION['name'] ?>! Witter - Your Hub for Local Stories and Anonymously Shared Experiences. Dive into the latest buzz from <?= $_SESSION['school'] ?> and communitys in <?= $_SESSION['city'] ?>. If you can't find your location, feel free to check and update your information in the <a href="../userProfile/settings.php" style='color:#880281'>settings</a>. Happy discovering! It's unfiltered, anonymous, and real.
 </p>
  <div>
               
-       <span class='span-loc'><a href="../Trends/trends.php?location=<?= $user['city'] ?>">     
-       <?= $user['school'] ?></a> ,<a href="../Trends/trends.php?location=<?= $user['city'] ?>"><?= $user['city'] ?></a>
+       <span class='span-loc'><a href="../Trends/trends.php?location=<?= $_SESSION['city'] ?>">     
+       <?= $_SESSION['school'] ?></a> ,<a href="../Trends/trends.php?location=<?= $_SESSION['city'] ?>"><?= $_SESSION['city'] ?></a>
        </span>
                         
     </div>

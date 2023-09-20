@@ -1,7 +1,5 @@
 <div class="posts" style='margin-top: 0px'>
-    <div class="backbtn">
-
-    </div>
+ 
    
    
 <!--...............------------------- Now Posting --------------------------------------------------------------->
@@ -64,7 +62,7 @@ foreach($post_single as $post){
                   <img src="../images/menu.png" alt="..." class="icons" style='width:20px'>
                 </div>
                <div class="head-menu">       
-               <form action="../privacy/report.php" method='post'>
+               <form action="../witter/reports.php?reporting" method='post'>
                <input type="hidden" name="post_id" value="<?= $post['post_id'] ?>">
                <input type="hidden" name="post" value="<?= $post['post_body'] ?>">
                 <input type="hidden" name='user_id' value='<?= $user_id ?>'>
@@ -101,16 +99,31 @@ foreach($post_single as $post){
                  </div>
     </div>
     <div class="bookmark">
+
     <form action="../classes_incs/bookmarks.inc.php" method='post'>
                <input type="hidden" name="page" value="postSingle">
                 <input type="hidden" name="post_id" value="<?= $post['post_id'] ?>">
                 <input type="hidden" name='user_id' value='<?= $user_id ?>'>
-               <button name="bookmark"> <img src="../images/star(1).png" alt="" class='icons' ></button>
+                <?php
+            $post_id = $post['post_id'];
+            $sql = "SELECT user_id FROM bookmarks WHERE  user_id = ? AND post_id = ?;";
+            $result = $dbh->connect()->prepare($sql);
+            if(!$result->execute(array($user_id , $post_id))){
+                $result = null;
+            }else{
+                if($result->rowCount()>0){ ?>
+                      <button name="bookmark"> <img src="../images/star2.png" alt="" class='icons' ></button>
+               <?php }else{ ?> 
+                <button name="bookmark"> <img src="../images/star(1).png" alt="" class='icons' ></button>
+                <?php } }?>
+             
                </form>
                <div>
+
                 <img src="../images/share-square.png" alt="share" class='icons'>
                </div>
     </div>
+
     <?php 
     if($userLogged) { ?>
    
@@ -249,9 +262,9 @@ foreach($post_single as $post){
                      <input type="hidden" name = 'post_id' value="<?= $post['post_id'] ?>">
                      <input type="hidden" name='user_id' value='<?= $user_id ?>'>
                      <input type="hidden" name='page' value='<?= $page ?>'>
-                 <div>
-                    <span id='remainingChars'></span>
-                 </div>
+                 
+                    <span id='remainingChars' style="position: absolute;margin-left:10px"></span>
+                 
         </div>
         <script>
                    const textarea_Reply = document.querySelector('#reply-textarea');

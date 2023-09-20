@@ -1,7 +1,8 @@
 <?php 
     $page = 'groups';
     $pagee = 'themes';
-include('../includes/headall.php'); ?>
+include('../includes/headall.php');
+include('grps.incs.php'); ?>
 
 <body>  
     <div class="main">
@@ -11,7 +12,7 @@ include('../includes/headall.php'); ?>
 <div class="posts">
 
 <div class="post_box">
-    <div class="trends">
+    <div >
         <?php foreach($themes as $trend){ ?>
             <div class='post-container' style="margin-bottom: 20px;">
         <a href="../location/location.php?theme=<?= $trend['theme'] ?>&post_count=<?= $trend['post_count'] ?>&topLocation=<?= $trend['top_location'] ?>" >
@@ -51,7 +52,9 @@ include('../includes/headall.php'); ?>
 
     </div>
     </div>
-    <?php include('../includes/leftbar.php') ?>
+    <?php 
+     include('../includes/script.php');
+    include('../includes/leftbar.php') ?>
 
   <?php include('../includes/footer.php') ?>
 </body>

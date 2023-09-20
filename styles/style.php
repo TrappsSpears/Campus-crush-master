@@ -7,6 +7,28 @@
     box-sizing: border-box;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+#data_witt{
+    margin-left: 10px;
+border-radius: 6px;
+    border: 1px solid #333;
+    margin-top: 10px;
+}
+#data_witt h2{
+    font-size: 20px;
+    padding: 6px;
+    margin-bottom: 10px;
+    width: fit-content;
+}
+.report-section{
+    border-radius: 6px;
+    padding: 6px;
+    border: 2px solid #333;
+    margin-bottom: 10px;
+    width: fit-content;
+}
+.report-section label{
+    display: block;
+}
 body{
     background-color: #000;
     width: 100%;
@@ -72,6 +94,8 @@ a:focus, a:active {
 .conFess_icon img {
     width: 40px;
     margin-right: 5px;
+    position: relative;
+    top: 5px;
 }
 .conFess_icon small{
     background-color: rgb(0, 101, 196);
@@ -662,7 +686,7 @@ select option{
 #remainingChars{
     position: relative;
   margin-left: 100%;
-  left: 43px;
+  left: 3px;
 }
 .prof_img{
     margin-top: -20px;
@@ -766,6 +790,7 @@ select option{
    margin-top: 10px;
    font-size: 30px;
    margin-left: -40px;
+
 }
 .back_btn img{
     width: 25px;
@@ -776,7 +801,7 @@ select option{
 .back_btn button{ border-radius: 63px;
     border: none;
     padding: 6px 10px;
-    
+       font-weight: 600;
     background-color: inherit;
     color: white;
     font-size: 16px;
@@ -1181,7 +1206,7 @@ left: 48px;
  .head_post_el{
     font-size: 13px;
     border-radius: 32px;
-    margin-left: -50px;
+    margin-left: -40px;
     padding: 6px;
     width: fit-content;
     position: relative;
@@ -1426,7 +1451,7 @@ cursor: pointer;
 }
 .comments_posts{
     text-align: left;
-    border-left:2px solid gray;
+    border-left:2px solid #333;
     padding-left: 25px;
     width:93%;
     margin-left: 37px;

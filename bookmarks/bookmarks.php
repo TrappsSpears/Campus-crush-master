@@ -1,6 +1,6 @@
 <?php 
 $page = 'bookmarks';
-include('../includes/headall.php'); ?>
+include('../includes/headall.php'); include('bkmarks.incs.php');?>
 
 <body>  
     <div class="main">

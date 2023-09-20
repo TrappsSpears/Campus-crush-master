@@ -35,7 +35,8 @@ if (isset($_POST["submit_prof"]) && isset($_FILES["profile_photo"]) && $_FILES["
             $stmtUpdate = $dbh->connect()->prepare($queryUpdate);
             if ($stmtUpdate->execute([$uniqueFilename, $userId])) {
                 // Successfully uploaded the file and updated profile picture
-                header('Location: ../userProfile/settings.php?Successfullyupdated');
+                $_SESSION['profile_pic'] = $uniqueFilename;
+                header('Location: ../userProfile/settings.php?msg=Profile Pic Updated');
             } else {
                 // Error while updating profile picture
                 header('Location: ../userProfile/settings.php?error=Failes');

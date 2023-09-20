@@ -9,7 +9,7 @@
 
 
 </div>
-<?php if($user){ ?> 
+<?php if($getname){ ?> 
 
 <div class ='profileContainer'>
 <?php if(isset($_GET['cover'])){ ?> 
@@ -46,8 +46,8 @@
         <form action="../classes_incs/posting.inc.php" method='Post' enctype="multipart/form-data">
         <div class='input_img'>
             <div class='userImg'>
-                <?php if($user['profile_pic']!=''){ ?> 
-                    <img src="../images/users/<?= $user['profile_pic'] ?>" alt="">
+                <?php if($_SESSION['profile_pic']!=''){ ?> 
+                    <img src="../images/users/<?= $_SESSION['profile_pic'] ?>" alt="">
                     <?php } else{ ?> 
                         <img src="../images/noProf.jpeg" alt="" class="noProf" style="filter: invert(100%);border:none">
                         <?php } ?>
@@ -85,10 +85,10 @@
            <div style='display:flex; gap:10px'>
             <div>
             <select name="location" id="location">
-                <?php if($user['school']!= ''){ ?> 
-                <option value="<?= $user['school'] ?>">@<?= $user['school'] ?></option>
+                <?php if($_SESSION['school']!= ''){ ?> 
+                <option value="<?= $_SESSION['school'] ?>">@<?= $_SESSION['school'] ?></option>
                 <?php }?>
-                <option value="<?= $user['city'] ?>">@<?= $user['city'] ?></option>
+                <option value="<?= $_SESSION['city'] ?>">@<?= $_SESSION['city'] ?></option>
              
             </select>
         
@@ -158,10 +158,11 @@
           <h2> Does Not Exist</h2>
            <?php  } ?>
     </div>
-    <?php include('../includes/leftbar.php') ?>
+    <?php
+    include('../includes/script.php');
+    include('../includes/leftbar.php') ?>
 
   <?php include('../includes/footer.php');
-    include('../includes/script.php');
   ?>
 </body>
 </html>

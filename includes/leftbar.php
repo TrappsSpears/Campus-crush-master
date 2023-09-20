@@ -1,3 +1,6 @@
+<?php 
+include('../Search/search.incs.php')
+?>
 <div class="leftbar">
  <?php if($page =='home'){ ?> 
     <div class="search-con">
@@ -100,7 +103,15 @@
  
     
    <?php } ?>
-   
+   <a href="../Groups/groupsLocs.php">
+            <div class='trndItms'>
+                
+                <div>
+                <p style='color:aqua'>Show More</p>
+                </div>
+                
+            </div>
+        </a>
 
     </div>
     <div class="footer-about" id='info_App'>

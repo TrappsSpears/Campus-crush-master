@@ -35,7 +35,7 @@
                        <div id='post_info'>
                         <div>
                              <b> <span id='username'><?= $post['username'] ?></span></b> <span id='name'> <b> <?= $post['name'] ?></b><small> . </small>  <?= $formattedDate ?>
-                             <?php if($post['country'] != $user['country']) { echo $post['country'];} ?>
+                             <?php if($post['country'] != $_SESSION['country']) { echo $post['country'];} ?>
                             </span>
                         </div>
                  
@@ -60,74 +60,7 @@
     <div class="img_post">
         <img src="../images/imagePosts/<?= $post['post_pic'] ?>" alt="">
     </div>
-    <div class='head_post_el'>
-        
-        <?php   
-        $selectComment = $dbh->connect()->prepare('SELECT comments.post_id,school, profile_pic as profile_pic ,name as name ,username as username , comment as comment , user_id  as user_id , comments.id as id ,type as type , school as school 
-        FROM comments JOIN users ON users.id=comments.user_id WHERE post_id = ?   ORDER BY comments.id DESC');
-       if(!$selectComment->execute(array($post['post_id']))){
-           echo 'Failed To Load Posts';
-       }else{
-            if($selectComment->rowCount() > 0){
-                 $comment = $selectComment->fetch(PDO::FETCH_ASSOC);
-            }else{
-                $comment = null;
-            }
-          
-       }
-        $sql ='SELECT p.post_id, l.type, COUNT(*) AS like_count
-        FROM posts p
-        JOIN likes l ON p.post_id = l.post_id
-        WHERE p.post_id = ? 
-        GROUP BY p.post_id, l.type
-        ORDER BY like_count DESC
-        LIMIT 1';
-        $typeResult = $dbh->connect()->prepare($sql);
-        
-        if(!$typeResult->execute(array($post['post_id']))){
-            $typeResult = null;
-        }else{
-            $typeLike = $typeResult->fetch(PDO::FETCH_ASSOC);
-            if($typeLike!==false){
-                $typeLikee=$typeLike;
-            }else{
-                $typeLikee= null;
-            }
-        }
-        if($comment != null && $comment['post_id'] === $post['post_id'] && $comment['type'] == 'public'){ 
-        ?>
-        <div style="margin-left:35px;margin-top:-25px">
-         <div class="post-head" >
-            <div class="heading-post">
-            <a href="../location/location.php?user=<?=$post['username'] ?>">
-         <div class="post-heading-container">
-        <div class='post-heading'>
-            <img src="../images/users/<?= $comment['profile_pic'] ?>" alt=""  id='profile_pic'>
- 
-               <div id='post_info'>
-                <div>
-                     <b> <span id='username'><?= $comment['username'] ?></span></b> <span id='name'> <b><?= $comment['name'] ?></b>
-                    <?php if($comment['school'] != $post['school']){ echo $comment['school'] ;} ?>
-                    </span> 
-                </div>   
-            </div>   
-        </div>
-        </div></a>
-            </div>
-            </div>
-            <div class="comments_posts" >
-     
-     <div class="comment-post"> <p id='type_com'> </small></p>
-        <p> <?= $comment['comment'] ?></p>
-         <div>
-             <small>@ <?php if($user_id == $comment['user_id']){ ?> You <?php } ?>.<span><?= $comment['school'] ?></span> </small>
-         </div>
-     </div>
-            </div>
- </div>
-        <?php } if($typeLikee !== null && $typeLikee['post_id']===$post['post_id']){ ?> 
-       <a href="../Trends/trends.php?reaction=<?= $typeLikee['type']?>"> <span><img src="../images/<?= $typeLikee['type']?>.png" alt="<?= $typeLikee['type']?>" class='icons'> </span></a><?php } ?>
-</div>
+   
     <div class="locInfo">
  
        
@@ -136,7 +69,7 @@
         <?php } else { ?>
             <a href="../location/location.php?user=<?=$post['location'] ?>"> 
            <?php } ?>   
-                     <?= $post['location'] ?>     <?php if($post['country'] != $user['country']) { echo $post['country'];} ?>
+                     <?= $post['location'] ?>     <?php if($post['country'] != $_SESSION['country']) { echo $post['country'];} ?>
                  </a> </span>
              <a href="../location/location.php?theme=<?= $post['theme'] ?>">   <span class='theme_span'>#<?= $post['theme'] ?></span></a>
                         
@@ -172,7 +105,78 @@
 </div>
 
 
-      
+<div>
+    <?php   
+        $selectComment = $dbh->connect()->prepare('SELECT comments.post_id,school, profile_pic as profile_pic ,name as name ,username as username , comment as comment , user_id  as user_id , comments.id as id ,type as type , school as school 
+        FROM comments JOIN users ON users.id=comments.user_id WHERE post_id = ?   ORDER BY comments.id DESC');
+       if(!$selectComment->execute(array($post['post_id']))){
+           echo 'Failed To Load Posts';
+       }else{
+            if($selectComment->rowCount() > 0){
+                 $comment = $selectComment->fetch(PDO::FETCH_ASSOC);
+            }else{
+                $comment = null;
+            }
+          
+       }
+        $sql ='SELECT p.post_id, l.type, COUNT(*) AS like_count
+        FROM posts p
+        JOIN likes l ON p.post_id = l.post_id
+        WHERE p.post_id = ? 
+        GROUP BY p.post_id, l.type
+        ORDER BY like_count DESC
+        LIMIT 1';
+        $typeResult = $dbh->connect()->prepare($sql);
+        
+        if(!$typeResult->execute(array($post['post_id']))){
+            $typeResult = null;
+        }else{
+            $typeLike = $typeResult->fetch(PDO::FETCH_ASSOC);
+            if($typeLike!==false){
+                $typeLikee=$typeLike;
+            }else{
+                $typeLikee= null;
+            }
+        }
+        if($comment != null && $comment['post_id'] === $post['post_id'] && $comment['type'] == 'public'){ 
+        ?>
+        <div style="margin-bottom:10px;margin-top:-25px">
+         <div class="post-head" >
+            <div class="heading-post">
+            <a href="../location/location.php?user=<?=$post['username'] ?>">
+         <div class="post-heading-container">
+        <div class='post-heading'>
+            <img src="../images/users/<?= $comment['profile_pic'] ?>" alt=""  id='profile_pic'>
+ 
+               <div id='post_info'>
+                <div>
+                     <b> <span id='username'><?= $comment['username'] ?></span></b> <span id='name'> <b><?= $comment['name'] ?></b>
+                    <?php if($comment['school'] != $post['school']){ echo $comment['school'] ;} ?>
+                    </span> 
+                </div>   
+            </div>   
+        </div>
+        </div></a>
+            </div>
+            </div>
+            <div class="comments_posts" >
+     
+     <div class="comment-post"> <p id='type_com'> </small></p>
+        <p> <?= $comment['comment'] ?></p>
+         <div>
+             <small>@ <?php if($user_id == $comment['user_id']){ ?> You <?php } ?>.<span><?= $comment['school'] ?></span> </small>
+         </div>
+     </div>
+            </div>
+ </div>
+        <?php } ?>
+        <div class='head_post_el'>
+        
+        <?php if($typeLikee !== null && $typeLikee['post_id']===$post['post_id']){ ?> 
+        <a href="../Trends/trends.php?reaction=<?= $typeLikee['type']?>"> <span><img src="../images/<?= $typeLikee['type']?>.png" alt="<?= $typeLikee['type']?>" class='icons'> </span></a><?php } ?>
+ </div>
+    </div>
        
     </div>
+    
     <?php } ?>

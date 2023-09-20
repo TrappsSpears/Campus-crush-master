@@ -18,26 +18,10 @@ include('location.incs.php');?>
     
   
 </div>
-<div class ='profileContainer'>
-  <div class="cover">
-    <img src="../images/users/<?= $pic['profile_pic'] ?>" alt="">
-  </div>
-  <div class="img_profile">
-    <img src="../images/users/<?= $pic['profile_pic'] ?>" alt="" >  
-  </div>
-  <div class="info">
-    <h4>
-      <span><?= $getname ?> <img src="../images/map-pin.png" alt="king" class="icons" style='width:12px'> </span>
-</h4>
-    <div>
-      <span> Members <small><?= $userInfo['total_members'] ?></small></span>
-    <span> Posts <small><?= $userInfo['total_posts'] ?></small></span>
-    </div>
-  
-  </div>
+
   <?php include('navlos.php'); ?>
   
-</div>
+
 <div class="posts" >
 <div class="con_form">
       
@@ -47,8 +31,8 @@ include('location.incs.php');?>
         <form action="../classes_incs/posting.inc.php" method='Post' enctype="multipart/form-data">
         <div class='input_img'>
             <div class='userImg'>
-                <?php if($user['profile_pic']!=''){ ?> 
-                    <img src="../images/users/<?= $user['profile_pic'] ?>" alt="">
+                <?php if($_SESSION['profile_pic']!=''){ ?> 
+                    <img src="../images/users/<?= $_SESSION['profile_pic'] ?>" alt="">
                     <?php } else{ ?> 
                         <img src="../images/noProf.jpeg" alt="" class="noProf" style="filter: invert(100%);border:none">
                         <?php } ?>

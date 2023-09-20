@@ -11,7 +11,7 @@
         include_once('dbh.class.php');
         $dbh = New Dbh();
 
-        $sql = "SELECT COUNT(*) as total FROM likes WHERE user_id = ? AND post_id = ?;";
+        $sql = "SELECT user_id FROM likes WHERE user_id = ? AND post_id = ?;";
 
         $result = $dbh->connect()->prepare($sql);
         if(!$result->execute(array($user_id,$post_id))){
@@ -24,19 +24,9 @@
                 $sql = "DELETE FROM likes WHERE user_id = ? AND post_id = ?;";
                 $result = $dbh->connect()->prepare($sql);
                 if(!$result->execute(array($user_id,$post_id))){
-                    header("Location: ../index/index.php?error=error Del like");
+                    header("Location: ../home/home.php?error=error Del like");
                 }else{
-                    $sql = "INSERT INTO likes(post_id,type,user_id,created_at) VALUES(?,?,?,?)";
-                    $result = $dbh->connect()->prepare($sql);
-                    if($result->execute(array($post_id,$type,$user_id,$date))){
-            
-                        header("Location: ../posts/posts.php?post=$post_id");
-            
-            
-                     
-                    }else{
-                        echo'not done';
-                    }
+                    header("Location: ../posts/posts.php?post=$post_id");
                 }
               } else { 
                 $sql = "INSERT INTO likes(post_id,type,user_id,created_at) VALUES(?,?,?,?)";
@@ -46,15 +36,15 @@
                     $sql = "INSERT INTO notifications(post_id, user_id, date_created, type) VALUES (?, ?, ?, 'like')";
                     $result = $dbh->connect()->prepare($sql);
                     if ($result->execute([$post_id, $user_id, $date])) {
-                        header("Location: ../singlePosts/singleposts.php?post_id=$post_id");
+                        header("Location: ../posts/posts.php?post=$post_id");
                     }else{
-                        header("Location: ../index/index.php?Error_Query");
+                        header("Location: ../home/home.php?Error_Query");
                     }
                 }else{
-                    echo'not done';
+                    header("Location: ../home/home.php?Error_Query");
                 }
               }
         }        
     }else{
-        echo 'error';
+        header("Location: ../home/home.php?Error_Query");
     }

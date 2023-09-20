@@ -26,9 +26,14 @@ if (isset($_POST["submit"])) {
             if (password_verify($password, $row['password'])) {
                 // Set the session variables
                 $_SESSION['user_id'] = $row['id'];
-                $_SESSION['username'] = $row['username'];  
+                $_SESSION['username'] = $row['username']; 
+                $_SESSION['email'] = $row['email']; 
                 $_SESSION['city'] = $row['city'];
-                $_SESSION['school'] = $row['school'];                
+                $_SESSION['school'] = $row['school'];
+                $_SESSION['profile_pic'] = $row['profile_pic'];
+                $_SESSION['name'] = $row['name'];     
+                $_SESSION['dob'] = $row['DOB'];   
+                $_SESSION['country'] = $row['country'];
                 // Redirect to dashboard
                 header("Location: ../home/home.php?loggedin=log_inSuccessful&username");                   
             } else {

@@ -10,7 +10,7 @@ include('../includes/headall.php'); ?>
     <div class="main">
     <?php include('../includes/sidebarnav.php'); ?>
     <div class="main-content">
-        <div class="nav" id ='nav'>
+        <div class="nav" id  style='padding-bottom:15px'>
             
             <h3><div class="back_btn">
             <button id="backButton"> <img src="../images/arrow.png" alt="Go Back" class='icons'> Post</button>

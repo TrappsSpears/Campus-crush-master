@@ -51,8 +51,8 @@
         <form action="../classes_incs/posting.inc.php" method='Post' enctype="multipart/form-data">
         <div class='input_img'>
             <div class='userImg'>
-                <?php if($user['profile_pic']!=''){ ?> 
-                    <img src="../images/users/<?= $user['profile_pic'] ?>" alt="">
+                <?php if($_SESSION['profile_pic']!=''){ ?> 
+                    <img src="../images/users/<?= $_SESSION['profile_pic'] ?>" alt="">
                     <?php } else{ ?> 
                         <img src="../images/noProf.jpeg" alt="" class="noProf" style="filter: invert(100%);border:none">
                         <?php } ?>
@@ -159,10 +159,11 @@
           
            <?php  } ?>
     </div>
-    <?php include('../includes/leftbar.php') ?>
+    <?php 
+    include('../includes/script.php');
+    include('../includes/leftbar.php') ?>
 
   <?php include('../includes/footer.php');
-    include('../includes/script.php');
   ?>
 </body>
 </html>

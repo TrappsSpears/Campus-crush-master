@@ -1,7 +1,8 @@
 <?php 
     $page = 'groups';
     $pagee = 'location';
-include('../includes/headall.php'); ?>
+include('../includes/headall.php');
+include('grps.incs.php');  ?>
 
 <body>  
     <div class="main">
@@ -54,7 +55,9 @@ include('../includes/headall.php'); ?>
 
     </div>
     </div>
-    <?php include('../includes/leftbar.php') ?>
+    <?php
+     include('../includes/script.php');
+    include('../includes/leftbar.php') ?>
 
   <?php include('../includes/footer.php') ?>
 </body>

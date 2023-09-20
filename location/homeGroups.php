@@ -20,27 +20,9 @@ $getname = $_GET['place']; include('homeThemes.inc.php');?>
 
 </div>
 <?php if($userInfo  && $pic){ ?> 
-<div class ='profileContainer'>
-  <div class="cover">
-    <img src="../images/users/<?= $pic['profile_pic'] ?>" alt="">
-  </div>
-  <div class="img_profile">
-    <img src="../images/users/<?= $pic['profile_pic'] ?>" alt="" >
-   
-  
-  </div>
-  <div class="info">
-    <h4>
-      <span><?= $getname ?> <img src="../images/map-pin.png" alt="king" class="icons" style='width:12px'> </span>
-    </h4>
-    <div>
-      <span> Members <small><?= $userInfo['total_members'] ?></small></span>
-    <span> Posts <small><?= $userInfo['total_posts'] ?></small></span>
-    </div>
-  
-  </div>
+
   <?php include('navlos.php'); ?>
-</div>
+
 <div class="con_form">
       
          
@@ -49,8 +31,8 @@ $getname = $_GET['place']; include('homeThemes.inc.php');?>
         <form action="../classes_incs/createTheme.inc.php" method='Post' enctype="multipart/form-data">
         <div class='input_img'>
             <div class='userImg'>
-                <?php if($user['profile_pic']!=''){ ?> 
-                    <img src="../images/users/<?= $user['profile_pic'] ?>" alt="">
+                <?php if($_SESSION['profile_pic']!=''){ ?> 
+                    <img src="../images/users/<?= $_SESSION['profile_pic'] ?>" alt="">
                     <?php } else{ ?> 
                         <img src="../images/noProf.jpeg" alt="" class="noProf" style="filter: invert(100%);border:none">
                         <?php } ?>
@@ -58,7 +40,7 @@ $getname = $_GET['place']; include('homeThemes.inc.php');?>
             </div>
             
             <div>  
-               <textarea id="post_choice"  placeholder="Group Theme Description ?" name="description" required minlength="2" maxlength="140"></textarea> 
+               <textarea id="post_choice"  placeholder="  Theme Description ?" name="description" required minlength="2" maxlength="140"></textarea> 
                <input type="text" placeholder="Theme name ?" name='themeName' id='theme_input' minlength="2" maxlength="20"> 
                <div class="custom-select">
                 
@@ -84,8 +66,8 @@ $getname = $_GET['place']; include('homeThemes.inc.php');?>
             <div>
             <select name="location" id="location" required>
                 <option value="" disabled selected>Location</option>
-              <option value="<?= $user['school'] ?>"><?= $user['school'] ?></option>
-              <option value="<?= $user['city'] ?>"><?= $user['city'] ?></option>
+              <option value="<?= $_SESSION['school'] ?>"><?= $_SESSION['school'] ?></option>
+              <option value="<?= $_SESSION['city'] ?>"><?= $_SESSION['city'] ?></option>
             </select>
         
                 </div>

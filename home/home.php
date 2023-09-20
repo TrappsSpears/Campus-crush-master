@@ -29,14 +29,17 @@ include('indexstyles.php');
   <div>
     <p id='active-home'> <span class='active-home'>For You</span> </p>
   </div>
-  <a href="../location/location.php?place=<?= $user['school'] ?> ">  <div>
-   <span> <?= $user['school'] ?> </span>
+  <a href="../location/location.php?place=<?= $_SESSION['school'] ?> ">  <div>
+   <span> <?= $_SESSION['school'] ?> </span>
   </div></a> 
 </div>
     
 </div>
 
-<?php include('../includes/postHome.php') ?>
+<?php 
+
+include('home.incs.php');
+include('../includes/postHome.php') ?>
 
     </div>
 

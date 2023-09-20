@@ -18,27 +18,9 @@ include('location.incs.php');?>
     
   
 </div>
-<div class ='profileContainer'>
-  <div class="cover">
-    <img src="../images/users/<?= $pic['profile_pic'] ?>" alt="">
-  </div>
-  <div class="img_profile">
-    <img src="../images/users/<?= $pic['profile_pic'] ?>" alt="" >
-  
-  
-  </div>
-  <div class="info">
-    <h4>
-      <span><?= $getname ?> <img src="../images/map-pin.png" alt="king" class="icons" style='width:12px'> </span>
-</h4>
-    <div>
-      <span> Members <small><?= $userInfo['total_members'] ?></small></span>
-    <span> Posts <small><?= $userInfo['total_posts'] ?></small></span>
-    </div>
-  
-  </div>
+
   <?php include('navlos.php'); ?>
-</div>
+
 <div class="posts" >
   
 <?php 

@@ -1,7 +1,6 @@
 <div class="sidebar-nav">
     
-    
-        <nav><a href="../home/home.php">
+    <a href="../witter/home.php">
     <div class="conFess_icon">
     <h2>
        <small></small> <small></small><b> <img src="../images/witterlogo.png" alt="" class='icons'></b>itter</h2>
@@ -32,11 +31,7 @@
                             <img src="../images/<?php if ($page == 'groups'){ ?>users(1).png <?php }else { ?>users.png <?php } ?>" alt="" class='icons'>Groups</li>
                     </a>
                 </div>
-                <div <?php if ($page == 'location'){ echo 'class="active"';} ?>>
-                    <a href="../location/location.php?place=<?= $user['school'] ?>" class="nav-a">
-                        <span></span><span></span><li><img src="../images/<?php if ($page == 'location'){ ?>marker.png <?php }else { ?>marker(1).png <?php } ?>" alt="" class='icons'><?= $user['school'] ?></li>
-                    </a>
-                </div>
+            
                 <div <?php if ($page == 'msgs'){ echo 'class="active"';} ?>>
                     <a href="../Messages/message.php" class="nav-a">
                         <span></span><span></span><li><img src="../images/<?php if ($page == 'msgs'){ ?>envelope-dot.png <?php }else { ?>envelope-dot(1).png <?php } ?>" alt="" class='icons'>Messages</li>
