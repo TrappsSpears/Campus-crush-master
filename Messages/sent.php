@@ -19,11 +19,11 @@ include('msgsphpFiles.php');
   <div>
     <p id='active-home'> <span class='active-home'>Sent</span> </p>
   </div>
-  <a href="../location/members.php?place=<?= $user['school'] ?>">  <div>
+  <a href="../location/members.php?place=<?= $_SESSION['school'] ?>">  <div>
    <span>Mates</span>
   </div></a> 
   <div>
-   <a href="../location/direct.php?place=<?= $user['school'] ?>"> <p> <span >Direct Post    </span> </a> </p>
+   <a href="../location/direct.php?place=<?= $_SESSION['school'] ?>"> <p> <span >Blow A Wistle  </span> </a> </p>
   </div>
 </div>
    </div>

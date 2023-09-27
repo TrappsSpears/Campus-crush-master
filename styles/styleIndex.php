@@ -68,7 +68,7 @@
             color: #fff;
               background: linear-gradient(to bottom, #3498db, #9b59b6);
             opacity: 0.8;
-            background-repeat: no-repeat;
+         
         }
         h1 span{color: #880281;}
         .signup-container {

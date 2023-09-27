@@ -43,7 +43,7 @@
          
 
        
-        <form action="../classes_incs/posting.inc.php" method='Post' enctype="multipart/form-data">
+        <form action="../classes_incs/posting.inc.php" method='Post' enctype="multipart/form-data" id = 'myForm'>
         <div class='input_img'>
             <div class='userImg'>
                 <?php if($_SESSION['profile_pic']!=''){ ?> 
@@ -129,12 +129,60 @@
         </div>
         
             <div>
-                <button name='submit'>Post</button>
+                <button name='submit' type='button' id = 'submitButton'>Post</button>
             </div>
             
         </div>
         
         </form>
+        <div id="loadingBarPost">
+        Posting
+    </div>
+
+<!-- Response message container -->
+<div id="responseMessage"></div>
+      <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("myForm");
+    const submitButton = document.getElementById("submitButton");
+    const loadingBar = document.getElementById("loadingBarPost");
+
+    submitButton.addEventListener("click", function () {
+        // Hide the form and show the loading bar
+        form.style.display = "none";
+        loadingBar.style.display = "block";
+        setTimeout(function(){
+          form.style.display = 'block'; 
+          loadingBar.style.display = "none";
+        } , 5000);
+        const formData = new FormData(form);
+        const xhr = new XMLHttpRequest();
+  
+        xhr.open("POST", "../classes_incs/posting.inc.php", true);
+        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+
+        xhr.onload = function () {
+                    if (xhr.status === 200) {
+         
+             
+                // Show the form again and hide the loading bar
+       
+                loadingBar.style.display = "none";
+                // Reset the form if needed
+                form.reset();
+            } else {
+                // Handle other HTTP status codes or errors here
+                responseMessage.textContent = "An error occurred.";
+                responseMessage.style.color = "red";
+            }
+        };
+
+        xhr.send(formData);
+    });
+});
+
+
+    </script>
         <div class="footer-about" id='info_App'>
            Share Stories - Share Ideas - Ask Ques - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a>
         </div> 
@@ -158,11 +206,11 @@
           <h2> Does Not Exist</h2>
            <?php  } ?>
     </div>
-    <?php
-    include('../includes/script.php');
-    include('../includes/leftbar.php') ?>
+    <?php   include('../includes/lefty.php'); ?>
 
-  <?php include('../includes/footer.php');
-  ?>
+</div>
+<?php include('../includes/footer.php') ;
+include('../includes/script.php');
+?>
 </body>
 </html>

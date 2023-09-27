@@ -17,8 +17,11 @@ include('../includes/headall.php'); ?>
 
     </div>
     </div>
-    <?php include('../includes/leftbar.php') ?>
+    <?php   include('../includes/lefty.php'); ?>
 
-  <?php include('../includes/footer.php') ?>
+</div>
+<?php include('../includes/footer.php') ;
+include('../includes/script.php');
+?>
 </body>
 </html>

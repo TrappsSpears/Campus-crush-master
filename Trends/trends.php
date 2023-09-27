@@ -59,7 +59,9 @@ $page = 'search';
     include('poststrends.php') ?>
     </div>
 
-<?php include('../includes/leftbar.php') ;?>
+    <div class="leftbar">
+    <!-- Leftbar here -->
+</div>
  
     </div>
     <script src="./Js/script.js"></script>
@@ -104,8 +106,9 @@ $page = 'search';
 
     include('poststrends.php') ?>
     </div>
-
-<?php include('../includes/leftbar.php') ;?>
+    <div class="leftbar">
+    <!-- Leftbar here -->
+</div>
  
     </div>
     <script src="./Js/script.js"></script>

@@ -26,6 +26,46 @@ if(isset($_SESSION['user_id'])){
 
 </div>
         <div class="posts">
+        <div class ='profileContainer'>
+  <div class="img_profile" style='margin-top: 10px;'>
+    <img src="../images/users/<?= $user['profile_pic'] ?>" alt="" >
+   
+       <div class="info">
+    <h4>
+      <span><?= $user['username'] ?> <small> <?= $_SESSION['name']?></small> </span>
+</h4>
+    <div>
+        <span>You are at <small><?=$user['school']?> . <?=$_SESSION['city']?></small></span>
+       
+    </div>
+   
+  </div>
+ 
+  </div> 
+  <div class="con_form" id='soclials'>
+      
+         
+
+       
+     
+    </div>
+
+  <div class='nav_prof'>
+        <a href="../bookmarks/bookmarks.php"> <img src="../images/star2.png" alt="Starred" ></a>
+        <a href="../Messages/message.php"> <img src="../images/envelope-dot(1).png" alt="messages" ></a>
+        <a href="../location/location.php?place=<?=$user['school']?>"> <img src="../images/marker(1).png" alt="Location" ></a>
+        <a href="../Groups/groups.php"><img src="../images/users(1).png" alt=""></a>
+    </div>
+  <div class="con_form">  
+                
+            
+                <div class="footer-about" id='info_App'>
+        Share Stories - Confess - Share Ideas - <a href="../privacy/report.php"> Report</a> - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a> - <a href="../privacy/termsOfService.html"> Terms Of Use</a> -  <a href="../privacy/cookies.html"> Cookie Policy</a> 2023 WitterVerse Corp.
+        </div>
+    
+</div>
+    
+    </div>
             <div class="post-container" id='settings'>
             <h3>Update Profile</h3>    
             <div class="post-box" style="text-align: center;">
@@ -55,7 +95,8 @@ if(isset($_SESSION['user_id'])){
                         </div> 
                         </form>  
                         </div>
-                       <div class="post-container" id='update'>
+                      
+                       <div class="post-container" >
                         <form action="../classes_incs/update-user.inc.php" method="post">
                               <div>
                                 <input type="text" placeholder="username" value="<?= $user['username'] ?>" name="username" required pattern="[A-Za-z -]+" minlength="3" maxlength="15">
@@ -67,7 +108,7 @@ if(isset($_SESSION['user_id'])){
                             </div>
                         </form>
                        </div>
-                        <div class="post-container" id='update'>
+                        <div class="post-container" >
                             <form action="../classes_incs/update-user.inc.php" method="post">
                                 <div>
                                 <input type="email" placeholder='email' value="<?= $user['email'] ?>" name="email" required minlength="3" maxlength="20">
@@ -78,7 +119,7 @@ if(isset($_SESSION['user_id'])){
                             </div>
                             </form>
                         </div>
-                        <form action="../classes_incs/update-user.inc.php" method="post">
+                        <form action="../classes_incs/update-user.inc.php" method="post" class='post-container'>
                         
                             <div>
                                 <input type="text" placeholder='name' value="<?= $user['name'] ?>" name="name" pattern="[A-Za-z -]+" minlength="3" maxlength="15">
@@ -98,7 +139,7 @@ if(isset($_SESSION['user_id'])){
                                 </select>
                             </div>
                             <div>
-                                <button type="submit" name='update'>Update</button>
+                                <button type="submit" name='update'>Update General Info</button>
                             </div>
                         </form>
                         <form action="">
@@ -112,8 +153,13 @@ if(isset($_SESSION['user_id'])){
                   <button>LogOut</button> 
                </form>
             </div>
+      
         </div>
+        
     </div>
+    <div class="leftbar">
+
+</div>
     <script>
     const profileImage = document.getElementById('profile-image');
     const profilePhotoInput = document.getElementById('profile-photo-input');

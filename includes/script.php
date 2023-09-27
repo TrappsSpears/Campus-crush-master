@@ -34,7 +34,7 @@
 textarea_Post.addEventListener('input', function() {
     textarea_Post.style.height = 'auto';
     textarea_Post.style.paddingBottom = '50px';
-    textarea_Post.style.fontSize = '14px';
+    textarea_Post.style.fontSize = '16px';
    
     textarea_Post.style.minHeight = '100px';
     customSelect.style.display = 'block';

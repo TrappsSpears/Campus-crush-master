@@ -20,15 +20,13 @@ include('location.incs.php');?>
 </div>
 
   <?php include('navlos.php'); ?>
-  
-
-<div class="posts" >
+  <div class="posts" >
 <div class="con_form">
       
          
 
        
-        <form action="../classes_incs/posting.inc.php" method='Post' enctype="multipart/form-data">
+        <form action="../classes_incs/posting.inc.php" method='Post' enctype="multipart/form-data" id='myForm'>
         <div class='input_img'>
             <div class='userImg'>
                 <?php if($_SESSION['profile_pic']!=''){ ?> 
@@ -40,14 +38,14 @@ include('location.incs.php');?>
             </div>
             
             <div>
-               <textarea id="post_choice" placeholder="What Happened?! " name="post" required minlength="2    0"></textarea> 
+               <textarea id="post_choice" placeholder="What Happened?! " name="post" required minlength="20"></textarea> 
                <div class="progress-container" id='prog_div'>
         <p id="remainingChars">600</p>
         <div class="progress-bar" id="progressBar"></div>
     </div> 
                   <div class="custom-select">
                   <select id="themeSelect" name="theme">
-           <option value="Message"> Message</option>
+           <option value="Whitsle Blow">Whistle Blow</option>
         </select>
         <input type="button" class='cancel_post' value='Cancel'>
          
@@ -70,9 +68,8 @@ include('location.incs.php');?>
            <div style='display:flex; gap:10px'>
             <div>
             <select name="location" id="location" required>
-                <option value="" disabled selected>Send To...</option>
                 <?php foreach($users as $users){ ?>
-                    <option value="<?= $users['username'] ?>"><?= $users['name'] ?></option>
+                    <option value="<? $users['school']?> - <?= $users['username'] ?>"><?= $users['name'] ?></option>
                 <?php } ?>
             </select>
         
@@ -113,14 +110,74 @@ include('location.incs.php');?>
         </div>
         
             <div>
-                <button name='submit'>Post</button>
+                <button name='submit' type='button' id='submitButton'>Post</button>
             </div>
             
         </div>
         
         </form>
+        <div id="loadingBarPost">
+      
+    </div>
+
+<!-- Response message container -->
+<div id="responseMessage"></div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("myForm");
+    const submitButton = document.getElementById("submitButton");
+    const loadingBar = document.getElementById("loadingBarPost");
+    const linksInForm = form.querySelectorAll("a");
+    const postChoice = document.getElementById("post_choice");
+    const postImage = document.getElementById("upload_profile_pic");
+    const profileImage = document.getElementById('post-image');
+
+    submitButton.addEventListener("click", function () {
+        // Hide the form and show the loading bar
+        
+        if (postChoice.value.trim() === "" && postImage.files.length === 0) {
+            alert("Textarea and/or file input cannot be empty.");
+            return; // Prevent form submission if validation fails
+        }
+        form.style.display = "none";
+        loadingBar.style.display = "block";
+        setTimeout(function(){
+          form.style.display = 'block'; 
+          form.value ='';
+          profileImage.style.display = 'none';
+          loadingBar.style.display = "none";
+          
+        } , 5000);
+        const formData = new FormData(form);
+        const xhr = new XMLHttpRequest();
+  
+        xhr.open("POST", "../classes_incs/posting.inc.php", true);
+        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+
+        xhr.onload = function () {
+                    if (xhr.status === 200) {
+         
+                      linksInForm.style.pointerEvents = 'all';
+                // Show the form again and hide the loading bar
+       
+          
+                // Reset the form if needed
+                form.reset();
+            } else {
+                // Handle other HTTP status codes or errors here
+                responseMessage.textContent = "An error occurred.";
+                responseMessage.style.color = "red";
+            }
+        };
+
+        xhr.send(formData);
+    });
+});
+
+
+    </script>
         <div class="footer-about" id='info_App'>
-           Share Stories - Share Ideas - Ask Ques - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a>
+           Share Storie - Share Ideas - Ask Ques - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a>
         </div> 
 
     </div>
@@ -134,13 +191,18 @@ include('location.incs.php');?>
         $formattedDate = format_post_date($post_date);
         include('../includes/posts.php'); }
         ?>
+        
 </div>
-    </div>
-    <?php include('../includes/leftbar.php') ?>
 
-  <?php include('../includes/footer.php') ;
-  include('../includes/script.php');
-  ?>
+    </div>
+
+<?php  include('../includes/script.php');include('../includes/lefty.php') ?>
+    </div>
+   
+
+   <?php include('../includes/footer.php') ;
+ 
+ ?> 
  
 </body>
 </html>

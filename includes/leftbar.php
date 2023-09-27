@@ -1,49 +1,10 @@
 <?php 
-include('../Search/search.incs.php')
-?>
-<div class="leftbar">
- <?php if($page =='home'){ ?> 
-    <div class="search-con">
-         <form action="../Trends/trends.php" method="get">
-    <div class="search_place" id='search_place' style='margin-bottom: 10px;'>
-        <input type="text"  placeholder="Search..." id='search' name="word"><button type='submit' required> <img src="../images/search.png" alt="search" class='icons'></button>
-    </div></form>
-    </div>
+include('../Search/search.incs.php');
 
-    <div class="emojis">
-            <div>
-            <a href="../Trends/trends.php?reaction=like">   
-            <img src="../images/like.png" class='icons' alt="like">
-            </a> 
-            </div>
-            <div>
-            <a href="../Trends/trends.php?reaction=shoking">   
-            <img src="../images/shocking.png" class='icons' alt="like">
-            </a> 
-            </div>
-            <div>
-            <a href="../Trends/trends.php?reaction=love">
-            <img src="../images/love.png" class='icons' alt="love">
-            </a>    
-            </div>
-            <div>
-                <a href="../Trends/trends.php?reaction=funny">
-                <img src="../images/funny.png" class='icons' alt="funny">
-                </a>
-            </div>
-            <div>
-                <a href="../Trends/trends.php?reaction=sad" >
-                <img src="../images/sad.png" class='icons' alt="sad">
-                </a>            
-            </div>
-            <div>
-                <a href="../Trends/trends.php?reaction=fire">
-                <img src="../images/fire.png" class='icons' alt="fire">
-                </a>
-            </div>
-        </div>
-           
-       <?php } ?>
+?>
+
+   
+ 
     <div class="leftbar-container">
        
     
@@ -57,13 +18,13 @@ include('../Search/search.incs.php')
             <a href="../location/location.php?theme=<?= $trend['theme'] ?>&post_count=<?= $trend['post_count'] ?>&topLocation=<?= $trend['top_location'] ?>">
             <div class='trndItms'>
                 <div>
-                    <small>Posts <?= $trend['post_count'] ?> - <?= $trend['top_location'] ?></small>
+        <small style='margin-left:-5px'>Posts <?= $trend['post_count'] ?> - <?= $trend['top_location'] ?></small>
                 </div>
                 <div>
-                <p>#<?= $trend['theme'] ?></p>
+                <p> #<?= $trend['theme'] ?></p>
                 </div>
                 <div>
-                 <small>Engagements <?php echo $trend['like_count'] + $trend['comment_count'] ?> <a href="../Trends/trends.php?reaction=<?= $trend['type'] ?>"> <span><img src="../images/<?= $trend['type'] ?>.png" alt="<?= $trend['type'] ?>"> </span></a></small>
+            <small style='margin-left:-5px'>Engagements <?php echo $trend['like_count'] + $trend['comment_count'] ?> <a href="../Trends/trends.php?reaction=<?= $trend['type'] ?>"> <span><img src="../images/<?= $trend['type'] ?>.png" alt="<?= $trend['type'] ?>"> </span></a></small>
                 </div>
             </div>
         </a>
@@ -119,5 +80,5 @@ include('../Search/search.incs.php')
         </div>
         </div>
         
-    </div>
-
+    
+<?php  ?>

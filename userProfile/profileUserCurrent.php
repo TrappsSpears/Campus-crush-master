@@ -1,19 +1,8 @@
 <?php 
 $page = 'profile';
 include('../includes/headall.php');
-include('allPosts.php');
-if(isset($_SESSION['user_id'])){ 
-    
-    $dbh = New Dbh();
-    $selectUser = $dbh->connect()->prepare("SELECT * FROM users WHERE id = ?");
-    if(!$selectUser->execute(array($user_id))){
-        echo 'Failed To Load User';
-        
-    }else{
 
-        $user = $selectUser->fetch(PDO::FETCH_ASSOC);
-        
-    }
+
     ?>
 
 <body>  
@@ -28,10 +17,10 @@ if(isset($_SESSION['user_id'])){
 <div class="posts">
 <div class ='profileContainer'>
   <div class="cover">
-    <img src="../images/users/<?= $user['profile_pic'] ?>" alt="">
+    <img src="../images/users/<?= $_SESSION['profile_pic'] ?>" alt="">
   </div>
   <div class="img_profile">
-    <img src="../images/users/<?= $user['profile_pic'] ?>" alt="" >
+    <img src="../images/users/<?= $_SESSION['profile_pic'] ?>" alt="" >
     <div>
     <a href="settings.php" id='settingsBtn'>   <span >Edit Profile</span></a>  
     </div>
@@ -40,14 +29,16 @@ if(isset($_SESSION['user_id'])){
   </div> 
    <div class="info">
     <h4>
-      <span><?= $user['username'] ?> <small> <?= $_SESSION['name']?></small> </span>
+      <span><?= $_SESSION['username'] ?> <small> <?= $_SESSION['name']?></small> </span>
 </h4>
     <div>
-        <span>You are at <small><?=$user['school']?> . <?=$_SESSION['city']?></small></span>
+        <span>You are at <small><?=$_SESSION['school']?> . <?=$_SESSION['city']?></small></span>
        
     </div>
    
   </div>
+
+ 
   <div class='nav_prof'>
         <a href="../bookmarks/bookmarks.php"> <img src="../images/star2.png" alt="Starred" ></a>
         <a href="../Messages/message.php"> <img src="../images/envelope-dot(1).png" alt="messages" ></a>
@@ -69,40 +60,45 @@ if(isset($_SESSION['user_id'])){
     <p id='active-home'> <span class='active-home'>Posts</span> </p>
   </div>
   <div>
-   <a href="../location/direct.php?place=<?= $_SESSION['school'] ?>"> <p> <span >Post A Message</span> </p></a>
+   <a href="../location/direct.php?place=<?= $_SESSION['school'] ?>"> <p> <span >Blow A Whistle</span> </p></a>
   </div>
   
 </div>
 <!--...............------------------- Now Posting --------------------------------------------------------------->
-<?php 
-    include('../classes_incs/functionsposts.php');
-        
-    foreach($posts_User as $post){ 
-        $idUnique = $post['post_id'];
-        $post_date = $post['date_created'].''.$post['time'];
-        $formattedDate = format_post_date($post_date);
-        include('../includes/posts.php'); }
-        ?>  
+<div id='posts'>
+
+</div>
+<script>
+// Function to fetch and insert content into the leftbar
+function loadPosts() {
+   var xhr = new XMLHttpRequest();
+   xhr.open('POST','allPosts.php',true);
+
+         
+         // Insert the fetched content into the specified element
+
+   xhr.onload =function(){
+    if(this.status==200){
+      var leftbarContentElement = document.getElementById('posts');
+      leftbarContentElement.innerHTML = this.response;
+    }else{
+      alert('error')
+    }
+   }
+   xhr.send();  
+}
+
+// Call the function to load the content when the page loads
+loadPosts();
+</script>
         </div>
   
     </div>
 
-<?php include('../includes/leftbar.php') ;?>
+    <?php include('../includes/lefty.php'); ?>
  
     </div>
     <script src="./Js/script.js"></script>
     <?php include('../includes/footer.php') ?>
 </body>
 </html>
-<?php }else{ ?>
-<body>
-    <div class="posts">
-        <div class="post-container">
-            <div class="post-box">
-                <h3>Page Not available</h3>
-                <p>Go <a href="../index.php">Log In</a> </p>
-            </div>
-        </div>
-    </div>
-</body>
-<?php }?>

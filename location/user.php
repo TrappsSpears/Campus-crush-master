@@ -23,7 +23,7 @@
       <span><?= $getname ?> <small><?= $userInfo['name'] ?></small></span>
 </h4>
     <div>
-      <span>..@<?= $userInfo['school'] ?><img src="../images/map-pin.png" alt="king" class="icons" style='width:12px'> .<?= $userInfo['city'] ?></span>
+      <span><small>Member @ </small><?= $userInfo['school'] ?> . <?= $userInfo['city'] ?></span>
     </div>
   
   </div>
@@ -48,7 +48,7 @@
          
 
        
-        <form action="../classes_incs/posting.inc.php" method='Post' enctype="multipart/form-data">
+        <form action="../classes_incs/posting.inc.php" method='Post' enctype="multipart/form-data" id='myForm'>
         <div class='input_img'>
             <div class='userImg'>
                 <?php if($_SESSION['profile_pic']!=''){ ?> 
@@ -67,7 +67,7 @@
     </div> 
                   <div class="custom-select">
                   <select id="themeSelect" name="theme">
-             <option value="Message">Message</option>
+             <option value="Whistle Blow">whistle</option>
         </select>
         <input type="button" class='cancel_post' value='Cancel'>
          
@@ -90,7 +90,7 @@
            <div style='display:flex; gap:10px'>
             <div>
             <select name="location" id="location" required>
-                <option value="<?= $getname ?>">@<?= $getname ?></option>
+                <option value="<?= $userInfo['school'] ?> - <?= $getname ?>"><?= $userInfo['school'] ?> - <?= $getname ?></option>
             </select>
         
             </div>
@@ -130,12 +130,70 @@
         </div>
         
             <div>
-                <button name='submit'>Post</button>
+                <button name='submit' type ='button' id='submitButton'>Post</button>
             </div>
             
         </div>
         
         </form>
+        <div id="loadingBarPost">
+        Posting
+    </div>
+
+<!-- Response message container -->
+<div id="responseMessage"></div>
+      <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("myForm");
+    const submitButton = document.getElementById("submitButton");
+    const loadingBar = document.getElementById("loadingBarPost");
+    const linksInForm = form.querySelectorAll("a");
+    const postChoice = document.getElementById("post_choice");
+    const postImage = document.getElementById("upload_profile_pic");
+    const profileImage = document.getElementById('post-image');
+
+    submitButton.addEventListener("click", function () {
+        // Hide the form and show the loading bar
+    
+        if (postChoice.value.trim() === "" && postImage.files.length === 0) {
+            alert("Textarea and/or file input cannot be empty.");
+            return; // Prevent form submission if validation fails
+        }
+        form.style.display = "none";
+        loadingBar.style.display = "block";
+        setTimeout(function(){
+          form.style.display = 'block'; 
+          profileImage.style.display = 'none';
+          loadingBar.style.display = "none";
+        } , 5000);
+        const formData = new FormData(form);
+        const xhr = new XMLHttpRequest();
+  
+        xhr.open("POST", "../classes_incs/posting.inc.php", true);
+        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+
+        xhr.onload = function () {
+                    if (xhr.status === 200) {
+         
+             
+                // Show the form again and hide the loading bar
+       
+          
+                // Reset the form if needed
+                form.reset();
+            } else {
+                // Handle other HTTP status codes or errors here
+                responseMessage.textContent = "An error occurred.";
+                responseMessage.style.color = "red";
+            }
+        };
+
+        xhr.send(formData);
+    });
+});
+
+
+    </script>
         <div class="footer-about" id='info_App'>
            Share Stories - Share Ideas - Ask Ques - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a>
         </div> 
@@ -159,11 +217,11 @@
           
            <?php  } ?>
     </div>
-    <?php 
-    include('../includes/script.php');
-    include('../includes/leftbar.php') ?>
+    <?php   include('../includes/lefty.php'); ?>
 
-  <?php include('../includes/footer.php');
-  ?>
+</div>
+<?php include('../includes/footer.php') ;
+include('../includes/script.php');
+?>
 </body>
 </html>

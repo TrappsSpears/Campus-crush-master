@@ -15,7 +15,7 @@ include('../includes/headall.php'); include('bkmarks.incs.php');?>
     include('../includes/postBookmarks.php') ?>
     </div>
 
-<?php include('../includes/leftbar.php') ;?>
+   <?php   include('../includes/lefty.php'); ?>
  
     </div>
     <script src="./Js/script.js"></script>

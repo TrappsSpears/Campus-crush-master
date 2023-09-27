@@ -55,11 +55,14 @@ include('location.incs.php');?>
 
 </div>
     </div>
-    <?php include('../includes/leftbar.php') ?>
+  
 
-  <?php include('../includes/footer.php') ;
-  include('../includes/script.php');
-  ?>
+    <?php   include('../includes/lefty.php'); ?>
+
+</div>
+<?php include('../includes/footer.php') ;
+include('../includes/script.php');
+?>
  
 </body>
 </html>

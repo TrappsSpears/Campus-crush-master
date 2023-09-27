@@ -78,14 +78,7 @@
         
 
     </a>
-    <?php if($page == 'profile' && $post['user_id'] == $user_id){ ?>
-    <div class="engage_btn">
-        <form action="../classes_incs/deletepost.inc.php" method="post">
-            <input type="hidden" value="<?=$post['post_id']?>" name='post_id'>
-            <button name='submit'> <small>X</small>Delete</button>
-        </form>
-    </div>
-    <?php } ?>
+   
     <a href="../posts/posts.php?post=<?= $post['post_id'] ?>">
     <div class="post_insights">
             <span class='thot'>  

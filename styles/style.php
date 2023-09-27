@@ -1,6 +1,18 @@
 <style>
-*{
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Clicker+Script&family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+:root{
+--bg-default-dark: #000;
+--bg-light:#f2f2fc;
+--text-default:#f2f2f2;
+--text-light:#000;
+--bg-trends-dark: rgb(25, 27, 32, 0.616);
+--bg-trends-light:rgba(119, 127, 148, 0.616);
+--brd-dark:#222;
+--brd-light:#888;
+}
+*{  
+    
+    font-family: 'Poppins' sans-serif;
     padding: 0;
     margin: 0;
     outline: none;
@@ -38,13 +50,13 @@ border-radius: 6px;
     display: block;
 }
 body{
-    background-color: #000;
+    background-color: var(--bg-default-dark);
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    color: white;
+    color: var(--text-default);
     min-width: 200px;
-    
+    overflow-x: hidden;
 }
 input,textarea,button,a,select{
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -156,7 +168,6 @@ position: relative;
    height: 100vh;
   max-width: 24%;
     padding: 50px 40px;
-    color: white;
    
 position: fixed;
 left: 0;
@@ -194,15 +205,14 @@ z-index: 400;
     width: 25px;
     height: 25px;
     position: relative;
-    top: 5px;
+    
 }
 .sidebar-nav ul .active li{
-    color: white;
+    color: var(--text-default);
     font-weight: 600;
     }
     .sidebar-nav ul .active span{
         background-color: #212121;
-    color: white;
     animation: span 1s infinite linear;
     }
 .sidebar-nav ul li:hover{
@@ -257,7 +267,7 @@ z-index: 400;
     padding-left: 30px;
     display: grid;
     grid-template-columns: auto auto auto auto;
-    background-color: #000;
+    background-color: var(--bg-default-dark);
 }
 .footer_items div{
     border-radius: 32px;
@@ -309,7 +319,7 @@ body {
 }
 
 #menu ul li a {
-    color: white;
+    color: var(--text-default);
     text-decoration: none;
     display: block;
 }
@@ -333,6 +343,8 @@ body {
 .main-content{
     z-index: 100;
     width: 100%;
+    max-width: 600px;
+    line-height: 1.5;
     text-align: center;
     justify-content: center;
     height: 100%;
@@ -341,8 +353,8 @@ body {
  justify-content: center;
  margin-left: 24%;
  position: relative;
-border-left: 1px solid #333;
-border-right: 1px solid #333;
+border-left: 1px solid var(--brd-dark);
+border-right: 1px solid var(--brd-dark);
      
 }
 
@@ -353,8 +365,8 @@ border-right: 1px solid #333;
     position:sticky;
     top: 0;
     padding: 5px;
-    border-bottom: 2px solid #333;
-    background-color: #000;
+    border-bottom: 2px solid var(--brd-dark);
+    background-color: var(--bg-default-dark);
     min-width:300px;
 }
 #nav{
@@ -387,7 +399,7 @@ border-right: 1px solid #333;
 .home_opt .active-home{
     border-bottom: 4px solid #1e8fffe2;
     border-radius: 3px;
-    
+    color: var(--text-default);
 }
 
  .home_opt div{
@@ -399,7 +411,7 @@ padding-bottom: 10px;
     border-radius: 6px;
 }
 .home_opt div:hover{
-    background-color:  rgb(25, 27, 32, 0.616);
+    background-color:  var(--bg-trends-dark);
     backdrop-filter: blur(42px);
 }
  .home_opt div p{
@@ -415,6 +427,9 @@ padding-bottom: 10px;
  #menue_mob{
     box-shadow: 0 0 0 0;
     cursor: pointer;
+    display: none;
+}
+#unW{
     display: none;
 }
 .posts{
@@ -440,7 +455,7 @@ padding-bottom: 10px;
    display: flex;
    font-size: 16px;
    width:100%;
-   background-color: rgb(25, 27, 32, 0.616);
+   background-color: var(--bg-trends-dark);
    border-radius: 63px;
    justify-content: center;
    margin-top: 10px;
@@ -457,7 +472,7 @@ padding-bottom: 10px;
     font-size: 25px;
     background-color: transparent;
     border-radius: 6px;
-    color: white;
+    color: var(--text-default);
     border-radius: 0px 63px 63px 0px;
     position: relative;
     
@@ -469,7 +484,7 @@ padding-bottom: 10px;
     font-size: 18px;
      position: relative;
      top: 6px;
-     color: white;
+     color: var(--text-default);
 background-color: transparent;
    
 }
@@ -529,7 +544,7 @@ background-color: transparent;
     border: 1px solid #ccc;
     padding: 5px;
     margin-left: 70px;
-    background-color: #000;
+    background-color: var(--bg-default-dark);
     box-shadow: 0px 2px 5px 0px white;
     z-index: 100;
     border: 6px;
@@ -551,11 +566,52 @@ background-color: transparent;
     height: auto;
     
 }
+.story{
 
+    overflow-x: scroll;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    gap: 10px;
+    text-align: left;
+    padding: 10px;
+  
+}
+.story-container{
+    height: 190px;
+    border-radius: 6px;
+    overflow: hidden;
+    width: 200px;
+}
+.story-container .icons{
+    position: relative;
+    top:-40px;
+    left: 10px;
+    margin-top: -20px;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 63px;
+    border: 4px solid var(--bg-default-dark);
+}
+.story-container .cover img{
+    max-width: 100%;
+    height: 180px;
+    position: relative;
+    border-radius: 6px;
+    filter: brightness(60%);
+}
+.story-container p{
+    text-align: center;
+    padding: 6px;
+    width: 100%;
+    position: relative;
+    margin-top: -90px;
+    font-weight: 600;
+}
 .con_form{
 text-align: left;
     padding: 20px 5PX;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid var(--brd-dark);
     width: 100%;
     margin-top: 5px;
     min-width: 200px;
@@ -563,7 +619,7 @@ text-align: left;
 }
  #theme_input{
     border-radius: 6px;
-    border: 2px solid #333;
+    border: 2px solid var(--brd-dark);
     font-size: 15px;
     width: 40%;
     margin-left: 15px;
@@ -572,8 +628,29 @@ text-align: left;
 }
 #create{
     background-color: #fff;
-    color: #000;
+    color: var(--bg-default-dark);
 }
+#loadingBarPost {
+            display:none ; /* Initially hide the loading bar */
+            
+            padding: 2px;
+            border-radius: 65px;
+            font-size: 10px;
+            background-color: #1e90ff;
+            animation: loadingAnimation 1.5s infinite;/* Blue background color */
+        }
+
+      
+
+        /* Keyframes for the loading animation */
+        @keyframes loadingAnimation {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 100%;
+            }
+        }
 .con_form textarea{
     padding: 10px 13px;
     position: relative;
@@ -581,7 +658,7 @@ text-align: left;
     background-color:  inherit;
     resize: none;
     border: none;
-    color: white;
+    color: var(--text-default);
 
     margin-top: -10px;
    width: 100%;
@@ -599,13 +676,14 @@ text-align: left;
     margin-bottom: -50px;
 }
 select{
-    background-color:#000 ;
+    background-color:var(--bg-trends-dark) ;
     width: fit-content;
     border-radius: 32px;
-    color: #1e90ff;
-    border:2px solid rgb(49, 52, 62);
-    font-weight: 700;
+    color: white;
+    border:none;
+    font-weight: 400;
     max-width: 100%;
+
 }
 select option{
     background-color: #121212;
@@ -625,7 +703,7 @@ select option{
     border-radius: 8px;
     padding: 6px;
     color: gainsboro;
-     background-color: #000;
+     background-color: var(--bg-default-dark);
     width:fit-content;
     position: relative;
     border: 1px solid #1a1a1a;
@@ -658,7 +736,17 @@ select option{
     width: 74%;
     left: 18%;
 }
+#upload_cover{
 
+    margin-bottom: 30px;
+
+    margin-left: -40px;
+}
+#upload_cover small{
+    position: absolute;
+  margin-left: 150px;
+    color: #333;
+}
 
 
 #upload_profile_pic{
@@ -666,7 +754,7 @@ select option{
 }
 
 .uploaded_img img{
-    border: 1px solid #333;
+    border: 1px solid var(--brd-dark);
     border-radius: 10px;
    max-height: 450px;
    max-width: 100%;
@@ -746,7 +834,7 @@ select option{
     background-color: inherit;
     margin-bottom: 10px;
     outline: none;
-    color: floralwhite;
+    color: var(--text-default);
     width: 100%;
     border-radius: 0px;
     border-bottom:2px solid #313131 ;
@@ -775,7 +863,7 @@ select option{
     background-color: inherit;
     border-radius: 8px;
     padding: 6px;
-    color: white;
+    color: var(--text-default);
     outline: none;
     margin-right: 10px;
 }
@@ -811,28 +899,28 @@ select option{
     padding: 6px 10px;
        font-weight: 600;
     background-color: inherit;
-    color: white;
+    color: var(--text-default);
     font-size: 16px;
     
 }
 .con_form button{
     font-size: 16px;
     width:60px;
-
+    
     padding: 8px;
     border-radius: 64px;
     border: none;
     background-color:#1e90ff ;
     cursor: pointer;
     outline: none;
-    color: white;
+    color: var(--text-default);
     font-weight: 600;
     position: relative;
     left: 55px;
 }
 .con_form button:hover{
     background-color: rgb(0, 131, 196);
-    color: #000000;
+    color: var(--bg-default-dark);
     transition: 0.3s;
 }
 .conform_desgn_head{
@@ -853,7 +941,7 @@ select option{
     text-align: left;
   min-width: 200px;    
   width: 100%;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid var(--brd-dark);
    }
    #profile_pic{
     height: 45px;
@@ -886,7 +974,7 @@ select option{
     .switch .small{
         font-size: 12px;
     
-        color: white;
+        color: var(--text-default);
     }
     .slider {
         position: absolute;
@@ -895,7 +983,7 @@ select option{
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: #212121;
+        background-color:  rgb(25, 27, 32, 0.616);
         transition: 0.4s;
         border-radius: 34px;
         height: 26px;
@@ -916,12 +1004,12 @@ select option{
     }
 
     input[type="checkbox"]:checked + .slider {
-        background: linear-gradient(to bottom, #9b59b6,#3498db);
+        background: linear-gradient(to bottom, green,green);
     }
 
     input[type="checkbox"]:checked + .slider:before {
         transform: translateX(26px);
-        background-color: white;
+        background-color: var(--bg-default-dark);
     }
 
    
@@ -934,7 +1022,7 @@ select option{
         border-radius: 63px;
         height: 80px;
         width: 80px;
-        background-color:#000;
+        background-color:var(--bg-default-dark);
         object-fit: cover;
     }
 
@@ -948,7 +1036,6 @@ select option{
     text-overflow:ellipsis;
     cursor: pointer; 
     border-radius: 8px;
-    color: white;
     line-height: 1.2;
 }
 
@@ -997,7 +1084,7 @@ left: 48px;
     font-size: 15px;
 
     border-radius: 6px;
-    color: gainsboro;
+    color: gray;
     margin-right: 10px;
 }
 
@@ -1006,6 +1093,11 @@ left: 48px;
 }
 .img_post{
     margin-left: 10px;
+}
+#img_post img{
+    width: 80%;
+    height: auto;
+    margin-top: 25px;
 }
 
 .img_post img{    
@@ -1035,11 +1127,13 @@ left: 48px;
     border: none;
     padding: 6px;
     border-radius: 10px;
-    left: 83%;
-    top: -55px;
     cursor: pointer;
 }
-
+.engage_btn{
+    text-align: left;
+    margin-top: 10px;
+    margin-left:15px;
+}
 .engage_btn img{
     width: 15px;
     position: relative;
@@ -1087,7 +1181,7 @@ left: 48px;
     padding: 10px ;
     font-size: 15px;
     cursor: pointer;
-    color: white;
+    color: gray;
     text-align: left;
     display: grid;
     grid-template-columns: auto auto auto auto;
@@ -1192,7 +1286,7 @@ left: 48px;
     margin-top: 10px;
 }
 .heading-post  #post_info #username{
-    color: white;
+    color:var(--text-default);
     font-weight: 700;
     
 }
@@ -1262,7 +1356,7 @@ left: 48px;
     font-weight: 600;
     background-color: inherit;
     cursor: pointer;
-    color: white;
+    color: var(--text-default);
     border: none;
     width: 100%;
     text-align:center;
@@ -1278,7 +1372,7 @@ left: 48px;
     display: block;
 }
 .comment{
-    border-top: 1px solid #333333;
+    border-top: 1px solid var(--brd-dark);
         display: grid;
     padding: 14px 1px 12px 12px;
     grid-template-columns: 13% 80%;
@@ -1311,7 +1405,7 @@ left: 48px;
     border: none;
     border-radius: 8px;
     width: auto;
-    color: white;
+    color: var(--text-default);
     font-weight: 600;
     background-color: green;
     cursor: pointer;
@@ -1365,8 +1459,8 @@ cursor: pointer;
 .react-emojis{
     display: none;
     position: relative;
-    margin-top: -100px;
-    background-color: #212121;
+    margin-top: -80px;
+    background-color: var(--bg-trends-dark);
     padding: 8px 10px;
     min-width: 300px;
     left: -20px;
@@ -1415,7 +1509,7 @@ cursor: pointer;
     margin-left: 20px;
     cursor: pointer;
     border: none;
-    color: floralwhite;
+    color: var(--text-default);
 }
 .bookmark{
     position: absolute;
@@ -1447,9 +1541,9 @@ cursor: pointer;
     background-color: #1e90ff;
     border-radius: 8px;
     border: none;
-    border-left:1px solid #000;
+    border-left:1px solid var(--bg-default-dark);
     height: 35px;
-    color: white;
+    color: var(--text-default);
     font-weight: 600;
     position: relative;
     left: 20%;
@@ -1459,7 +1553,7 @@ cursor: pointer;
 }
 .comments_posts{
     text-align: left;
-    border-left:2px solid #333;
+    border-left:2px solid var(--brd-dark);
     padding-left: 25px;
     width:93%;
     margin-left: 37px;
@@ -1500,7 +1594,6 @@ cursor: pointer;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 22px;
-    color: white;
     text-align: left;
 }
 .replys #profile_pic{
@@ -1519,7 +1612,7 @@ cursor: pointer;
 
 
 .replys small ,.emoji_cont small{
-    color: rgb(0, 101, 196);
+    color: gray;
     font-size: 11px;
 }
 .reply_com{
@@ -1530,7 +1623,7 @@ cursor: pointer;
     background-color: inherit;
     border: none;
     border-radius: 6px;
-    color: white;
+    color: var(--text-default);
 }
 .divider{
     border-radius: 6px;
@@ -1549,7 +1642,7 @@ cursor: pointer;
     padding: 6px;
     border:none;
     
-    color: white;
+    color: var(--text-default);
     width: 60%;
     padding: 6px ;
     
@@ -1592,7 +1685,7 @@ cursor: pointer;
 }
 .comOpt{
     display: flex;
-    margin-top: 10px;
+    margin-top: -5px;
 }
 .comOpt select{
     padding: 4px 6px;
@@ -1638,14 +1731,14 @@ cursor: pointer;
     border-radius: 44px;
     cursor: pointer;
     box-shadow: 0px 3px 3px 0px black;
-    color: #000;
+    color: var(--bg-default-dark);
     font-weight: 600;
 }
 .close-btn:hover{
     transform: scale(1.2);
     transition: 0.3s ease;
     background-color: #242323;
-    color: floralwhite;
+    color: var(--text-default);
 }
 .post-reply{
    padding-left: 80px;
@@ -1691,7 +1784,7 @@ cursor: pointer;
     font-size: 18px;
     font-weight: 600;
     padding:5px 12px;
-    color: white;
+    color: var(--text-default);
    
 }
 .input-reply button{
@@ -1702,7 +1795,7 @@ cursor: pointer;
     border-radius: 12px;
     width: 70px;
     font-weight: 600;
-    color: white;
+    color: var(--text-default);
     cursor: pointer;
     box-shadow: 2px 3px 4px 0px black;
 }
@@ -1714,6 +1807,10 @@ cursor: pointer;
 
     padding-bottom: 80px;
 }
+#leftbar-content{
+    position: sticky;
+    top: 0;
+}
 
 #search_place input{
     width: 100%;
@@ -1724,9 +1821,9 @@ cursor: pointer;
     margin-bottom: 10px;
 }
 .search-con{
-    
+    width: 100%;
     padding: 6px;
-    background-color: #000;
+    background-color: var(--bg-default-dark);
 }
  
 .leftbar .leftbar-container{
@@ -1803,12 +1900,19 @@ cursor: pointer;
 }
 .profileContainer .img_profile img{
     margin-left: 15px;
-    background-color: #000;
+    background-color: var(--bg-default-dark);
     width: 120px;
     height: 120px;
     padding: 6px;
     border-radius: 63px;
     object-fit: cover;
+}
+.profileContainer .img_profile #img{
+    width: 12px;
+    height: auto;
+    border-radius: 0px;
+    margin: 0;
+    padding: 0;
 }
 .nav_prof{
     margin-bottom: -20px;
@@ -1828,15 +1932,20 @@ cursor: pointer;
 }
 .profileContainer .info{
    padding: 20px;
-    font-size: 20px;
-    color: #777;    
+    font-size: 20px;  
     width: fit-content;
    text-align: left;
+}
+.profileContainer .social{
+    display: flex;
+    gap: 15px;
+    padding: 12px;
+    margin-top: -10px;
 }
 .profileContainer .home_opt{
     display: grid;
     grid-template-columns:auto auto auto  ;
-    border-bottom: 1px solid #333
+    border-bottom: 1px solid var(--brd-dark)
 }
 .profileContainer{
     text-align: left;
@@ -1852,7 +1961,7 @@ cursor: pointer;
     font-size: 15px;
     padding: 6px 12px;
     font-weight: 600;
-    background-color: white;
+    background-color: var(--text-default);
     color: black;
     border-radius:66px;
     border: none;
@@ -1886,14 +1995,14 @@ cursor: pointer;
 }
 .profileContainer .info small{
     font-size: 15px;
-    color: gainsboro;
+    color: gray;
     font-weight: 700;
 }
 
 .profile, .settings{
     padding: 10px;
     cursor: pointer;
-    background: #000;
+    background: var(--bg-default-dark);
     border-radius: 43px;
     margin-right: 12px;
     font-weight: 600;
@@ -1912,7 +2021,7 @@ cursor: pointer;
     
 }
 .settings:hover{
-    background-color: #000000;
+    background-color: var(--bg-default-dark);
     box-shadow: 0px 2px 3px 0px;
 }
 .profile:hover{
@@ -1934,7 +2043,7 @@ cursor: pointer;
     padding: 12px;
     margin-right: 10px;
     font-weight: 600;
-    color: white;
+    color: var(--text-default);
     border-radius: 8px;
     border: none;
     cursor:pointer;
@@ -1959,7 +2068,7 @@ cursor: pointer;
 }
 
 .trends{
-    background-color: rgb(25, 27, 32, 0.616);
+    background-color: var(--bg-trends-dark);
     margin-top: 12px;
     border-radius: 10px;
     font-size: 15px;
@@ -1981,7 +2090,7 @@ cursor: pointer;
     background-color: rgb(18, 33, 46);
 }
 .trends .trndItms small{
-    color: #777;
+    color: gray;;
     font-size: 14px;
     padding: 5px;
 }
@@ -2016,7 +2125,7 @@ cursor: pointer;
     width: 100%;
     font-weight: 600;
     background-color:#1a1a1a;
-    color: white;
+    color: var(--text-default);
     border-radius: 8px;
     border: none;
 }
@@ -2200,21 +2309,25 @@ cursor: pointer;
     border-left:  3px solid rgb(2, 70, 118);
 }
 
-/* Responcive Design*/
-
 /* Tablets */
 @media only screen and (min-width: 700px) and (max-width: 1023px) {
     /* CSS styles here */
     .main-content{
-        margin-left: 0;
+        border: none;
     }
+    #unW{
+    display: block;
+}
+.footer_items{
+    grid-template-columns: auto auto auto auto auto auto;
+}
     .nav{
         border-left: none;
         border-right: none;
      
     }
     .home_h2{
-        text-align: center;
+        display: none;
     }
     #small_screen_icon{
         display: block;
@@ -2229,11 +2342,13 @@ cursor: pointer;
     .sidebar-nav{
        display: none;
     }
+   
     nav{
         margin-left: -20px;
     }
     .con_form{
         padding: 0;
+        padding-top: 10px;
     }
     .emojis{
         left: 0;
@@ -2244,7 +2359,9 @@ cursor: pointer;
     }
     #menue_mob{
     display: block;
+
   }
+  
   .react small{
     position: relative;
     color:inherit;
@@ -2316,13 +2433,37 @@ cursor: pointer;
   #settings .post-container{
     text-align: center;
     padding: 10px;
-    margin-bottom: 10px;
-    border: none;
+  border: 1px solid #333;
+  border-radius: 6px;
+  margin-bottom: 10px;
   }
   #settings #update div{
     display: flex;
     gap: 10px;
     justify-content: center;
+  }
+  #soclials {
+    margin-bottom: 10px;
+  }
+  #soclials .select{
+    margin-top: -10px;
+  }
+  #soclials select{
+    margin-left: 20px;
+    color: white;
+    border: none;
+  }
+ 
+  #soclials .post_header{
+    margin-top: 15px;
+  }
+  #soclials button{
+    width: fit-content;
+  }
+  #soclials input{
+    width: 80%;
+    margin-left: 13px;
+    border: none;
   }
   #settings .post-container input {
     width: fit-content;
@@ -2390,7 +2531,7 @@ cursor: pointer;
     background-color: rgb(0, 101, 196);
     border-radius: 8px;
     border: none;
-    color: white;
+    color: var(--text-default);
     font-weight: 600;
     padding: 8px;
     cursor: pointer;
@@ -2404,7 +2545,7 @@ cursor: pointer;
     background-color: brown;
     padding: 10px;
     border-radius: inherit;
-    color: whitesmoke;
+    color: var(--text-default);
     width: 100%;
     font-weight: 600;
     border: none;
@@ -2423,7 +2564,7 @@ cursor: pointer;
         backdrop-filter: blur(44px);
     }
     .home_h2{
-        text-align: center;
+        display: none;
     }
     .leftbar{
         display: none;
@@ -2519,6 +2660,8 @@ body{
 
 .main-content{
     margin-left: 0;
+    
+    border: none;
 }
 .img_post img{    
     border: 1px solid #121212;

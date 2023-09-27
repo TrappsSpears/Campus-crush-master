@@ -1,11 +1,18 @@
 <?php
-if (isset($_POST['submit'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+    $response = array();
+
     $post = nl2br(htmlspecialchars($_POST['post']));
     $location = $_POST['location'];
     $user_id = $_POST['user_id'];
     $date = date('Y-m-d H:i:s');
-    $anonym = $_POST['show_profile'];
-    $theme=$_POST['theme'];
+    if(isset($_POST['show_profile'])){
+        $anonym = $_POST['show_profile']; 
+    }else{
+        $anonym = '';
+    }
+   
+    $theme = $_POST['theme'];
     include_once('dbh.class.php');
     $dbh = new Dbh();
 
@@ -21,36 +28,34 @@ if (isset($_POST['submit'])) {
         // Validate file type
         $imageFileType = strtolower(pathinfo($_FILES["post_pic"]["name"], PATHINFO_EXTENSION));
         if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png") {
-            header('Location: ../home/home.php.php?InvalidFormat');
-            exit();
+            echo "InvalidFormat";
         } else {
             if (move_uploaded_file($_FILES["post_pic"]["tmp_name"], $targetFile)) {
                 // Successfully uploaded the file
                 $post_pic = $uniqueFilename; // Set the file path
             } else {
                 // Error while moving the uploaded file
-                header("Location: ../home/home.php.php?Error_MovingFile");
-                exit();
+                echo  "Error_MovingFile";
             }
         }
     }
 
     // Prepare and execute the post insertion query
-    $sql = "INSERT INTO posts(post_body, user_id, date_created, location, time, post_pic, anonymous,theme) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+    $sql = "INSERT INTO posts(post_body, user_id, date_created, location, time, post_pic, anonymous, theme) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $result = $dbh->connect()->prepare($sql);
 
-    // Check if the query executed successfully
-    if ($result->execute([$post, $user_id, $date, $location, $date, $post_pic, $anonym,$theme])) {      
-            header("Location: ../home/home.php?succeeded");
-        exit();
+    if (!$result->execute(array($post, $user_id, $date, $location, $date, $post_pic, $anonym, $theme))) {
+        echo "Error_Query";
+        
     } else {
-        // Error while executing the query
-        header("Location: ../home/home.php?Error_Query");
-        exit();
+   
+        echo  "Post successfully created!";
     }
+
+
 } else {
-    // Form not submitted
-    header("Location: ../home/home.php.php?FormNotSubmitted");
+    // Form not submitted or invalid request
+    header('HTTP/1.1 400 Bad Request');
     exit();
 }
 ?>

@@ -1,5 +1,22 @@
 <?php
-     $selectThemes = $dbh->connect()->prepare('
+  
+  if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+  }
+    include_once('../classes_incs/dbh.class.php');
+    if(isset($_SESSION['user_id'])){
+      $user_id = $_SESSION['user_id'];
+      $userCity = $_SESSION['city'];
+      $userSchool = $_SESSION['school'];
+      $userCountry = $_SESSION['country'];
+      $userDOB = $_SESSION['dob']; 
+      $userID = $user_id; 
+      $userName = $_SESSION['username'];  
+    }
+    $dbh = New Dbh();
+    
+     
+  $selectThemes = $dbh->connect()->prepare('
      SELECT
          theme,
          MAX(location) AS top_location,

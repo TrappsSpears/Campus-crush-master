@@ -1,4 +1,30 @@
 <?php 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+  }
+ include_once('../classes_incs/dbh.class.php');
+ if(isset($_SESSION['user_id'])){
+   $user_id = $_SESSION['user_id'];
+   $userCity = $_SESSION['city'];
+   $userSchool = $_SESSION['school'];
+   $userCountry = $_SESSION['country'];
+   $userDOB = $_SESSION['dob']; 
+   $userID = $user_id; 
+   $userName = $_SESSION['username'];  
+ }
+ $dbh = New Dbh();
+
+ 
+ ##-------------------Posts for All, HomePage--------------------------------------##
+
+ 
+ $today = new DateTime();
+ $userBirthDate = new DateTime($userDOB);
+ $ageDifference = $userBirthDate->diff($today)->y;
+ $ageGroup = floor($ageDifference / 15); // Group users into age groups of 15 years
+ $msg = 'Message';
+
+
     $selectMessages = $dbh->connect()->prepare('
     SELECT * FROM (
         SELECT posts.*, users.*, likes.type as type,
@@ -17,7 +43,7 @@
     ORDER BY engagement_score DESC, date_created DESC, time DESC
 ');
 
-$selectMessages->bindValue(':username', $username, PDO::PARAM_STR);
+$selectMessages->bindValue(':username', $userName, PDO::PARAM_STR);
 
 $selectMessages->bindValue(':theme', $msg, PDO::PARAM_STR);
 

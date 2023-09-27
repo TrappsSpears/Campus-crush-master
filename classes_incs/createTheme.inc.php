@@ -1,5 +1,7 @@
 <?php
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit'])){
+
+
     $post = nl2br(htmlspecialchars($_POST['description']));
     $location = $_POST['location'];
     $user_id = $_POST['user_id'];
@@ -40,7 +42,7 @@ if (isset($_POST['submit'])) {
 
     // Check if the query executed successfully
     if ($result->execute([$post, $user_id, $location,  $post_pic, $anonym,$themename])) {      
-            header("Location: ../location/homeGroups.php?place=Eden&successfullyCreatedATheme");
+        header("Location: ../location/location.php?theme=$themename");
         exit();
     } else {
         // Error while executing the query

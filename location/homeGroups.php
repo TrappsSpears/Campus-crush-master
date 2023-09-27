@@ -28,7 +28,7 @@ $getname = $_GET['place']; include('homeThemes.inc.php');?>
          
 
        
-        <form action="../classes_incs/createTheme.inc.php" method='Post' enctype="multipart/form-data">
+        <form action="../classes_incs/createTheme.inc.php" method='Post' enctype="multipart/form-data" id='myForm'>
         <div class='input_img'>
             <div class='userImg'>
                 <?php if($_SESSION['profile_pic']!=''){ ?> 
@@ -40,8 +40,8 @@ $getname = $_GET['place']; include('homeThemes.inc.php');?>
             </div>
             
             <div>  
-               <textarea id="post_choice"  placeholder="  Theme Description ?" name="description" required minlength="2" maxlength="140"></textarea> 
-               <input type="text" placeholder="Theme name ?" name='themeName' id='theme_input' minlength="2" maxlength="20"> 
+               <textarea id="post_choice"  placeholder="  Caption..." name="description" required minlength="2" maxlength="100"></textarea> 
+               <input type="text" placeholder="Theme ..." name='themeName' id='theme_input' minlength="2" maxlength="20"> 
                <div class="custom-select">
                 
         <input type="button" class='cancel_post' value='Cancel' style='display:none'>
@@ -55,17 +55,17 @@ $getname = $_GET['place']; include('homeThemes.inc.php');?>
             
         </div>
      
-    <div class="uploaded_img">
+    <div class="uploaded_img" id="upload_cover">
+
         <img src="" alt="" id='post-image'>
     </div>
-      
+   
         <div class='post_header'>
         
         
            <div style='display:flex; gap:10px'>
             <div>
             <select name="location" id="location" required>
-                <option value="" disabled selected>Location</option>
               <option value="<?= $_SESSION['school'] ?>"><?= $_SESSION['school'] ?></option>
               <option value="<?= $_SESSION['city'] ?>"><?= $_SESSION['city'] ?></option>
             </select>
@@ -99,14 +99,15 @@ $getname = $_GET['place']; include('homeThemes.inc.php');?>
         </div>
         
             <div>
-                <button name='submit' id='create'>Create</button>
+                <button name='submit' id='create' >Create</button>
             </div>
             
         </div>
         
         </form>
+       
         <div class="footer-about" id='info_App'>
-          Create Custome #Themes To Engage with Your Community Friends From Your Theme- Add A Cover Photo 
+          Create Hot #Themes and Engage with Your Community Friends From Your Theme- Add A Cover Photo 
         </div> 
 
     </div>
@@ -116,15 +117,12 @@ $getname = $_GET['place']; include('homeThemes.inc.php');?>
     <div >
         <?php foreach($themes_Home as $trend){ ?>
         <a href="../location/location.php?theme=<?= $trend['theme_name'] ?>&topLocation=<?= $getname?>&cover=<?=$trend['cover_photo']?>">
-        <div class='post-container' style="margin-bottom: 20px;">
+        <div class='post-containe' style="margin-bottom: 20px;">
         <div class ='profileContainer'>
-  <div class="cover" >
-    <img src="../images/imagePosts/<?= $trend['cover_photo']?>" alt="" >
-  </div>
-  <div class="img_profile">
-    <img src="../images/imagePosts/<?= $trend['cover_photo']?>" alt="" >
-  </div>
-  <div class='info'>
+  
+  <div class="img_profile" style="margin-top: 5px;">
+    <img src="../images/imagePosts/<?= $trend['cover_photo']?>" alt=""  style="border-radius: 32px;">
+    <div class='info'>
         <h4>
       #<?= $trend['theme_name'] ?> 
 </h4>
@@ -133,8 +131,10 @@ $getname = $_GET['place']; include('homeThemes.inc.php');?>
         <span><small><?= $trend['theme_desc']?></small></span>
     </div>
        
-                <div> <span><img src="../images/map-pin.png" alt="king" class="icons" style='width:12px'> <?= $trend['location']?></span></div>
+                <div> <span> <?= $trend['location']?></span></div>
             </div>
+  </div>
+ 
         </div>
         </div>
         </a>
@@ -152,9 +152,12 @@ $getname = $_GET['place']; include('homeThemes.inc.php');?>
 <h2> Does Not Exist</h2>
  <?php  } ?>
     </div>
-    <?php include('../includes/script.php'); include('../includes/leftbar.php') ?>
+    <?php   include('../includes/lefty.php'); ?>
 
-  <?php include('../includes/footer.php');
+</div>
+<?php include('../includes/footer.php') ;
+include('../includes/script.php');
+?>
 
   ?>
 </body>

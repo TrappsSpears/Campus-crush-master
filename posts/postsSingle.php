@@ -3,10 +3,49 @@
    
    
 <!--...............------------------- Now Posting --------------------------------------------------------------->
+<?php if(isset($_GET['post_id'])){
+$post_id = $_GET['post_id'];
 
-<?php 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+  }
+    include_once('../classes_incs/dbh.class.php');
+    if(isset($_SESSION['user_id'])){
+      $user_id = $_SESSION['user_id'];
+      $userCity = $_SESSION['city'];
+      $userSchool = $_SESSION['school'];
+      $userCountry = $_SESSION['country'];
+      $userDOB = $_SESSION['dob']; 
+      $userID = $user_id; 
+      $userName = $_SESSION['username'];  
+    }
+    $dbh = New Dbh();
+    
+
+##-------------------Posts for Single Post--------------------------------------##
+
+// Check if the data is already cached
+
+    // Data is not cached or has expired, so fetch it from the database
+    $selectPost = $dbh->connect()->prepare("SELECT posts.*, users.*, likes.type as type,
+        COUNT(bookmarks.id) AS save_count, 
+        COUNT(likes.id) AS like_count, 
+        COUNT(comments.id) AS comment_count
+        FROM posts JOIN users ON posts.user_id = users.id 
+        LEFT JOIN likes ON posts.post_id = likes.post_id 
+        LEFT JOIN bookmarks ON posts.post_id = bookmarks.post_id 
+        LEFT JOIN comments ON posts.post_id = comments.post_id  
+        WHERE posts.post_id = ? ORDER BY date_created DESC");
+
+    if (!$selectPost->execute(array($post_id))) {
+        echo 'Failed To Load Posts';
+    } else {
+        $post = $selectPost->fetch(PDO::FETCH_ASSOC);
+
+    }
+ 
       include_once('../classes_incs/functionsposts.php');
-foreach($post_single as $post){ 
+
     $post_date =$post['date_created'].''.$post['time'];
     $formattedDate = format_post_date($post_date);
     
@@ -124,8 +163,7 @@ foreach($post_single as $post){
                </div>
     </div>
 
-    <?php 
-    if($userLogged) { ?>
+   
    
       
     <div class="comment" style='height:fit-content'>
@@ -172,7 +210,7 @@ foreach($post_single as $post){
                 <div class="react">
                 <div class="react">
                 <img src="../images/<?php echo $resultsall['type'];?>.png" alt="<?= $resultsall['type'] ?>" class='icons' >
-                <small style='background-color:inherit;margin-top:40px'>
+                <small style='background:inherit; margin-left:-4px'><?= $results['total']; ?></small> <small style='background-color:inherit;margin-top:40px'>
               <span style=' visibility: hidden;'>Reactions</span>  
                 </small>
                 </div>
@@ -190,7 +228,7 @@ foreach($post_single as $post){
             <?php }else{?>
                 <div class="react" id='react' style="font-size: 23px;">
                 <img src="../images/love2.png" alt="" class='icons' >
-                <small><?= $results['total']; ?></small>
+                <small style='background:inherit; margin-left:-4px'><?= $results['total']; ?></small>
                 
                 </div>
             <?php }} ?>
@@ -256,7 +294,7 @@ foreach($post_single as $post){
     </div>
     </div>
    
-        <form action="../classes_incs/postcomments.php" method="post" class='form-comment'>
+        <form action="../classes_incs/postcomments.php" method="post" class='form-comment' id='myForm'>
          <div class="comment_in" >
                 <textarea placeholder="What are your Thoughts" class="textarea_reply" id="reply-textarea" name="comment" required  ></textarea> 
                      <input type="hidden" name = 'post_id' value="<?= $post['post_id'] ?>">
@@ -304,219 +342,112 @@ foreach($post_single as $post){
             
              </div>   
              
-            <button name='submit_comment'>Post</button>
+            <button name='submit_comment' type='button' id='submitButton'>Post</button>
         
        </div>
     
         
         </form>
+        <div id="loadingBarPost">
+        Commenting
+    </div>
+
+<!-- Response message container -->
+<div id="responseMessage"></div>
+      <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("myForm");
+    const submitButton = document.getElementById("submitButton");
+    const loadingBar = document.getElementById("loadingBarPost");
+    const linksInForm = document.querySelector("a");
+    const postChoice = document.getElementById("reply-textarea");
+    
+
+    submitButton.addEventListener("click", function () {
+        // Hide the form and show the loading bar
+  
+        if (postChoice.value.trim() === "" ) {
+            alert("Textarea and/or file input cannot be empty.");
+            return; // Prevent form submission if validation fails
+        }
+        form.style.display = "none";
+        loadingBar.style.display = "block";
+        setTimeout(function(){
+          form.style.display = 'block'; 
+          profileImage.style.display = 'none';
+          loadingBar.style.display = "none";
+        } , 2000);
+        const formData = new FormData(form);
+        const xhr = new XMLHttpRequest();
+  
+        xhr.open("POST", "../classes_incs/postscomments.php", true);
+        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+
+        xhr.onload = function () {
+                    if (xhr.status === 200) {
+         
+             
+                // Show the form again and hide the loading bar
+                loadComms();
+                linksInForm.style.pointerEvents = 'all';
+                // Reset the form if needed
+                form.reset();
+            } else {
+                // Handle other HTTP status codes or errors here
+                responseMessage.textContent = "An error occurred.";
+                responseMessage.style.color = "red";
+            }
+        };
+
+        xhr.send(formData);
+        
+    });
+});
+
+
+    </script>
     </div>
 </div>
-    <?php }else{ ?>
-            <div class="form-comment">
-                <h4 style='text-align:center'>Sign in to comment and Like</h4>
-            </div>
-        <?php } ?>
+   
         
         </div>
-        <?php } ?> 
+        
 
         <div class="reply-container">
       
             <h3>Comments <small> <?= $post['comment_count'] ?></small></h3>
+            <div id='posts-com'>
 
-        <?php
-        if($userLogged){
-        foreach($post_comment as $comment){ 
-            $com_id =$comment['id'];
-            $dbh = New Dbh();
-
-##-------------------Replys for comments--------------------------------------##
-$selectReply = $dbh->connect()->prepare('SELECT username, reply ,emoji, profile_pic FROM reply JOIN users ON users.id=reply.user_id WHERE com_id = ? ');
-if(!$selectReply ->execute(array($com_id))){
-    echo 'Failed To Load Posts';
-}else{
-    $reply = $selectReply->fetchAll(PDO::FETCH_ASSOC);
-}
-$selectPostIDUSER = $dbh->connect()->prepare('SELECT user_id, post_id FROM posts WHERE post_id = ? ');
-if(!$selectPostIDUSER ->execute(array($post_id))){
-    echo 'Failed To Load Posts';
-}else{
-    $userPost_id = $selectPostIDUSER->fetch(PDO::FETCH_ASSOC);
-    if($userPost_id!==false){
-        $posterId=$userPost_id;
-    }else{
-        $posterId= null
-        ;
-    }
-}
-
-            ?> 
-            <?php if($comment['type']=='private'){ if($comment['user_id'] == $user_id || $posterId['user_id']==$user_id){ ?>
-                <div class="post-container">
-                <div class="post-head">
-                    <div class="heading-post">
-                    <a href="../location/location.php?place=<?=$post['location'] ?>">">
-                 <div class="post-heading-container">
-                <div class='post-heading'>
-                
-                    <img src="../images/users/<?= $comment['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
-                    
-                       <div id='post_info'>
-                        <div>
-                             <b> <span id='username'><?= $comment['username'] ?></span></b> <span id='name'>  <?= $comment['name'] ?></span> 
-                        </div>   
-                    </div>   
-                </div>
-                </div></a>
-                    </div>
-                    </div>
-                    <div class="comments_posts" style="border-left: 2px solid green;">
-             
-                <div class="comment-post"> <p id='type_com'> </small></p>
-                   <p> <?= $comment['comment'] ?></p>
-                    <div>
-                        <small>@ <?php if($user_id == $comment['user_id']){ ?> You <?php } ?>.<span><?= $comment['school'] ?></span> </small>
-                    </div>
-                </div>
-                   
-               
-                
-         
-            </div>
-            <?php 
-                foreach($reply as $reply){ 
-                    if($reply['reply'] != ''){?>
-
-            <div class="replys">
-                       <p><?=$reply['reply'] ?></p>  
-                       <div>
-                        <small>@<?= $reply['username'] ?></small>
-                       </div>                       
-            </div>
-                        <?php } ?>
-                      
-            <?php } ?>
-            
-            <div class="reply_com">
-              
-               
-                    
-              <form action="../classes_incs/postReply.inc.php" method='Post'>
-                 
-                  <div class="replyform">
-                  <input type="hidden" name='emoji' value=''>
-                  
-                  <input type="hidden" name='post_id' value='<?= $posterId['post_id'] ?>'>
-                      <input type="hidden" name="user_id"  value="<?= $user_id?>">
-                      <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
-                          <textarea name="reply" id="reply_input" placeholder="reply"></textarea>
-                          <button type='submit' name='submit_reply'><img src="../images/reply.png" alt="reply" class='icons'></button>
-                      </div>
-              </form>
-                      
-                  
-          </div>
-                </div>
-            
-            <?php }else{ ?> 
-                <div class="comments_posts" id="pvt_com">
-                <div class="comment-post">
-                this comment is private
-             </div></div>
-            <?php }}else{ ?> 
-                <div class="post-container">
-                <div class="post-head">
-                    <div class="heading-post">
-                    <a href="../location/location.php?place=<?=$post['location'] ?>">
-                 <div class="post-heading-container">
-                <div class='post-heading'>
-       
-                    <img src="../images/users/<?= $comment['profile_pic'] ?>" alt="" class="icons" id='profile_pic'>
-           
-                       <div id='post_info'>
-                        <div>
-                             <b> <span id='username'><?= $comment['username'] ?></span></b> <span id='name'>  <?= $comment['name'] ?></span> 
-                        </div>   
-                    </div>   
-                </div>
-                </div></a>
 </div>
-                    </div>
-                <div class="comments_posts">
-             
-             <div class="comment-post"> <p id='type_com'> <small style='color:#880281'><?= $comment['type'] ?></small></p>
-                <p> <?= $comment['comment'] ?></p>
-                 <div>
-                     <small>@
-                     <?php if($user_id == $comment['user_id']){ ?> You <?php }else{ echo $comment['username'];} ?> 
-                     .<span><?= $comment['school'] ?></span> </small>
-                 </div>
-             </div>      
-         </div>
-         <?php 
-                foreach($reply as $reply){ 
-                    if($reply['reply'] != ''){?>
+<script>
+// Function to fetch and insert content into the leftbar
+function loadComms() {
+   var xhr = new XMLHttpRequest();
+   xhr.open('GET','comments.php?p_id=<?php echo $post['post_id'] ?>',true);
 
-            <div class="replys">
-                <div>
-                    <img src="../images/users/<?=$reply['profile_pic'] ?>" class="icons" alt="" id='profile_pic'>
-                </div>
-                        
-                       <div>
-                        <div>
-                        <small>@<?= $reply['username'] ?></small>
-                       </div> 
-                            <p><?=$reply['reply'] ?></p>  
-                       
-                        </div>
-                                             
-            </div>
-                        <?php }elseif($reply['emoji']!=''){ ?> 
-                            <div class="emoji_cont">
-                                
-                               <img src="../images/<?= $reply['emoji'] ?>.png" alt="<?= $reply['emoji'] ?>" class='icons'> <small>@<?= $reply['username'] ?></small>
-                            </div>
+         
+         // Insert the fetched content into the specified element
 
-                            <?php } ?>
-                      
-            <?php } ?>
-         <div class="reply_com">
-              
-               
-                    
-              <form action="../classes_incs/postReply.inc.php" method='Post'>
-                 
-                  <div class="replyform">
-                  <input type="hidden" name='emoji' value=''>
-                  
-                  <input type="hidden" name='post_id' value='<?= $posterId['post_id'] ?>'>
-                      <input type="hidden" name="user_id"  value="<?= $user_id?>">
-                      <input type="hidden" name='com_id' value='<?= $comment['id']?>'>
-                          <textarea name="reply" id="reply_input" placeholder="reply"></textarea>
-                          <button type='submit' name='submit_reply'><img src="../images/reply.png" alt="reply" class='icons'></button>
-                      </div>
-              </form>
-                      
-                  
-          </div>  
-                </div>
-                
-                <?php } ?>
-        
-           
-            <div class="divider">
-                
-               </div>
-        <?php } }else{?>
-            <small>Please log in</small>
-            <?php } ?>
+   xhr.onload =function(){
+    if(this.status==200){
+      var postsCom = document.getElementById('posts-com');
+      postsCom.innerHTML = this.responseText;
+    }else{
+      alert('error')
+    }
+   }
+   xhr.send();  
+}
+
+// Call the function to load the content when the page loads
+loadComms();
+</script>
         </div>
         <div class="footer_">
          <a href="../privacy/about.html">About</a> || <a href="../privacy/privacy.html">  Privacy</a>
         </div>
 </div>
-
+<?php  }?> 
 <script>
     // when user wanna post somthing
 
@@ -533,6 +464,7 @@ const react =document.querySelector('.react');
   react.addEventListener('click', () => {
     react_emojis.classList.toggle('react-emojis-active');
   })
+ 
 
   const head_dots =document.querySelector('.head-dots');
   const head_menu =document.querySelector('.head-menu');

@@ -13,7 +13,7 @@
 
  
 <?php include('navlos.php'); ?>
-  
+
 <?php     
     include_once('../classes_incs/functionsposts.php');
     foreach($postshomie as $post){ 
@@ -32,12 +32,11 @@
 
 } ?>
     </div>
-    <?php
-    include('../includes/script.php');
-    include('../includes/leftbar.php') ?>
+    <?php   include('../includes/lefty.php'); ?>
 
-  <?php include('../includes/footer.php');
-
-  ?>
+</div>
+<?php include('../includes/footer.php') ;
+include('../includes/script.php');
+?>
 </body>
 </html>

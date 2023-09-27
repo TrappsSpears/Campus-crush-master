@@ -11,44 +11,34 @@ include('grps.incs.php');  ?>
 <?php  include('navrps.php')?>
 <div class="posts">
 
-<div class="post_box">
-    <div >
-        <?php foreach($locations as $trend){ ?>
-            <div class='post-container' style="margin-bottom: 20px;">
-        <a href="../location/location.php?place=<?= $trend['location'] ?>" >
-         
-            <div class ='profileContainer'>
-  <div class="cover" >
-    <img src="../images/users/<?= $trend['profile_pic']?>" alt="" >
-  </div>
-  <div class="img_profile">
-    <img src="../images/users/<?= $trend['profile_pic']?>" alt="" >
-  </div>
-  <div class='info'>
-    <span>
-          <small>Posts <?= $trend['post_count'] ?>  - Trending<?= $trend['theme'] ?> </small>
-    </span>
-
-        <h4>
-      <span>-<?= $trend['location'] ?> </span>
-        </h4>
-  
-    <div>
-     <small>Engagements <?php echo $trend['like_count'] + $trend['comment_count'] ?>  <a href="../Trends/trends.php?reaction=<?= $trend['type'] ?>"> <span><img src="../images/<?= $trend['type'] ?>.png" alt="<?= $trend['type'] ?>" style='width:12px'> </span></a></small>
-     </div>
-            </div>
-        </div>
-        </a>
-        </div>
-    
-   <?php } ?>
-   
-    
-    </div>
-  
-</div>
+<!-- PostBox Here -->
  
-  
+<div id='posts'>
+
+</div>
+<script>
+// Function to fetch and insert content into the leftbar
+function loadPosts() {
+   var xhr = new XMLHttpRequest();
+   xhr.open('POST','placesdata.php',true);
+
+         
+         // Insert the fetched content into the specified element
+
+   xhr.onload =function(){
+    if(this.status==200){
+      var leftbarContentElement = document.getElementById('posts');
+      leftbarContentElement.innerHTML = this.responseText;
+    }else{
+      alert('error')
+    }
+   }
+   xhr.send();  
+}
+
+// Call the function to load the content when the page loads
+loadPosts();
+</script>
       
 
 
@@ -57,7 +47,7 @@ include('grps.incs.php');  ?>
     </div>
     <?php
      include('../includes/script.php');
-    include('../includes/leftbar.php') ?>
+include('../includes/lefty.php'); ?>
 
   <?php include('../includes/footer.php') ?>
 </body>

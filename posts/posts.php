@@ -1,7 +1,8 @@
 <?php 
+
 if(isset($_GET['post'])){
     $post_id = $_GET['post'];
-    include('phpfiles.post-single.php');
+
 
 $page = 'postSingle';
 include('../includes/headall.php'); ?>
@@ -16,12 +17,36 @@ include('../includes/headall.php'); ?>
             <button id="backButton"> <img src="../images/arrow.png" alt="Go Back" class='icons'> Post</button>
     </div></h3>
         </div>
-<?php 
+<!-- The post will appear Here -->
+<div id='posts'>
 
-    include('postsSingle.php') ?>
+</div>
+<script>
+// Function to fetch and insert content into the leftbar
+function loadPosts() {
+   var xhr = new XMLHttpRequest();
+   xhr.open('GET','postsSingle.php?post_id=<?php echo $post_id ?>',true);
+
+         
+         // Insert the fetched content into the specified element
+
+   xhr.onload =function(){
+    if(this.status==200){
+      var leftbarContentElement = document.getElementById('posts');
+      leftbarContentElement.innerHTML = this.responseText;
+    }else{
+      alert('error')
+    }
+   }
+   xhr.send();  
+}
+
+// Call the function to load the content when the page loads
+loadPosts();
+</script>
     </div>
 
-<?php include('../includes/leftbar.php') ;?>
+    <?php include('../includes/lefty.php'); ?>
  
     </div>
     <script src="./Js/script.js"></script>
