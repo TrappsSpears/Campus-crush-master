@@ -27,7 +27,9 @@
 
     <div>
     <?php if(isset($_GET['topLocation'])){?>
-   <a href="location.php?place=<?= $_GET['topLocation']?>">   <span>  <small><?= $_GET['topLocation']?> <img src="../images/badge-check2.png" alt="king" class="icons" style='width:12px'></small> <?php if(isset($_GET['creator'])){ echo '-'. $_GET['creator'] ?><img src="../images/badge-check.png" alt="king" class="icons" style='width:12px'> <?php } ?></span></a>
+   <a href="location.php?place=<?= $_GET['topLocation']?>">   <span>  
+    <small> <?php if($getname == 'WhistleBlow'){  ?> 
+        <?= $_GET['topLocation']?> <img src="../images/badge-check2.png" alt="king" class="icons" style='width:12px'><?php } ?></small> <?php if(isset($_GET['creator'])){ echo '-'. $_GET['creator'] ?><img src="../images/badge-check.png" alt="king" class="icons" style='width:12px'> <?php } ?></span></a>
       <?php } ?>
       <?php if(isset($_GET['desc'])){?>
         <span><small><?= $_GET['desc']?></small></span>
@@ -136,7 +138,6 @@
         
         </form>
         <div id="loadingBarPost">
-        Posting
     </div>
 
 <!-- Response message container -->
@@ -166,8 +167,7 @@
          
              
                 // Show the form again and hide the loading bar
-       
-                loadingBar.style.display = "none";
+                loadPosts();
                 // Reset the form if needed
                 form.reset();
             } else {
@@ -188,19 +188,32 @@
         </div> 
        
     </div>
+    <div id='posts' >
 
-<?php 
-    include_once('../classes_incs/functionsposts.php');
-    foreach($postsUser as $post){ 
-        $rand = rand(0,1000);
-        $idUnique = $post['post_id'];
-        $post_date = $post['date_created'].' '.$post['time'];
-        $formattedDate = format_post_date($post_date);
-        if($post['anonymous'] != 'yes'){
-            include('../includes/posts.php');
-        }
-         }
-        ?>
+</div>
+<script>
+// Function to fetch and insert content into the leftbar
+function loadPosts() {
+   var xhr = new XMLHttpRequest();
+   xhr.open('GET','theme.incs.php?get=<?php echo $getname ?>',true);
+
+         
+         // Insert the fetched content into the specified element
+
+   xhr.onload =function(){
+    if(this.status==200){
+      var leftbarContentElement = document.getElementById('posts');
+      leftbarContentElement.innerHTML = this.response;
+    }else{
+      alert('error')
+    }
+   }
+   xhr.send();  
+}
+
+// Call the function to load the content when the page loads
+loadPosts();
+</script>
         <?php } else{?>
 
           <h2> Does Not Exist</h2>

@@ -2,12 +2,13 @@
 <div class="post-container">
         <div class="post-head">
             <div class="heading-post">
-            <?php if($post['anonymous'] == 'yes'){  if($post['theme'] != 'Message'){ ?>
-        <a href="../location/location.php?place=<?=$post['location'] ?>">
+            <?php if($post['anonymous'] == 'yes'){  
+                if($post['theme'] != 'Whistle Blow'){ ?>
+        <a href="../location/location.php?theme=<?=$post['theme'] ?>">
         <?php } else { ?>
             <a href="#"></a>
            <?php } ?>
-                    <a href="../location/location.php?place=<?= $post['location'] ?>">
+                    <a href="../location/location.php?theme=<?= $post['theme'] ?>">
                     <div class="post-heading-container">
                   <div class='post-heading' id='anymous_' style = ' filter: hue-rotate(<?= $rand?>deg);
 '>
@@ -64,10 +65,10 @@
     <div class="locInfo">
  
        
-              <span class='span-loc'><img src="../images/map-pin.png" alt="king" class="icons" style='width:12px'>    <?php   if($post['theme'] != 'Message'){ ?>
+              <span class='span-loc'><img src="../images/map-pin.png" alt="king" class="icons" style='width:12px'>    <?php   if($post['theme'] != 'Whistle Blow'){ ?>
         <a href="../location/location.php?place=<?=$post['location'] ?>">
         <?php } else { ?>
-            <a href="../location/location.php?user=<?=$post['location'] ?>"> 
+            <a href="../location/direct.php?place=<?=$post['school'] ?>"> 
            <?php } ?>   
                      <?= $post['location'] ?>     <?php if($post['country'] != $_SESSION['country']) { echo $post['country'];} ?>
                  </a> </span>

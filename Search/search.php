@@ -16,9 +16,39 @@ include('search.incs.php');
     </div></form>
 </div>
 <!-- Search Data Here -->
+<h2 style='text-align:left;margin-left:15px;margin-top:10px'>Weekly Highlights</h2>
+<div id='highlights'>
+
+</div>
+<!-- 
+Main Content Here -->
+<script>
+// Function to fetch and insert content into the leftbar
+function loadHighlights() {
+   var xhr = new XMLHttpRequest();
+   xhr.open('POST','../home/highlights.php',true);
+
+         
+         // Insert the fetched content into the specified element
+
+   xhr.onload =function(){
+    if(this.status==200){
+      var leftbarContentElement = document.getElementById('highlights');
+      leftbarContentElement.innerHTML = this.response;
+    }else{
+      alert('error')
+    }
+   }
+   xhr.send();  
+}
+
+// Call the function to load the content when the page loads
+loadHighlights();
+</script>
 <div id='posts'>
 
 </div>
+
 <script>
 // Function to fetch and insert content into the leftbar
 function loadPosts() {
@@ -42,6 +72,7 @@ function loadPosts() {
 // Call the function to load the content when the page loads
 loadPosts();
 </script>
+
     </div>
  <?php include('../includes/lefty.php'); ?>
     </div>

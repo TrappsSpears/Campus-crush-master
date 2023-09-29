@@ -4,7 +4,7 @@
 include('../includes/headall.php'); 
 
 if(isset($_GET['place'])){
-$getname = $_GET['place']; include('homeThemes.inc.php');?>
+$getname = $_GET['place'];?>
 <body>  
   
     <div class="main">
@@ -19,11 +19,13 @@ $getname = $_GET['place']; include('homeThemes.inc.php');?>
 
 
 </div>
-<?php if($userInfo  && $pic){ ?> 
+<?php if($getname){ ?> 
 
-  <?php include('navlos.php'); ?>
-
-<div class="con_form">
+    <?php include('skuldat.php'); ?>
+<div class="create_theme">
+    <button id='create_theme'> + Create A Theme</button>
+</div>
+<div class="con_form" id="theme_form_create">
       
          
 
@@ -113,39 +115,39 @@ $getname = $_GET['place']; include('homeThemes.inc.php');?>
     </div>
 
 
-<div class="post_box">
-    <div >
-        <?php foreach($themes_Home as $trend){ ?>
-        <a href="../location/location.php?theme=<?= $trend['theme_name'] ?>&topLocation=<?= $getname?>&cover=<?=$trend['cover_photo']?>">
-        <div class='post-containe' style="margin-bottom: 20px;">
-        <div class ='profileContainer'>
-  
-  <div class="img_profile" style="margin-top: 5px;">
-    <img src="../images/imagePosts/<?= $trend['cover_photo']?>" alt=""  style="border-radius: 32px;">
-    <div class='info'>
-        <h4>
-      #<?= $trend['theme_name'] ?> 
-</h4>
-  
-<div>
-        <span><small><?= $trend['theme_desc']?></small></span>
-    </div>
-       
-                <div> <span> <?= $trend['location']?></span></div>
-            </div>
-  </div>
- 
-        </div>
-        </div>
-        </a>
- 
-    
-   <?php } ?>
-   
-    
-    </div>
-  
+    <div id='posts' >
+
 </div>
+<script>
+    var create_theme_btn =document.getElementById('create_theme');
+    var theme_form =document.getElementById('theme_form_create');
+    create_theme_btn.addEventListener('click' , ()=>{
+        if(theme_form.style.display='none'){
+            theme_form.style.display='block';
+            create_theme_btn.textContent ='- Cancel';
+            create_theme_btn.style.color ='brown';
+        }
+    })
+
+// Function to fetch and insert content into the leftbar
+function loadPosts() {
+   var xhr = new XMLHttpRequest();
+   xhr.open('GET','location.incs.php?themeH=<?php echo $getname ?>',true);
+
+   xhr.onload =function(){
+    if(this.status==200){
+      var leftbarContentElement = document.getElementById('posts');
+      leftbarContentElement.innerHTML = this.response;
+    }else{
+      alert('error Loading postMessage')
+    }
+   }
+   xhr.send();  
+}
+
+// Call the function to load the content when the page loads
+loadPosts();
+</script>
 
                 <?php } else{?>
 

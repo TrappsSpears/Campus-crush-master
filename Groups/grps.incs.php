@@ -39,7 +39,7 @@
         $themes = $selectThemes->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    $thm = 'Message';
+    $thm = 'Whistle Blow';
     $selectLocation = $dbh->connect()->prepare('
     SELECT location,
          MAX(theme) AS theme,

@@ -48,6 +48,7 @@ loadPosts();
     <?php
      include('../includes/script.php');
 include('../includes/lefty.php'); ?>
+    </div>
 
   <?php include('../includes/footer.php') ?>
 </body>

@@ -1,3 +1,99 @@
+<?php if(isset($_GET['skuldat'])){ 
+$getname = $_GET['skuldat'];
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+  include_once('../classes_incs/dbh.class.php');
+  if(isset($_SESSION['user_id'])){
+    $user_id = $_SESSION['user_id'];
+    $userCity = $_SESSION['city'];
+    $userSchool = $_SESSION['school'];
+    $userCountry = $_SESSION['country'];
+    $userDOB = $_SESSION['dob']; 
+    $userID = $user_id; 
+    $userName = $_SESSION['username'];  
+  }
+  $dbh = New Dbh();
+  
+   
+    ##-------------------Posts for All, HomePage--------------------------------------##
+   
+    
+    $today = new DateTime();
+    $userBirthDate = new DateTime($userDOB);
+    $ageDifference = $userBirthDate->diff($today)->y;
+    $ageGroup = floor($ageDifference / 15); // Group users into age groups of 15 years
+    $msg = 'Message';
+
+##----------------------------------------------------------------------------------------------------------
+
+
+    // Data is not cached or has expired, so fetch it from the database
+    $selectHomeUsersIn = $dbh->connect()->prepare('
+        SELECT users.school,
+            COUNT(users.id) AS total_members, SUM(post_count) AS total_posts, school, city 
+        FROM users
+        LEFT JOIN (
+            SELECT user_id, COUNT(*) AS post_count
+            FROM posts
+            GROUP BY user_id
+        ) AS user_posts ON users.id = user_posts.user_id
+        WHERE users.school LIKE :getname OR users.school LIKE :userSkul
+    ');
+
+    $selectHomeUsersIn->bindValue(':getname', $getname.'%', PDO::PARAM_STR);
+    $selectHomeUsersIn->bindValue(':userSkul', $_SESSION['school'].'%', PDO::PARAM_STR);
+
+    if (!$selectHomeUsersIn->execute()) {
+        echo 'Failed To Load Trending Posts';
+    } else {
+        $userInfo = $selectHomeUsersIn->fetch(PDO::FETCH_ASSOC);
+       
+    }
+
+
+##----------------------------------------------------------------------------------------------------------
+
+
+    // Data is not cached or has expired, so fetch it from the database
+    $selectHomeRandPic = $dbh->connect()->prepare('
+        SELECT profile_pic, username FROM users WHERE school LIKE :getname OR users.school LIKE :userSkul ORDER BY RAND()
+    ');
+
+    $selectHomeRandPic->bindValue(':getname', $getname.'%', PDO::PARAM_STR);
+    $selectHomeRandPic->bindValue(':userSkul', $_SESSION['school'].'%', PDO::PARAM_STR);
+
+    if (!$selectHomeRandPic->execute()) {
+        echo 'Failed To Load Trending Posts';
+    } else {
+        $pic = $selectHomeRandPic->fetch(PDO::FETCH_ASSOC);
+
+    }
+
+
+##----------------------------------------------------------------------------------------------------------
+
+
+// Check if the data is already cached
+
+    // Data is not cached or has expired, so fetch it from the database
+    $selectHomeUsers = $dbh->connect()->prepare('
+        SELECT * FROM (
+            SELECT users.*
+            FROM users
+            WHERE (users.school LIKE :userSchool OR users.school LIKE :userSkul)    
+        ) AS subquery
+    ');
+
+    $selectHomeUsers->bindValue(':userSchool', $getname.'%', PDO::PARAM_STR);
+    $selectHomeUsers->bindValue(':userSkul', $_SESSION['school'].'%', PDO::PARAM_STR);
+
+    if (!$selectHomeUsers->execute()) {
+        echo 'Failed To Load Trending Posts';
+    } else {
+        $users = $selectHomeUsers->fetchAll(PDO::FETCH_ASSOC);
+    } if($userInfo && $pic){ 
+?>
 <div class ='profileContainer'>
  
   <div class="img_profile" style='margin-top:10px'>
@@ -10,7 +106,7 @@
     <span><img src="../images/blog-text.png" alt="king" class="icons" style='width:12px;margin-left:5px' id='img'>  Posts <small><?= $userInfo['total_posts'] ?></small></span>
     <a href="members.php?place=<?= $getname ?>"> 
     <div>
-         <span <?php if($pagee == 'membs' ){?> class='active-home' <?php } ?>><img src="../images/users.png" alt="" class='icons' style='width:14px' id='img'>  Members <small><?= $userInfo['total_members'] ?></small> </span>
+         <span ><img src="../images/users.png" alt="" class='icons' style='width:14px' id='img'>  Members <small><?= $userInfo['total_members'] ?></small> </span>
     </div>
 
   </a>
@@ -39,20 +135,7 @@
 
 
 </div>
-<div class="home_opt" style='grid-template-columns:auto auto auto auto'>
- <a href="location.php?place=<?= $getname ?>"> <div>
-   <p id='active-home'> <span <?php if($pagee == 'posts' ){?> class='active-home' <?php } ?>>Posts</span> </p>
-  </div></a> 
-  <a href="gallery.php?place=<?= $getname ?>"> <div>
-   <p id='active-home'> <span <?php if($pagee == 'gallery' ){?> class='active-home' <?php } ?>>Gallery</span> </p>
-  </div></a> 
-  
-  <a href="direct.php?place=<?= $getname ?>"><div>
-    <p> <span <?php if($pagee == 'post_D' ){?> class='active-home' <?php } ?>>Whistle Blows</span> </p>
-  </div></a> 
-  <a href="homeGroups.php?place=<?= $getname ?>">  <div>
-    <p> <span <?php if($pagee == 'homeGees' ){?> class='active-home' <?php } ?>> <? $getname ?>Themes</span></p> 
-  </div></a>
-</div>
+
 
 </div>
+<?php }else{ echo '<h2> Location Not Found</h2>';} } ?>

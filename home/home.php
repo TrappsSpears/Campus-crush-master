@@ -317,7 +317,7 @@ window.addEventListener("load", function () {
 </div>
 <?php }?>
 
-<div id='posts'>
+<div id='posts' >
 
 </div>
 <script>

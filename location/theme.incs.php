@@ -1,13 +1,22 @@
-<?php
+<?php 
+if(isset($_GET['get'])){
+$getname = $_GET['get'];
 
-// Define a cache key for the user's posts query based on the $getname parameter
-$userPostsCacheKey = 'user_posts_' . md5($getname);
 
-// Check if the data is already cached
-if (file_exists($userPostsCacheKey) && time() - filemtime($userPostsCacheKey) < 3600) {
-    // Data is still fresh, so use the cached version
-    $postsUser = unserialize(file_get_contents($userPostsCacheKey));
-} else {
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+  }
+    include_once('../classes_incs/dbh.class.php');
+    if(isset($_SESSION['user_id'])){
+      $user_id = $_SESSION['user_id'];
+      $userCity = $_SESSION['city'];
+      $userSchool = $_SESSION['school'];
+      $userCountry = $_SESSION['country'];
+      $userDOB = $_SESSION['dob']; 
+      $userID = $user_id; 
+      $userName = $_SESSION['username'];  
+    }
+    $dbh = New Dbh();
     // Data is not cached or has expired, so fetch it from the database
     $selectUserP = $dbh->connect()->prepare('
         SELECT * FROM (
@@ -22,7 +31,7 @@ if (file_exists($userPostsCacheKey) && time() - filemtime($userPostsCacheKey) < 
             LEFT JOIN bookmarks ON posts.post_id = bookmarks.post_id 
             LEFT JOIN comments ON posts.post_id = comments.post_id 
             WHERE (theme = :getname)    
-                AND posts.date_created >= DATE_SUB(NOW(), INTERVAL 4 WEEK) -- Consider posts from the last week only
+                AND posts.date_created >= DATE_SUB(NOW(), INTERVAL 2 WEEK) -- Consider posts from the last week only
             GROUP BY posts.post_id
         ) AS subquery
         ORDER BY engagement_score DESC, date_created DESC, time DESC
@@ -35,11 +44,24 @@ if (file_exists($userPostsCacheKey) && time() - filemtime($userPostsCacheKey) < 
     } else {
         $postsUser = $selectUserP->fetchAll(PDO::FETCH_ASSOC);
 
-        // Cache the data for future use
-        file_put_contents($userPostsCacheKey, serialize($postsUser));
     }
-}
 
+?>
+
+<?php 
+    include_once('../classes_incs/functionsposts.php');
+    foreach($postsUser as $post){ 
+        $rand = rand(0,1000);
+        $idUnique = $post['post_id'];
+        $post_date = $post['date_created'].' '.$post['time'];
+        $formattedDate = format_post_date($post_date);
+      
+            include('../includes/posts.php');
+        
+         }}else{
+            echo 'No Responce';
+         }
+        ?>
 
 
 

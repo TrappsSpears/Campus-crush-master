@@ -43,15 +43,7 @@ $page = 'search';
   <div>
     <p id='active-home'> <span class='active-home'>Posts</span> </p>
   </div>
-  <a href="../location/location.php?place=<?= $_GET['word'] ?>">  <div>
-   <span> Places</span>
-  </div></a> 
-  <a href="../location/location.php?user=<?= $_GET['word'] ?>">  <div>
-   <span>Users</span>
-  </div></a> 
-  <a href="../location/location.php?theme=<?= $_GET['word'] ?>">  <div>
-   <span>Themes</span>
-  </div></a> 
+
 </div>
         </div>
 <?php 

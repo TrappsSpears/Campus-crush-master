@@ -9,40 +9,32 @@
 
 
 </div>
-<?php if($userInfo){ ?> 
-<div class ='profileContainer'>
-  <div class="cover">
-    <img src="../images/users/<?= $userInfo['profile_pic'] ?>" alt="">
-  </div>
-  <div class="img_profile">
-    <img src="../images/users/<?= $userInfo['profile_pic'] ?>" alt="" >
-    
-  </div>
-  <div class="info">
-    <h4>
-      <span><?= $getname ?> <small><?= $userInfo['name'] ?></small></span>
-</h4>
-    <div>
-      <span><small>Member @ </small><?= $userInfo['school'] ?> . <?= $userInfo['city'] ?></span>
-    </div>
-  
-  </div>
-  
-  <div class="home_opt">
-  <div>
-    <p id='active-home'> <span class='active-home'>Posts</span> </p>
-  </div>
-  <a href="members.php?place=<?= $userInfo['school']?>">  <div>
-   <span> Visit <?= $userInfo['school']?></span>
-  </div></a> 
-  <a href="#">
-    <div>
-      <p><span> Following </span></p>
-    </div>
-  </a>
+<?php if($getname)
+{ ?>
+<!-- User'sInfo Here -->
+<div id='userInfo' >
+
 </div>
-  
-</div>
+<script>
+// Function to fetch and insert content into the leftbar
+function loadUserInfo() {
+   var xhr = new XMLHttpRequest();
+   xhr.open('GET','userInfo.php?getdat=<?php echo $getname ?>',true);
+
+   xhr.onload =function(){
+    if(this.status==200){
+      var leftbarContentElement = document.getElementById('userInfo');
+      leftbarContentElement.innerHTML = this.response;
+    }else{
+      alert('error Loading postMessage')
+    }
+   }
+   xhr.send();  
+}
+
+// Call the function to load the content when the page loads
+loadUserInfo();
+</script>
 <div class="con_form">
       
          
@@ -90,7 +82,7 @@
            <div style='display:flex; gap:10px'>
             <div>
             <select name="location" id="location" required>
-                <option value="<?= $userInfo['school'] ?> - <?= $getname ?>"><?= $userInfo['school'] ?> - <?= $getname ?></option>
+                <option value="<?= $getname ?>"> - <?= $getname ?></option>
             </select>
         
             </div>
@@ -137,7 +129,7 @@
         
         </form>
         <div id="loadingBarPost">
-        Posting
+        
     </div>
 
 <!-- Response message container -->
@@ -198,20 +190,31 @@
            Share Stories - Share Ideas - Ask Ques - Engage - Whats On Your Mind - <a href="../privacy/about.html">About</a> - <a href="../privacy/privacy.html">  Privacy</a>
         </div> 
        
-    </div>
+    </div> 
 
-<?php 
-    include_once('../classes_incs/functionsposts.php');
-    foreach($postsUser as $post){ 
-        $rand = rand(0,1000);
-        $idUnique = $post['post_id'];
-        $post_date = $post['date_created'].' '.$post['time'];
-        $formattedDate = format_post_date($post_date);
-        if($post['anonymous'] != 'yes'){
-            include('../includes/posts.php');
-        }
-         }
-        ?>
+    <div id='posts' >
+
+</div>
+<script>
+// Function to fetch and insert content into the leftbar
+function loadPosts() {
+   var xhr = new XMLHttpRequest();
+   xhr.open('GET','user.inc.php?get=<?php echo $getname ?>',true);
+
+   xhr.onload =function(){
+    if(this.status==200){
+      var leftbarContentElement = document.getElementById('posts');
+      leftbarContentElement.innerHTML = this.response;
+    }else{
+      alert('error Loading postMessage')
+    }
+   }
+   xhr.send();  
+}
+
+// Call the function to load the content when the page loads
+loadPosts();
+</script>
         <?php } else{?>
 
           

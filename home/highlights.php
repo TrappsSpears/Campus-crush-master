@@ -27,7 +27,7 @@ include('home.incs.php'); ?>
     include_once('../classes_incs/functionsposts.php');
     foreach($highlights as $post){ 
       ?>
-        <a href="../location/location.php?theme=<?= $post['theme'] ?>">
+        <a href="../posts/posts.php?post=<?= $post['post_id'] ?>">
           <div class="story-container">
             <div class="story-cover">
             <div class="cover"><?php if($post['post_pic'] != 'Array') { ?>
@@ -39,9 +39,17 @@ include('home.incs.php'); ?>
           
           </div>
             <div class="user_prof">
-        <img src="../images/users/<?= $post['profile_pic'] ?>" alt="" class='icons'>
+            <?php if($post['anonymous'] != 'yes') { ?>
+                <img src="../images/users/<?= $post['profile_pic']?>" alt="" class='icons'>
+              
+              <?php } else {?>
+                <img src="../images/W.png" alt="" class='icons'>
+                <?php } ?>
+        
       </div>
-            <p><?= $post['theme']?></p>
+      
+            <p><?= $post['theme']?> </p>
+     
                 </div>
             </div>
             </a>

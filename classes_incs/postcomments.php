@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['HTTP_X_REQUESTED_WI
             if ($result->execute([$post_id, $user_id, $date])) {
                 echo 'Commented';
             }else{
-                echo 'Error';
+                header("Location: ../home/home.php?Error_Query");
             }
             
 

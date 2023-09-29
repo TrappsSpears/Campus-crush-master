@@ -22,7 +22,7 @@ if (session_status() == PHP_SESSION_NONE) {
  $userBirthDate = new DateTime($userDOB);
  $ageDifference = $userBirthDate->diff($today)->y;
  $ageGroup = floor($ageDifference / 15); // Group users into age groups of 15 years
- $msg = 'Message';
+ $msg = 'Whistle Blow';
 
 
     $selectMessages = $dbh->connect()->prepare('

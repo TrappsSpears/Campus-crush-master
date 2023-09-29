@@ -13,13 +13,13 @@ include('location.incs.php');?>
     <div class="nav" id="navOther">
 
     <h2><div class="back_btn">
-            <button id="backButton"> <img src="../images/arrow.png" alt="Go Back" class='icons'> Post A Message</button>
+            <button id="backButton"> <img src="../images/arrow.png" alt="Go Back" class='icons'>Whistle Blow</button>
     </div></h2>
     
   
 </div>
 
-  <?php include('navlos.php'); ?>
+<?php include('skuldat.php'); ?>
   <div class="posts" >
 <div class="con_form">
       
@@ -45,7 +45,7 @@ include('location.incs.php');?>
     </div> 
                   <div class="custom-select">
                   <select id="themeSelect" name="theme">
-           <option value="Whitsle Blow">Whistle Blow</option>
+           <option value="Whistle Blow">Whistle Blow</option>
         </select>
         <input type="button" class='cancel_post' value='Cancel'>
          
@@ -67,11 +67,31 @@ include('location.incs.php');?>
         
            <div style='display:flex; gap:10px'>
             <div>
-            <select name="location" id="location" required>
-                <?php foreach($users as $users){ ?>
-                    <option value="<? $users['school']?> - <?= $users['username'] ?>"><?= $users['name'] ?></option>
-                <?php } ?>
-            </select>
+            <div id='select' >
+
+</div>
+<script>
+     document.addEventListener("DOMContentLoaded", function () {
+// Function to fetch and insert content into the leftbar
+function loadSelect() {
+   var xhr = new XMLHttpRequest();
+   xhr.open('GET','selectUsers.php?select=<?php echo $getname ?>',true);
+
+   xhr.onload =function(){
+    if(this.status==200){
+      var leftbarContentElement = document.getElementById('select');
+      leftbarContentElement.innerHTML = this.response;
+    }else{
+      alert('error Loading postMessage')
+    }
+   }
+   xhr.send();  
+}
+
+// Call the function to load the content when the page loads
+loadSelect();
+     });
+</script>
         
             </div>
             
@@ -143,7 +163,7 @@ include('location.incs.php');?>
         loadingBar.style.display = "block";
         setTimeout(function(){
           form.style.display = 'block'; 
-          form.value ='';
+          postChoice.value ='';
           profileImage.style.display = 'none';
           loadingBar.style.display = "none";
           
@@ -160,7 +180,7 @@ include('location.incs.php');?>
                       linksInForm.style.pointerEvents = 'all';
                 // Show the form again and hide the loading bar
        
-          
+                loadPosts();  
                 // Reset the form if needed
                 form.reset();
             } else {
@@ -182,15 +202,31 @@ include('location.incs.php');?>
 
     </div>
 
-    <?php  
-    include_once('../classes_incs/functionsposts.php');
-    foreach($directPosts as $post){ 
-        $rand = rand(0,1000);
-        $idUnique = $post['post_id'];
-        $post_date = $post['date_created'].' '.$post['time'];
-        $formattedDate = format_post_date($post_date);
-        include('../includes/posts.php'); }
-        ?>
+    <div id='posts' >
+
+</div>
+<script>
+     document.addEventListener("DOMContentLoaded", function () {
+// Function to fetch and insert content into the leftbar
+function loadPosts() {
+   var xhr = new XMLHttpRequest();
+   xhr.open('GET','location.incs.php?direct=<?php echo $getname ?>',true);
+
+   xhr.onload =function(){
+    if(this.status==200){
+      var leftbarContentElement = document.getElementById('posts');
+      leftbarContentElement.innerHTML = this.response;
+    }else{
+      alert('error Loading postMessage')
+    }
+   }
+   xhr.send();  
+}
+
+// Call the function to load the content when the page loads
+loadPosts();
+     });
+</script>
         
 </div>
 

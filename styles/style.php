@@ -567,7 +567,8 @@ background-color: transparent;
     
 }
 .story{
-
+    
+    width: 100%;
     overflow-x: scroll;
     display: grid;
     grid-template-columns: auto auto auto auto auto auto;
@@ -585,7 +586,7 @@ background-color: transparent;
 .story-container .icons{
     position: relative;
     top:-40px;
-    left: 10px;
+    left: 15px;
     margin-top: -20px;
     width: 50px;
     height: 50px;
@@ -594,8 +595,9 @@ background-color: transparent;
     border: 4px solid var(--bg-default-dark);
 }
 .story-container .cover img{
-    max-width: 100%;
+    width: 100%;
     height: 180px;
+    object-fit: cover;
     position: relative;
     border-radius: 6px;
     filter: brightness(60%);
@@ -607,6 +609,7 @@ background-color: transparent;
     position: relative;
     margin-top: -90px;
     font-weight: 600;
+    margin-left: 15px;
 }
 .con_form{
 text-align: left;
@@ -853,6 +856,9 @@ select option{
     
     padding: 4px 6px;
 }
+#theme_form_create{
+    display: none;
+}
 .con_form .post_header{
     margin-top: -15px;
 }
@@ -866,6 +872,19 @@ select option{
     color: var(--text-default);
     outline: none;
     margin-right: 10px;
+}
+.create_theme{
+    position: relative;
+}
+.create_theme button{
+    padding: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 65px;
+    border: none;
+    background-color: var(--bg-light);
+    color: var(--bg-default-dark);
+
 }
 .con_form .post_header div{
     width: 50%;
@@ -938,6 +957,7 @@ select option{
 }
 .post-container{
     height: auto;
+    
     text-align: left;
   min-width: 200px;    
   width: 100%;
@@ -1457,22 +1477,21 @@ cursor: pointer;
 }
 
 .react-emojis{
-    display: none;
+    display:grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    gap: 10px;
+    width: 300px;
     position: relative;
-    margin-top: -80px;
-    background-color: var(--bg-trends-dark);
     padding: 8px 10px;
     min-width: 300px;
-    left: -20px;
     z-index: 400;
     border-radius: 90px;
+    margin-top: 10px;
     box-shadow: 0px 2px 16px 0px #1a1a1a;
-    
+    margin-left: 10px;
+    margin-bottom: 10px;
 }
-.react-emojis-active{
-  display: grid; 
-  grid-template-columns: auto auto auto auto auto auto;
-}
+
 .react-emojis button{
     padding: 2px;
     background-color: inherit;
@@ -1810,6 +1829,7 @@ cursor: pointer;
 #leftbar-content{
     position: sticky;
     top: 0;
+  
 }
 
 #search_place input{
@@ -2313,13 +2333,18 @@ cursor: pointer;
 @media only screen and (min-width: 700px) and (max-width: 1023px) {
     /* CSS styles here */
     .main-content{
+        padding-left: 10px;
         border: none;
+        margin-left: 0;
     }
     #unW{
     display: block;
 }
 .footer_items{
     grid-template-columns: auto auto auto auto auto auto;
+}
+#comments-container-mob{
+    margin-top: -100px;
 }
     .nav{
         border-left: none;
@@ -2334,7 +2359,7 @@ cursor: pointer;
     }
     
     .leftbar{
-        width: 350px;
+        width: 300px;
     }
     .leftbar .emojis{
         display: none;
@@ -2402,7 +2427,7 @@ cursor: pointer;
     #search_place input{
         width: 200px;
     }
-   
+    
   }
   .nav .profile{
     display: block;
@@ -2586,6 +2611,10 @@ cursor: pointer;
         padding: 0;
         width: 100%;
     }
+    #comments-container-mob{
+    margin-top: -100px;
+}
+   
     .sidebar-nav{
         z-index: 200;
         position: fixed;
@@ -2644,17 +2673,13 @@ cursor: pointer;
     width: fit-content;
     width: 100%;
 }
-.react-emojis{
-    left: 5px;
-    top: -25px;
-    z-index: 100;
-}
-.react-emojis img{
-    width: 25px;
-}
+
+
 
 body{
     opacity: 1;
+    
+    overflow-x: hidden;
 }
 
 
@@ -2684,6 +2709,9 @@ body{
 .nav_prof{
     display: block;
     margin-left: 120px;
+}
+.react-emojis{
+    margin-top:110px;
 }
   }
   @media only screen and (max-width: 400px) { 

@@ -167,12 +167,7 @@ if (file_exists($trendingThemesCacheKey) && time() - filemtime($trendingThemesCa
 
 
 // Check if locations are already cached
-if (file_exists($locationCacheKey) && time() - filemtime($locationCacheKey) < 3600) {
-  // Data is still fresh, so use the cached version
-  $location = unserialize(file_get_contents($locationCacheKey));
-} else {
-  // Data is not cached or has expired, so fetch it from the database
-  // Execute the $selectLoc query and store the result in $location
+
   $selectLoc = $dbh->connect()->prepare(" 
   SELECT location,
   MAX(theme) AS theme,
@@ -185,7 +180,7 @@ if (file_exists($locationCacheKey) && time() - filemtime($locationCacheKey) < 36
   JOIN users ON posts.user_id = users.id 
   LEFT JOIN likes ON posts.post_id = likes.post_id 
   LEFT JOIN comments ON posts.post_id = comments.post_id
-  WHERE posts.theme != 'Whitsle Blow'
+  WHERE posts.theme != 'Whistle Blow'
   GROUP BY location
   ORDER BY users.country = :userCountry DESC, engagement_score DESC, like_count DESC
   LIMIT 4
@@ -197,7 +192,6 @@ if (!$selectLoc->execute()) {
   $location = $selectLoc->fetchAll(PDO::FETCH_ASSOC);
 }
   // Cache the data for future use
-  file_put_contents($locationCacheKey, serialize($location));
-}
+
  
 

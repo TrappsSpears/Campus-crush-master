@@ -9,26 +9,44 @@
 
 
 </div>
-<?php if($userInfo  && $pic){ ?> 
+
+<?php if($getname){ ?> 
 
  
-<?php include('navlos.php'); ?>
+<?php include('skuldat.php'); ?>
 
-<?php     
-    include_once('../classes_incs/functionsposts.php');
-    foreach($postshomie as $post){ 
-        $rand = rand(0,1000);
-        $idUnique = $post['post_id'];
-        $post_date = $post['date_created'].' '.$post['time'];
-        $formattedDate = format_post_date($post_date);
-        include('../includes/posts.php'); }
-        ?>
+       <div id='posts' >
+
+</div>
+<script>
+// Function to fetch and insert content into the leftbar
+function loadPosts() {
+   var xhr = new XMLHttpRequest();
+   xhr.open('GET','location.incs.php?get=<?php echo $getname ?>',true);
+
+   xhr.onload =function(){
+    if(this.status==200){
+      var leftbarContentElement = document.getElementById('posts');
+      leftbarContentElement.innerHTML = this.response;
+    }else{
+      alert('error Loading postMessage')
+    }
+   }
+   xhr.send();  
+}
+
+// Call the function to load the content when the page loads
+loadPosts();
+</script>
+
+
+
+
                 <?php } else{?>
 
-<h2> Does Not Exist</h2>
+<h3>No Such Place - Does Not Exist</h3>
  <?php 
-   $delquery="DELETE FROM posts WHERE location=?";
-   $result = $dbh->connect()->prepare($getname);
+header('Location: ../home/home.php');
 
 } ?>
     </div>

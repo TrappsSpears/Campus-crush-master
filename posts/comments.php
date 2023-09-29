@@ -63,7 +63,7 @@ if(!$selectPostIDUSER ->execute(array($p_id))){
                 <div class="post-container">
                 <div class="post-head">
                     <div class="heading-post">
-                    <a href="../location/location.php?place=<?=$post['location'] ?>">">
+                    <a href="../location/location.php?user=<?=$comment['username']?>">">
                  <div class="post-heading-container">
                 <div class='post-heading'>
                 
@@ -135,7 +135,7 @@ if(!$selectPostIDUSER ->execute(array($p_id))){
                 <div class="post-container">
                 <div class="post-head">
                     <div class="heading-post">
-                    <a href="../location/location.php?place=<?=$post['location'] ?>">
+                    <a href="../location/location.php?user=<?=$comment['name'] ?>">
                  <div class="post-heading-container">
                 <div class='post-heading'>
        
